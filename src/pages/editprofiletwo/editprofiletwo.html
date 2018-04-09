@@ -1,0 +1,70 @@
+<!--
+  Generated template for the EditprofilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-header>
+
+  <ion-navbar color="green">
+      <button ion-button menuToggle style="display:block !important;">
+        <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
+      </button>
+    <ion-title>edit profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<form [formGroup]="Editprofile" style="height:100%; padding-top: 56px;">
+<ion-content>
+    
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+     <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+    
+  <div class="head-sec">
+    <div class="image-wrapper">
+      <img [src]="base64Image">
+    </div>
+    <h2 (click)="presentActionSheet()">EDIT</h2>
+  </div>
+    
+  <div class="input-sec">
+    <ion-list>
+
+      <ion-item>
+          <ion-label stacked>Name</ion-label>
+          <ion-input type="text" placeholder="Kriston Peeter" formControlName="name"></ion-input>
+        </ion-item>
+      <span *ngIf="!isValid('name')" class="validationpop animated bounce">Name required.</span>
+      
+        <ion-item>
+          <ion-label stacked>Email</ion-label>
+          <ion-input type="email" placeholder="kristonpeeter@yahoo.com" formControlName="email" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Phone Number</ion-label>
+          <ion-input type="tel" placeholder="XXX-XXX-XXXX" formControlName="phone" maxLength="12"></ion-input>
+        </ion-item>
+        <h2>User Setting</h2>
+        <ion-item *ngIf='profiledata?.regitration_type == "simple_registarion"' (click)="changepwd()">
+          <p>Change Password</p>
+          <ion-icon name="arrow-forward" item-end></ion-icon>
+        </ion-item>
+        
+
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <button type="submit" (click)="editProfile(Editprofile)" ion-button full color="green" class="btn2">SAVE</button>
+</ion-footer>
+</form> 

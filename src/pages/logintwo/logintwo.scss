@@ -1,0 +1,52 @@
+page-logintwo {
+    .loginform{
+        text-align: center;
+        padding: 20px;
+    }
+    .loginform p{ @extend .fontheadding16px; color: #000; font-weight: 400; margin-bottom: 15px;}
+    
+    .forgot{
+        text-transform: inherit;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .haveacc {
+        width: 100%;
+        float: left;
+        text-align: center;
+        color: #696969;
+        font-size: 15px;
+    }
+    .haveacc span {
+        color: #000;
+        font-weight: 500;
+    }
+    .orstrip {
+        float: left;
+        width: 100%;
+        margin-top: 0 !important;
+    }
+    .orstrip span {
+    font-size: 16px;
+    position: relative;
+}
+.orstrip span::before {
+    width: 100px;
+    height: 2px;
+    position: absolute;
+    content: "";
+    background: #000;
+    top: 7px;
+    right: 27px;
+}
+.orstrip span::after {
+    width: 100px;
+    height: 2px;
+    position: absolute;
+    content: "";
+    background: #000;
+    top: 7px;
+    left: 27px;
+}
+
+}

@@ -1,0 +1,115 @@
+page-filter {
+    .loginform{
+        text-align: left;
+    }
+    .loginform h2 {@extend .fontheadding16px; margin-bottom: 11px; margin-top: 8px !important;}
+    .loginform p{ @extend .fontheadding12px; color: #000; font-weight: 400; margin-bottom: 15px;}
+    .text-input{
+        border: 1px solid #c3c3c3;
+        margin: 0;
+        padding: 8px 10px 8px 10px;
+        border-radius: 5px;
+        line-height: 18px;
+        background: transparent;
+    }
+    .select {
+        border: 1px solid #c3c3c3;
+        margin: 0;
+        padding: 8px 10px 8px 10px;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 12px;
+        max-width: 100%;
+    }
+    .select .select-text{
+        line-height: 18px;
+    }
+    .inputouter{
+        position: relative;
+        padding-bottom: 10px;
+    }
+    .inputouter .item-inner{
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+    
+    }
+    .inputouter .item{
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: auto;
+        border: none !important;
+    }
+    .range-bar-active {
+        background: #0bc502 !important;
+    }
+    .range-knob{
+        background-color: #fff !important;
+        left: 10px !important;
+        bottom: 0 !important;
+        top: 0 !important;
+        margin: auto;
+        width: 20px !important;
+        height: 20px !important;
+        box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.13), 0 0 0 1px rgba(0, 0, 0, 0.02) !important;
+        pointer-events: none !important;
+    }
+    .range-slider{ height: 24px !important; }
+    .range-knob-handle{ height: 24px !important; }
+    .range-bar{
+        top: 0 !important;
+        bottom:0 !important;
+        margin: auto;
+    }
+    .range { 
+        padding: 0 !important;
+ }
+ .rdo{
+    padding-left: 25px !important;
+    width: 90px;
+    float: left;
+ }
+ .rdo .item-cover{
+    width: 50px !important;
+ }
+ .rdo .label{
+    margin: 0;
+    line-height: 18px;
+    padding-top: 2px;
+ }
+ .radio{
+    position: absolute !important;
+    top: 0 ;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: auto !important;
+    height: fit-content !important;
+ }
+ .item-radio-checked .label{
+     color: #0bc502;
+ }
+ .radio-icon{
+    height: 16px !important;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #787878;
+    border-radius: 50%;
+ }
+ .radio-icon.radio-checked{
+    border-color: #0bc502 !important;
+ }
+.radio-checked .radio-inner{
+    left: 2px !important;
+    top: 2px !important;
+    border-radius: 50%;
+    position: absolute !important;
+    width: 8px !important;
+    height: 8px !important;
+    background-color: #0bc502;
+    border: none !important;
+ }
+ .btn2 {
+    width: 49%;
+}
+   
+}

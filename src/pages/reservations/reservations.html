@@ -1,0 +1,69 @@
+<!--
+  Generated template for the ReservationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar hideBackButton color="green">
+    <button ion-button menuToggle style="display:block !important;">
+      <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
+    </button>
+  <ion-title>Home</ion-title>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+  <ion-list *ngIf="reservationsdata">
+      <ion-item-sliding *ngFor="let reservation of reservationsdata">
+          
+        <ion-item>
+            <ion-thumbnail item-start>
+              <img [src]="reservation?.order_data[0]?.profile_pic">
+            </ion-thumbnail>
+          <h2>{{reservation?.order_data[0]?.firstname}} {{reservation?.order_data[0]?.lastname}}</h2>
+          <p>{{reservation?.spacial_accomodation}}</p>
+          <div class="left">
+            <p>Booking Date</p>
+            <p>{{reservation?.orderstart | date}}</p>
+          </div>
+          <div class="right">
+            <p>Booking Time</p>
+            <p>{{reservation?.orderstart | date:'shortTime'}}</p>
+          </div>
+        </ion-item>
+          
+       <ion-item-options side="right" class="btnsec">
+          <button ion-button color="green" (click)="Accept(reservation?._id)">
+<!--            <ion-icon><img src="assets/imgs/accept.png"></ion-icon>-->
+  <ion-icon style="font-size: 31px;font-weight: 700;" name="checkmark"></ion-icon>
+            Accept
+          </button>
+          <button ion-button color="reddrk" (click)="Decline(reservation?._id)">
+            <ion-icon><img src="assets/imgs/delete.png"></ion-icon>
+            Decline
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+<ion-list *ngIf="!reservationsdata">
+    <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+          <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
+          <span> Looks like you have no reservations yet!</span>
+    </div>
+    </ion-list>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

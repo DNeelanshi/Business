@@ -1,0 +1,53 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="green">
+    <ion-title text-center>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="loginform formmain">
+    <p style="font-weight: 600;">Thank you for becoming a part of <br> our community!</p>
+    <form [formGroup]="SigninForm" (submit)="Signin(SigninForm)">
+      <ion-list no-lines>
+       
+          <ion-item>
+            <ion-input type="email" placeholder="Email" formControlName="email" autocapitalize="off"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/user.png"></ion-icon>
+            <span item-content *ngIf="!isValid('email')" class="validationpop animated bounce">Invalid email</span>
+          </ion-item>
+          
+        
+       
+          <ion-item>
+            <ion-input type="{{type}}" placeholder="Password" formControlName="password" ></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>
+            <button item-end type="button" color="dark" class="" (click)="showPassword()" ion-button icon-only clear>
+                <ion-icon  name="{{iconname}}" ></ion-icon>
+            </button>
+            <span item-content *ngIf="!isValid('password')" class="validationpop animated bounce">Invalid Password</span>
+          </ion-item>
+            
+          
+        
+        <button type="submit" class="btn1" ion-button color="green" block [disabled]="!SigninForm.valid">Login</button>
+        <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>
+        <h2 class="orstrip"><span style="font-weight: 600;">OR</span></h2>
+        <button (click)="Facebooklogin()" type="button" class="btn3" ion-button block >Login with facebook</button>
+      </ion-list>
+    </form>
+  </div>
+
+  <div class="haveacc">Don’t have an account? <span color="dark" (click)="signup()" style="font-weight: 600;">Sign Up</span></div>
+  <div class="haveacc"><button class="btn1" ion-button clear (click)="home()">Skip</button></div>
+  
+</ion-content>

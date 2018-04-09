@@ -1,0 +1,101 @@
+<!--
+  Generated template for the SignuptwoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="green">
+    <ion-title text-center>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="loginform formmain">
+    <h5>Benefits of becoming an “ME” Valued Business</h5>
+    <ul>
+
+      <li>Gain maximum exposure for your business</li>
+
+      <li>Connect directly with your potential customers in our fun and active RealTalk! Chat Room</li>
+
+      <li>Create a better online customer experience by scheduling appointment or reservations</li>
+
+      <li>…and much more!</li>
+    </ul>
+
+    <form [formGroup]="SignupForm" (submit)="CreateAccount(SignupForm)">
+      <ion-list no-lines>
+        
+          <ion-item>
+            <ion-input type="text" placeholder="First Name" formControlName="fname"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/user.png"></ion-icon>
+             <span tem-content *ngIf="!isValid('fname')" class="validationpop animated bounce">Firstname required.</span>
+          </ion-item>
+           
+       
+       
+          <ion-item>
+            <ion-input type="text" placeholder="Last Name" formControlName="lname"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/user.png"></ion-icon>
+             <span tem-content *ngIf="!isValid('lname')" class="validationpop animated bounce">Lastname required.</span>
+          </ion-item>
+            
+       
+       
+          <ion-item>
+            <ion-input type="tel" placeholder="Phone number" formControlName="phone" maxLength="12"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/phn.png"></ion-icon>
+            <span tem-content *ngIf="!isValid('phone')" class="validationpop animated bounce">Invalid phone number.</span>
+          </ion-item>
+          
+    
+          <ion-item>
+            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/email.png"></ion-icon>
+            <span tem-content *ngIf="!isValid('email')" class="validationpop animated bounce">Invalid email.</span>
+          </ion-item>
+          
+      
+          <ion-item>
+            <ion-input type="{{type}}" placeholder="Password" formControlName="password" (input)="pass_strength(SignupForm.controls.password)"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>
+            <button item-end type="button" color="dark" class="eyebutton" (click)="showPassword()" ion-button icon-only clear>
+                <ion-icon name="{{iconname}}"></ion-icon>
+          </button>
+          <span tem-content *ngIf="!isValid('password')" class="validationpop animated bounce">Password should at least 6 char.</span>
+          </ion-item>
+            
+<!--           <div id="strength">
+                    <p class="strnth">Password strength:</p>
+                        <ul id="strengthBar">
+                            <li class="point" [style.background-color]="bar0"></li>
+                            <li class="point" [style.background-color]="bar1"></li>
+                            <li class="point" [style.background-color]="bar2"></li>
+                            <li class="point" [style.background-color]="bar3"></li>
+                            <li class="point" [style.background-color]="bar4"></li>
+                        </ul>
+                    </div>-->
+    
+          <ion-item>
+            <ion-input type="{{Ctype}}" placeholder="Confirm Password" formControlName="cpassword"></ion-input>
+            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>
+            
+            <button item-end type="button" color="dark" class="eyebutton" (click)="showCPassword()" ion-button icon-only clear>
+                <ion-icon name="{{iconname1}}"></ion-icon>
+          </button>
+          <span tem-content *ngIf="SignupForm.hasError('mismatchedPasswords')"  class="validationpop animated bounce">Password mismatch.</span>
+          </ion-item>
+           
+       
+        <button type="submit" class="btn1" ion-button color="green" block  [disabled]="!SignupForm.valid">Sign up</button>
+<!--        <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>-->
+      </ion-list>
+    </form>
+  </div>
+
+  <div class="haveacc">Have an account? <span color="dark" (click)="login()" style="font-weight: 600;">Sign In</span></div>
+</ion-content>

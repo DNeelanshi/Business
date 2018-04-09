@@ -1,0 +1,86 @@
+<!--
+  Generated template for the ViewproductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="green">
+    <ion-title text-center>View</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background: #dee1e4;">
+  <div class="productslide">
+    <ion-slides pager>
+      <ion-slide *ngFor="let img of restaurantdata?.business_image">
+        <div class="imagebox">
+          <img [src]="img.business_image">
+        </div>
+      </ion-slide>
+<!--      <ion-slide *ngIf="restaurantdata?.business_image1">
+        <div class="imagebox">
+          <img [src]="restaurantdata?.business_image1">
+        </div>
+      </ion-slide>-->
+    </ion-slides>
+  </div>
+
+  <div class="product_content">
+    <ion-list>
+      <ion-item>
+        <h1>{{restaurantdata?.business_data[0].business_name}}</h1>
+        <p>{{restaurantdata?.business_data[0].sub_cat}}</p>
+        <h4><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> 4 Check-Ins</h4>
+        <div item-end class="buttonright">
+          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()"><ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>Book Now</button>
+          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()"><ion-icon ><img width="16px" src="assets/imgs/checkin.png"></ion-icon>Check In</button>
+        </div>
+      </ion-item>
+      <ion-item-divider color="light">Info</ion-item-divider>
+      <ion-item text-wrap>
+        <div class="contactbox">
+          <h4><img width="20px" src="assets/imgs/contactinfo.png"> Contact Info</h4>
+<!--          <p><img width="12px" src="assets/imgs/city.png"> 508 Virginia </p>-->
+          <p (click)="LaunchNavigator()"><img width="12px" src="assets/imgs/location.png"> {{restaurantdata?.business_data[0].address}} </p>
+          <p><img width="12px" src="assets/imgs/phone.png"> Phone: {{restaurantdata?.business_data[0].business_phone_number}}</p>
+        </div>
+        <div class="contactbox">
+          <h4><img width="20px" src="assets/imgs/website.png"> Website Info</h4>
+          <p style="font-size:14px !important;" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].website_url)"> {{restaurantdata?.business_data[0].website_url}}</p>
+<!--          <p *ngIf="restaurantdata?.business_data[0].facebook_link"> {{restaurantdata?.business_data[0].facebook_link}}</p>
+          <p *ngIf="restaurantdata?.business_data[0].instagram_link"> {{restaurantdata?.business_data[0].instagram_link}}</p>
+          <p *ngIf="restaurantdata?.business_data[0].twitter_link"> {{restaurantdata?.business_data[0].twitter_link}}</p>-->
+        </div>
+      </ion-item>
+      <ion-item>
+        <button class="fav" clear ion-button icon-left color="dark" (click)="MarkAsFavourite(restaurantdata?.business_data[0]._id)">
+            <ion-icon *ngIf="restaurantdata?.fav == 0"><img width="16px" src="assets/imgs/fav.png"></ion-icon>
+            <ion-icon *ngIf="restaurantdata?.fav == 1"><img width="16px" src="assets/imgs/favactive.png"></ion-icon>
+            
+            Favorite</button>
+        <button class="share" clear ion-button icon-left color="dark" (click)="socialsharing(restaurantdata?.business_data[0].business_name,restaurantdata?.business_data[0].address,restaurantdata?.business_image[0])"><ion-icon ><img width="16px" src="assets/imgs/share.png"></ion-icon>Share</button>
+      </ion-item>
+      <ion-item-divider color="light">Time</ion-item-divider>
+      <ion-item text-wrap>
+        <div class="timesec">
+          <h4 *ngFor="let days of restaurantdata?.business_data[0].opening_days_and_timings"><span>{{days.day}}</span> {{days.opening_time}} to {{days.closing_time}} </h4>
+        </div>
+      </ion-item>
+      <ion-item-divider color="light">IS THIS YOUR BUSINESS?</ion-item-divider>
+      <ion-item text-wrap>
+        <p>Claim your business to respond to reviews and messages.
+        </p>
+        <button [disabled]="restaurantdata?.role != 'dummy'" class="btneq" full ion-button color="green" (click)="ClaimYourBusiness()">Claim this Business</button>
+      </ion-item>
+      <ion-item-divider color="light">Description</ion-item-divider>
+      <ion-item text-wrap>
+        <p [innerHTML]="restaurantdata?.business_data[0].business_description">
+        </p>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

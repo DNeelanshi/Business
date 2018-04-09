@@ -1,0 +1,66 @@
+<!--
+  Generated template for the BooknowPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header hidden>
+
+  <ion-navbar>
+      <button ion-button menuToggle style="display:block !important;">
+          <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
+      </button>
+    <ion-title>booknow</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="overouter" (click)="dismiss()"></div>
+    <div class="centerbox">
+    <form class="formsec" [formGroup]="BookingForm" (submit)="MakeBooking(BookingForm)">
+      <div class="topsec">
+        <div class="image-wrapper">
+          <img src="assets/imgs/bookpopup.png">
+        </div>
+        <p>Please let us know if you're celebrating or 
+          have a special accommodation!</p>
+          <h2>Add Booking Day / Time</h2>
+         
+            <ion-grid>
+              <ion-row>
+                <ion-col col-12 class="left right">
+                  <ion-item class="clandr">
+                    <ion-datetime class="inputtxt" placeholder="Date" displayFormat="DDDD  MM-DD-YYYY" pickerFormat="MM-DD-YYYY" min="{{currentdate}}" formControlName="date"></ion-datetime>
+                    <img src="assets/imgs/calander.png" item-end>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-6 class="left">
+                  <ion-item>
+                    <ion-datetime class="inputtxt" placeholder="Start Time" displayFormat="HH:mm A" pickerFormat="HH:mm A" formControlName="startTime"></ion-datetime>
+                  </ion-item>
+                </ion-col>
+
+                <ion-col col-6 class="right">
+                  <ion-item>
+                    <ion-datetime class="inputtxt" placeholder="End Time" displayFormat="HH:mm A" formControlName="endTime"></ion-datetime>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <h2>Special accomodations</h2>
+            <ion-item class="discripation">
+              <ion-textarea class="inputtxt" placeholder="Write special accomodations..." formControlName="specialAccomo"></ion-textarea>
+            </ion-item>
+        </div>
+        <div class="btnsec">
+            <button type="button" clear color="green" (click)="dismiss()">Cancel</button>
+          <button type="submit" clear color="green" style="border-right:1px solid #bdbdbd;" [disabled]="!BookingForm.valid">Confirm</button>
+          
+        </div>
+      </form>
+
+    </div>
+</ion-content>

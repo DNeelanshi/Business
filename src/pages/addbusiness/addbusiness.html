@@ -1,0 +1,200 @@
+<!--
+  Generated template for the AddbusinessPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-toolbar color="green">
+        <ion-buttons start>
+            <button ion-button icon-only (click)="login()">
+                    <ion-icon class="bckbtn" name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>add business</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="AddbusinessForm" (submit)="AddBusiness(AddbusinessForm)">
+        <ion-list no-lines>
+            <!--            <ion-item>
+                            <ion-label>Business type</ion-label>
+                            <ion-select formControlName="businesstype" (ionChange)="selectedBusiness($event)">
+                                <ion-option value="1">Premium</ion-option>
+                                <ion-option value="">Valued</ion-option>
+                            </ion-select>
+                        </ion-item>-->
+            <ion-item>
+                <ion-input type="text" placeholder="Business Name" formControlName="businessname"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="tel" placeholder="Phone Number" formControlName="phone" maxLength="12"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" placeholder="Address" formControlName="address" [(ngModel)]="autocomplete.query" (input)="updateSearch()"></ion-input>
+            </ion-item>
+            <div *ngIf="autocompleteItems != ''" class="suggestion">
+                <ion-label *ngFor="let item of autocompleteItems" tappable   (click)="chooseItem(item)">{{ item }}</ion-label>
+            </div>
+            <ion-item>
+                <ion-input type="text" placeholder="Zip code" formControlName="zipcode"></ion-input>
+            </ion-item>
+            <ion-item class="area">
+                <ion-textarea  placeholder="Description" formControlName="description"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Category</ion-label>
+                <ion-select class="catoption" formControlName="category" (ionChange)="selectedCat($event)">
+                    <ion-option *ngFor="let cat of category" value ="{{cat._id}}">{{cat.title}}
+                        <ion-input type="hidden" [(ngModel)]="data.category_title" formControlName="category_id"></ion-input>
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+            <h2>Add opening and closing hours.</h2>
+
+            <ion-item>
+                <ion-label>Select Day</ion-label>
+                <ion-select formControlName="days" [(ngModel)]="data.days">
+                    <ion-option *ngFor="let day of days;let i = index">{{day}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-grid class="paddingnone">
+                <ion-row>
+                    <ion-col col-5 class="padding-left">
+                        <ion-item>
+                            <ion-datetime placeholder="Opening Hours" displayFormat="HH:MM A" [(ngModel)]="data.openinghours" formControlName="openinghours"></ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-5 class="paddingtopbtm">
+                        <ion-item>
+                            <ion-datetime placeholder="Closing Hours" displayFormat="HH:MM A" [(ngModel)]="data.closinghours" formControlName="closinghours"></ion-datetime>
+                        </ion-item>
+                    </ion-col> 
+                    <ion-col col-2 class="padding-right">
+                        <ion-item class="addbtn">
+                            <button type="button" ion-button clear color="gray" (click)="closingtime(AddbusinessForm)"><ion-icon name="add"></ion-icon></button>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <div class="tagsec" *ngIf="daytime.length>0">
+                <div class="inner-sec" *ngFor="let d of daytime;let i = index">
+                     <p style="margin-bottom:1px;">{{d.day}}</p>
+                    <p><span>{{d.openingtime}}</span> to <span>{{d.closingtime}}</span></p>
+                    <ion-icon name="close" (click)="DeleteTimes(d,i)"></ion-icon>
+                </div>
+            </div>
+
+            <ion-item *ngIf="services">
+                <ion-label>Services</ion-label>
+                <ion-select class="catoption" formControlName="services" (ionChange)="selectedService($event)">
+                    <ion-option *ngFor="let service of services" value="{{service._id}}">{{service.sub_category_title}}
+                        <ion-input type="hidden" [(ngModel)]="data.service_title" formControlName="services_title"></ion-input>
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+            <!--            <h2>Social Links</h2>
+            
+                        <ion-item>
+                            <img src="assets/imgs/instgrm.png" item-start class="social">
+                            <ion-input type="text" placeholder="https://www.instagram.com/" formControlName="instagramlink" autocapitalize="off"></ion-input>
+                        </ion-item>
+            
+                        <ion-item>
+                            <img src="assets/imgs/fb.png" item-start class="social">
+                            <ion-input type="text" placeholder="https://www.facebook.com/" formControlName="facebooklink" autocapitalize="off"></ion-input>
+                        </ion-item>
+            
+                        <ion-item>
+                            <img src="assets/imgs/twtr.png" item-start class="social">
+                            <ion-input type="text" placeholder="https://www.twitter.com/" formControlName="twitterlink" autocapitalize="off"></ion-input>
+                        </ion-item>-->
+            <ion-item>
+                
+                <ion-input type="text" placeholder="https://www.websitename.com/" formControlName="websiteurl"></ion-input>
+            </ion-item>
+
+            <h2>Is this a veteran owned business?</h2>
+
+            <ion-list radio-group style="margin:0 !important;" formControlName="veteranowned">
+                <ion-item class="rdo" style="padding-left: 25px !important;">
+
+                    <ion-radio checked="yes" value="yes"></ion-radio>
+                    <ion-label>Yes</ion-label>
+                </ion-item>
+
+                <ion-item class="rdo" style="padding-left: 25px !important;">
+
+                    <ion-radio value="no"></ion-radio>
+                    <ion-label>No</ion-label>
+                </ion-item>
+            </ion-list>
+
+            <h2>Do you own an online marketplace?</h2>
+
+            <ion-list radio-group style="margin:0 !important;" formControlName="onlinemarketplace">
+                <ion-item class="rdo" style="padding-left: 25px !important;">
+
+                    <ion-radio checked="yes" value="yes"></ion-radio>
+                    <ion-label>Yes</ion-label>
+                </ion-item>
+
+                <ion-item class="rdo" style="padding-left: 25px !important;">
+
+                    <ion-radio value="no"></ion-radio>
+                    <ion-label>No</ion-label>
+                </ion-item>
+            </ion-list>
+
+            <h2>Do you accept?</h2>
+            <ion-list style="margin:0 !important;">
+                <ion-item class="chck">
+                    <ion-checkbox formControlName="accept" style="margin-right: 9px !important;"></ion-checkbox>
+                    <ion-label>Appointments</ion-label>
+                </ion-item>
+                <ion-item class="chck">
+                    <ion-checkbox formControlName="reservation" style="margin-right: 9px !important;"></ion-checkbox>
+                    <ion-label>Reservations</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-list>
+        <div class="photosec">
+            <h2 style="position:relative;">Add Photo <span>( Multiple photos )</span>
+                <button *ngIf="bit<=4" type="button" ion-button color="green" (click)="presentActionSheet()"><ion-icon name="add"></ion-icon></button>
+            </h2>
+            <ion-grid class="paddingnone" *ngIf="base64Image.length>0">
+                <ion-row>
+                    <ion-col col-4 *ngFor="let img of base64Image">
+                             <div class="image-wrapper">
+                            <img src="{{img}}">
+                        </div>
+                    </ion-col>
+                    <!--            <ion-col col-4>
+                                    <div class="image-wrapper">
+                                      <img src="assets/imgs/sqar.png">
+                                    </div>
+                                  </ion-col>
+                                  <ion-col col-4>
+                                      <div class="image-wrapper">
+                                        <img src="assets/imgs/sqar.png">
+                                      </div>
+                                    </ion-col>-->
+                </ion-row>
+            </ion-grid>
+            <div class="btnsec">
+                <button type="submit" ion-button color="green" full class="btn1">SAVE</button>
+            </div>
+        </div>
+    </form>
+</ion-content>

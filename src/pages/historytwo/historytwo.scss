@@ -1,0 +1,38 @@
+page-historytwo {
+    .item{
+        align-items:start ;
+        border-bottom: 1px solid #c8c7cc;
+    }
+    .item .item-inner{
+        border-bottom: none !important;
+    }
+    .item p{
+        @extend .fontheadding12px;
+    }
+    .item h2{
+        @extend .fontheadding16px;
+        margin-top: 0;
+    }
+    .item .left{
+        width: 87px;
+        float: left;
+        overflow: hidden;
+    }
+    .item .right{
+        width: 92px;
+        float: left;
+        border-left: 1px solid #c8c7cc;
+        padding-left: 8px;
+        margin-left: 7px;
+    }
+    .label{
+        margin: 8px auto;
+    }
+    .btnsec button img{
+        width: 26px;
+    }
+    .btnsec button{
+        font-size: 14px;
+        font-weight: 700;
+    }
+}

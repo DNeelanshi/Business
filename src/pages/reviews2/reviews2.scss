@@ -1,0 +1,98 @@
+page-reviews2 {
+    .image-wrapper{
+        width: 100%;
+        float: left;
+    }
+    .image-wrapper img{
+        width: 100%;
+        float: left;
+    }
+    .content-sec {
+        width: 100%;
+        float: left;
+    }
+    .content h2 {@extend .fontheadding16px; margin: 0px; margin-bottom: 3px; margin-top: 0 !important;}
+    .content p {@extend .fontheadding12px; margin:0;line-height: 17px; width: 100%; float:left; white-space: normal;}
+    .content ul{
+        float: left;
+        padding: 0;
+        margin: 2px 0px;
+        width: 100px;
+    }
+   h2 span{@extend .fontheadding12px; float: right; line-height: 22px;}
+     .revw{
+        margin-top: 2px !important;
+        line-height: 19px !important;
+        padding-left: 16px;
+        float: left;
+        width: calc(100% - 100px) !important;
+     }
+    .content ul li {
+        list-style-type: none;
+        display: inline-block;
+    }
+    .content ul li .icon{
+        font-weight: 700;
+        font-size: 13px;
+    }
+    .item{
+        padding: 0;
+        align-items: start;
+        border-bottom: none !important;
+        min-height: auto;
+    }
+    .item .label{
+        margin: 8px auto 8px auto;
+    }
+    .item .item-inner{
+        border: none !important;
+        padding: 0 !important;
+    }
+    .top-sec{
+        width: 100%;
+        float: left;
+    }
+    .bottom-sec{
+        width: 100%;
+        float: left;
+        margin: 0;
+        padding-top: 5px;
+    }
+    .bottom-sec li{
+        line-height: 13px;    
+    }
+    .bottom-sec ul{
+        line-height: 13px;    
+    }
+    ion-avatar{
+        min-height: 45px !important;
+        min-width: 45px !important;
+    }
+    ion-avatar img{
+        height: 45px !important;
+        width: 45px !important;
+    }
+    .reply{ padding: 5px 0 !important; border-bottom: 1px solid #d4d4d4; }
+    .reply img{
+        width: 12px;
+        margin-right: 8px;
+    }
+    .text-input{
+        border: 1px solid rgb(212, 212, 212);
+        border-radius: 5px;
+        height: 60px;
+        padding: 7px;
+        background: transparent;
+        margin: 13px 0;
+    }
+    .btnsec{
+        width: 100%;
+        float: left;
+        text-align: right;
+    }
+    .btn1{
+        width: 70px;
+        letter-spacing: 1px;
+    }
+
+}

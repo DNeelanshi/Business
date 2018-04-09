@@ -1,0 +1,183 @@
+<ion-header>
+    <ion-navbar hideBackButton color="green">
+        <button ion-button menuToggle style="display:block !important;">
+            <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
+        </button>
+        <ion-title text-center >Home</ion-title>
+        <ion-buttons right (click)="filterModal()">
+                     <button ion-button>
+                <ion-icon><img width="22px" src="assets/imgs/filter.png"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <div class="searchouter">
+        <ion-searchbar placeholder="Search location" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)"></ion-searchbar>
+        <ion-list class="searchtogle animated bounceIn">
+            <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
+                {{ item }}
+        </ion-item>
+    </ion-list>
+</div>
+
+<ion-toolbar>
+    <div class="procatout">
+        <ul class="procat">
+            <li *ngFor="let sub of subcat" (click)="FilterBySubCat(sub._id)">
+                <div class="icons"><img [src]="sub.sub_category_image"></div>
+                <p>{{sub.sub_category_title}}</p>
+            </li>
+<!--            <li>
+                <div class="icons"><img src="assets/imgs/icon2.png"></div>
+                <p>Saloon</p>
+            </li>
+            <li>
+                <div class="icons"><img src="assets/imgs/icon3.png"></div>
+                <p>Museum</p>
+            </li>
+                        <li>
+                            <div class="icons"><img src="assets/imgs/icon4.png"></div>
+                            <p>Hotel</p>
+                        </li>
+            <li>
+                <div class="icons"><img src="assets/imgs/icon5.png"></div>
+                <p>Hospital</p>
+            </li>-->
+            <!--      <li>
+                    <div class="icons"><img src="assets/imgs/icon1.png"></div>
+                    <p>Restaurant</p>
+                  </li>
+                  <li>
+                    <div class="icons"><img src="assets/imgs/icon1.png"></div>
+                    <p>Restaurant</p>
+                  </li>
+                  <li>
+                    <div class="icons"><img src="assets/imgs/icon1.png"></div>
+                    <p>Restaurant</p>
+                  </li>
+                  <li>
+                    <div class="icons"><img src="assets/imgs/icon1.png"></div>
+                    <p>Restaurant</p>
+                  </li>-->
+
+        </ul>
+    </div>
+</ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+<!--    <ion-scroll direction="x" class="wideslide">
+        <ul class="imglist">
+            <li *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">
+                <div class="boxxgrid">
+                    <div class="imgbox">
+                        <img src="{{premium.business_image[0].business_image}}">
+                        
+                    </div>
+                    <img src="assets/imgs/premium.png" class="premium">
+                </div>
+            </li>
+            <li>
+                <div class="boxxgrid">
+                    <div class="imgbox">
+                        <img src="assets/imgs/sqar.png">
+                    </div>
+                    <img src="assets/imgs/premium.png" class="premium">
+                </div>
+            </li>
+           
+        </ul>
+    </ion-scroll>-->
+    <ion-slides pager *ngIf="premiumBusiness.length>0">
+
+        <ion-slide *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">
+          <img src="{{premium.business_image[0].business_image}}">
+            <img src="assets/imgs/PREMIERE.png" class="premium">
+        </ion-slide>
+
+       
+        
+      </ion-slides>
+    
+    <div class="productlist" *ngIf="restaurantlist?.length>0">
+        <ion-list text-wrap>
+            <ion-item *ngFor="let res of restaurantlist">
+                <ion-thumbnail item-start (click)="viewproduct(res)">
+                           <img [src]="res.business_image[0].business_image">
+
+                </ion-thumbnail>
+                <ion-note class="online" *ngIf="res.business_data[0].own_online_market_place == true"><span class="dot"></span> Online</ion-note>
+                <!--                <span *ngIf="res.business_data[0].own_online_market_place == true">Online</span>-->
+                <h2>{{res.business_data[0].business_name}}</h2>
+                <div class="fullwidth">
+                    <h4 class="listcol">
+                        <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false">
+                        </rating>
+                    </h4>
+                    <h4 *ngIf="res.business_data[0].own_online_market_place == true" class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>
+                </div>
+                <div class="fullwidth">
+                    <h4 class="listcol"><span class="proicon"><img src="assets/imgs/mile.png"></span> {{res.business_data[0].distance}} Miles</h4>
+                    <h4 class="listcol"><span class="proicon"><img src="assets/imgs/check.png"></span> 4 Check-Ins</h4>
+                </div>
+                <p>{{res.business_data[0].sub_cat}}</p>
+                <div class="fullwidth">
+                    <h4 class="listcol" (click)="MarkAsFavourite(res.business_data[0]._id)">
+                        <span class="proicon">
+                            <img *ngIf="res.business_data[0].fav == 0" src="assets/imgs/fav.png">
+                            <img *ngIf="res.business_data[0].fav == 1" src="assets/imgs/favactive.png">
+                        </span> Favorite</h4>
+                    <h4 class="listcol" (click)="socialsharing(res.business_data[0].business_name,res.business_data[0].address,res.business_image[0].business_image)"><span class="proicon"><img src="assets/imgs/share.png"></span> Share</h4>
+                </div>
+                <div class="fullwidth">
+                    <button class="btneq" ion-button color="green" (click)="bookModal(res)">Book Now</button>
+                    <button class="btneq yelo" ion-button color="yellow" (click)="view()">Review</button>
+                </div>
+                <img *ngIf="res.business_data[0].business_type == 1 || res.business_data[0].business_type == 2" src="assets/imgs/premium.png" class="premim">
+            </ion-item>
+
+            <!--  <ion-item>
+                <ion-thumbnail item-start>
+                <img src="assets/imgs/img1.jpg">
+                </ion-thumbnail>
+                <h2>Rudford’s Restaurant</h2>
+                <div class="fullwidth">
+                <h4 class="listcol">sdfdssaf</h4>
+                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>
+                </div>
+                <div class="fullwidth">
+                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/mile.png"></span> 7.4 Miles</h4>
+                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/check.png"></span> 4 Check-Ins</h4>
+                </div>
+                <p>Diners, Breakfast & Brunch, Burgers</p>
+                <div class="fullwidth">
+                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/favactive.png"></span> Favorite</h4>
+                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/share.png"></span> Share</h4>
+                </div>
+                <div class="fullwidth">
+                <button class="btneq" ion-button color="green">Book Now</button>
+                <button class="btneq" ion-button color="yellow">Review</button>
+                </div>
+              </ion-item>-->
+            
+         
+
+        </ion-list>
+    </div>
+    <div class="notfound" *ngIf="restaurantlist?.length == 0">
+        <!--        <img src="assets/imgs/SORRY-01.png">-->
+        Sorry no data found!
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

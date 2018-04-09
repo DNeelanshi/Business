@@ -1,0 +1,25 @@
+page-viewfavorites {
+    .item{
+        border-bottom: 1px solid #c8c8c8;
+        align-items: start;
+        position: relative;
+    }
+    
+     .hrt{
+        position: absolute;
+        top: 12px;
+        left: 24px;
+    }
+    .item .item-inner{
+        border: none !important;
+    }
+    .item .label{
+        margin: 8px auto 0 0;
+    }
+    .item h2{ @extend .fontheadding16px; margin-top: 0;}
+    .item p{ @extend .fontheadding12px; line-height: 16px;}
+    .outer{
+        width:100%;
+        float: left;
+    }
+}

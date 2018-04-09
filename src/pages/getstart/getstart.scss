@@ -1,0 +1,48 @@
+page-getstart {
+.getbg{
+    background:url(../assets/imgs/bg1.jpg) no-repeat; 
+    background-size:cover;
+    height: 100%;
+}
+.vcenter{
+    position: absolute;
+/*    top: 0;*/
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: min-content;
+    text-align: center;
+    padding: 15px;
+    padding-bottom: 5px !important;
+}
+
+.logo{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 10px;
+    background: #fff;
+}
+.vcenter h4{
+    color: #fff;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+.vcenter p{ @extend .fontsize; margin-top: 0;}
+.box { @include border-radius(5px);font-weight: 600;} 
+.button-ios {
+    height: 3.6rem;
+    font-size: 1.4rem;
+}
+.box.activated{
+    background-color: #008000;
+}
+.ylo.activated{
+    background-color: #d2b307;
+}
+
+}

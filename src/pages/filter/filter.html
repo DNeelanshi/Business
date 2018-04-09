@@ -1,0 +1,89 @@
+<!--
+  Generated template for the FilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+   
+<ion-header>
+
+  <ion-navbar color="green">
+    <ion-buttons left (click)="dismiss()">
+    <button ion-button clear>
+      <ion-icon ion-icon icon-only name="close" style="font-size:30px; font-weight: 700;"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title text-center>filter</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<form [formGroup]="FilterForm" (submit)="Search(FilterForm)" style="height: 100%; margin-top: 44px;">
+<ion-content padding>
+  <div class="loginform">
+ 
+      <ion-list no-lines>
+        <div class="inputouter">
+          <h2>Services</h2>
+          <ion-item>
+            <ion-select formControlName="services">
+              <ion-option selected *ngFor="let service of services" value="{{service._id}}">{{service.sub_category_title}}</ion-option>
+<!--              <ion-option>Option 1</ion-option>
+              <ion-option>Option 2</ion-option>-->
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="inputouter">
+          <h2>Miles</h2>
+          <ion-item>
+            <ion-range min="1" step="1" max="5" formControlName="range" [(ngModel)]="range" name="range">
+               <p range-left *ngIf="!range">0 miles</p>
+               <p range-left *ngIf="range">{{range}} miles</p>
+               <p range-right>5 miles</p>
+            </ion-range>
+          </ion-item>
+        </div>
+
+        <div class="inputouter">
+          <h2>Zip Code</h2>
+          <ion-item>
+            <ion-input type="tel" placeholder="Zip Code" formControlName="zipcode"></ion-input>
+          </ion-item>
+        </div>
+
+<!--        <div class="inputouter">
+          <h2>City/State</h2>
+          <ion-item>
+            <ion-input type="text" placeholder="City" formControlName="city"></ion-input>
+          </ion-item>
+        </div>-->
+
+
+        <div class="inputouter">
+          <h2>Online</h2>
+         
+            <ion-list radio-group formControlName="online">
+              <ion-item class="rdo" style="padding-left: 25px !important;">
+               
+                <ion-radio checked="yes" value="yes"></ion-radio>
+                <ion-label>Yes</ion-label>
+              </ion-item>
+            
+              <ion-item class="rdo" style="padding-left: 25px !important;">
+                
+                <ion-radio value="no"></ion-radio>
+                <ion-label>No</ion-label>
+              </ion-item>
+            </ion-list>
+         
+        </div>
+      </ion-list>
+
+  </div>
+</ion-content>
+<ion-footer>
+  <button type="submit" ion-button color="green" class="btn2">Search</button>
+  <button type="button" ion-button color="green" class="btn2" (click)="Reset()">Reset</button>
+</ion-footer>
+           </form>

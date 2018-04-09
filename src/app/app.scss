@@ -1,0 +1,259 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+/*.toolbar-title{
+    text-transform: uppercase;
+    width: calc(100% - 88px);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    height: fit-content;
+}*/
+.toolbar-title{
+    text-transform: uppercase;
+}
+
+.text-input[disabled] {
+    opacity: 1;
+}
+.menuicon{
+    width: 23px;
+    float: left;
+}
+.profile_strip {
+    position:  relative;
+    width:  100%;
+    padding-left: 90px;
+}
+.toolbarhead .toolbar-background{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+.toolbarhead {
+    min-height: 150px !important;
+    background: url(../assets/imgs/bullet.png) repeat-x left bottom 0px;
+    background-color: #0bc502;
+    overflow: inherit;
+    padding-bottom: 20px;
+    background-size: 20px;
+    border: none;
+    box-shadow: none;
+}
+.profile_strip h2 {
+    float:  left;
+    margin-bottom:  0;
+    color:  #fff;
+    font-size: 18px;
+}
+
+.profile_strip p {
+    color:  #fff;
+    float:  left;
+    width:  100%;
+    font-size:  16px;
+    margin: 0;
+}
+.header::after{
+    background-image: none !important;
+}
+.profile_pic {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 0;
+    top: 0;
+    padding: 0;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0bc502+0,0bc502+49,ffffff+50,ffffff+100 */
+    background: rgb(11,197,2); /* Old browsers */
+    background: -moz-linear-gradient(-45deg, rgba(11,197,2,1) 0%, rgba(11,197,2,1) 49%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, rgba(11,197,2,1) 0%,rgba(11,197,2,1) 49%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, rgba(11,197,2,1) 0%,rgba(11,197,2,1) 49%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bc502', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.profile_picinn {
+    width: 65px;
+    height: 65px;
+    padding: 0px;
+    overflow:  hidden;
+    border-radius:  50%;
+    margin: 6px 0 0 6px;
+}
+
+.menuprofile {
+    padding: 16px;
+    min-height: 100px;
+}
+.sidemenu .item {
+    font-size:  16px;
+    letter-spacing:  1px;
+    font-weight:  500;
+    color: #666;
+    padding-left: 45px;
+    min-height: 3.3rem;
+}
+
+.sidemenu .active{
+    background: #90EE90 !important;//#d8fcd6 !important;
+}
+
+.sidemenu .icon {
+    margin-top:  0;
+    position:  absolute;
+    left: 16px;
+    top: 9px;
+}
+
+
+
+.validationpop {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding: 2px 7px;
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    left: 0;
+    bottom: -18px;
+    z-index: 9999;
+    box-shadow: 0 0 34px #ddd;
+    border-bottom: 1px solid #ff0000;
+    color: #ff0000;
+    font-size: 11px;
+    text-align: center;
+}
+
+.validationpop:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 8px 8px;
+border-color: #fff transparent;
+display: block;
+width: 0;
+z-index: 1;
+top: -7px;
+left: 110px;
+}
+
+
+.iconinput {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 16px;
+    min-width: 16px !important;
+    height: 20px;
+    min-height: 20px;
+    margin: 0 !important;
+}
+.btn1 {
+    min-height: 25px;
+    height: 3.2rem;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+}
+.btn1.activated {
+background:#008000;
+}
+.btn3 {
+    min-height: 25px;
+    height: 3.2rem;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.btn2{
+    height: 4rem;
+    margin: 0;
+    font-size: 15px;
+    min-height: 25px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.toolbar-content.toolbar-content-md {
+    width: 100%;
+    position: absolute;
+}
+
+.item ion-thumbnail {
+    min-width: 70px !important;
+    min-height: 70px !important;
+    width: 70px !important;
+    height: 70px !important;
+    border-radius: 5px !important;
+    overflow: hidden;
+}
+.item ion-thumbnail img{
+    width: 70px;
+    height: 70px;
+}
+.listcol{
+    width: auto;
+    display: inline-table;
+}
+
+
+
+
+/*=============================*/
+
+.formmain{
+    width: 100%;
+}
+
+.formmain .item-inner{
+        border: 1px solid #c3c3c3 !important;
+        margin: 0 !important;
+        border-radius: 5px;
+        padding-right: 0 !important;
+        background: #f9f9f9;
+    }
+    .formmain .item{
+        padding: 0;
+        min-height: 35px !important;
+        margin-bottom: 10px;
+        height: 35px;
+        contain:none;
+    }
+    
+.formmain .text-input{
+        margin: 0;
+        padding: 8px 10px 8px 32px;
+        font-size: 15px;
+        width: 100%;
+    }
+
+    
+    .back-button-text{
+        display: none;
+    }

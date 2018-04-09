@@ -1,0 +1,51 @@
+<ion-menu [content]="content" [swipeEnabled]="false">
+  <ion-header>
+    <ion-toolbar class="toolbarhead" color="green">
+      <div class="menuprofile" *ngIf="currentuser">
+        <div class="profile_strip">
+          <div class="profile_pic">
+            <div class="profile_picinn">
+            <img src="{{currentuser?.profile_pic}}"> 
+            </div>
+          </div>
+          <h2>{{currentuser?.firstname}}</h2>
+          <p>{{currentuser?.email}}</p>
+        </div>
+      </div>
+        
+        <div class="menuprofile" *ngIf="!currentuser">
+        <div class="profile_strip">
+          <div class="profile_pic">
+            <div class="profile_picinn">
+            <img src="assets/imgs/profile.png"> 
+            </div>
+          </div>
+<!--          <h2>{{currentuser?.firstname}}</h2>
+          <p>{{currentuser?.email}}</p>-->
+        </div>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list no-lines class="sidemenu" *ngIf="currentuser">
+      <button menuClose color="black" ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.active]="checkActivePage(p)">
+        <ion-icon><img width="20px" src="{{p.icon}}"></ion-icon>
+        {{p.title}}
+      </button>
+        <button menuClose color="black" ion-item (click)="logout()">
+        <ion-icon><img width="20px" src="assets/imgs/logout.png"></ion-icon>
+        Logout
+      </button>
+    </ion-list>
+      
+      <ion-list no-lines class="sidemenu" *ngIf="currentuser == null">
+      <button menuClose color="black" ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.active]="checkActivePage(p)">
+        <ion-icon><img width="20px" src="{{p.icon}}"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
