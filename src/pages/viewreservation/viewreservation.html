@@ -33,7 +33,7 @@
               <img *ngIf="!reservation?.order_data[0].profile_pic" src="assets/imgs/profile.png">
             </ion-thumbnail>
           <h2>{{reservation?.order_data[0].firstname}} {{reservation?.order_data[0].lastname}}</h2>
-          <p>Special Food</p>
+          <p *ngIf="reservation?.spacial_accomodation">{{reservation?.spacial_accomodation}}</p>
           <div class="left">
             <p>Booking Date</p>
             <p>{{reservation?.orderstart | date}}</p>

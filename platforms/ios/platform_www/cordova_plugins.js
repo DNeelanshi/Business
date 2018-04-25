@@ -1,6 +1,14 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
+    "id": "cordova-plugin-actionsheet.ActionSheet",
+    "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+    "pluginId": "cordova-plugin-actionsheet",
+    "clobbers": [
+      "window.plugins.actionsheet"
+    ]
+  },
+  {
     "id": "cordova-plugin-camera.Camera",
     "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
     "pluginId": "cordova-plugin-camera",
@@ -41,11 +49,27 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-dialogs.notification",
+    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
+  },
+  {
     "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
     "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
     "pluginId": "cordova-plugin-facebook4",
     "clobbers": [
       "facebookConnectPlugin"
+    ]
+  },
+  {
+    "id": "cordova-plugin-fcm.FCMPlugin",
+    "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
+    "pluginId": "cordova-plugin-fcm",
+    "clobbers": [
+      "FCMPlugin"
     ]
   },
   {
@@ -81,6 +105,15 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
+  },
+  {
     "id": "cordova-plugin-ionic-keyboard.keyboard",
     "file": "plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js",
     "pluginId": "cordova-plugin-ionic-keyboard",
@@ -105,6 +138,14 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-statusbar.statusbar",
+    "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+    "pluginId": "cordova-plugin-statusbar",
+    "clobbers": [
+      "window.StatusBar"
+    ]
+  },
+  {
     "id": "es6-promise-plugin.Promise",
     "file": "plugins/es6-promise-plugin/www/promise.js",
     "pluginId": "es6-promise-plugin",
@@ -116,38 +157,6 @@ module.exports = [
     "pluginId": "cordova-plugin-x-socialsharing",
     "clobbers": [
       "window.plugins.socialsharing"
-    ]
-  },
-  {
-    "id": "cordova-plugin-statusbar.statusbar",
-    "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-    "pluginId": "cordova-plugin-statusbar",
-    "clobbers": [
-      "window.StatusBar"
-    ]
-  },
-  {
-    "id": "cordova-plugin-fcm.FCMPlugin",
-    "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
-    "pluginId": "cordova-plugin-fcm",
-    "clobbers": [
-      "FCMPlugin"
-    ]
-  },
-  {
-    "id": "cordova-plugin-actionsheet.ActionSheet",
-    "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
-    "pluginId": "cordova-plugin-actionsheet",
-    "clobbers": [
-      "window.plugins.actionsheet"
-    ]
-  },
-  {
-    "id": "cordova-plugin-dialogs.notification",
-    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-    "pluginId": "cordova-plugin-dialogs",
-    "merges": [
-      "navigator.notification"
     ]
   },
   {
@@ -173,36 +182,28 @@ module.exports = [
     "merges": [
       "launchnavigator"
     ]
-  },
-  {
-    "id": "cordova-plugin-inappbrowser.inappbrowser",
-    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-    "pluginId": "cordova-plugin-inappbrowser",
-    "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
-    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+  "cordova-plugin-actionsheet": "2.3.3",
+  "cordova-plugin-add-swift-support": "1.7.1",
   "cordova-plugin-camera": "4.0.2",
   "cordova-plugin-device": "2.0.1",
+  "cordova-plugin-dialogs": "2.0.1",
   "cordova-plugin-facebook4": "1.9.1",
+  "cordova-plugin-fcm": "2.1.2",
   "cordova-plugin-geolocation": "4.0.1",
+  "cordova-plugin-inappbrowser": "2.0.2",
   "cordova-plugin-ionic-keyboard": "2.0.5",
   "cordova-plugin-ionic-webview": "1.1.16",
   "cordova-plugin-splashscreen": "5.0.2",
+  "cordova-plugin-statusbar": "2.4.1",
   "cordova-plugin-whitelist": "1.3.3",
   "es6-promise-plugin": "4.1.0",
   "cordova-plugin-x-socialsharing": "5.3.1",
-  "cordova-plugin-statusbar": "2.4.1",
-  "cordova-plugin-fcm": "2.1.2",
-  "cordova-plugin-actionsheet": "2.3.3",
-  "cordova-plugin-dialogs": "2.0.1",
-  "uk.co.workingedge.phonegap.plugin.launchnavigator": "4.2.0",
-  "cordova-plugin-inappbrowser": "2.0.2"
+  "uk.co.workingedge.phonegap.plugin.launchnavigator": "4.2.0"
 };
 // BOTTOM OF METADATA
 });

@@ -2,11 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform, AlertController, ToastController, Events} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-
 import {GetstartPage} from '../pages/getstart/getstart';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
-
 import {RealtalkPage} from '../pages/realtalk/realtalk';
 import {CareernetworkPage} from '../pages/careernetwork/careernetwork';
 import {NewartistPage} from '../pages/newartist/newartist';
@@ -39,7 +37,7 @@ export class MyApp {
     currentuser: any;
     userimage: any;
     @ViewChild(Nav) nav: Nav;
-
+    
     rootPage: any;
     activePage: any;
 
@@ -58,7 +56,8 @@ export class MyApp {
         private app: App,
         private menu: MenuController
     ) {
-    //alert('asdfjk')
+    
+   // alert('asdfjk')
          platform.ready().then(() => {
             
       // Okay, so the platform is ready and our plugins are available.
@@ -80,9 +79,6 @@ export class MyApp {
         if (localStorage.getItem('CurrentUser')) {
             this.getUser();
         }
-
-      
-
     }
 
     initializeApp() {
@@ -170,13 +166,13 @@ export class MyApp {
         this.nav.setRoot(GetstartPage);
     }
     getUser() {
-        //alert('user image:-'+this.userimage);
         if(localStorage.getItem('CurrentUser')){
         console.log(JSON.parse(localStorage.getItem('CurrentUser'))._id);
         let options = this.appsetting.header();
         var postdata = {
-            user_id: JSON.parse(localStorage.getItem('CurrentUser'))._id,
+            user_id:JSON.parse(localStorage.getItem('CurrentUser'))._id,
         }
+        console.log(postdata);
         var serialized = this.appsetting.serializeObj(postdata);
         this.http.post(this.appsetting.url + 'users/userinfo', serialized, options).map(res => res.json()).subscribe(response => {
             console.log(response);
@@ -196,13 +192,13 @@ export class MyApp {
                 this.currentuser = response.data;
                 console.log(this.currentuser);
                 if(this.currentuser.role == "member"){
-            this.pages = [
+                this.pages = [
                 {title: 'Home', component: HomePage, icon: 'assets/imgs/home.png'},
                 {title: 'Real Talk', component: RealtalkPage, icon: 'assets/imgs/realtalk.png'},
                 {title: 'Career Network', component: CareernetworkPage, icon: 'assets/imgs/career.png'},
                 {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editprofile.png'},
 //                {title: 'Edit Business Information', component: EditbusinessPage, icon: 'assets/imgs/editprofile.png'},
-                {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
+//                {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
                 {title: 'New Artist', component: NewartistPage, icon: 'assets/imgs/artist.png'},
                 {title: 'View Reservations', component: ViewreservationtwoPage, icon: 'assets/imgs/reservation.png'},
 //                {title: 'Reservations', component: ReservationsPage, icon: 'assets/imgs/reservation.png'},

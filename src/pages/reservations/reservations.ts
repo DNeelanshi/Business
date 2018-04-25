@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams,LoadingController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams,LoadingController, AlertController} from 'ionic-angular';
 import {Appsetting} from '../../providers/appsetting';
 import {Http} from '@angular/http';
 import {Common} from '../../providers/common';
@@ -28,8 +28,13 @@ export class ReservationsPage {
         public appsetting: Appsetting,
         public http: Http,
         public common: Common,
-        public loadingCtrl:LoadingController
+        public loadingCtrl:LoadingController,
+        public alertCtrl:AlertController
+        
     ) {
+    //alert('reservationsffff');
+    
+   
     }
 
     ionViewDidLoad() {
@@ -58,13 +63,19 @@ export class ReservationsPage {
                 this.reservationsdata = '';
                 response.data.forEach(function (value, key) {
                     console.log(value);
-                    value.orderstart = moment(value.orderstart).format('MM-DD-YYYY');
-                    value.bookingtime = moment(value.orderstart).format('HH:mm A');
+                    var datetime = value.orderstart;
+                    value.bookingtime = moment(datetime).format('hh:mm A');
+                    value.bookingdate = moment(datetime).format('MM-DD-YYYY');
+                   // value.bookingtime = parseInt( value.orderstart);
+                   
+                    console.log(value.bookingtime)
                 })
                 this.reservationsdata = response.data;
                 this.totalpageno = response.page;
+//                this.reservationsdata[0].bookingtime =  parseInt(this.reservationsdata[0].bookingtime);
                 console.log(this.reservationsdata);
             } else {
+                this.reservationsdata = '';
                 //this.common.presentAlert('Book now', 'Something went wrong!');
             }
         })
@@ -95,8 +106,9 @@ export class ReservationsPage {
     }
     
     /*********** function to accept the reservations *******************/
-    Decline(orderid) {
+    Decline(orderid,dec) {
         console.log('Decline clicked');
+        if(dec != 2){
         var user = JSON.parse(localStorage.getItem('CurrentUser'));
         let options = this.appsetting.header();
         let postdata = {
@@ -113,6 +125,29 @@ export class ReservationsPage {
                         this.common.presentAlert('Reservation', 'Something went wrong!');
                     }
                 })
+        }else{
+             let alert = this.alertCtrl.create({
+                    title: 'Reservation',
+                    message: 'Are you sure you want to decline?',
+                    buttons: [
+                      {
+                        text: 'Disagree',
+                        role: 'cancel',
+                        handler: () => {
+                          console.log('alertCtrl clicked');
+                        }
+                      },
+                      {
+                        text: 'Agree',
+                        handler: () => {
+                          console.log('Agree clicked');
+                         this.Decline(orderid,1);
+                        }
+                      }
+                    ]
+  });
+  alert.present();
+        }
     }
       /****** functions used for pagination ************/
     doInfinite(infiniteScroll) {

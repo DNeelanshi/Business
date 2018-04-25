@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Appsetting} from '../../providers/appsetting';
 import {Common} from '../../providers/common';
 import {Http} from '@angular/http';
+import {ReviewPage} from '../review/review';
 
 /**
  * Generated class for the HistoryPage page.
@@ -50,12 +51,36 @@ export class HistoryPage {
         this.http.post(this.appsetting.url + 'orders/getoldreservation ', serialized, options).map(res => res.json()).subscribe(response => {
             console.log(response);
             if (response.status == true) {
+                response.data.forEach(function(value,key){
+                    console.log(value);
+                    
+                    var sum = 0;
+                    if(value.order_data[0].review){
+                        if (value.order_data[0].review.length > 0) {
+                            value.order_data[0].review.forEach(function (val, ke) {
+                                console.log(val);
+                                sum += val.stars;
+                                console.log(sum);
+                                value.order_data[0].avg = sum / value.order_data[0].review.length;
+                            })
+                        } else {
+                            value.order_data[0].avg = 0;
+                        }
+                    }else{
+                        value.order_data[0].avg = 0;
+                    }
+                    
+                })
                 this.historydata = response.data;
                 this.totalpageno = response.page;
             } else {
                 this.common.presentAlert('History', 'No data found!');
             }
         })
+    }
+    
+    Review(resid) {
+        this.navCtrl.push(ReviewPage, {prod_id: resid});
     }
     /****** functions used for pagination ************/
     doInfinite(infiniteScroll) {

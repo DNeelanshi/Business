@@ -19,8 +19,9 @@ import {HomePage} from '../home/home';
     templateUrl: 'review.html',
 })
 export class ReviewPage {
+    resdetail: any;
     ReviewForm: any;
-
+    data:any = {};
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -44,6 +45,12 @@ export class ReviewPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ReviewPage');
+        this.GetReview();
+        console.log(this.navParams.get('prod_id'));
+        this.resdetail = this.navParams.get('prod_id');
+        this.data.rate = this.resdetail.avg;
+         console.log(this.navParams.get('prod_id').business_data[0]._id);
+        console.log(JSON.parse(localStorage.getItem('CurrentUser')));
     }
 
     ngOnInit(): any {
@@ -54,29 +61,40 @@ export class ReviewPage {
 
         })
     }
+    
     onModelChange(event) {
         console.log(event);
     }
+    
     MakeReview(MakeReview) {
         console.log(MakeReview.value);
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             let options = this.appsetting.header();
             var postdata = {
-//                email: signindata.value.email,
-//                password: signindata.value.password,
+                user_id: JSON.parse(localStorage.getItem('CurrentUser'))._id,
+                business_id: this.navParams.get('prod_id').business_data[0]._id,
+                stars:MakeReview.value.rating,
+                comment:MakeReview.value.comment
             }
             var serialized = this.appsetting.serializeObj(postdata);
-//            var Loading = this.loadingCtrl.create({
-//                spinner: 'bubbles',
-//                content: 'Loading...'
-//            });
-//            Loading.present().then(() => {
-//                this.http.post(this.appsetting.url + 'users/loginuser', serialized, options).map(res => res.json()).subscribe(response => {
-//                    console.log(response);
-//                    Loading.dismiss();
-//                })
-//            })
+            var Loading = this.loadingCtrl.create({
+                spinner: 'bubbles',
+                content: 'Loading...'
+            });
+            Loading.present().then(() => {
+                this.http.post(this.appsetting.url + 'postReview', serialized, options).map(res => res.json()).subscribe(response => {
+                    console.log(response);
+                    Loading.dismiss();
+                    if(response.status == true){
+                        this.common.presentAlert('Review', response.msg);
+                        this.navCtrl.push(HomePage);
+                    }else{
+                         this.common.presentAlert('Review', response.msg);
+                          
+                    }
+                })
+            })
 
 
         } else {
@@ -90,5 +108,41 @@ export class ReviewPage {
             });
             toast.present();
         }
+    }
+    GetReview(){
+         let options = this.appsetting.header();
+            var postdata = {
+                business_id: this.navParams.get('prod_id').business_data[0]._id,
+            }
+            var serialized = this.appsetting.serializeObj(postdata);
+            var Loading = this.loadingCtrl.create({
+                spinner: 'bubbles',
+                content: 'Loading...'
+            });
+            Loading.present().then(() => {
+                this.http.post(this.appsetting.url + 'getReview', serialized, options).map(res => res.json()).subscribe(response => {
+                    console.log(response);
+                    Loading.dismiss();
+                    if(response.status == true){
+                        if(this.resdetail.review.length>0){
+                        this.resdetail.review.forEach(function(value,key){
+                            console.log(value);
+                            response.userinfo.forEach(function(val,ke){
+                                console.log(val)
+                                if(value.user_id == val._id){
+                                value.firstname = val.firstname;
+                                value.lastname = val.lastname;
+                                value.profile_pic = val.profile_pic;
+                                }
+                            })
+                        })
+                        console.log(this.resdetail);
+                        }
+                    }else{
+                        
+                          
+                    }
+                })
+            })
     }
 }

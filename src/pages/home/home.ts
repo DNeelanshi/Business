@@ -1,5 +1,5 @@
 import {Component, NgZone} from '@angular/core';
-import {NavController, ModalController, ViewController, ToastController, LoadingController} from 'ionic-angular';
+import {NavController, ModalController, ViewController, ToastController, LoadingController, AlertController} from 'ionic-angular';
 import {FilterPage} from "../filter/filter";
 import {ViewproductPage} from '../viewproduct/viewproduct';
 import {BooknowPage} from '../booknow/booknow';
@@ -10,6 +10,7 @@ import {Appsetting} from '../../providers/appsetting';
 import {Http} from '@angular/http';
 import {Geolocation} from '@ionic-native/geolocation';
 import * as moment from 'moment';
+import {LoginPage} from '../login/login';
 
 declare var google;
 @Component({
@@ -17,6 +18,8 @@ declare var google;
     templateUrl: 'home.html'
 })
 export class HomePage {
+    currentLong: number;
+    currentLat: number;
     favourite: any;
     modaldata: any;
     totalpageno: any;
@@ -33,6 +36,7 @@ export class HomePage {
     subcat: any = [];
     premiumBusiness: any = [];
     fav = 0;
+    rating: any = {};
     constructor(
         public navCtrl: NavController,
         public modalCtrl: ModalController,
@@ -44,33 +48,38 @@ export class HomePage {
         public appsetting: Appsetting,
         public http: Http,
         private zone: NgZone,
-        private geolocation: Geolocation
+        private geolocation: Geolocation,
+        public alertCtrl: AlertController
     ) {
         console.log('rahul');
-        console.log(JSON.parse(localStorage.getItem('CurrentUser')));
-        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            console.log('You are online');
-        } else {
-            this.common.tryagain();
+        if (localStorage.getItem('CurrentUser')) {
+            console.log(JSON.parse(localStorage.getItem('CurrentUser')));
+            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
         }
         this.autocompleteItems = [];
         this.autocomplete = {
             query: ''
         };
-        this.currentLocation();
+       
     }
 
     ionViewDidLoad() {
         //alert('ionViewDidLoad');
-        console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            console.log('You are online');
+             this.currentLocation();
+             console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
         this.getSubCatList();
         console.log('ionViewDidLoad HomePage');
-        this.Getlist(1, 30.723839099999996, 76.8465082);
-        this.latitude = 30.723839099999996;
-        this.longitude = 76.8465082;
-        
+//        this.Getlist(1, 30.723839099999996, 76.8465082);
+//        this.latitude = 30.723839099999996;
+//        this.longitude = 76.8465082;
+        } else {
+            this.common.tryagain();
+        }
+       
+
     }
 
     currentLocation() {
@@ -82,14 +91,20 @@ export class HomePage {
             console.log(resp.coords.longitude);
             this.latitude = resp.coords.latitude;// resp.coords.latitude
             this.longitude = resp.coords.longitude;// resp.coords.longitude
+            this.currentLat = resp.coords.latitude;
+            this.currentLong = resp.coords.longitude;
+
             this.Getlist(this.pageno, resp.coords.latitude, resp.coords.longitude);
             var geocoder = new google.maps.Geocoder;
             var latlng = {lat: resp.coords.latitude, lng: resp.coords.longitude};
+
+
             geocoder.geocode({'location': latlng}, function (results, status) {
                 if (status === 'OK') {
                     console.log(results[0]);
                     if (results[0]) {
                         temp.autocomplete.query = results[0].formatted_address;
+
                     } else {
                         temp.autocomplete.query = '';
                     }
@@ -101,7 +116,7 @@ export class HomePage {
             console.log('Error getting location', error);
         });
     }
-    
+
     /********* function used for get subcatlist to show on top of the page ***********/
     getSubCatList() {
         this.subcat = [];
@@ -122,17 +137,18 @@ export class HomePage {
             console.log(this.subcat);
         })
     }
-    
+
     /****** functions used for run ionViewDidLoad() function after clear the search bar ************/
-    ionClear() {
-        this.ionViewDidLoad();
-    }
-    
+//    ionClear() {
+//        this.ionViewDidLoad();
+//    }
+
     /****** functions used for getlist of restaurants by default when user visit on page ************/
     Getlist(pageno, lat, long) {
-        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+
         console.log('Getlist');
         var temp = this;
+        
         let options = this.appsetting.header();
         var postdata = {
             lat: lat,
@@ -151,28 +167,45 @@ export class HomePage {
                     console.log(response.data);
                     console.log(this.latitude);
                     console.log(this.longitude);
-                    //this.geolocation.getCurrentPosition().then((resp) => {
+                    // this.geolocation.getCurrentPosition().then((resp) => {
                     // alert('here');
                     this.restaurantlist = [];
                     temp.premiumBusiness = [];
                     //                        console.log(resp.coords.latitude);
                     //                        console.log(resp.coords.longitude);
-                     for (var i = 0; i < response.data.length; i++) {
-                         if(this.favourite.length>0){
-                        for (var j = 0; j < this.favourite.length; j++) {
-                            if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                console.log('matched');
-                                response.data[i].business_data[0].fav = 1;
-                                break;
+                    for (var i = 0; i < response.data.length; i++) {
+
+                        if (localStorage.getItem('CurrentUser')) {
+                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                            if (this.favourite.length > 0) {
+                                for (var j = 0; j < this.favourite.length; j++) {
+                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                        console.log('matched');
+                                        response.data[i].business_data[0].fav = 1;
+                                        break;
+                                    } else {
+                                        console.log('not matched');
+                                        response.data[i].business_data[0].fav = 0;
+                                        // break;
+                                    }
+                                }
                             } else {
-                                console.log('not matched');
                                 response.data[i].business_data[0].fav = 0;
-                                // break;
                             }
+                        } else {
+                            response.data[i].business_data[0].fav = 0;
                         }
-                         }else{
-                             response.data[i].business_data[0].fav = 0;
-                         }
+                        var sum = 0;
+                        if (response.data[i].review.length > 0) {
+                            response.data[i].review.forEach(function (val, ke) {
+                                console.log(val);
+                                sum += val.stars;
+                                console.log(sum);
+                                response.data[i].avg = sum / response.data[i].review.length;
+                            })
+                        } else {
+                            response.data[i].avg = 0;
+                        }
                     }
                     response.data.forEach(function (value, key) {
                         console.log(value);
@@ -188,7 +221,7 @@ export class HomePage {
                             temp.restaurantlist.push(value);
                         }
 
-                         value.business_data[0].distance = temp.common.distance(lat, long, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
                     })
                     //})
                     this.totalpageno = response.pages;
@@ -232,6 +265,7 @@ export class HomePage {
                 console.log(results[0].geometry.location.lng());
                 temp.latitude = results[0].geometry.location.lat();
                 temp.longitude = results[0].geometry.location.lng();
+                temp.pageno = 1;
                 temp.Getlist(temp.pageno, temp.latitude, temp.longitude);
 
             } else {
@@ -334,9 +368,9 @@ export class HomePage {
                     orderdate: da,
                     orderstart: startdate,
                     orderend: enddate,
-                    spacial_accomodation:data.bookingdata.specialAccomo
+                    spacial_accomodation: data.bookingdata.specialAccomo
                 }
-                
+
                 let serialized = this.appsetting.serializeObj(postdata);
                 this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
                     console.log(response);
@@ -384,7 +418,7 @@ export class HomePage {
 
     /********* function used for filter by subcat(by clicking on top scroll bar) *************/
     FilterBySubCat(id) {
-        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+
         console.log(id);
         var temp = this;
         let options = this.appsetting.header();
@@ -406,24 +440,31 @@ export class HomePage {
                     if (response.data.length > 0) {
                         this.premiumBusiness = [];
                         this.restaurantlist = [];
+
                         for (var i = 0; i < response.data.length; i++) {
-                         if(this.favourite.length>0){
-                        for (var j = 0; j < this.favourite.length; j++) {
-                            if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                console.log('matched');
-                                response.data[i].business_data[0].fav = 1;
-                                break;
+                            if (localStorage.getItem('CurrentUser')) {
+                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                if (this.favourite.length > 0) {
+                                    for (var j = 0; j < this.favourite.length; j++) {
+                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                            console.log('matched');
+                                            response.data[i].business_data[0].fav = 1;
+                                            break;
+                                        } else {
+                                            console.log('not matched');
+                                            response.data[i].business_data[0].fav = 0;
+                                            // break;
+                                        }
+                                    }
+                                } else {
+                                    response.data[i].business_data[0].fav = 0;
+                                }
                             } else {
-                                console.log('not matched');
                                 response.data[i].business_data[0].fav = 0;
-                                // break;
                             }
                         }
-                         }else{
-                             response.data[i].business_data[0].fav = 0;
-                         }
-                    }
-                    
+
+
                         response.data.forEach(function (value, key) {
                             console.log(value);
                             console.log(key);
@@ -436,7 +477,7 @@ export class HomePage {
                                 console.log('else');
                                 temp.restaurantlist.push(value);
                             }
-                            //value.business_data[0].distance = temp.common.distance(resp.coords.latitude, resp.coords.longitude, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
                             //})
                         })
 
@@ -449,7 +490,7 @@ export class HomePage {
             })
         })
     }
-    
+
     viewproduct(dat) {
         console.log(dat);
         dat.business_data[0].opening_days_and_timings.forEach(function (value, key) {
@@ -457,31 +498,31 @@ export class HomePage {
             var ot = value.opening_time.split(':');
             console.log(value.opening_time.includes("AM"));
             if (ot[0] > 11) {
-                if(value.opening_time.includes("AM") == true || value.opening_time.includes("PM") == true){
-                value.opening_time = value.opening_time;
-                }else{
+                if (value.opening_time.includes("AM") == true || value.opening_time.includes("PM") == true) {
+                    value.opening_time = value.opening_time;
+                } else {
                     value.opening_time = value.opening_time + ' PM';
                 }
             } else {
-             if(value.opening_time.includes("AM") == true || value.opening_time.includes("PM") == true){
-                value.opening_time = value.opening_time;
-                }else{
+                if (value.opening_time.includes("AM") == true || value.opening_time.includes("PM") == true) {
+                    value.opening_time = value.opening_time;
+                } else {
                     value.opening_time = value.opening_time + ' AM';
                 }
-                
+
             }
             var ct = value.closing_time.split(':');
             if (ct[0] > 11) {
-                if(value.closing_time.includes("AM") == true || value.closing_time.includes("PM") == true){
-                value.closing_time = value.closing_time;
-                }else{
-                     value.closing_time = value.closing_time + ' PM';
+                if (value.closing_time.includes("AM") == true || value.closing_time.includes("PM") == true) {
+                    value.closing_time = value.closing_time;
+                } else {
+                    value.closing_time = value.closing_time + ' PM';
                 }
             } else {
-            if(value.closing_time.includes("AM") == true || value.closing_time.includes("PM") == true){
-                value.closing_time = value.closing_time;
-                }else{
-                     value.closing_time = value.closing_time + ' AM';
+                if (value.closing_time.includes("AM") == true || value.closing_time.includes("PM") == true) {
+                    value.closing_time = value.closing_time;
+                } else {
+                    value.closing_time = value.closing_time + ' AM';
                 }
             }
         })
@@ -489,9 +530,9 @@ export class HomePage {
         //return false;
         this.navCtrl.push(ViewproductPage, {restdata: dat});
     }
-    
-    view() {
-        this.navCtrl.push(ReviewPage);
+
+    view(resid) {
+        this.navCtrl.push(ReviewPage, {prod_id: resid});
     }
 
     /*********** function to favourite a restaurant *******************/
@@ -499,34 +540,81 @@ export class HomePage {
     MarkAsFavourite(businessID) {
         console.log('MarkAsFavourite function');
         console.log(businessID);
-        var user = JSON.parse(localStorage.getItem('CurrentUser'));
-        let options = this.appsetting.header();
-        let postdata = {
-            user_id: user._id,
-            favorite_business_id: businessID
-        }
-        let serialized = this.appsetting.serializeObj(postdata);
-        this.http.post(this.appsetting.url + 'user/add_to_favarite', serialized, options).map(res => res.json()).subscribe(response => {
-            console.log(response);
-            if (response.status == true) {
-                localStorage.setItem('CurrentUser', JSON.stringify(response.data[0]));
-                this.Getlist(this.pageno, this.latitude, this.longitude);
-            } else {
-                this.http.post(this.appsetting.url + 'user/delete_favarite_business ', serialized, options).map(res => res.json()).subscribe(response => {
-                    console.log(response);
-                    if (response.status == true) {
-                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                        this.Getlist(this.pageno, this.latitude, this.longitude);
-                    }
-                })
+        if (localStorage.getItem('CurrentUser')) {
+            var user = JSON.parse(localStorage.getItem('CurrentUser'));
+            let options = this.appsetting.header();
+            let postdata = {
+                user_id: user._id,
+                favorite_business_id: businessID
             }
-        })
+            let serialized = this.appsetting.serializeObj(postdata);
+            this.http.post(this.appsetting.url + 'user/add_to_favarite', serialized, options).map(res => res.json()).subscribe(response => {
+                console.log(response);
+                if (response.status == true) {
+                    localStorage.setItem('CurrentUser', JSON.stringify(response.data[0]));
+                    // this.pageno = 1;
+                    //                this.Getlist(this.pageno, this.latitude, this.longitude);
+                    this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                    for (var i = 0; i < this.restaurantlist.length; i++) {
+                        if (this.favourite.length > 0) {
+                            for (var j = 0; j < this.favourite.length; j++) {
+                                if ((this.restaurantlist[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                    console.log('matched');
+                                    this.restaurantlist[i].business_data[0].fav = 1;
+                                    break;
+                                } else {
+                                    console.log('not matched');
+                                    this.restaurantlist[i].business_data[0].fav = 0;
+                                    // break;
+                                }
+                            }
+                        } else {
+                            this.restaurantlist[i].business_data[0].fav = 0;
+                        }
+                    }
+                    console.log(this.restaurantlist);
+                } else {
+                    this.http.post(this.appsetting.url + 'user/delete_favarite_business ', serialized, options).map(res => res.json()).subscribe(response => {
+                        console.log(response);
+                        if (response.status == true) {
+                            localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                            //this.pageno = 1;
+                            //this.Getlist(this.pageno, this.latitude, this.longitude);
+                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                            for (var i = 0; i < this.restaurantlist.length; i++) {
+                                if (this.favourite.length > 0) {
+                                    for (var j = 0; j < this.favourite.length; j++) {
+                                        if ((this.restaurantlist[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                            console.log('matched');
+                                            this.restaurantlist[i].business_data[0].fav = 1;
+                                            break;
+                                        } else {
+                                            console.log('not matched');
+                                            this.restaurantlist[i].business_data[0].fav = 0;
+                                            // break;
+                                        }
+                                    }
+                                } else {
+                                    this.restaurantlist[i].business_data[0].fav = 0;
+                                }
+                            }
+                            console.log(this.restaurantlist);
+                        }
+                    })
+                }
+
+            })
+        } else {
+            this.common.ConfirmFunction('Favourite', 'Please login first to make favourite!', LoginPage)
+
+        }
     }
-     /****** functions used only for getdata of restaurants when infinite scroll hit ************/
+    /****** functions used only for getdata of restaurants when infinite scroll hit ************/
     Getdata(pageno, lat, long) {
-        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+
         console.log('Getlist');
         var temp = this;
+        var sum = 0;
         let options = this.appsetting.header();
         var postdata = {
             lat: lat,
@@ -547,33 +635,46 @@ export class HomePage {
                     console.log(this.longitude);
                     //this.geolocation.getCurrentPosition().then((resp) => {
                     // alert('here');
-//                    this.restaurantlist = [];
-//                    temp.premiumBusiness = [];
+                    //                    this.restaurantlist = [];
+                    //                    temp.premiumBusiness = [];
                     //                        console.log(resp.coords.latitude);
                     //                        console.log(resp.coords.longitude);
-                     for (var i = 0; i < response.data.length; i++) {
-                         if(this.favourite.length>0){
-                        for (var j = 0; j < this.favourite.length; j++) {
-                            if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                console.log('matched');
-                                response.data[i].business_data[0].fav = 1;
-                                break;
+                    for (var i = 0; i < response.data.length; i++) {
+                        if (localStorage.getItem('CurrentUser')) {
+                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                            if (this.favourite.length > 0) {
+                                for (var j = 0; j < this.favourite.length; j++) {
+                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                        console.log('matched');
+                                        response.data[i].business_data[0].fav = 1;
+                                        break;
+                                    } else {
+                                        console.log('not matched');
+                                        response.data[i].business_data[0].fav = 0;
+                                        // break;
+                                    }
+                                }
                             } else {
-                                console.log('not matched');
                                 response.data[i].business_data[0].fav = 0;
-                                // break;
                             }
+                        } else {
+                            response.data[i].business_data[0].fav = 0;
                         }
-                         }else{
-                             response.data[i].business_data[0].fav = 0;
-                         }
+                        if (response.data[i].review.length > 0) {
+                            response.data[i].review.forEach(function (val, ke) {
+                                console.log(val);
+                                sum += val.stars;
+                                console.log(sum);
+                                response.data[i].avg = sum / response.data[i].review.length;
+                            })
+                        } else {
+                            response.data[i].avg = 0;
+                        }
                     }
+
                     response.data.forEach(function (value, key) {
                         console.log(value);
                         console.log(key);
-                        //                            console.log(value.business_data[0].location.coordinates[1]);
-                        //                            console.log(typeof (value.business_data[0].business_type));
-                        console.log()
                         if (value.business_data[0].business_type == 1) {
                             console.log('if');
                             temp.premiumBusiness.push(value);
@@ -581,19 +682,22 @@ export class HomePage {
                             console.log('else');
                             temp.restaurantlist.push(value);
                         }
+                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
 
-                         value.business_data[0].distance = temp.common.distance(lat, long, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
                     })
-                    //})
+
+
                     this.totalpageno = response.pages;
                     console.log(this.restaurantlist);
                     console.log(temp.premiumBusiness);
                 }
             })
         })
+
     }
-    
-     /****** functions used for getlist on refresh ************/
+
+    /****** functions used for getlist on refresh ************/
     doRefresh(refresher) {
         console.log('Begin async operation', refresher);
         //this.getSubCatList();
@@ -613,6 +717,7 @@ export class HomePage {
         if (this.pageno <= this.totalpageno) {
             this.Getdata(this.pageno, this.latitude, this.longitude);
         } else {
+            //this.pageno = 1;
             console.log('No more data to load');
         }
         setTimeout(() => {

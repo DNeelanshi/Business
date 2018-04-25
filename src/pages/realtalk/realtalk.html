@@ -6,156 +6,151 @@
 -->
 <ion-header>
 
-  <ion-navbar color="green">
-      <button ion-button menuToggle style="display:block !important;">
-        <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
-      </button>
-    <ion-title>realtalk!</ion-title>
-  </ion-navbar>
-  <div class="segment-sec" color="green">
-      <ion-segment [(ngModel)]="pet">
-          <ion-segment-button value="ourtalk">
-            Ourtalk
-          </ion-segment-button>
-          <ion-segment-button value="mytalk">
-            Mytalk
-          </ion-segment-button>
-          <ion-segment-button value="newtalk">
-            Newtalk
-          </ion-segment-button>
+    <ion-navbar color="green">
+        <button ion-button menuToggle style="display:block !important;">
+            <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
+        </button>
+        <ion-title>realtalk!</ion-title>
+    </ion-navbar>
+    <div class="segment-sec" color="green">
+        <ion-segment [(ngModel)]="talk">
+            <ion-segment-button value="ourtalk" (click)="GetOurTalks()">
+                Ourtalk
+            </ion-segment-button>
+            <ion-segment-button value="mytalk" (click)="MyTalk()">
+                Mytalk
+            </ion-segment-button>
+            <ion-segment-button value="newtalk">
+                Newtalk
+            </ion-segment-button>
         </ion-segment>
-  </div>
+    </div>
 
 </ion-header>
 
 
 <ion-content >
-    <div [ngSwitch]="pet">
+    <div [ngSwitch]="talk">
         <ion-list *ngSwitchCase="'ourtalk'">
-          <ion-item>
-            <ion-thumbnail item-start>
-              <img src="assets/imgs/talk.png">
-            </ion-thumbnail>
-            <h2>Best Pickup lines </h2>
-            <p>By Anima</p>
-            <p>2 Friends</p>
-            <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
-          </ion-item>
-
-          <ion-item>
-              <ion-thumbnail item-start>
-                <img src="assets/imgs/talk.png">
-              </ion-thumbnail>
-              <h2>Best Pickup lines </h2>
-              <p>By Anima</p>
-              <p>2 Friends</p>
-              <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
+            <ion-item *ngFor="let ourtalk of ourtalks">
+                <ion-thumbnail item-start>
+                    <img *ngIf="ourtalk.talk_data[0].profile_pic" [src]="ourtalk.talk_data[0].profile_pic">
+                    <img *ngIf="!ourtalk.talk_data[0].profile_pic" src="assets/imgs/user.png">
+                </ion-thumbnail>
+                <h2>{{ourtalk?.topic_name}} </h2>
+                <p>By {{ourtalk?.talk_data[0].firstname}}</p>
+                <p><ion-icon name="star-outline" color="gray"></ion-icon>{{ourtalk?.comments.length}} Comment</p>
             </ion-item>
 
-            <ion-item>
+<!--            <ion-item>
                 <ion-thumbnail item-start>
-                  <img src="assets/imgs/talk.png">
+                    <img src="assets/imgs/talk.png">
                 </ion-thumbnail>
                 <h2>Best Pickup lines </h2>
                 <p>By Anima</p>
                 <p>2 Friends</p>
                 <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
-              </ion-item>
-
-        </ion-list>
-      
-        <ion-list *ngSwitchCase="'mytalk'" class="mytlk">
-          <ion-item>
-            <ion-thumbnail item-start>
-              <img src="assets/imgs/talk.png">
-            </ion-thumbnail>
-            <h2>Topic Name</h2>
-            <p>Manhattan, New York, NY</p>
-            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
-            <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
-          </ion-item>
-
-          <ion-item>
-              <ion-thumbnail item-start>
-                <img src="assets/imgs/talk.png">
-              </ion-thumbnail>
-              <h2>Topic Name</h2>
-              <p>Manhattan, New York, NY</p>
-              <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
-              <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
             </ion-item>
 
             <ion-item>
                 <ion-thumbnail item-start>
-                  <img src="assets/imgs/talk.png">
+                    <img src="assets/imgs/talk.png">
+                </ion-thumbnail>
+                <h2>Best Pickup lines </h2>
+                <p>By Anima</p>
+                <p>2 Friends</p>
+                <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
+            </ion-item>-->
+            <ion-infinite-scroll (ionInfinite)="doInfiniteOurTalks($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'mytalk'" class="mytlk">
+            <ion-item *ngFor="let mytalk of mytalks">
+                <ion-thumbnail item-start>
+                    <img [src]="mytalk.profile_pic">
+                </ion-thumbnail>
+                <h2>{{mytalk?.topic_name}}</h2>
+                <p>{{mytalk?.loc_address}}</p>
+                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{mytalk?.comments.length}} Comment</p>
+                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+            </ion-item>
+
+<!--            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="assets/imgs/talk.png">
                 </ion-thumbnail>
                 <h2>Topic Name</h2>
                 <p>Manhattan, New York, NY</p>
                 <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
                 <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
-              </ion-item>
+            </ion-item>
 
-              <ion-item>
-                  <ion-thumbnail item-start>
+            <ion-item>
+                <ion-thumbnail item-start>
                     <img src="assets/imgs/talk.png">
-                  </ion-thumbnail>
-                  <h2>Topic Name</h2>
-                  <p>Manhattan, New York, NY</p>
-                  <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
-                  <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
-                </ion-item>
+                </ion-thumbnail>
+                <h2>Topic Name</h2>
+                <p>Manhattan, New York, NY</p>
+                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
+                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+            </ion-item>
 
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="assets/imgs/talk.png">
+                </ion-thumbnail>
+                <h2>Topic Name</h2>
+                <p>Manhattan, New York, NY</p>
+                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
+                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+            </ion-item>-->
+            <ion-infinite-scroll (ionInfinite)="doInfiniteMyTalks($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
         </ion-list>
 
         <div *ngSwitchCase="'newtalk'" class="newtalk" padding>
-          <h2 class="heading">Start a new talk </h2>
-          <ion-list no-lines no-padding>
-              <h2>Topic Name</h2>
-              <ion-item>               
-                  <ion-input type="text" ></ion-input>
-              </ion-item>
-              <h2>Location</h2>
-              <ion-item>               
-                  <ion-input type="text" placeholder="Enter your location"></ion-input>
-              </ion-item>
-
-              <ion-list radio-group class="category">
-                  <h2>Category</h2>                
-                  <ion-item>
-                    <ion-label>Lorem Ipsum</ion-label>
-                    <ion-radio  value="1"></ion-radio>
-                  </ion-item>
-                
-                  <ion-item>
-                    <ion-label>Lorem Ipsum</ion-label>
-                    <ion-radio value="2"></ion-radio>
-                  </ion-item>
-
-                  <ion-item>
-                    <ion-label>Lorem Ipsum</ion-label>
-                    <ion-radio value="3"></ion-radio>
-                  </ion-item>
-
-                    <ion-item>
-                      <ion-label>Lorem Ipsum</ion-label>
-                      <ion-radio checked="true" value="4"></ion-radio>
+            <h2 class="heading">Start a new talk </h2>
+            <form [formGroup]="realTalk" (submit)="postTalk(realTalk)">
+                <ion-list no-lines no-padding>
+                    <h2>Topic Name</h2>
+                    <ion-item>               
+                        <ion-input type="text" placeholder="Enter your topic" formControlName="topicname"></ion-input>
                     </ion-item>
-
-                    <ion-item>
-                      <ion-label>Lorem Ipsum</ion-label>
-                      <ion-radio value="5"></ion-radio>
+                    <h2>Location</h2>
+                    <ion-item>               
+                        <ion-input type="text" placeholder="Enter your location" formControlName="location" (input)="updateSearch(realTalk)"></ion-input>
                     </ion-item>
-
+                    <ion-list class="searchtogle animated bounceIn">
+                        <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
+                            {{ item }}
+                    </ion-item>
                 </ion-list>
+                <h2>Category</h2>
+                <ion-item> 
+                    <ion-select placeholder="Select Category" formControlName="category">
+                        <ion-option *ngFor="let cat of subcat" value="{{cat._id}},{{cat.sub_category_title}}">{{cat.sub_category_title}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <!--              <ion-list radio-group class="category">
+                                  <h2>Category</h2>                
+                                  <ion-item>
+                                    <ion-label>Lorem Ipsum</ion-label>
+                                    <ion-radio  value="1"></ion-radio>
+                                  </ion-item>
+                                </ion-list>-->
                 <h2>Message</h2>
                 <ion-item>
-                  <ion-textarea placeholder=""></ion-textarea>
+                    <ion-textarea placeholder="Write your message..." formControlName="message"></ion-textarea>
                 </ion-item>
-          </ion-list>
-          <div class="btn-sec">
-            <button ion-button color="green" class="btn1">Post</button>
-            <button ion-button clear color="gray" class="btn1">Cancel</button>
-          </div>
-        </div>
-      </div>
+            </ion-list>
+            <div class="btn-sec">
+                <button type="submit" ion-button color="green" class="btn1" [disabled]="!realTalk.valid">Post</button>
+                <!--            <button ion-button clear color="gray" class="btn1">Cancel</button>-->
+            </div>
+        </form>
+    </div>
+</div>
 </ion-content>

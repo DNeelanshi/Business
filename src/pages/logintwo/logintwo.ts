@@ -116,12 +116,12 @@ export class LogintwoPage {
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             let options = this.appsetting.header();
-//            this.fcm.getToken().then(token => {
-//                console.log('Tokenid-->' + token);
+            this.fcm.getToken().then(token => {
+                console.log('Tokenid-->' + token);
                 var postdata = {
                     email: signindata.value.email,
                     password: signindata.value.password,
-                    divice_token: 'asdf',//token,
+                    divice_token: token,
                     role: 'business'
                 }
                 console.log(postdata);
@@ -149,9 +149,9 @@ export class LogintwoPage {
 
                     })
                 })
-//            }, err => {
-//                console.log(err);
-//            })
+            }, err => {
+                console.log(err);
+            })
 
 
         } else {
@@ -193,47 +193,47 @@ export class LogintwoPage {
                     console.log(window.navigator.onLine);
                     if (window.navigator.onLine == true) {
                         let options = this.appsetting.header();
-                        //                this.fcm.getToken().then(token => {
-                        //                    alert(token);
-                        //                })
-                        var postdata = {
-                            fb_id: this.userData.id,
-                            firstname: this.userData.first_name,
-                            lastname: this.userData.last_name,
-                            email: this.userData.email,
-                            role: 'business',
-                            regitration_type: 'facebook',
-                            divice_token: 'ajsdfja',
-                            profile_pic: this.userData.picture,
-                            password: this.userData.id,
-                        }
-                        var serialized = this.appsetting.serializeObj(postdata);
-                        var Loading = this.loadingCtrl.create({
-                            spinner: 'bubbles',
-                            content: 'Loading...'
-                        });
-                        Loading.present().then(() => {
-                            this.http.post(this.appsetting.url + 'users/fbregistration', serialized, options).map(res => res.json()).subscribe(response => {
-                                console.log(response);
-                                Loading.dismiss();
-                                if (response.status == true) {
-                                    //alert('succes facebook');
-                                    if (response.data) {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                                        this.events.publish('Loggedin', 'loginpage');
-                                        this.navCtrl.push(HomePage);
+                        this.fcm.getToken().then(token => {
+
+                            var postdata = {
+                                fb_id: this.userData.id,
+                                firstname: this.userData.first_name,
+                                lastname: this.userData.last_name,
+                                email: this.userData.email,
+                                role: 'business',
+                                regitration_type: 'facebook',
+                                divice_token: token,
+                                profile_pic: this.userData.picture,
+                                password: this.userData.id,
+                            }
+                            var serialized = this.appsetting.serializeObj(postdata);
+                            var Loading = this.loadingCtrl.create({
+                                spinner: 'bubbles',
+                                content: 'Loading...'
+                            });
+                            Loading.present().then(() => {
+                                this.http.post(this.appsetting.url + 'users/fbregistration', serialized, options).map(res => res.json()).subscribe(response => {
+                                    console.log(response);
+                                    Loading.dismiss();
+                                    if (response.status == true) {
+                                        //alert('succes facebook');
+                                        if (response.data) {
+                                            localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                                            this.events.publish('Loggedin', 'loginpage');
+                                            this.navCtrl.push(HomePage);
+                                        } else {
+                                            localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                                            this.events.publish('Loggedin', 'loginpage');
+                                            this.navCtrl.push(HomePage);
+                                        }
+
                                     } else {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                                        this.events.publish('Loggedin', 'loginpage');
-                                        this.navCtrl.push(HomePage);
+                                        //alert('fail facebook!');
+                                        this.common.presentAlert('Signin', response.message);
                                     }
-
-                                } else {
-                                    //alert('fail facebook!');
-                                    this.common.presentAlert('Signin', response.message);
-                                }
-
-
+                                })
+                            }, err => {
+                                console.log(err);
                             })
                         })
 

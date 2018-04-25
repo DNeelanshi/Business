@@ -34,6 +34,7 @@ page-reviews2 {
     .content ul li .icon{
         font-weight: 700;
         font-size: 13px;
+        color:#f8d71d;
     }
     .item{
         padding: 0;
@@ -94,5 +95,7 @@ page-reviews2 {
         width: 70px;
         letter-spacing: 1px;
     }
-
+ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
+    padding: 0 !important;
+}
 }

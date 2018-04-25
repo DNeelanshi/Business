@@ -43,4 +43,11 @@ page-history {
     .btneq.activated{
         background-color: #d2b307;
     }
+    ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
+    display: inline;
+    border: 0px;
+    background: none;
+    padding: 0;
+    color: #f8d71d;
+}
 }

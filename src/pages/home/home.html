@@ -5,14 +5,14 @@
         </button>
         <ion-title text-center >Home</ion-title>
         <ion-buttons right (click)="filterModal()">
-                     <button ion-button>
+            <button ion-button>
                 <ion-icon><img width="22px" src="assets/imgs/filter.png"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 
     <div class="searchouter">
-        <ion-searchbar placeholder="Search location" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)"></ion-searchbar>
+        <ion-searchbar placeholder="Search location" [(ngModel)]="autocomplete.query" (input)="updateSearch()"></ion-searchbar>
         <ion-list class="searchtogle animated bounceIn">
             <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
                 {{ item }}
@@ -120,7 +120,7 @@
                 <h2>{{res.business_data[0].business_name}}</h2>
                 <div class="fullwidth">
                     <h4 class="listcol">
-                        <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false">
+                        <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="res.avg" name="rate">
                         </rating>
                     </h4>
                     <h4 *ngIf="res.business_data[0].own_online_market_place == true" class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="fullwidth">
                     <button class="btneq" ion-button color="green" (click)="bookModal(res)">Book Now</button>
-                    <button class="btneq yelo" ion-button color="yellow" (click)="view()">Review</button>
+                    <button class="btneq yelo" ion-button color="yellow" (click)="view(res)">Review</button>
                 </div>
                 <img *ngIf="res.business_data[0].business_type == 1 || res.business_data[0].business_type == 2" src="assets/imgs/premium.png" class="premim">
             </ion-item>
@@ -173,9 +173,11 @@
 
         </ion-list>
     </div>
-    <div class="notfound" *ngIf="restaurantlist?.length == 0">
-        <!--        <img src="assets/imgs/SORRY-01.png">-->
-        Sorry no data found!
+    <div *ngIf="restaurantlist?.length == 0">
+       <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+          <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
+          <span> No data found!</span>
+    </div>
     </div>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>

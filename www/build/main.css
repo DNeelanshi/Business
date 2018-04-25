@@ -26,7 +26,7 @@
   color: #434343;
 }
 
-.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reviews2 .content p, page-reviews2 h2 span, page-terms .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
+.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-terms .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
   font-size: 15px;
   font-weight: 400;
   color: #434343;
@@ -41402,6 +41402,36 @@ page-history .btneq.activated {
   background-color: #d2b307;
 }
 
+page-history ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 0;
+  color: #f8d71d;
+}
+
+page-historytwo {
+  /*    .item p{
+        @extend .fontheadding12px;
+    }
+    .item h2{
+        @extend .fontheadding16px;
+        margin-top: 0;
+    }
+    .item .left{
+        width: 87px;
+        float: left;
+        overflow: hidden;
+    }
+    .item .right{
+        width: 92px;
+        float: left;
+        border-left: 1px solid #c8c7cc;
+        padding-left: 8px;
+        margin-left: 7px;
+    }*/
+}
+
 page-historytwo .item {
   -webkit-box-align: start;
   -webkit-align-items: start;
@@ -41414,22 +41444,30 @@ page-historytwo .item .item-inner {
   border-bottom: none !important;
 }
 
+page-historytwo .item p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  float: left;
+  width: 100%;
+}
+
 page-historytwo .item h2 {
   margin-top: 0;
 }
 
 page-historytwo .item .left {
-  width: 87px;
+  width: 50%;
   float: left;
   overflow: hidden;
+  padding-right: 8px;
 }
 
 page-historytwo .item .right {
-  width: 92px;
+  width: 50%;
   float: left;
   border-left: 1px solid #c8c7cc;
   padding-left: 8px;
-  margin-left: 7px;
 }
 
 page-historytwo .label {
@@ -41471,6 +41509,10 @@ page-home ion-slides ion-slide img {
   height: 100% !important;
 }
 
+page-home button.searchbar-clear-icon {
+  background-size: 23px !important;
+}
+
 page-home .online {
   position: absolute;
   top: 80px;
@@ -41499,6 +41541,7 @@ page-home ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
   border: 0px;
   background: none;
   padding: 0;
+  color: #f8d71d;
 }
 
 page-home .searchouter {
@@ -41597,6 +41640,8 @@ page-home .productlist .label {
 page-home .productlist .item p {
   text-overflow: ellipsis;
   white-space: nowrap;
+  float: left;
+  width: 100%;
 }
 
 page-home .proicon {
@@ -41990,12 +42035,21 @@ page-realtalk .newtalk .text-input {
   border-radius: 5px;
   padding: 8px 10px 8px 10px;
   background: transparent;
+  width: 100%;
 }
 
 page-realtalk .newtalk .item-inner {
   margin: 0 !important;
-  padding: 0 !important;
   border: none !important;
+  padding-right: 0 !important;
+}
+
+page-realtalk .newtalk ion-select {
+  max-width: 100% !important;
+  width: 100%;
+  border: 1px solid #c3c3c3;
+  padding: 8px 10px 8px 10px !important;
+  border-radius: 5px !important;
 }
 
 page-realtalk .newtalk .item {
@@ -42083,23 +42137,36 @@ page-reservations .item p {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 100%;
+  float: left;
+}
+
+page-reservations .item h5 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  float: left;
 }
 
 page-reservations .item h2 {
   margin-top: 0;
+  width: 100%;
+  float: left;
 }
 
 page-reservations .item .left {
-  width: 87px;
+  width: 50%;
   float: left;
+  overflow: hidden;
+  padding-right: 8px;
 }
 
 page-reservations .item .right {
-  width: 92px;
+  width: 50%;
   float: left;
   border-left: 1px solid #c8c7cc;
   padding-left: 8px;
-  margin-left: 7px;
 }
 
 page-reservations .label {
@@ -42117,6 +42184,69 @@ page-reservations .btnsec button {
 
 page-reservations .ion-ios-checkmark:before {
   content: "\f2bc";
+}
+
+page-review {
+  /*.footer .star{
+		float: left;
+	    background-color: #fff;
+	    width: 80%;
+	    border-radius: 5px;
+	    height: 32px;
+	    margin: 0;
+	    padding-left: 6px;
+	}
+	.footer .star ul{
+		padding: 0;
+	    width: 100%;
+	    float: left;
+	    line-height: 32px;
+	    margin: 0;
+	}
+	.footer .star ul li{
+    display: inline-block;
+	}
+	.footer .star ul li .icon{
+		font-size: 11px;
+	}
+	.footer .bar-buttons{
+		width: 20%;
+	    display: table;
+	    float: none;
+	    padding-left: 6px;
+	}
+	.footer .text{
+		border-radius: 5px;
+	    background-color: #fff;
+	    width: 100%;
+	    float: left;
+	    margin-bottom: 6px;
+	    padding: 6px;
+	}
+	.footer .text-input{
+	    margin: 0;
+	    width: 100%;
+	    float: left;
+	    font-size: 13px;
+	    color: #a8a7a7;
+	    font-weight: 400;
+	    height: 45px;
+	}
+	.footer .toolbar-background{
+		background-color: #d7d7da;
+		border: none;
+	}
+	.btnprofile{
+		font-size: 13px;
+	    font-weight: 500;
+	    color: #fff;
+	    background-color: #f27242;
+	    width: 100%;
+	    float: left;
+	} 
+	.footer .toolbar{
+		padding: 6px;
+	}*/
 }
 
 page-review .content h2 {
@@ -42176,6 +42306,159 @@ page-review .btnsec {
   padding-top: 10px;
 }
 
+page-review .top ul {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  list-style: none;
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+page-review .top {
+  width: 100%;
+  float: left;
+  padding: 10px 0px 0px 0px;
+}
+
+page-review .top .list {
+  border-bottom: 2px dotted #b9b9b9;
+  padding-bottom: 5px;
+}
+
+page-review .top ul li {
+  display: inline-block;
+}
+
+page-review .top ul li .icon {
+  font-size: 11px;
+}
+
+page-review .top .btn {
+  background-color: #f2f2f2;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-right: 0;
+  text-align: center;
+  width: 46%;
+}
+
+page-review .top .label {
+  margin-right: 0px;
+}
+
+page-review .top .item {
+  border: none !important;
+  padding-left: 0;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+page-review .top .item-inner {
+  padding-right: 0 !important;
+}
+
+page-review .btn h4 {
+  color: #6a6a6a;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  float: left;
+  margin: 0px 0px 5px 0px !important;
+}
+
+page-review .top h2 {
+  font-size: 14px;
+  width: 100%;
+  font-weight: 700;
+  margin-bottom: 5px;
+  margin-top: 0;
+  white-space: normal;
+}
+
+page-review .top h3 {
+  font-size: 12px;
+  color: #6a6a6a;
+  font-weight: 500;
+  margin-bottom: 4px;
+  white-space: normal;
+}
+
+page-review .top ion-avatar img {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+}
+
+page-review .bottom {
+  width: 100%;
+  float: left;
+  padding-top: 4px;
+  margin-bottom: 15vh;
+}
+
+page-review .bottom .list {
+  margin: 0;
+}
+
+page-review .bottom .item {
+  border: none !important;
+}
+
+page-review .bottom .item:last-child .item-inner {
+  border-bottom: 0.55px solid #c8c7cc !important;
+}
+
+page-review .item ion-thumbnail {
+  width: 55px !important;
+  height: 55px !important;
+  margin: 0 8px 0 0 !important;
+  min-width: auto;
+  min-height: auto;
+}
+
+page-review .item ion-thumbnail img {
+  width: 100% !important;
+  float: left !important;
+  height: auto !important;
+}
+
+page-review .bottom h2 {
+  font-size: 13px;
+  color: #010101;
+  font-weight: 500;
+  width: 100%;
+  float: left;
+}
+
+page-review .bottom h2 span {
+  font-size: 12px;
+  color: #6a6a6a;
+  float: right;
+}
+
+page-review .bottom p {
+  width: 100%;
+  float: left;
+  color: #6a6a6a;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: normal;
+  letter-spacing: 0.5px;
+}
+
+page-review ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
+  padding: 0px !important;
+}
+
+page-review .rply {
+  text-align: right;
+}
+
 page-reviews2 .image-wrapper {
   width: 100%;
   float: left;
@@ -42233,6 +42516,7 @@ page-reviews2 .content ul li {
 page-reviews2 .content ul li .icon {
   font-weight: 700;
   font-size: 13px;
+  color: #f8d71d;
 }
 
 page-reviews2 .item {
@@ -42312,6 +42596,10 @@ page-reviews2 .btnsec {
 page-reviews2 .btn1 {
   width: 70px;
   letter-spacing: 1px;
+}
+
+page-reviews2 ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
+  padding: 0 !important;
 }
 
 page-signup .loginform {
@@ -42628,22 +42916,30 @@ page-viewreservation .item .item-inner {
   border-bottom: none !important;
 }
 
+page-viewreservation .item p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  float: left;
+  width: 100%;
+}
+
 page-viewreservation .item h2 {
   margin-top: 0;
 }
 
 page-viewreservation .item .left {
-  width: 87px;
+  width: 50%;
   float: left;
   overflow: hidden;
+  padding-right: 8px;
 }
 
 page-viewreservation .item .right {
-  width: 92px;
+  width: 50%;
   float: left;
   border-left: 1px solid #c8c7cc;
   padding-left: 8px;
-  margin-left: 7px;
 }
 
 page-viewreservation .label {
@@ -42676,6 +42972,8 @@ page-viewreservationtwo .item p {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  float: left;
+  width: 100%;
 }
 
 page-viewreservationtwo .item h2 {
@@ -42683,17 +42981,17 @@ page-viewreservationtwo .item h2 {
 }
 
 page-viewreservationtwo .item .left {
-  width: 87px;
+  width: 50%;
   float: left;
   overflow: hidden;
+  padding-right: 8px;
 }
 
 page-viewreservationtwo .item .right {
-  width: 92px;
+  width: 50%;
   float: left;
   border-left: 1px solid #c8c7cc;
   padding-left: 8px;
-  margin-left: 7px;
 }
 
 page-viewreservationtwo .label {

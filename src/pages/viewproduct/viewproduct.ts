@@ -9,6 +9,7 @@ import {HomePage} from '../home/home';
 import {LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
 import {Geolocation} from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {LoginPage} from '../login/login';
 
 /**
  * Generated class for the ViewproductPage page.
@@ -42,7 +43,9 @@ export class ViewproductPage {
         private geolocation: Geolocation,
         private iab: InAppBrowser
     ) {
+    if(localStorage.getItem('CurrentUser')){
         this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+    }
 
     }
 
@@ -51,7 +54,8 @@ export class ViewproductPage {
         console.log(this.navParams.get('restdata'));
         let resdata = this.navParams.get('restdata').business_data[0].opening_days_and_timings;
         this.restaurantdata = this.navParams.get('restdata');
-        if (this.favourite.length > 0) {
+        if(this.favourite){
+            if (this.favourite.length > 0) {
             for (var j = 0; j < this.favourite.length; j++) {
                 console.log(this.favourite[j].favorite_business_id);
                 if (this.restaurantdata.business_data[0]._id == this.favourite[j].favorite_business_id) {
@@ -67,6 +71,9 @@ export class ViewproductPage {
         } else {
             this.restaurantdata.fav = 0;
         }
+    }else{
+        this.restaurantdata.fav = 0;
+    }
         console.log(this.restaurantdata);
     }
     /******** function used for social sharing *****************/
@@ -103,11 +110,13 @@ export class ViewproductPage {
 
     /******** function used for open booking modal *****************/
     bookModal() {
-        var user = JSON.parse(localStorage.getItem('CurrentUser'));
+        
         let modal = this.modalCtrl.create(BooknowPage);
         modal.onDidDismiss(data => {
             console.log(data);
             console.log(this.modaldata);
+            if(localStorage.getItem('CurrentUser')){
+            var user = JSON.parse(localStorage.getItem('CurrentUser'));
             if (data.bookingdata) {
                 console.log(new Date(data.bookingdata.date).toISOString());
 
@@ -140,6 +149,10 @@ export class ViewproductPage {
                         this.common.presentAlert('Book now', 'Something went wrong!');
                     }
                 })
+            }
+            }else{
+            this.common.ConfirmFunction('Book Now','Please login first to confirm booking!',LoginPage)
+              
             }
         });
         modal.present();
@@ -200,6 +213,7 @@ export class ViewproductPage {
     MarkAsFavourite(businessID) {
         console.log('MarkAsFavourite function');
         console.log(businessID);
+        if(localStorage.getItem('CurrentUser')){
         var user = JSON.parse(localStorage.getItem('CurrentUser'));
         let options = this.appsetting.header();
         let postdata = {
@@ -264,6 +278,9 @@ export class ViewproductPage {
                 })
             }
         })
+        }else{
+            this.common.ConfirmFunction('Favourite','Please login first to make favourite!',LoginPage)
+        }
     }
 
     /*********** Function for launch navigator after click on address ***************/

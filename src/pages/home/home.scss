@@ -20,6 +20,9 @@ page-home {
             }*/
         }
     }
+    button.searchbar-clear-icon{
+        background-size: 23px !important;
+    }
     .online {
         position: absolute;
         top: 80px;
@@ -45,6 +48,7 @@ page-home {
         border: 0px;
         background: none;
         padding: 0;
+        color:#f8d71d;
     }
 
     .searchouter{
@@ -126,7 +130,7 @@ page-home {
     .productlist .label{margin-top: 6px;}
     .productlist .item h2 {@extend .fontheadding16px;}
     .productlist .item p {@extend .fontheadding12px; text-overflow: ellipsis;
-                          white-space: nowrap;}
+                          white-space: nowrap;float: left; width: 100%;}
     .productlist .item h4 {@extend .fontheadding12px;}
     .proicon{
         display: table-cell;

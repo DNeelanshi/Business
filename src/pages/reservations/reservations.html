@@ -25,9 +25,28 @@
             refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
+    
+<!--<ion-list *ngIf="reservationsdata">
+  <ion-item-sliding #item>
+    <ion-item *ngFor="let reservation of reservationsdata;let i = index;">
+      Itemhhhhhh{{i}}hhh
+       <img [src]="reservation?.order_data[0]?.profile_pic">
+      <h2>{{reservation?.order_data[0]?.firstname}} {{reservation?.order_data[0]?.lastname}} </h2>
+        <p>{{reservation?.spacial_accomodation}}</p>
+        <div class="left"><p>Booking Date</p> <h5>{{reservation?.orderstart}} </h5></div>
+        <div class="right"><p>Booking Time</p><h5>{{reservation?.orderstart}}</h5></div>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button (click)="favorite(item)">Favorite</button>
+      <button ion-button color="danger" (click)="share(item)">Share</button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button ion-button (click)="unread(item)">Unread</button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>-->
   <ion-list *ngIf="reservationsdata">
       <ion-item-sliding *ngFor="let reservation of reservationsdata">
-          
         <ion-item>
             <ion-thumbnail item-start>
               <img [src]="reservation?.order_data[0]?.profile_pic">
@@ -36,21 +55,21 @@
           <p>{{reservation?.spacial_accomodation}}</p>
           <div class="left">
             <p>Booking Date</p>
-            <p>{{reservation?.orderstart | date}}</p>
+            <h5>{{reservation?.bookingdate}}</h5>
           </div>
           <div class="right">
             <p>Booking Time</p>
-            <p>{{reservation?.orderstart | date:'shortTime'}}</p>
+            <h5>{{reservation?.bookingtime}}</h5>
           </div>
         </ion-item>
           
        <ion-item-options side="right" class="btnsec">
-          <button ion-button color="green" (click)="Accept(reservation?._id)">
+          <button ion-button color="green" (click)="Accept(reservation?._id,1)">
 <!--            <ion-icon><img src="assets/imgs/accept.png"></ion-icon>-->
   <ion-icon style="font-size: 31px;font-weight: 700;" name="checkmark"></ion-icon>
             Accept
           </button>
-          <button ion-button color="reddrk" (click)="Decline(reservation?._id)">
+          <button ion-button color="reddrk" (click)="Decline(reservation?._id,2)">
             <ion-icon><img src="assets/imgs/delete.png"></ion-icon>
             Decline
           </button>

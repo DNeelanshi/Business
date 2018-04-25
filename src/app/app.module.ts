@@ -47,6 +47,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LocationComponent } from '../components/location/location';
 @NgModule({
   declarations: [
     MyApp,
@@ -135,7 +136,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Geolocation,
     LaunchNavigator,
     InAppBrowser,
-    
+    LocationComponent,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -14,6 +14,55 @@
 
 
 <ion-content padding>
+    <div class="top">
+		<ion-list style="margin: 0;">
+		  <ion-item>
+		    <ion-avatar item-start>
+		      <img [src]="resdetail?.business_image[0].business_image">
+		    </ion-avatar>
+		    <h2 color="green">{{resdetail?.business_data[0].business_name}}</h2>
+			<h3 [innerHTML]="resdetail?.business_data[0].business_description"></h3>
+
+		      <div class="btn" item-end *ngIf="resdetail?.review">
+		      	<rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="data.rate" name="rate">
+                        </rating>
+                          <h4 *ngIf="resdetail?.review.length>0">{{resdetail?.review.length}} Reviews</h4>
+                          <h4 *ngIf="resdetail?.review.length == 0">0 Review</h4>
+		      </div>     
+		 
+		  </ion-item>
+		</ion-list>
+	</div>
+    <div class="bottom">
+		<ion-list>
+		  <ion-item *ngFor="let reviews of resdetail?.review">
+		    <ion-thumbnail item-start>
+		        <img *ngIf="reviews.profile_pic" [src]="reviews.profile_pic">
+                        <img *ngIf="!reviews.profile_pic" src="assets/imgs/user.png">
+		    </ion-thumbnail>
+		    <h2>{{reviews.firstname}} {{reviews.lastname}} <span>{{reviews.created_at | date:"shortDate"}}</span></h2>
+		    <p>{{reviews.comment}}</p>
+                    <div class="rply">
+                        <h2 *ngIf="reviews.reply.length>0">Replies</h2>
+                        <p *ngIf="reviews.reply.length>0">{{reviews.reply[0].comment}}</p>
+                    </div>
+		  </ion-item>
+<!--		   <ion-item>
+		    <ion-thumbnail item-start>
+	          <img src="assets/img/southfood.png">
+	        </ion-thumbnail>
+		    <h2>Good Chef <span>12/06/2017</span></h2>
+		    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		  </ion-item>
+		   <ion-item>
+		    <ion-thumbnail item-start>
+		        <img src="assets/img/southfod.png">
+		    </ion-thumbnail>
+		    <h2>Good Chef <span>12/06/2017</span></h2>
+		    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		  </ion-item>-->
+		</ion-list>
+	</div>
     <form [formGroup]="ReviewForm" (submit)="MakeReview(ReviewForm)">
   <h2>Please rate your experience</h2>
   <rating readOnly="false" max="5" emptyStarIconName="star-outline" starIconName="star" formControlName="rating"
@@ -34,3 +83,25 @@
   </div>
     </form>
 </ion-content>
+<!-- <ion-footer>
+  <ion-toolbar style="padding: 6px;">
+		<div class="text">
+			 <ion-textarea class="enter" placeholder="Enter your text"></ion-textarea>
+		</div>
+		<div>
+			<div class="star">
+				<ul>
+			     	<li><ion-icon name="star" color="theme-header"></ion-icon></li>
+			     	<li><ion-icon name="star" color="theme-header"></ion-icon></li>
+			     	<li><ion-icon name="star" color="theme-header"></ion-icon></li>
+			     	<li><ion-icon name="star" color="lightgray"></ion-icon></li>
+			     	<li><ion-icon name="star" color="lightgray"></ion-icon></li>
+			    </ul>
+			</div>
+			<ion-buttons end>
+		      <button ion-button icon-only class="btnprofile">Submit</button>     
+		    </ion-buttons>
+		</div>
+		
+  </ion-toolbar>
+</ion-footer> -->

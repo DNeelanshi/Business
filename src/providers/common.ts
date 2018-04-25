@@ -18,7 +18,7 @@ export class Common {
         public http: Http,
         private alertCtrl: AlertController,
         public app: App
-        
+
     ) {
         console.log('Hello Common Provider');
     }
@@ -34,7 +34,7 @@ export class Common {
         }, 3000);
         return alert.present();
     }
-    
+
     distance(lat1, lon1, lat2, lon2, unit) {
         console.log(lat1);
         console.log(lon1);
@@ -79,7 +79,7 @@ export class Common {
         }
     }
 
-    presentConfirm(title,message,page) {
+    presentConfirm(title, message, page) {
         let alert = this.alertCtrl.create({
             title: title,
             message: message,
@@ -92,6 +92,33 @@ export class Common {
                         let nav = this.app.getActiveNav();
                         console.log(nav);
                         nav.push(page);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
+
+    ConfirmFunction(title, message, page) {
+        let alert = this.alertCtrl.create({
+            title: title,
+            message: message,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Login',
+                    handler: () => {
+                        console.log('login clicked');
+                        let nav = this.app.getActiveNav();
+                        console.log(nav);
+                        nav.push(page);
+
                     }
                 }
             ]

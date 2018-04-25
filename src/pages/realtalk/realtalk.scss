@@ -83,11 +83,20 @@ page-realtalk {
         border-radius: 5px;
         padding: 8px 10px 8px 10px;
         background: transparent;
+        width: 100%;
     }
     .newtalk .item-inner{
         margin: 0 !important;
-        padding: 0 !important;
         border: none !important;
+        padding-right: 0 !important;
+        
+    }
+    .newtalk ion-select{
+        max-width: 100% !important;
+        width: 100%;
+        border: 1px solid #c3c3c3;
+        padding: 8px 10px 8px 10px !important;
+        border-radius: 5px !important;
     }
     .newtalk .item{
         margin: 0 !important;

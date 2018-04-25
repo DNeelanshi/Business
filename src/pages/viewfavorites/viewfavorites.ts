@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {Appsetting} from '../../providers/appsetting';
 import {Http} from '@angular/http';
 import {Common} from '../../providers/common';
@@ -26,6 +26,7 @@ export class ViewfavoritesPage {
         public appsetting: Appsetting,
         public http: Http,
         public common: Common,
+        public loadingCtrl:LoadingController
     ) {
     }
 
@@ -42,14 +43,20 @@ export class ViewfavoritesPage {
             user_id: user._id
         }
         let serialized = this.appsetting.serializeObj(postdata);
+        var Loading = this.loadingCtrl.create({
+            spinner: 'bubbles',
+        });
+        Loading.present().then(() => {
         this.http.post(this.appsetting.url + 'user/get_favarite_business', serialized, options).map(res => res.json()).subscribe(response => {
             console.log(response);
+            Loading.dismiss();
             if (response.status == true) {
                 this.favouritelist = response.data;
                 console.log(this.favouritelist.length);
             } else {
                 //this.common.presentAlert('Book now', 'Something went wrong!');
             }
+        })
         })
     }
 

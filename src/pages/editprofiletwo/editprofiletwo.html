@@ -17,9 +17,9 @@
 
 </ion-header>
 
-<form [formGroup]="Editprofile" style="height:100%; padding-top: 56px;">
+
 <ion-content>
-    
+    <form [formGroup]="Editprofile">
     <ion-refresher (ionRefresh)="doRefresh($event)">
      <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -33,7 +33,16 @@
     <div class="image-wrapper">
       <img [src]="base64Image">
     </div>
-    <h2 (click)="presentActionSheet()">EDIT</h2>
+      <ion-fab center>
+    <h2 ion-fab mini icon-only>EDIT</h2>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="chooseImage(0)"><ion-icon name="images"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="right">
+      <button ion-fab (click)="chooseImage(1)"><ion-icon name="camera"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+   
   </div>
     
   <div class="input-sec">
@@ -63,8 +72,24 @@
 
     </ion-list>
   </div>
+        </form> 
+<!--    <ion-fab center>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="bottom">
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon name="images"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="right">
+      <button ion-fab><ion-icon name="camera"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>-->
 </ion-content>
 <ion-footer>
   <button type="submit" (click)="editProfile(Editprofile)" ion-button full color="green" class="btn2">SAVE</button>
 </ion-footer>
-</form> 
+

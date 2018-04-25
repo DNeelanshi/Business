@@ -24,14 +24,9 @@
           </ion-thumbnail>
           <h2>{{history.order_data[0].business_data[0].business_name}}</h2>
           <p>{{history.order_data[0].business_data[0].sub_cat}}</p>
-          <ul>
-            <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-            <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-            <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-            <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-            <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-          </ul>
-          <button class="btneq" ion-button color="yellow" >Edit Review</button>
+          <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="history.order_data[0].avg" name="rate">
+           </rating>
+          <button class="btneq" ion-button color="yellow" (click)="Review(history.order_data[0])">Review</button>
           <p>{{history.order_data[0].business_data[0].business_description}}</p>
           <p><span>{{history.order_data[0].business_data[0].updated_at | date}}</span> <span class="time">{{history.order_data[0].business_data[0].updated_at | date:'shortTime'}}</span></p>
         </ion-item>

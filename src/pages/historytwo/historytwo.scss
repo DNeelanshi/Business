@@ -6,7 +6,7 @@ page-historytwo {
     .item .item-inner{
         border-bottom: none !important;
     }
-    .item p{
+/*    .item p{
         @extend .fontheadding12px;
     }
     .item h2{
@@ -24,6 +24,30 @@ page-historytwo {
         border-left: 1px solid #c8c7cc;
         padding-left: 8px;
         margin-left: 7px;
+    }*/
+    .item p{
+        @extend .fontheadding12px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float: left;
+        width: 100%;
+    }
+    .item h2{
+        @extend .fontheadding16px;
+        margin-top: 0;
+    }
+    .item .left{
+        width: 50%;
+        float: left;
+        overflow: hidden;
+        padding-right: 8px;
+    }
+    .item .right{
+        width: 50%;
+        float: left;
+        border-left: 1px solid #c8c7cc;
+        padding-left: 8px;
     }
     .label{
         margin: 8px auto;
