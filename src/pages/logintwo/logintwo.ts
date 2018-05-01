@@ -116,12 +116,12 @@ export class LogintwoPage {
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             let options = this.appsetting.header();
-            this.fcm.getToken().then(token => {
-                console.log('Tokenid-->' + token);
+//            this.fcm.getToken().then(token => {
+//                console.log('Tokenid-->' + token);
                 var postdata = {
                     email: signindata.value.email,
                     password: signindata.value.password,
-                    divice_token: token,
+                    divice_token:'aaa',//token,
                     role: 'business'
                 }
                 console.log(postdata);
@@ -149,9 +149,9 @@ export class LogintwoPage {
 
                     })
                 })
-            }, err => {
-                console.log(err);
-            })
+//            }, err => {
+//                console.log(err);
+//            })
 
 
         } else {

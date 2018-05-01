@@ -28,16 +28,7 @@ terms = [];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsPage');
-      let options = this.appsetting.header();
-            var postdata = {
-                rating: this.terms,
-            }
-            console.log(postdata);
-            var serialized = this.appsetting.serializeObj(postdata);
-                this.http.post('http://rakesh.crystalbiltech.com/grouptrip/api/galleries/additineraryy', postdata, options).map(res => res.json()).subscribe(response => {
-                    console.log(response);
-                     
-                })
+    
   }
 
 }

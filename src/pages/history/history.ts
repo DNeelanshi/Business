@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {Appsetting} from '../../providers/appsetting';
 import {Common} from '../../providers/common';
 import {Http} from '@angular/http';
@@ -28,6 +28,7 @@ export class HistoryPage {
         public appsetting: Appsetting,
         public http: Http,
         public common: Common,
+        public loadingCtrl:LoadingController
     ) {
 
     }
@@ -48,8 +49,14 @@ export class HistoryPage {
         }
         
         let serialized = this.appsetting.serializeObj(postdata);
+         var Loading = this.loadingCtrl.create({
+                    spinner: 'bubbles',
+                    content: 'Loading...'
+                });
+                Loading.present().then(() => {
         this.http.post(this.appsetting.url + 'orders/getoldreservation ', serialized, options).map(res => res.json()).subscribe(response => {
             console.log(response);
+            Loading.dismiss();
             if (response.status == true) {
                 response.data.forEach(function(value,key){
                     console.log(value);
@@ -77,6 +84,7 @@ export class HistoryPage {
                 this.common.presentAlert('History', 'No data found!');
             }
         })
+                })
     }
     
     Review(resid) {

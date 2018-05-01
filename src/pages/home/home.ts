@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import {LoginPage} from '../login/login';
 
 declare var google;
+
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -345,10 +346,8 @@ export class HomePage {
             console.log(data);
             console.log(this.modaldata);
             if (data.bookingdata) {
+                console.log(new Date());
                 console.log(new Date(data.bookingdata.date).toISOString());
-
-                //                console.log(new Date(data.bookingdata.startTime).toISOString());
-                //                console.log(new Date(data.bookingdata.endTime).toISOString());
                 var da = new Date(data.bookingdata.date).toISOString();
                 var t = da.charAt(10);
                 var z = da.match(/.{1,16}/g);

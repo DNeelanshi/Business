@@ -1,11 +1,23 @@
 page-review {
     .content h2 {@extend .fontheadding16px; font-weight: 700; margin-bottom: 5px;}
-
+     h5{
+        width: 100%;
+        float: left;
+        font-size: 15px;
+        font-weight: 600;
+        color: #3cc602;
+    }
     .content ul{
         width: 100%;
         float: left;
         padding: 0;
         margin: 5px 0px;
+    }
+    .rplyimg{
+        width: 25px;
+        position: relative;
+        bottom: -13px;
+        margin-left: 5px;
     }
     .content ul li {
         list-style-type: none;

@@ -29,10 +29,10 @@
       
         <ion-item *ngFor="let reservation of reservations">
             <ion-thumbnail item-start>
-              <img *ngIf="reservation?.order_data[0].profile_pic" [src]="reservation?.order_data[0].profile_pic">
-              <img *ngIf="!reservation?.order_data[0].profile_pic" src="assets/imgs/profile.png">
+                <img *ngIf="reservation?.order_data.length>0" [src]="reservation?.order_data[0].profile_pic">
+              <img *ngIf="!reservation?.order_data.length>0" src="assets/imgs/profile.png">
             </ion-thumbnail>
-          <h2>{{reservation?.order_data[0].firstname}} {{reservation?.order_data[0].lastname}}</h2>
+          <h2 *ngIf="reservation?.order_data.length>0">{{reservation?.order_data[0].firstname}} {{reservation?.order_data[0].lastname}}</h2>
           <p *ngIf="reservation?.spacial_accomodation">{{reservation?.spacial_accomodation}}</p>
           <div class="left">
             <p>Booking Date</p>

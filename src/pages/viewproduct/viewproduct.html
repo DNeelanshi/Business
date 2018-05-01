@@ -36,8 +36,12 @@
         <p>{{restaurantdata?.business_data[0].sub_cat}}</p>
         <h4><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> 4 Check-Ins</h4>
         <div item-end class="buttonright">
-          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()"><ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>Book Now</button>
-          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()"><ion-icon ><img width="16px" src="assets/imgs/checkin.png"></ion-icon>Check In</button>
+          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()">
+<!--              <ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>-->
+              Book Now</button>
+          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()">
+<!--              <ion-icon ><img width="16px" src="assets/imgs/checkin.png"></ion-icon>-->
+              Check In</button>
         </div>
       </ion-item>
       <ion-item-divider color="light">Info</ion-item-divider>

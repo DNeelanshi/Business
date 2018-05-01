@@ -31,6 +31,7 @@ export class Reviews2Page {
         public loadingCtrl:LoadingController
 
     ) {
+    
         this.getUser();
     }
 
@@ -60,8 +61,10 @@ export class Reviews2Page {
                     response.data.review.forEach(function (value, key) {
                         console.log(value);
                         sum += value.stars;
+                        
                         response.userinfo.forEach(function (val, ke) {
                             console.log(val);
+                            if(val != null){
                             if (val._id == value.user_id) {
                                 value.firstname = val.firstname;
                                 value.lastname = val.lastname;
@@ -71,7 +74,10 @@ export class Reviews2Page {
                                     value.profilePic = 'assets/imgs/user.png';
                                 }
                             }
+                            }
                         })
+                   
+                    
                         /****** code to get date and time difference ************/
                         var a = new Date();
                         console.log(new Date(value.created_at))

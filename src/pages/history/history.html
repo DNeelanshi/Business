@@ -31,60 +31,7 @@
           <p><span>{{history.order_data[0].business_data[0].updated_at | date}}</span> <span class="time">{{history.order_data[0].business_data[0].updated_at | date:'shortTime'}}</span></p>
         </ion-item>
 
-<!--        <ion-item>
-            <ion-thumbnail item-start>
-              <img src="assets/imgs/img1.jpg">
-            </ion-thumbnail>
-            <h2>Sam's Auto Repair</h2>
-            <p>Auto Repair</p>
-            <ul>
-              <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-              <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-              <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-              <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-              <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-            </ul>
-            <button class="btneq" ion-button color="yellow" >Edit Review</button>
-            <p>Lorem Ipsum available, but the majority have suffered</p>
-            <p><span>15 nov 2017</span> <span class="time">20:15 PM</span></p>
-          </ion-item>
-
-          <ion-item>
-              <ion-thumbnail item-start>
-                <img src="assets/imgs/img1.jpg">
-              </ion-thumbnail>
-              <h2>Sam's Auto Repair</h2>
-              <p>Auto Repair</p>
-              <ul>
-                <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-                <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-                <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-                <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-                <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-              </ul>
-              <button class="btneq" ion-button color="yellow" >Edit Review</button>
-              <p>Lorem Ipsum available, but the majority have suffered</p>
-              <p><span>15 nov 2017</span> <span class="time">20:15 PM</span></p>
-            </ion-item>
-
-            <ion-item>
-                <ion-thumbnail item-start>
-                  <img src="assets/imgs/img1.jpg">
-                </ion-thumbnail>
-                <h2>Sam's Auto Repair</h2>
-                <p>Auto Repair</p>
-                <ul>
-                  <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-                  <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
-                  <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-                  <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-                  <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
-                </ul>
-                <button class="btneq" ion-button color="yellow" >Edit Review</button>
-                <p>Lorem Ipsum available, but the majority have suffered</p>
-                <p><span>15 nov 2017</span> <span class="time">20:15 PM</span></p>
-              </ion-item>
-
+<!--  
               <ion-item>
                   <ion-thumbnail item-start>
                     <img src="assets/imgs/img1.jpg">
@@ -104,4 +51,10 @@
                 </ion-item>-->
 
       </ion-list>
+    <div *ngIf="historydata?.length<1">
+                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
+                    <span> No data found!</span>
+                </div>
+            </div>
 </ion-content>

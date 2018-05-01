@@ -42,10 +42,13 @@
                 <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="reviews.stars" name="rating"
                         nullable="false">
                 </rating>
-                <!--            <p class="revw" style="line-height: 17px !important; margin-top:0 !important;">Rating</p>-->
-                <p>{{reviews.comment}}</p>
+                <!-- <p class="revw" style="line-height: 17px !important; margin-top:0 !important;">Rating</p>-->
+                <p style="padding-bottom: 10px;">{{reviews.comment}}  </p>
+                
+                <h5>REPLY</h5>
                 <ion-item *ngFor="let replies of reviews.reply">
-                    <p style="text-align: right;">{{replies.comment}}</p>
+                   
+                    <p style="text-align: left; background-color: #f2f2f2; padding: 10px !important;">{{replies.comment}}</p>
                 </ion-item>
                 <div *ngIf="reviews.reply.length<1">
                     <p class="reply" (click)="Reply(reviews._id)"><img src="assets/imgs/reply.png">Reply</p>

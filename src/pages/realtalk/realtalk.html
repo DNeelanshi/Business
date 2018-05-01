@@ -29,86 +29,119 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
     <div [ngSwitch]="talk">
-        <ion-list *ngSwitchCase="'ourtalk'">
-            <ion-item *ngFor="let ourtalk of ourtalks">
+        
+        <ion-list *ngSwitchCase="'ourtalk'" class="ourtalk">
+            <ion-refresher (ionRefresh)="doRefreshOurTalk($event)">
+            <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+            </ion-refresher-content>
+        </ion-refresher>
+            
+            <ion-item *ngFor="let ourtalk of ourtalks" (click)="OurTalkReply(ourtalk)">
                 <ion-thumbnail item-start>
-                    <img *ngIf="ourtalk.talk_data[0].profile_pic" [src]="ourtalk.talk_data[0].profile_pic">
-                    <img *ngIf="!ourtalk.talk_data[0].profile_pic" src="assets/imgs/user.png">
+                    <img *ngIf="ourtalk?.talk_data.length>0" [src]="ourtalk.talk_data[0].profile_pic">
+                    <img *ngIf="ourtalk?.talk_data.length>0" src="assets/imgs/user.png">
                 </ion-thumbnail>
                 <h2>{{ourtalk?.topic_name}} </h2>
-                <p>By {{ourtalk?.talk_data[0].firstname}}</p>
-                <p><ion-icon name="star-outline" color="gray"></ion-icon>{{ourtalk?.comments.length}} Comment</p>
+                <p style="white-space: normal">{{ourtalk?.message}}</p>
+                <p *ngIf="ourtalk?.talk_data.length>0">By {{ourtalk?.talk_data[0].firstname}}</p>
+                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{ourtalk?.comments.length}} Comment</p>
             </ion-item>
 
-<!--            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="assets/imgs/talk.png">
-                </ion-thumbnail>
-                <h2>Best Pickup lines </h2>
-                <p>By Anima</p>
-                <p>2 Friends</p>
-                <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
-            </ion-item>
-
-            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="assets/imgs/talk.png">
-                </ion-thumbnail>
-                <h2>Best Pickup lines </h2>
-                <p>By Anima</p>
-                <p>2 Friends</p>
-                <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
-            </ion-item>-->
+            <div *ngIf="loader == 0">
+                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                <img src="assets/imgs/loader.gif">
+                </div>
+            </div>
+            <div *ngIf="ourtalks.length<1 && loader != 0">
+                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
+                    <span> No data found!</span>
+                </div>
+            </div>
+            <!-- 
+                        <ion-item>
+                            <ion-thumbnail item-start>
+                                <img src="assets/imgs/talk.png">
+                            </ion-thumbnail>
+                            <h2>Best Pickup lines </h2>
+                            <p>By Anima</p>
+                            <p>2 Friends</p>
+                            <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
+                        </ion-item>-->
             <ion-infinite-scroll (ionInfinite)="doInfiniteOurTalks($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
         </ion-list>
-
         <ion-list *ngSwitchCase="'mytalk'" class="mytlk">
-            <ion-item *ngFor="let mytalk of mytalks">
+            <ion-refresher (ionRefresh)="doRefreshMyTalk($event)">
+            <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+            </ion-refresher-content>
+        </ion-refresher>
+            <ion-item *ngFor="let mytalk of mytalks" (click)="ReplyPage(mytalk)">
                 <ion-thumbnail item-start>
-                    <img [src]="mytalk.profile_pic">
+                    <img *ngIf="mytalk.profile_pic" [src]="mytalk.profile_pic">
                 </ion-thumbnail>
                 <h2>{{mytalk?.topic_name}}</h2>
+                <p style="white-space: normal">{{mytalk?.message}}</p>
                 <p>{{mytalk?.loc_address}}</p>
                 <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{mytalk?.comments.length}} Comment</p>
-                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>{{mytalk?.days}} {{mytalk?.time}} ago</p>
+        
             </ion-item>
+            <div *ngIf="loader == 0">
+                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                <img src="assets/imgs/loader.gif">
+                </div>
+            </div>
+            <div *ngIf="mytalks.length<1 && loader != 0">
+                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
+                    <span> No data found!</span>
+                </div>
+            </div>
 
-<!--            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="assets/imgs/talk.png">
-                </ion-thumbnail>
-                <h2>Topic Name</h2>
-                <p>Manhattan, New York, NY</p>
-                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
-                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
-            </ion-item>
-
-            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="assets/imgs/talk.png">
-                </ion-thumbnail>
-                <h2>Topic Name</h2>
-                <p>Manhattan, New York, NY</p>
-                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
-                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
-            </ion-item>
-
-            <ion-item>
-                <ion-thumbnail item-start>
-                    <img src="assets/imgs/talk.png">
-                </ion-thumbnail>
-                <h2>Topic Name</h2>
-                <p>Manhattan, New York, NY</p>
-                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
-                <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
-            </ion-item>-->
+            <!--            <ion-item>
+                            <ion-thumbnail item-start>
+                                <img src="assets/imgs/talk.png">
+                            </ion-thumbnail>
+                            <h2>Topic Name</h2>
+                            <p>Manhattan, New York, NY</p>
+                            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
+                            <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+                        </ion-item>
+            
+                        <ion-item>
+                            <ion-thumbnail item-start>
+                                <img src="assets/imgs/talk.png">
+                            </ion-thumbnail>
+                            <h2>Topic Name</h2>
+                            <p>Manhattan, New York, NY</p>
+                            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
+                            <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+                        </ion-item>
+            
+                        <ion-item>
+                            <ion-thumbnail item-start>
+                                <img src="assets/imgs/talk.png">
+                            </ion-thumbnail>
+                            <h2>Topic Name</h2>
+                            <p>Manhattan, New York, NY</p>
+                            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
+                            <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
+                        </ion-item>-->
             <ion-infinite-scroll (ionInfinite)="doInfiniteMyTalks($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
         </ion-list>
 
         <div *ngSwitchCase="'newtalk'" class="newtalk" padding>
@@ -152,5 +185,8 @@
             </div>
         </form>
     </div>
+
+
 </div>
+
 </ion-content>

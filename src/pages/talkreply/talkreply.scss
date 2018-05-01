@@ -1,0 +1,120 @@
+page-talkreply {
+    .back-button{
+    display: none !important;
+}
+    .mytlk{
+        width: 100%;
+        float: left;
+        margin: 10px 0 0 0;
+        
+        .item{
+            border-bottom: 1px solid #c8c8c8;
+            align-items: start;
+            border-top: none !important;
+        }
+        .item .item-inner{
+            border: none !important;
+        }
+        .item .label{
+            margin: 8px auto 8px 0;
+        }
+        .item h2{ @extend .fontheadding16px; margin-top: 0; white-space: normal;}
+        .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left;}
+        .item p .icon{
+            padding-right: 4px;
+            font-weight: 700;
+        }
+        .item p .icon{
+            vertical-align: middle;
+        }
+        .item p .icon img{
+            width: 14px;
+            margin-top: 2px;
+        }
+    }
+
+    .bottom-sec{
+            width: 100%;
+            float: left;
+            margin: 0;
+            padding-top: 5px;
+            background-color: #f9f9f9;
+
+        .item{
+            align-items: start;
+            border-bottom: none !important;
+            min-height: auto;
+            background: transparent;
+        }
+        .item .label{
+            margin: 8px auto 8px auto;
+        }
+        .item .item-inner{
+            border: none !important;
+        }
+        .top-sec{
+            width: 100%;
+            float: left;
+        }
+        li .icon{
+            line-height: 13px;
+            font-weight: 700;
+            font-size: 13px;    
+        }
+        li{
+            display: inline-block;
+        }
+        ul{
+            line-height: 13px; 
+            list-style-type: none;
+            display: inline-block;
+            float: left;
+            padding: 0;
+            margin: 2px 0px;
+            width: 78px;   
+        }
+        h2 span{@extend .fontheadding12px; float: right; line-height: 22px; }
+        .revw{
+            margin-top: 2px !important;
+            line-height: 19px !important;
+            padding-left: 16px;
+            float: left;
+            width: calc(100% - 78px) !important;
+        }
+        ion-avatar{
+            min-height: 45px !important;
+            min-width: 45px !important;
+        }
+        ion-avatar img{
+            height: 45px !important;
+            width: 45px !important;
+        }
+        .reply{ padding: 5px 0 !important; border-bottom: 1px solid #d4d4d4; width: 100%; float: left; }
+        .reply img{
+            width: 12px;
+            margin-right: 8px;
+        }
+        .text-input{
+            border: 1px solid rgb(212, 212, 212);
+            border-radius: 5px;
+            height: 60px;
+            padding: 7px;
+            background: transparent;
+            margin: 13px 0;
+        }
+        .btnsec{
+            width: 100%;
+            float: left;
+            text-align: right;
+        }
+        .btn1{
+            width: 70px;
+            letter-spacing: 1px;
+        }
+        .item h2{ @extend .fontheadding16px; margin-top: 0; white-space: normal;}
+        .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left; white-space: normal;}
+        .item-textarea .item-inner{
+            padding-right: 0;
+        }
+    }
+}

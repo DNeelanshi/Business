@@ -1,0 +1,84 @@
+<!--
+  Generated template for the TalkreplyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="green">
+    <ion-title>{{topicdata?.topic_name}}</ion-title>
+    <button style="height:28px;" start ion-button clear>
+     <img width="11px" src="assets/imgs/back_btn.svg" (click)="back()">
+     </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list class="mytlk">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img *ngIf="topicdata?.talk_data[0].profile_pic" [src]="topicdata?.talk_data[0].profile_pic">
+              <img *ngIf="!topicdata?.talk_data[0].profile_pic" src="assets/imgs/user.png">
+            </ion-thumbnail>
+            <h2>{{topicdata?.topic_name}}</h2>
+            <p style="white-space: normal">{{topicdata?.message}}</p>
+            <p>{{topicdata?.loc_address}}</p>
+            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{commentdata?.comments.length}} Comment</p>
+           <p *ngIf="topicdata?.time == 'day'"><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>{{topicdata?.days}} days ago</p>
+        <p *ngIf="topicdata?.time == 'time'"><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>{{topicdata?.days}} hour ago</p>
+          </ion-item>
+    </ion-list>
+    <ion-list no-lines  class="bottom-sec" *ngIf="topicdata?.comments?.length>0">
+        <ion-item style="padding-right: 8px;" *ngFor="let comment of commentdata?.comments; let last = last">
+          <ion-avatar item-start>{{last ? scrollBottom() : ''}}
+            <img [src]="comment.profile_pic">
+          </ion-avatar>
+          <h2>{{comment.firstname}} {{comment.lastname}}<span>{{comment.days}} {{comment.time}} ago</span></h2>
+          
+          <p>{{comment.comment_msg}}</p>
+        </ion-item>
+
+<!--        <ion-item style="padding-right: 8px;">
+          <ion-avatar item-start>
+            <img src="assets/imgs/talk.png">
+          </ion-avatar>
+          <h2>Austin Robertson<span>1 Day ago</span></h2>
+          <ul style="margin-top:0 !important;">
+              <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
+              <li> <ion-icon name="star" color="yellow" class="actv"></ion-icon></li>
+              <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
+              <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
+              <li> <ion-icon name="star-outline" color="gray"></ion-icon></li>
+            </ul>
+            <p class="revw" style="line-height: 17px !important; margin-top:0 !important;">Rating</p>
+          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+          <p class="reply"><img src="assets/imgs/reply.png">Reply</p>
+          <ion-item style="padding: 0;">
+            <ion-textarea placeholder=""></ion-textarea>
+          </ion-item>
+          <div class="btnsec">
+            <button ion-button color="green" class="btn1">POST</button>
+          </div>
+        </ion-item>-->
+      </ion-list>
+    <div *ngIf="commentdata?.comments?.length == 0">
+       <div style="text-align: center !important;padding: 52% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+          <img style="width:160px;margin: auto;display: block;" src="assets/imgs/sorry.png">
+          <span> Oops no one replied on your topic!</span>
+    </div>
+    </div>
+</ion-content>
+<ion-footer>
+         <form [formGroup]="ourtalk" class="out">
+              <p class="reply">Reply on topic</p>
+          <ion-item style="padding: 0;">
+            <ion-textarea placeholder="" formControlName="comment"></ion-textarea>
+          </ion-item>
+          <div class="btnsec">
+            <button type="submit" ion-button color="green" class="btn1" block [disabled]="!ourtalk.valid" (click)="PostComment(ourtalk)">REPLY</button>
+          </div>
+         </form>
+</ion-footer>

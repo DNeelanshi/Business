@@ -1,14 +1,14 @@
 webpackJsonp([18],{
 
-/***/ 449:
+/***/ 462:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetstartPageModule", function() { return GetstartPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HistoryPageModule", function() { return HistoryPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getstart__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__historytwo__ = __webpack_require__(129);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var GetstartPageModule = (function () {
-    function GetstartPageModule() {
+var HistoryPageModule = (function () {
+    function HistoryPageModule() {
     }
-    GetstartPageModule = __decorate([
+    HistoryPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__getstart__["a" /* GetstartPage */],
+                __WEBPACK_IMPORTED_MODULE_2__historytwo__["a" /* HistorytwoPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__getstart__["a" /* GetstartPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__historytwo__["a" /* HistorytwoPage */]),
             ],
         })
-    ], GetstartPageModule);
-    return GetstartPageModule;
+    ], HistoryPageModule);
+    return HistoryPageModule;
 }());
 
-//# sourceMappingURL=getstart.module.js.map
+//# sourceMappingURL=historytwo.module.js.map
 
 /***/ })
 

@@ -14,7 +14,7 @@
   color: #000;
 }
 
-.fontheadding16px, page-addbusiness h2, page-booknow h2, page-editbusiness h2, page-editprofile .head-sec h2, page-editprofile .input-sec h2, page-editprofiletwo .head-sec h2, page-editprofiletwo .input-sec h2, page-filter .loginform h2, page-history .item h2, page-historytwo .item h2, page-home .productlist .item h2, page-login .loginform p, page-login h2, page-logintwo .loginform p, page-privacy .contant-sec h2, page-realtalk .item h2, page-realtalk .newtalk h2, page-reservations .item h2, page-review .content h2, page-reviews2 .content h2, page-signuptwo .loginform h5, page-signuptwo .loginform p, page-terms .contant-sec h2, page-viewfavorites .item h2, page-viewproduct .product_content .item h1, page-viewreservation .item h2, page-viewreservationtwo .item h2 {
+.fontheadding16px, page-addbusiness h2, page-booknow h2, page-editbusiness h2, page-editprofile .head-sec h2, page-editprofile .input-sec h2, page-editprofiletwo .head-sec h2, page-editprofiletwo .input-sec h2, page-filter .loginform h2, page-history .item h2, page-historytwo .item h2, page-home .productlist .item h2, page-login .loginform p, page-login h2, page-logintwo .loginform p, page-ourtalkreply .mytlk .item h2, page-ourtalkreply .bottom-sec .item h2, page-privacy .contant-sec h2, page-realtalk .item h2, page-realtalk .newtalk h2, page-reservations .item h2, page-review .content h2, page-reviews2 .content h2, page-signuptwo .loginform h5, page-signuptwo .loginform p, page-talkreply .mytlk .item h2, page-talkreply .bottom-sec .item h2, page-terms .contant-sec h2, page-viewfavorites .item h2, page-viewproduct .product_content .item h1, page-viewreservation .item h2, page-viewreservationtwo .item h2 {
   font-size: 17px;
   font-weight: 500;
   color: #000;
@@ -26,7 +26,7 @@
   color: #434343;
 }
 
-.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-terms .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
+.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-ourtalkreply .mytlk .item p, page-ourtalkreply .bottom-sec h2 span, page-ourtalkreply .bottom-sec .item p, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-talkreply .mytlk .item p, page-talkreply .bottom-sec h2 span, page-talkreply .bottom-sec .item p, page-terms .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
   font-size: 15px;
   font-weight: 400;
   color: #434343;
@@ -40947,6 +40947,11 @@ page-editprofiletwo .head-sec {
   background-color: #0bc502;
   text-align: center;
   padding: 10px 0px;
+  padding-bottom: 60px;
+}
+
+page-editprofiletwo .fab[mini] {
+  background: transparent;
 }
 
 page-editprofiletwo .head-sec .image-wrapper {
@@ -41903,6 +41908,237 @@ page-logintwo .orstrip span::after {
   left: 27px;
 }
 
+page-ourtalkreply .back-button {
+  display: none !important;
+}
+
+page-ourtalkreply h2 {
+  white-space: normal;
+}
+
+page-ourtalkreply .mytlk {
+  width: 100%;
+  float: left;
+  margin: 10px 0 0 0;
+}
+
+page-ourtalkreply .mytlk .item {
+  border-bottom: 1px solid #c8c8c8;
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+  border-top: none !important;
+}
+
+page-ourtalkreply .mytlk .item .item-inner {
+  border: none !important;
+}
+
+page-ourtalkreply .mytlk .item .label {
+  margin: 8px auto 8px 0;
+}
+
+page-ourtalkreply .mytlk .item h2 {
+  margin-top: 0;
+}
+
+page-ourtalkreply .mytlk .item p {
+  line-height: 16px;
+  width: 100%;
+  float: left;
+}
+
+page-ourtalkreply .mytlk .item p .icon {
+  padding-right: 4px;
+  font-weight: 700;
+}
+
+page-ourtalkreply .mytlk .item p .icon {
+  vertical-align: middle;
+}
+
+page-ourtalkreply .mytlk .item p .icon img {
+  width: 14px;
+  margin-top: 2px;
+}
+
+page-ourtalkreply .bottom-sec {
+  width: 100%;
+  float: left;
+  margin: 0;
+  padding-top: 5px;
+  background-color: #f9f9f9;
+}
+
+page-ourtalkreply .bottom-sec .item {
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+  border-bottom: none !important;
+  min-height: auto;
+  background: transparent;
+}
+
+page-ourtalkreply .bottom-sec .item .label {
+  margin: 8px auto 8px auto;
+}
+
+page-ourtalkreply .bottom-sec .item .item-inner {
+  border: none !important;
+}
+
+page-ourtalkreply .bottom-sec .top-sec {
+  width: 100%;
+  float: left;
+}
+
+page-ourtalkreply .bottom-sec li .icon {
+  line-height: 13px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+page-ourtalkreply .bottom-sec li {
+  display: inline-block;
+}
+
+page-ourtalkreply .bottom-sec ul {
+  line-height: 13px;
+  list-style-type: none;
+  display: inline-block;
+  float: left;
+  padding: 0;
+  margin: 2px 0px;
+  width: 78px;
+}
+
+page-ourtalkreply .bottom-sec h2 span {
+  float: right;
+  line-height: 22px;
+}
+
+page-ourtalkreply .bottom-sec .revw {
+  margin-top: 2px !important;
+  line-height: 19px !important;
+  padding-left: 16px;
+  float: left;
+  width: calc(100% - 78px) !important;
+}
+
+page-ourtalkreply .bottom-sec ion-avatar {
+  min-height: 45px !important;
+  min-width: 45px !important;
+}
+
+page-ourtalkreply .bottom-sec ion-avatar img {
+  height: 45px !important;
+  width: 45px !important;
+}
+
+page-ourtalkreply .bottom-sec .reply {
+  padding: 5px 0 !important;
+  border-bottom: 1px solid #d4d4d4;
+  width: 100%;
+  float: left;
+}
+
+page-ourtalkreply .bottom-sec .reply img {
+  width: 12px;
+  margin-right: 8px;
+}
+
+page-ourtalkreply .bottom-sec .text-input {
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  height: 60px;
+  padding: 7px;
+  background: transparent;
+  margin: 13px 0;
+}
+
+page-ourtalkreply .bottom-sec .btnsec {
+  width: 100%;
+  float: left;
+  text-align: right;
+}
+
+page-ourtalkreply .bottom-sec .btn1 {
+  width: 70px;
+  letter-spacing: 1px;
+}
+
+page-ourtalkreply .bottom-sec .item h2 {
+  margin-top: 0;
+}
+
+page-ourtalkreply .bottom-sec .item p {
+  line-height: 16px;
+  width: 100%;
+  float: left;
+  white-space: normal;
+}
+
+page-ourtalkreply .bottom-sec .item-textarea .item-inner {
+  padding-right: 0;
+}
+
+page-ourtalkreply [contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: #878787;
+  font-family: futuraheavy;
+}
+
+page-ourtalkreply div[contenteditable=true] {
+  width: 100%;
+  max-height: 120px;
+  border: 1px solid #ccc;
+  padding: 9px 9px;
+  border-radius: 15px;
+  background-color: #fff;
+  color: #484848;
+  letter-spacing: 0.5px;
+  overflow: auto;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+page-ourtalkreply .abc:focus {
+  outline: none;
+}
+
+page-ourtalkreply .abc, page-ourtalkreply [contenteditable] {
+  -wekit-user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+page-ourtalkreply .footer .out {
+  padding: 5px 16px;
+}
+
+page-ourtalkreply .footer .out .text-input {
+  width: 100%;
+  float: left;
+  margin: 0;
+  padding: 5px 10px;
+  min-height: 95px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+page-ourtalkreply .footer .out .item-textarea {
+  padding: 0;
+}
+
+page-ourtalkreply .footer .out .item-textarea .item-inner {
+  padding-right: 0;
+}
+
 page-privacy .contant-sec h2 {
   margin: 0;
 }
@@ -41923,6 +42159,14 @@ page-privacy .banner {
 page-privacy .contant-sec {
   width: 100%;
   float: left;
+}
+
+page-realtalk .back-button {
+  display: none !important;
+}
+
+page-realtalk h2 {
+  white-space: normal;
 }
 
 page-realtalk .segment-sec {
@@ -42070,6 +42314,7 @@ page-realtalk .newtalk .item-md.item-input.item-input-has-focus .item-inner {
 
 page-realtalk .newtalk h2 {
   margin-top: 8px !important;
+  white-space: normal;
 }
 
 page-realtalk .category {
@@ -42119,6 +42364,20 @@ page-realtalk .btn-sec {
 page-realtalk .btn1 {
   text-transform: capitalize;
   padding: 0 20px;
+}
+
+page-realtalk .ourtalk .refresher-active + ion-item {
+  margin-top: 50px;
+}
+
+page-realtalk .mytlk .refresher-active + ion-item {
+  margin-top: 50px;
+}
+
+page-realtalk ion-refresher {
+  z-index: 11111;
+  /* display: none; */
+  top: 0 !important;
 }
 
 page-reservations .item {
@@ -42254,11 +42513,26 @@ page-review .content h2 {
   margin-bottom: 5px;
 }
 
+page-review h5 {
+  width: 100%;
+  float: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3cc602;
+}
+
 page-review .content ul {
   width: 100%;
   float: left;
   padding: 0;
   margin: 5px 0px;
+}
+
+page-review .rplyimg {
+  width: 25px;
+  position: relative;
+  bottom: -13px;
+  margin-left: 5px;
 }
 
 page-review .content ul li {
@@ -42457,6 +42731,21 @@ page-review ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
 
 page-review .rply {
   text-align: right;
+}
+
+page-reviews2 h5 {
+  width: 100%;
+  float: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3cc602;
+}
+
+page-reviews2 .rplyimg {
+  width: 25px;
+  position: relative;
+  bottom: -10px;
+  margin-left: 5px;
 }
 
 page-reviews2 .image-wrapper {
@@ -42746,6 +43035,180 @@ page-signuptwo .strnth {
   float: left;
   margin: 0;
   margin-bottom: 6px;
+}
+
+page-talkreply .back-button {
+  display: none !important;
+}
+
+page-talkreply .mytlk {
+  width: 100%;
+  float: left;
+  margin: 10px 0 0 0;
+}
+
+page-talkreply .mytlk .item {
+  border-bottom: 1px solid #c8c8c8;
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+  border-top: none !important;
+}
+
+page-talkreply .mytlk .item .item-inner {
+  border: none !important;
+}
+
+page-talkreply .mytlk .item .label {
+  margin: 8px auto 8px 0;
+}
+
+page-talkreply .mytlk .item h2 {
+  margin-top: 0;
+  white-space: normal;
+}
+
+page-talkreply .mytlk .item p {
+  line-height: 16px;
+  width: 100%;
+  float: left;
+}
+
+page-talkreply .mytlk .item p .icon {
+  padding-right: 4px;
+  font-weight: 700;
+}
+
+page-talkreply .mytlk .item p .icon {
+  vertical-align: middle;
+}
+
+page-talkreply .mytlk .item p .icon img {
+  width: 14px;
+  margin-top: 2px;
+}
+
+page-talkreply .bottom-sec {
+  width: 100%;
+  float: left;
+  margin: 0;
+  padding-top: 5px;
+  background-color: #f9f9f9;
+}
+
+page-talkreply .bottom-sec .item {
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+  border-bottom: none !important;
+  min-height: auto;
+  background: transparent;
+}
+
+page-talkreply .bottom-sec .item .label {
+  margin: 8px auto 8px auto;
+}
+
+page-talkreply .bottom-sec .item .item-inner {
+  border: none !important;
+}
+
+page-talkreply .bottom-sec .top-sec {
+  width: 100%;
+  float: left;
+}
+
+page-talkreply .bottom-sec li .icon {
+  line-height: 13px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+page-talkreply .bottom-sec li {
+  display: inline-block;
+}
+
+page-talkreply .bottom-sec ul {
+  line-height: 13px;
+  list-style-type: none;
+  display: inline-block;
+  float: left;
+  padding: 0;
+  margin: 2px 0px;
+  width: 78px;
+}
+
+page-talkreply .bottom-sec h2 span {
+  float: right;
+  line-height: 22px;
+}
+
+page-talkreply .bottom-sec .revw {
+  margin-top: 2px !important;
+  line-height: 19px !important;
+  padding-left: 16px;
+  float: left;
+  width: calc(100% - 78px) !important;
+}
+
+page-talkreply .bottom-sec ion-avatar {
+  min-height: 45px !important;
+  min-width: 45px !important;
+}
+
+page-talkreply .bottom-sec ion-avatar img {
+  height: 45px !important;
+  width: 45px !important;
+}
+
+page-talkreply .bottom-sec .reply {
+  padding: 5px 0 !important;
+  border-bottom: 1px solid #d4d4d4;
+  width: 100%;
+  float: left;
+}
+
+page-talkreply .bottom-sec .reply img {
+  width: 12px;
+  margin-right: 8px;
+}
+
+page-talkreply .bottom-sec .text-input {
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  height: 60px;
+  padding: 7px;
+  background: transparent;
+  margin: 13px 0;
+}
+
+page-talkreply .bottom-sec .btnsec {
+  width: 100%;
+  float: left;
+  text-align: right;
+}
+
+page-talkreply .bottom-sec .btn1 {
+  width: 70px;
+  letter-spacing: 1px;
+}
+
+page-talkreply .bottom-sec .item h2 {
+  margin-top: 0;
+  white-space: normal;
+}
+
+page-talkreply .bottom-sec .item p {
+  line-height: 16px;
+  width: 100%;
+  float: left;
+  white-space: normal;
+}
+
+page-talkreply .bottom-sec .item-textarea .item-inner {
+  padding-right: 0;
 }
 
 page-terms .contant-sec h2 {

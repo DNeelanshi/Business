@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Common {
-    public cords: any;
+    public interval: any;
     constructor(
         public http: Http,
         private alertCtrl: AlertController,

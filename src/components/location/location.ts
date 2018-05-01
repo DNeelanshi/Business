@@ -14,31 +14,37 @@ import {Geolocation} from '@ionic-native/geolocation';
 export class LocationComponent {
     longitude: number;
     latitude: number;
-
+    CurrentLatLong;
   text: string;
 
   constructor(public geolocation: Geolocation,) {
     console.log('Hello LocationComponent Component');
     this.text = 'Hello World';
- if (navigator.geolocation) {
+    this.currentLocation();
+
+    
+  }
+currentLocation(){
+     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
+           // callback(position.coords.latitude);
+            return position.coords.latitude
           }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
+            
           });
         } else {
           // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+          //handleLocationError(false, infoWindow, map.getCenter());
         }
-    
-  }
+//        console.log(this.CurrentLatLong)
+//        return 'hello location';
+}
 
+LatLong(lat,long){
+    console.log(lat);
+}
 }

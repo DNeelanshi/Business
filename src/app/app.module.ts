@@ -48,6 +48,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LocationComponent } from '../components/location/location';
+import { TalkreplyPage } from '../pages/talkreply/talkreply';
+import { OurtalkreplyPage } from '../pages/ourtalkreply/ourtalkreply';
 @NgModule({
   declarations: [
     MyApp,
@@ -79,7 +81,9 @@ import { LocationComponent } from '../components/location/location';
     SignuptwoPage,
     AddbusinessPage,
     ForgottwoPage,
-    ViewreservationtwoPage
+    ViewreservationtwoPage,
+    TalkreplyPage,
+    OurtalkreplyPage
     
   ],
   imports: [
@@ -91,7 +95,6 @@ import { LocationComponent } from '../components/location/location';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-  
     MyApp,
     HomePage,
     GetstartPage,
@@ -121,7 +124,9 @@ import { LocationComponent } from '../components/location/location';
     SignuptwoPage,
     AddbusinessPage,
     ForgottwoPage,
-    ViewreservationtwoPage
+    ViewreservationtwoPage,
+    TalkreplyPage,
+    OurtalkreplyPage
     
   ],
   providers: [

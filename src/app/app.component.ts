@@ -56,8 +56,7 @@ export class MyApp {
         private app: App,
         private menu: MenuController
     ) {
-    
-   // alert('asdfjk')
+    //alert('asdfjk')
          platform.ready().then(() => {
             
       // Okay, so the platform is ready and our plugins are available.

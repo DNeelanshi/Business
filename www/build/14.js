@@ -1,14 +1,14 @@
 webpackJsonp([14],{
 
-/***/ 453:
+/***/ 479:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogintwoPageModule", function() { return LogintwoPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OurtalkreplyPageModule", function() { return OurtalkreplyPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logintwo__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ourtalkreply__ = __webpack_require__(133);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var LogintwoPageModule = (function () {
-    function LogintwoPageModule() {
+var OurtalkreplyPageModule = (function () {
+    function OurtalkreplyPageModule() {
     }
-    LogintwoPageModule = __decorate([
+    OurtalkreplyPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__logintwo__["a" /* LogintwoPage */],
+                __WEBPACK_IMPORTED_MODULE_2__ourtalkreply__["a" /* OurtalkreplyPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__logintwo__["a" /* LogintwoPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__ourtalkreply__["a" /* OurtalkreplyPage */]),
             ],
         })
-    ], LogintwoPageModule);
-    return LogintwoPageModule;
+    ], OurtalkreplyPageModule);
+    return OurtalkreplyPageModule;
 }());
 
-//# sourceMappingURL=logintwo.module.js.map
+//# sourceMappingURL=ourtalkreply.module.js.map
 
 /***/ })
 

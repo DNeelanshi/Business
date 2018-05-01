@@ -46,7 +46,7 @@ export class LoginPage {
         private fcm: FCM
 
     ) {
-    
+
         console.log('rahul');
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
@@ -116,42 +116,41 @@ export class LoginPage {
         console.log('rahul');
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
-            this.fcm.getToken().then(token => {
-               // alert(token);
-                console.log('Tokenid-->'+token);
-                let options = this.appsetting.header();
-                
-                var postdata = {
-                    email: signindata.value.email,
-                    password: signindata.value.password,
-                    divice_token: token,
-                    role: 'member'
-                }
-                
-                console.log(postdata);
-                var serialized = this.appsetting.serializeObj(postdata);
-                var Loading = this.loadingCtrl.create({
-                    spinner: 'bubbles',
-                    content: 'Loading...'
-                });
-                Loading.present().then(() => {
-                    this.http.post(this.appsetting.url + 'users/loginuser', serialized, options).map(res => res.json()).subscribe(response => {
-                        console.log(response);
-                        Loading.dismiss();
-                        if (response.status == true) {
-                            localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                            this.events.publish('Loggedin', 'loginpage');
-                            this.appsetting.userprofile = response.userinfo;
-                            this.navCtrl.push(HomePage);
-                        } else {
-                            this.common.presentAlert('Login', response.message);
-                        }
+                //        this.fcm.getToken().then(token => {
+            //                console.log('Tokenid-->'+token);
+            let options = this.appsetting.header();
 
-                    })
+            var postdata = {
+                email: signindata.value.email,
+                password: signindata.value.password,
+                divice_token:'',// token,
+                role: 'member'
+            }
+
+            console.log(postdata);
+            var serialized = this.appsetting.serializeObj(postdata);
+            var Loading = this.loadingCtrl.create({
+                spinner: 'bubbles',
+                content: 'Loading...'
+            });
+            Loading.present().then(() => {
+                this.http.post(this.appsetting.url + 'users/loginuser', serialized, options).map(res => res.json()).subscribe(response => {
+                    console.log(response);
+                    Loading.dismiss();
+                    if (response.status == true) {
+                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                        this.events.publish('Loggedin', 'loginpage');
+                        this.appsetting.userprofile = response.userinfo;
+                        this.navCtrl.push(HomePage);
+                    } else {
+                        this.common.presentAlert('Login', response.message);
+                    }
+
                 })
-            },err=>{
-                console.log(err);
-            })
+                 })
+//            }, err => {
+//                console.log(err);
+//            })
 
 
         } else {
@@ -215,52 +214,52 @@ export class LoginPage {
                     console.log(window.navigator.onLine);
                     if (window.navigator.onLine == true) {
                         let options = this.appsetting.header();
-                        //                this.fcm.getToken().then(token => {
-                        //                    alert(token);
-                        //                })
-                        var postdata = {
-                            fb_id: this.userData.id,
-                            firstname: this.userData.first_name,
-                            lastname: this.userData.last_name,
-                            email: this.userData.email,
-                            role: 'member',
-                            regitration_type: 'facebook',
-                            divice_token: 'ajsdfja',
-                            profile_pic: this.userData.picture,
-                            password: this.userData.id,
-                        }
-                        console.log('postdata------->');
-                        console.log(postdata);
-                        var serialized = this.appsetting.serializeObj(postdata);
-                        var Loading = this.loadingCtrl.create({
-                            spinner: 'bubbles',
-                            content: 'Loading...'
-                        });
-                        Loading.present().then(() => {
-                            this.http.post(this.appsetting.url + 'users/fbregistration', serialized, options).map(res => res.json()).subscribe(response => {
-                                console.log(response);
-                                Loading.dismiss();
-                                if (response.status == true) {
-                                    // alert('succes facebook');
-                                    if (response.data) {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                                        this.events.publish('Loggedin', 'loginpage');
-                                        this.navCtrl.push(HomePage);
+                        this.fcm.getToken().then(token => {
+                            //                    alert(token);
+                            //                })
+                            var postdata = {
+                                fb_id: this.userData.id,
+                                firstname: this.userData.first_name,
+                                lastname: this.userData.last_name,
+                                email: this.userData.email,
+                                role: 'member',
+                                regitration_type: 'facebook',
+                                divice_token: token,
+                                profile_pic: this.userData.picture,
+                                password: this.userData.id,
+                            }
+                            console.log('postdata------->');
+                            console.log(postdata);
+                            var serialized = this.appsetting.serializeObj(postdata);
+                            var Loading = this.loadingCtrl.create({
+                                spinner: 'bubbles',
+                                content: 'Loading...'
+                            });
+                            Loading.present().then(() => {
+                                this.http.post(this.appsetting.url + 'users/fbregistration', serialized, options).map(res => res.json()).subscribe(response => {
+                                    console.log(response);
+                                    Loading.dismiss();
+                                    if (response.status == true) {
+                                        // alert('succes facebook');
+                                        if (response.data) {
+                                            localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                                            this.events.publish('Loggedin', 'loginpage');
+                                            this.navCtrl.push(HomePage);
+                                        } else {
+                                            localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                                            this.events.publish('Loggedin', 'loginpage');
+                                            this.navCtrl.push(HomePage);
+                                        }
                                     } else {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                                        this.events.publish('Loggedin', 'loginpage');
-                                        this.navCtrl.push(HomePage);
+                                        //alert('fail facebook');
+                                        this.common.presentAlert('Signin', response.message);
                                     }
-                                } else {
-                                    //alert('fail facebook');
-                                    this.common.presentAlert('Signin', response.message);
-                                }
 
 
+                                })
                             })
-                        })
 
-                        //}).catch((error: any) => console.log(error));
+                        }).catch((error: any) => console.log(error));
                     } else {
                         let toast = this.toastCtrl.create({
                             message: 'Check your internet connection',

@@ -41,9 +41,9 @@
                         <img *ngIf="!reviews.profile_pic" src="assets/imgs/user.png">
 		    </ion-thumbnail>
 		    <h2>{{reviews.firstname}} {{reviews.lastname}} <span>{{reviews.created_at | date:"shortDate"}}</span></h2>
-		    <p>{{reviews.comment}}</p>
+		    <p style="padding-bottom: 10px;">{{reviews.comment}}</p>
                     <div class="rply">
-                        <h2 *ngIf="reviews.reply.length>0">Replies</h2>
+                        <h5>REPLY</h5>       
                         <p *ngIf="reviews.reply.length>0">{{reviews.reply[0].comment}}</p>
                     </div>
 		  </ion-item>

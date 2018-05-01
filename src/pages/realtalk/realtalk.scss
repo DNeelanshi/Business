@@ -1,4 +1,10 @@
 page-realtalk {
+    .back-button{
+    display: none !important;
+}
+    h2{
+        white-space: normal;
+    }
     .segment-sec {
         width: 100%;
         float: left;
@@ -109,7 +115,8 @@ page-realtalk {
     .newtalk .item-md.item-input.item-input-has-focus .item-inner{
         box-shadow: none !important;
     }
-    .newtalk h2{ @extend .fontheadding16px; margin-top: 8px !important;}
+    .newtalk h2{ @extend .fontheadding16px; margin-top: 8px !important;
+    white-space: normal;}
     .category {
         margin-bottom: 18px;
     }
@@ -148,5 +155,17 @@ page-realtalk {
         text-transform: capitalize;
         padding: 0 20px;
     }
-    
+    .ourtalk .refresher-active + ion-item{
+        margin-top: 50px;
+    }
+    .mytlk .refresher-active + ion-item{
+        margin-top: 50px;
+    } 
+    ion-refresher {
+
+    z-index: 11111;
+    /* display: none; */
+     top: 0 !important; 
+}
+
 }
