@@ -24,46 +24,28 @@
     <string>0.0.1</string>
     <key>CFBundleSignature</key>
     <string>????</string>
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb338511573301173</string>
-        </array>
-      </dict>
-    </array>
     <key>CFBundleVersion</key>
     <string>0.0.1</string>
-    <key>FacebookAppID</key>
-    <string>338511573301173</string>
-    <key>FacebookDisplayName</key>
-    <string>Melanin enterprise</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>fbapi</string>
-      <string>fb-messenger-api</string>
-      <string>fbauth2</string>
-      <string>fbshareextension</string>
-      <string>citymapper</string>
-      <string>comgooglemaps</string>
-      <string>navigon</string>
-      <string>transit</string>
-      <string>waze</string>
-      <string>yandexnavi</string>
-      <string>uber</string>
-      <string>tomtomhome</string>
-      <string>com.sygic.aura</string>
-      <string>here-route</string>
-      <string>moovit</string>
-      <string>lyft</string>
-      <string>mapsme</string>
-      <string>cabify</string>
-      <string>baidumap</string>
-      <string>taxis99</string>
-      <string>iosamap</string>
-    </array>
     <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSMainNibFile</key>
+    <string/>
+    <key>NSMainNibFile~ipad</key>
+    <string/>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UIRequiresFullScreen</key>
     <true/>
     <key>NSAppTransportSecurity</key>
     <dict>
@@ -94,38 +76,52 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
-    <key>NSAppleMusicUsageDescription</key>
-    <string>${PRODUCT_NAME} wants to access media library</string>
-    <key>NSCameraUsageDescription</key>
-    <string>${PRODUCT_NAME} wants to access camera</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>${PRODUCT_NAME} wants to access your location</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app requires access to your location for navigation purposes</string>
-    <key>NSMainNibFile</key>
-    <string/>
-    <key>NSMainNibFile~ipad</key>
-    <string/>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>This app requires photo library access to function properly.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>${PRODUCT_NAME} wants to access photo library</string>
     <key>UILaunchStoryboardName</key>
     <string>CDVLaunchScreen</string>
-    <key>UIRequiresFullScreen</key>
-    <true/>
-    <key>UISupportedInterfaceOrientations</key>
+    <key>FacebookAppID</key>
+    <string>338511573301173</string>
+    <key>FacebookDisplayName</key>
+    <string>Melanin enterprise</string>
+    <key>CFBundleURLTypes</key>
     <array>
-      <string>UIInterfaceOrientationPortrait</string>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb338511573301173</string>
+        </array>
+      </dict>
     </array>
-    <key>UISupportedInterfaceOrientations~ipad</key>
+    <key>LSApplicationQueriesSchemes</key>
     <array>
-      <string>UIInterfaceOrientationPortrait</string>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-      <string>UIInterfaceOrientationPortraitUpsideDown</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>fbapi</string>
+      <string>fb-messenger-api</string>
+      <string>fbauth2</string>
+      <string>fbshareextension</string>
+      <string>citymapper</string>
+      <string>comgooglemaps</string>
+      <string>navigon</string>
+      <string>transit</string>
+      <string>waze</string>
+      <string>yandexnavi</string>
+      <string>uber</string>
+      <string>tomtomhome</string>
+      <string>com.sygic.aura</string>
+      <string>here-route</string>
+      <string>moovit</string>
+      <string>lyft</string>
+      <string>mapsme</string>
+      <string>cabify</string>
+      <string>baidumap</string>
+      <string>taxis99</string>
+      <string>iosamap</string>
     </array>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>This app requires photo library access to function properly.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app requires access to your location for navigation purposes</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Clicked image will use as your profile picture</string>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>${PRODUCT_NAME} wants to access your media library</string>
   </dict>
 </plist>

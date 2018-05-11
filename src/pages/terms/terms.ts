@@ -16,7 +16,8 @@ import {Appsetting} from '../../providers/appsetting';
   templateUrl: 'terms.html',
 })
 export class TermsPage {
-terms = [];
+    role: any;
+terms;
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
@@ -28,7 +29,43 @@ terms = [];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsPage');
+    if(localStorage.getItem('CurrentUser')){
+    this.role = JSON.parse(localStorage.getItem('CurrentUser')).role;
+    console.log(JSON.parse(localStorage.getItem('CurrentUser')));
+    }else{
+        this.role = this.navParams.get('role')
+    }
+    this.get();
     
   }
-
+  
+    get() {
+        var postdata;
+        console.log(this.role);
+        let options = this.appsetting.header();
+        if(this.role == 'member'){
+        postdata = {
+            pagename: 'terms&condition(user)'
+        }
+        }else{
+           postdata = {
+            pagename: 'terms&condition(business)'
+        } 
+        }
+        var serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'static/getstaticpagedata',serialized,options).map(res => res.json()).subscribe(response => {
+            console.log(response);
+            if(response.status == true){
+                if(response.data[0].pageimage){
+                    response.data[0].loaded = true;
+                }else{
+                    response.data[0].loaded = false;
+                }
+            this.terms = response.data[0];
+            }else{
+                
+            }
+            
+        })
+    }
 }

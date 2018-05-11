@@ -22,6 +22,8 @@ export class ReviewPage {
     resdetail: any;
     ReviewForm: any;
     data:any = {};
+      limit: number = 40;
+    truncating = true;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,

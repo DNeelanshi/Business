@@ -14,7 +14,7 @@
   color: #000;
 }
 
-.fontheadding16px, page-addbusiness h2, page-booknow h2, page-editbusiness h2, page-editprofile .head-sec h2, page-editprofile .input-sec h2, page-editprofiletwo .head-sec h2, page-editprofiletwo .input-sec h2, page-filter .loginform h2, page-history .item h2, page-historytwo .item h2, page-home .productlist .item h2, page-login .loginform p, page-login h2, page-logintwo .loginform p, page-ourtalkreply .mytlk .item h2, page-ourtalkreply .bottom-sec .item h2, page-privacy .contant-sec h2, page-realtalk .item h2, page-realtalk .newtalk h2, page-reservations .item h2, page-review .content h2, page-reviews2 .content h2, page-signuptwo .loginform h5, page-signuptwo .loginform p, page-talkreply .mytlk .item h2, page-talkreply .bottom-sec .item h2, page-terms .contant-sec h2, page-viewfavorites .item h2, page-viewproduct .product_content .item h1, page-viewreservation .item h2, page-viewreservationtwo .item h2 {
+.fontheadding16px, page-addbusiness h2, page-booknow h2, page-editbusiness h2, page-editprofile .head-sec h2, page-editprofile .input-sec h2, page-editprofiletwo .head-sec h2, page-editprofiletwo .input-sec h2, page-filter .loginform h2, page-history .item h2, page-historytwo .item h2, page-home .productlist .item h2, page-login .loginform p, page-login h2, page-logintwo .loginform p, page-ourtalkreply .mytlk .item h2, page-ourtalkreply .bottom-sec .item h2, page-privacy .contant-sec h2, page-realtalk .item h2, page-realtalk .newtalk h2, page-reservations .item h2, page-review .content h2, page-reviews2 .content h2, page-signuptwo .loginform h5, page-signuptwo .loginform p, page-talkreply .mytlk .item h2, page-talkreply .bottom-sec .item h2, page-terms .contant-sec h2, page-termsbusiness .contant-sec h2, page-viewfavorites .item h2, page-viewproduct .product_content .item h1, page-viewreservation .item h2, page-viewreservationtwo .item h2 {
   font-size: 17px;
   font-weight: 500;
   color: #000;
@@ -26,7 +26,7 @@
   color: #434343;
 }
 
-.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-ourtalkreply .mytlk .item p, page-ourtalkreply .bottom-sec h2 span, page-ourtalkreply .bottom-sec .item p, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-talkreply .mytlk .item p, page-talkreply .bottom-sec h2 span, page-talkreply .bottom-sec .item p, page-terms .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
+.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-ourtalkreply .mytlk .item p, page-ourtalkreply .bottom-sec h2 span, page-ourtalkreply .bottom-sec .item p, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-talkreply .mytlk .item p, page-talkreply .bottom-sec h2 span, page-talkreply .bottom-sec .item p, page-terms .contant-sec p, page-termsbusiness .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
   font-size: 15px;
   font-weight: 400;
   color: #434343;
@@ -40078,6 +40078,70 @@ ion-navbar.toolbar {
   display: none;
 }
 
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.highlighted path {
+  fill: #3cc602 !important;
+}
+
+.highlighted p {
+  color: #3cc602 !important;
+}
+
+ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 0;
+  color: #000;
+}
+
+ul.rating[_ngcontent-c1] li[_ngcontent-c1] {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 5px 0 !important;
+  color: #f8d71d;
+}
+
+ul.rating[_ngcontent-c1] .ion-ios-star-outline {
+  color: #000;
+}
+
 page-addbusiness .catoption {
   width: 100%;
   right: 0;
@@ -41503,9 +41567,9 @@ page-home ion-slides ion-slide {
   float: left;
   height: 100% !important;
   /*            .slide-zoom{
-                height: 100%;
-                float: left
-            }*/
+                            height: 100%;
+                            float: left
+                        }*/
 }
 
 page-home ion-slides ion-slide img {
@@ -41515,7 +41579,7 @@ page-home ion-slides ion-slide img {
 }
 
 page-home button.searchbar-clear-icon {
-  background-size: 23px !important;
+  background-size: 30px !important;
 }
 
 page-home .online {
@@ -41546,11 +41610,29 @@ page-home ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
   border: 0px;
   background: none;
   padding: 0;
+  color: #000;
+}
+
+page-home ul.rating[_ngcontent-c1] li[_ngcontent-c1] {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 5px 0;
   color: #f8d71d;
+}
+
+page-home ul.rating[_ngcontent-c1] .ion-ios-star-outline {
+  color: #000;
 }
 
 page-home .searchouter {
   position: relative;
+  width: 100%;
+  float: left;
+}
+
+page-home .brfone .searchbar-clear-icon {
+  display: none !important;
 }
 
 page-home .searchtogle {
@@ -41571,8 +41653,42 @@ page-home .searchtogle .label {
   margin-bottom: 5px;
 }
 
+page-home .bfr.searchbar {
+  background: #fff;
+  width: calc(100% - 80px);
+  float: left;
+  position: absolute;
+  top: 0;
+}
+
 page-home .searchbar {
   background: #fff;
+}
+
+page-home .searchouter p {
+  width: 77px;
+  float: right;
+  line-height: 27px;
+  padding: 0 0px;
+  text-align: center;
+  background-color: #3cc602;
+  margin: 8px 3px 7px 3px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #3cc602;
+  color: #fff;
+}
+
+page-home .gosrch {
+  position: absolute;
+  right: 94px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 22px;
 }
 
 page-home .searchbar-input-container {
@@ -41588,6 +41704,10 @@ page-home .searchbar-md .searchbar-input {
   line-height: 2rem;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+page-home .searchbar-ios .searchbar-input {
+  padding: 0 32px 0 28px !important;
 }
 
 page-home .searchbar-md .searchbar-search-icon {
@@ -41609,6 +41729,31 @@ page-home ul.procat li {
   padding: 0 10px;
   font-size: 12px;
   text-align: center;
+  /*        .icons{
+            img{
+                &.unactive{
+                    display: block;
+                }
+                &.active{
+                    display: none;
+                }
+            }
+        }
+        &.highlighted{
+            .icons{
+                img{
+                    &.unactive{
+                        display: none;
+                    }
+                    &.active{
+                        display: block;
+                    }
+                }
+            }
+            p{
+                color:#0bc502;
+            }
+        }*/
 }
 
 page-home .icons {
@@ -42161,6 +42306,10 @@ page-privacy .contant-sec {
   float: left;
 }
 
+page-privacy .banner img {
+  width: 100%;
+}
+
 page-realtalk .back-button {
   display: none !important;
 }
@@ -42506,6 +42655,12 @@ page-review {
 	.footer .toolbar{
 		padding: 6px;
 	}*/
+  /*        span.st {
+    height: 70px;
+    overflow: hidden;
+    float: left;
+    text-overflow: ellipsis;
+}*/
 }
 
 page-review .content h2 {
@@ -42656,7 +42811,6 @@ page-review .top h2 {
 page-review .top h3 {
   font-size: 12px;
   color: #6a6a6a;
-  font-weight: 500;
   margin-bottom: 4px;
   white-space: normal;
 }
@@ -42731,6 +42885,10 @@ page-review ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
 
 page-review .rply {
   text-align: right;
+}
+
+page-review .button-clear {
+  color: #3cc602 !important;
 }
 
 page-reviews2 h5 {
@@ -43231,6 +43389,36 @@ page-terms .banner {
 page-terms .contant-sec {
   width: 100%;
   float: left;
+}
+
+page-terms .banner img {
+  width: 100%;
+}
+
+page-termsbusiness .contant-sec h2 {
+  margin: 0;
+}
+
+page-termsbusiness .contant-sec p {
+  line-height: 18px;
+  width: 100%;
+  float: left;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+page-termsbusiness .banner {
+  width: 100%;
+  float: left;
+}
+
+page-termsbusiness .contant-sec {
+  width: 100%;
+  float: left;
+}
+
+page-termsbusiness .banner img {
+  width: 100%;
 }
 
 page-viewfavorites .item {

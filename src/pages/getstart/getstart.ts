@@ -18,6 +18,7 @@ import { LogintwoPage } from '../logintwo/logintwo';
 export class GetstartPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+     // alert('get started page');
   }
 
   ionViewDidLoad() {

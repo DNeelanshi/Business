@@ -262,7 +262,7 @@ export class EditbusinessPage {
             opening_time: timedata.value.openinghours,
             closing_time: timedata.value.closinghours
         }
-
+        
         this.senddays.push(timedata.value.days);
         var ot = timedata.value.openinghours.split(' ');
         var ct = timedata.value.closinghours.split(' ');
@@ -273,6 +273,9 @@ export class EditbusinessPage {
         console.log(this.sendclosingtime.join(','));
         this.daytime.push(dayOpeningClosing);
         console.log(this.daytime);
+        this.data.openinghours = '';
+        this.data.closinghours = '';
+        this.data.days = '';
          }else {
             this.common.presentAlert('Edit business', 'Closing time must be greater than opening time!');
         }
@@ -286,6 +289,9 @@ export class EditbusinessPage {
         /**** pop a value from array by index ************/
         console.log(temp.daytime);
         temp.daytime.splice(ind, 1);
+        temp.senddays.splice(ind, 1);
+        temp.sendopeningtime.splice(ind, 1);
+        temp.sendclosingtime.splice(ind, 1);
         console.log(this.daytime.length);
         console.log(this.daytime);
         if (this.daytime.length == 0) {

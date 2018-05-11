@@ -49,16 +49,17 @@ export class FilterPage {
         this.services = this.navParams.get('serviceslist');
         if(localStorage.getItem('filterdata')){
             this.filterd = JSON.parse(localStorage.getItem('filterdata'));
-            if(this.filterd.online == 1){
-                this.filterd.online = "yes";
-            }else{
-                 this.filterd.online = "no";
-            }
+//            if(this.filterd.online == 1){
+//                this.filterd.online = "yes";
+//            }else{
+//                 this.filterd.online = "no";
+//            }
             this.FilterForm.patchValue({
                 services:this.filterd.services,
                 range:this.filterd.range,
                 zipcode:this.filterd.zipcode,
-                online:this.filterd.online
+                online1:this.filterd.online1,
+                offline:this.filterd.offline
             })
         }
     }
@@ -68,8 +69,9 @@ export class FilterPage {
             services: [''],
             range: [''],
             zipcode: [''],
-//            city: [''],
             online: [''],
+            online1: [false],
+            offline:[false]
 
         })
     }
@@ -80,18 +82,27 @@ export class FilterPage {
     
     Search(filterformdata) {
         console.log(filterformdata.value);
-        if (filterformdata.value.online) {
-            if (filterformdata.value.online == "yes") {
+            if (filterformdata.value.online1 == true && filterformdata.value.offline == true) {
+                filterformdata.value.online = 3;
+            }else if (filterformdata.value.online1 == true) {
                 filterformdata.value.online = 1;
-            } else {
+            }else if (filterformdata.value.offline == true) {
                 filterformdata.value.online = 0;
             }
-        }
+            
+            if (filterformdata.value.online1 == false && filterformdata.value.offline == false) {
+                filterformdata.value.online = 3;
+            }
+            
         if (filterformdata.value.range != undefined) {
             filterformdata.value.range = filterformdata.value.range;
         } else {
             filterformdata.value.range = '';
         }
+        
+        console.log(filterformdata.value);
+       // return false;
+        
         let options = this.appsetting.header();
              this.viewCtrl.dismiss({searchedlist: filterformdata.value,type:'search'});
              localStorage.setItem('filterdata',JSON.stringify(filterformdata.value));

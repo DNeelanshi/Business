@@ -50,6 +50,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LocationComponent } from '../components/location/location';
 import { TalkreplyPage } from '../pages/talkreply/talkreply';
 import { OurtalkreplyPage } from '../pages/ourtalkreply/ourtalkreply';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { HttpClientModule } from '@angular/common/http';
+import { TruncateModule } from '@yellowspot/ng-truncate';
 @NgModule({
   declarations: [
     MyApp,
@@ -84,13 +87,15 @@ import { OurtalkreplyPage } from '../pages/ourtalkreply/ourtalkreply';
     ViewreservationtwoPage,
     TalkreplyPage,
     OurtalkreplyPage
-    
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     PasswordStrengthBarModule,
     Ionic2RatingModule,
+    AngularSvgIconModule,
+    TruncateModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

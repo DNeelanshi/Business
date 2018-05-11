@@ -21,8 +21,13 @@
 		      <img [src]="resdetail?.business_image[0].business_image">
 		    </ion-avatar>
 		    <h2 color="green">{{resdetail?.business_data[0].business_name}}</h2>
-			<h3 [innerHTML]="resdetail?.business_data[0].business_description"></h3>
-
+			<h3 *ngIf="truncating && resdetail?.business_data[0].business_description.length > limit" [innerHTML]="resdetail?.business_data[0].business_description | truncate : 80">
+                        </h3>
+                    <button ion-button clear *ngIf="truncating && resdetail?.business_data[0].business_description.length > limit" ion-button (click)="truncating = false">Show more</button>
+                    <h3 *ngIf="!truncating && resdetail?.business_data[0].business_description.length > limit" [innerHTML]="resdetail?.business_data[0].business_description">
+                             <button ion-button (click)="truncating = true">show less</button>
+                        </h3>
+                    <button ion-button clear *ngIf="!truncating && resdetail?.business_data[0].business_description.length > limit" ion-button (click)="truncating = true">Show less</button>
 		      <div class="btn" item-end *ngIf="resdetail?.review">
 		      	<rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="data.rate" name="rate">
                         </rating>

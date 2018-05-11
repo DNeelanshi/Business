@@ -4,7 +4,7 @@ import {AlertController, NavController, App} from 'ionic-angular';
 import 'rxjs/add/operator/map';
 /*********Native plugins *************/
 //import { Geolocation } from '@ionic-native/geolocation';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 /*
   Generated class for the Appsetting provider.
 
@@ -17,12 +17,12 @@ export class Common {
     constructor(
         public http: Http,
         private alertCtrl: AlertController,
-        public app: App
+        public app: App,
+        private iab: InAppBrowser
 
     ) {
         console.log('Hello Common Provider');
     }
-
     presentAlert(title, subtitle) {
         let alert = this.alertCtrl.create({
             title: title,
@@ -124,5 +124,13 @@ export class Common {
             ]
         });
         alert.present();
+    }
+    InappBrowser(link){
+          let InAppBrowserOptions = {
+        locatio:'no',
+        closebuttoncaption:'Back to app'
+    }
+     const browser = this.iab.create(link,'_blank',InAppBrowserOptions);
+     browser.show();
     }
 }

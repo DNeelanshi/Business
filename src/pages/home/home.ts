@@ -13,12 +13,15 @@ import * as moment from 'moment';
 import {LoginPage} from '../login/login';
 
 declare var google;
-
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
+
 export class HomePage {
+    name: string = 'By name';
+    categoryid: any;
+    class: string;
     currentLong: number;
     currentLat: number;
     favourite: any;
@@ -27,6 +30,7 @@ export class HomePage {
     pageno: any = 1;
     restaurantlist: any = [];
     searchQuery: string = '';
+    data: any = {};
     /**** parameters for autocomplete *****/
     autocompleteItems;//variable used for autocomplete on address field
     public autocomplete: any = {};//variable used for autocomplete on address field
@@ -38,6 +42,8 @@ export class HomePage {
     premiumBusiness: any = [];
     fav = 0;
     rating: any = {};
+    show: boolean = false;
+    
     constructor(
         public navCtrl: NavController,
         public modalCtrl: ModalController,
@@ -61,7 +67,7 @@ export class HomePage {
         this.autocomplete = {
             query: ''
         };
-       
+
     }
 
     ionViewDidLoad() {
@@ -69,17 +75,17 @@ export class HomePage {
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             console.log('You are online');
-             this.currentLocation();
-             console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
-        this.getSubCatList();
-        console.log('ionViewDidLoad HomePage');
-//        this.Getlist(1, 30.723839099999996, 76.8465082);
-//        this.latitude = 30.723839099999996;
-//        this.longitude = 76.8465082;
+            this.currentLocation();
+            console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
+            this.getSubCatList();
+            console.log('ionViewDidLoad HomePage');
+            //        this.Getlist(1, 30.723839099999996, 76.8465082);
+            //        this.latitude = 30.723839099999996;
+            //        this.longitude = 76.8465082;
         } else {
             this.common.tryagain();
         }
-       
+
 
     }
 
@@ -140,16 +146,17 @@ export class HomePage {
     }
 
     /****** functions used for run ionViewDidLoad() function after clear the search bar ************/
-//    ionClear() {
-//        this.ionViewDidLoad();
-//    }
+        ionClear() {
+            console.log('clear');
+            this.autocomplete.query = '';
+        }
 
     /****** functions used for getlist of restaurants by default when user visit on page ************/
     Getlist(pageno, lat, long) {
 
         console.log('Getlist');
         var temp = this;
-        
+
         let options = this.appsetting.header();
         var postdata = {
             lat: lat,
@@ -279,57 +286,68 @@ export class HomePage {
         var temp = this;
         let modal = this.modalCtrl.create(FilterPage, {serviceslist: this.subcat});
         modal.onDidDismiss(data => {
-            if (data.type == 'search') {
-                console.log('Search');
-                if (data.searchedlist) {
-                    console.log(data.searchedlist);
-                    let options = this.appsetting.header();
-                    let postdata = {
-                        sub_cat_id: data.searchedlist.services,
-                        max_distance: data.searchedlist.range,
-                        zip_code: '',
-                        business_online: data.searchedlist.online,
-                        lat: this.latitude,
-                        long: this.longitude
-                    }
-                    let serialized = this.appsetting.serializeObj(postdata);
-                    this.http.post(this.appsetting.url + 'users/filterall', serialized, options).map(res => res.json()).subscribe(response => {
-                        console.log(response);
-                        if (response.status == true) {
-                            if (response.data.length > 0) {
-                                console.log(response.data);
-                                this.restaurantlist = null;
-                                this.geolocation.getCurrentPosition().then((resp) => {
-                                    console.log(resp.coords.latitude);
-                                    console.log(resp.coords.longitude);
-                                    response.data.forEach(function (value, key) {
-                                        console.log(value.business_data[0].location.coordinates[1]);
-                                        value.business_data[0].distance = temp.common.distance(resp.coords.latitude, resp.coords.longitude, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-                                    })
-                                }).catch((error) => {
-                                    console.log('Error getting location', error);
-                                });
-                                this.restaurantlist = response.data;
-                            } else {
-                                this.restaurantlist = response.data;
-                            }
+            if (data) {
+                if (data.type == 'search') {
+                    console.log('Search');
+                    if (data.searchedlist) {
+                        console.log(data.searchedlist);
+                        let options = this.appsetting.header();
+                        let postdata = {
+                            sub_cat_id: data.searchedlist.services,
+                            max_distance: data.searchedlist.range,
+                            zip_code: '',
+                            business_online: data.searchedlist.online,
+                            lat: this.latitude,
+                            long: this.longitude
                         }
-                    })
+                        let serialized = this.appsetting.serializeObj(postdata);
+                        this.http.post(this.appsetting.url + 'users/filterall', serialized, options).map(res => res.json()).subscribe(response => {
+                            console.log(response);
+                            if (response.status == true) {
+                                if (response.data.length > 0) {
+                                    console.log(response.data);
+                                    this.premiumBusiness = [];
+                                    this.restaurantlist = [];
+                                    this.geolocation.getCurrentPosition().then((resp) => {
+                                        console.log(resp.coords.latitude);
+                                        console.log(resp.coords.longitude);
+                                        response.data.forEach(function (value, key) {
+                                            console.log(value.business_data[0].location.coordinates[1]);
+                                            if (value.business_data[0].business_type == 1) {
+                                                console.log('if');
+                                                temp.premiumBusiness.push(value);
+                                            } else {
+                                                console.log('else');
+                                                temp.restaurantlist.push(value);
+                                            }
+                                            value.business_data[0].distance = temp.common.distance(resp.coords.latitude, resp.coords.longitude, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                                        })
+                                    }).catch((error) => {
+                                        console.log('Error getting location', error);
+                                    });
+                                    // this.restaurantlist = response.data;
+                                } else {
+                                    this.restaurantlist = [];
+                                    this.premiumBusiness = [];
+                                }
+                            }
+                        })
+                    }
+                } else {
+                    console.log('reset');
+                    localStorage.removeItem('filterdata');
+                    this.geolocation.getCurrentPosition().then((resp) => {
+                        console.log('getCurrentPosition');
+                        console.log(resp.coords.latitude);
+                        console.log(resp.coords.longitude);
+                        this.latitude = resp.coords.latitude;// resp.coords.latitude
+                        this.longitude = resp.coords.longitude;// resp.coords.longitude
+                        this.pageno = 1;
+                        this.Getlist(this.pageno, resp.coords.latitude, resp.coords.longitude);
+                    }).catch((error) => {
+                        console.log('Error getting location', error);
+                    });
                 }
-            } else {
-                console.log('reset');
-                localStorage.removeItem('filterdata');
-                this.geolocation.getCurrentPosition().then((resp) => {
-                    console.log('getCurrentPosition');
-                    console.log(resp.coords.latitude);
-                    console.log(resp.coords.longitude);
-                    this.latitude = resp.coords.latitude;// resp.coords.latitude
-                    this.longitude = resp.coords.longitude;// resp.coords.longitude
-                    this.pageno = 1;
-                    this.Getlist(this.pageno, resp.coords.latitude, resp.coords.longitude);
-                }).catch((error) => {
-                    console.log('Error getting location', error);
-                });
             }
 
         });
@@ -344,41 +362,43 @@ export class HomePage {
         let modal = this.modalCtrl.create(BooknowPage);
         modal.onDidDismiss(data => {
             console.log(data);
-            console.log(this.modaldata);
-            if (data.bookingdata) {
-                console.log(new Date());
-                console.log(new Date(data.bookingdata.date).toISOString());
-                var da = new Date(data.bookingdata.date).toISOString();
-                var t = da.charAt(10);
-                var z = da.match(/.{1,16}/g);
-                console.log(da.charAt(10));
-                console.log(da.match(/.{1,16}/g));
-                console.log(da);
-                var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
-                console.log(startdate);
-                var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
-                console.log(enddate);
-                //return false;
-                let options = this.appsetting.header();
-                let postdata = {
-                    business_id: this.modaldata.business_data[0]._id,
-                    order_to: this.modaldata._id,
-                    order_from: user._id,
-                    orderdate: da,
-                    orderstart: startdate,
-                    orderend: enddate,
-                    spacial_accomodation: data.bookingdata.specialAccomo
-                }
-
-                let serialized = this.appsetting.serializeObj(postdata);
-                this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
-                    console.log(response);
-                    if (response.status == true) {
-                        this.common.presentAlert('Book now', response.message);
-                    } else {
-                        this.common.presentAlert('Book now', 'No result found!');
+            if (data) {
+                console.log(this.modaldata);
+                if (data.bookingdata) {
+                    console.log(new Date());
+                    console.log(new Date(data.bookingdata.date).toISOString());
+                    var da = new Date(data.bookingdata.date).toISOString();
+                    var t = da.charAt(10);
+                    var z = da.match(/.{1,16}/g);
+                    console.log(da.charAt(10));
+                    console.log(da.match(/.{1,16}/g));
+                    console.log(da);
+                    var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
+                    console.log(startdate);
+                    var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
+                    console.log(enddate);
+                    //return false;
+                    let options = this.appsetting.header();
+                    let postdata = {
+                        business_id: this.modaldata.business_data[0]._id,
+                        order_to: this.modaldata._id,
+                        order_from: user._id,
+                        orderdate: da,
+                        orderstart: startdate,
+                        orderend: enddate,
+                        spacial_accomodation: data.bookingdata.specialAccomo
                     }
-                })
+
+                    let serialized = this.appsetting.serializeObj(postdata);
+                    this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
+                        console.log(response);
+                        if (response.status == true) {
+                            this.common.presentAlert('Book now', response.message);
+                        } else {
+                            this.common.presentAlert('Book now', 'No result found!');
+                        }
+                    })
+                }
             }
         });
         modal.present();
@@ -420,6 +440,7 @@ export class HomePage {
 
         console.log(id);
         var temp = this;
+        this.categoryid = id;
         let options = this.appsetting.header();
         var postdata = {
             lat: this.latitude,
@@ -696,11 +717,101 @@ export class HomePage {
 
     }
 
+    ShowHide() {
+        console.log(this.name);
+        if (this.show == true) {
+            this.show = false;
+            this.name = 'By name';
+            this.class = 'slideOutRight';
+            console.log('true');
+        } else {
+            this.name = 'By location';
+            this.class = 'slideInRight';
+            this.show = true;
+            console.log('false');
+
+        }
+         console.log(this.name);
+    }
+    Searchbyname(text) {
+        console.log(text);
+        var temp = this;
+        this.categoryid = '';
+        var sum = 0;
+        let options = this.appsetting.header();
+        var postdata = {
+            name: text
+        }
+        console.log(postdata);
+        var serialized = this.appsetting.serializeObj(postdata);
+        var Loading = this.loadingCtrl.create({
+            spinner: 'bubbles',
+            content: 'Loading...'
+        });
+        Loading.present().then(() => {
+            this.http.post(this.appsetting.url + 'users/Searchbyname', serialized, options).map(res => res.json()).subscribe(response => {
+                console.log(response);
+                Loading.dismiss();
+                if (response.status == true) {
+                    this.premiumBusiness = [];
+                    this.restaurantlist = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        if (localStorage.getItem('CurrentUser')) {
+                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                            if (this.favourite.length > 0) {
+                                for (var j = 0; j < this.favourite.length; j++) {
+                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                        console.log('matched');
+                                        response.data[i].business_data[0].fav = 1;
+                                        break;
+                                    } else {
+                                        console.log('not matched');
+                                        response.data[i].business_data[0].fav = 0;
+                                        // break;
+                                    }
+                                }
+                            } else {
+                                response.data[i].business_data[0].fav = 0;
+                            }
+                        } else {
+                            response.data[i].business_data[0].fav = 0;
+                        }
+                        if (response.data[i].review.length > 0) {
+                            response.data[i].review.forEach(function (val, ke) {
+                                console.log(val);
+                                sum += val.stars;
+                                console.log(sum);
+                                response.data[i].avg = sum / response.data[i].review.length;
+                            })
+                        } else {
+                            response.data[i].avg = 0;
+                        }
+                    }
+                    response.data.forEach(function (value, key) {
+                        console.log(value);
+                        console.log(key);
+                        if (value.business_data[0].business_type == 1) {
+                            console.log('if');
+                            temp.premiumBusiness.push(value);
+                        } else {
+                            console.log('else');
+                            temp.restaurantlist.push(value);
+                        }
+                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                    })
+                } else {
+                    this.common.presentAlert('Search', response.message);
+                }
+
+            })
+        })
+    }
     /****** functions used for getlist on refresh ************/
     doRefresh(refresher) {
         console.log('Begin async operation', refresher);
         //this.getSubCatList();
         this.pageno = 1;
+        this.categoryid = '';
         this.Getlist(this.pageno, this.latitude, this.longitude);
         setTimeout(() => {
             console.log('Async operation has ended');
@@ -724,4 +835,6 @@ export class HomePage {
             infiniteScroll.complete();
         }, 500);
     }
+
+
 }

@@ -276,6 +276,7 @@ export class AddbusinessPage {
         /**** pop a value from array by index ************/
         console.log(temp.daytime);
         temp.daytime.splice(ind, 1);
+        temp.senddays.splice(ind,1);
         console.log(this.daytime.length);
         if (this.daytime.length == 0) {
             this.data.days = '';

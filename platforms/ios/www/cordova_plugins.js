@@ -105,15 +105,6 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-inappbrowser.inappbrowser",
-    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-    "pluginId": "cordova-plugin-inappbrowser",
-    "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
-    ]
-  },
-  {
     "id": "cordova-plugin-ionic-keyboard.keyboard",
     "file": "plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js",
     "pluginId": "cordova-plugin-ionic-keyboard",
@@ -143,6 +134,14 @@ module.exports = [
     "pluginId": "cordova-plugin-statusbar",
     "clobbers": [
       "window.StatusBar"
+    ]
+  },
+  {
+    "id": "cordova-plugin-themeablebrowser.themeablebrowser",
+    "file": "plugins/cordova-plugin-themeablebrowser/www/themeablebrowser.js",
+    "pluginId": "cordova-plugin-themeablebrowser",
+    "clobbers": [
+      "cordova.ThemeableBrowser"
     ]
   },
   {
@@ -182,6 +181,15 @@ module.exports = [
     "merges": [
       "launchnavigator"
     ]
+  },
+  {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -195,15 +203,16 @@ module.exports.metadata =
   "cordova-plugin-facebook4": "1.9.1",
   "cordova-plugin-fcm": "2.1.2",
   "cordova-plugin-geolocation": "4.0.1",
-  "cordova-plugin-inappbrowser": "2.0.2",
   "cordova-plugin-ionic-keyboard": "2.0.5",
   "cordova-plugin-ionic-webview": "1.1.16",
   "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-statusbar": "2.4.1",
+  "cordova-plugin-themeablebrowser": "0.2.17",
   "cordova-plugin-whitelist": "1.3.3",
   "es6-promise-plugin": "4.1.0",
   "cordova-plugin-x-socialsharing": "5.3.1",
-  "uk.co.workingedge.phonegap.plugin.launchnavigator": "4.2.0"
+  "uk.co.workingedge.phonegap.plugin.launchnavigator": "4.2.0",
+  "cordova-plugin-inappbrowser": "3.0.0"
 };
 // BOTTOM OF METADATA
 });

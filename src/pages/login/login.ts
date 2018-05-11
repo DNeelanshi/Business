@@ -11,6 +11,7 @@ import {SignuptwoPage} from '../signuptwo/signuptwo';
 import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook';
 
 import {FCM} from '@ionic-native/fcm';
+import {TermsPage} from '../terms/terms';
 /**
  * Generated class for the LoginPage page.
  *
@@ -46,7 +47,8 @@ export class LoginPage {
         private fcm: FCM
 
     ) {
-
+    //alert('login oage');
+    
         console.log('rahul');
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
@@ -116,14 +118,15 @@ export class LoginPage {
         console.log('rahul');
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
-                //        this.fcm.getToken().then(token => {
-            //                console.log('Tokenid-->'+token);
+             // this.fcm.getToken().then(token => {
+                         //   console.log('Tokenid-->'+token);
+                           // alert(token)
             let options = this.appsetting.header();
 
             var postdata = {
                 email: signindata.value.email,
                 password: signindata.value.password,
-                divice_token:'',// token,
+                divice_token:'g',//token,
                 role: 'member'
             }
 
@@ -288,5 +291,7 @@ export class LoginPage {
     forgot() {
         this.navCtrl.push(ForgotPage);
     }
-
+term(){
+this.navCtrl.push(TermsPage,{role:'member'});
+}
 }

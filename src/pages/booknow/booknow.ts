@@ -38,7 +38,7 @@ export class BooknowPage {
     ) {
         console.log('rahul');
         console.log(new Date());
-        this.currentdate = moment(new Date()).format('YYYY-MM-DD');
+        this.currentdate = moment(new Date().toISOString()).locale('es').format();
         console.log(this.currentdate);
         var a = new Date();
         console.log(a.getTime());
@@ -68,14 +68,15 @@ export class BooknowPage {
     }
     MakeBooking(BookingForm) {
         console.log(BookingForm.value);
+       // return false;
         var startTime = BookingForm.value.startTime.split(':');
         console.log(startTime);
         console.log(startTime[0]);
         var endTime = BookingForm.value.endTime.split(':');
-        console.log(endTime);
-        if(endTime[0]>startTime[0]){
+        console.log(endTime[0]);
+       
+        if(startTime[0] < endTime[0]){
             console.log('true');
-        //return false;
         console.log(window.navigator.onLine);
         if (localStorage.getItem('CurrentUser')) {
             this.viewCtrl.dismiss({bookingdata: BookingForm.value});
@@ -102,8 +103,7 @@ export class BooknowPage {
             });
             alert.present();
         }
-    }
-    else{
+    }else{
         let alert = this.alertCtrl.create({
                 title: 'Book now',
                 message: 'End time must be greater than start time!',

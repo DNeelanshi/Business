@@ -100,14 +100,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-fcm": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-fcm@^2.1.2"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "uk.co.workingedge.phonegap.plugin.launchnavigator": {
     "source": {
       "type": "registry",
@@ -134,10 +126,26 @@
     "is_top_level": false,
     "variables": {}
   },
+  "cordova-plugin-themeablebrowser": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-themeablebrowser"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-fcm": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-fcm"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
   "cordova-plugin-inappbrowser": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-inappbrowser@2.0.2"
+      "id": "cordova-plugin-inappbrowser@3.0.0"
     },
     "is_top_level": true,
     "variables": {}

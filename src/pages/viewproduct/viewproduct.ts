@@ -8,7 +8,7 @@ import {Http} from '@angular/http';
 import {HomePage} from '../home/home';
 import {LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
 import {Geolocation} from '@ionic-native/geolocation';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {LoginPage} from '../login/login';
 
 /**
@@ -41,11 +41,11 @@ export class ViewproductPage {
         public common: Common,
         private launchNavigator: LaunchNavigator,
         private geolocation: Geolocation,
-        private iab: InAppBrowser
+        // private iab: InAppBrowser
     ) {
-    if(localStorage.getItem('CurrentUser')){
-        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-    }
+        if (localStorage.getItem('CurrentUser')) {
+            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+        }
 
     }
 
@@ -54,26 +54,26 @@ export class ViewproductPage {
         console.log(this.navParams.get('restdata'));
         let resdata = this.navParams.get('restdata').business_data[0].opening_days_and_timings;
         this.restaurantdata = this.navParams.get('restdata');
-        if(this.favourite){
+        if (this.favourite) {
             if (this.favourite.length > 0) {
-            for (var j = 0; j < this.favourite.length; j++) {
-                console.log(this.favourite[j].favorite_business_id);
-                if (this.restaurantdata.business_data[0]._id == this.favourite[j].favorite_business_id) {
-                    console.log('matched');
-                    this.restaurantdata.fav = 1;
-                    break;
-                } else {
-                    console.log('not matched');
-                    this.restaurantdata.fav = 0;
-                    // break;
+                for (var j = 0; j < this.favourite.length; j++) {
+                    console.log(this.favourite[j].favorite_business_id);
+                    if (this.restaurantdata.business_data[0]._id == this.favourite[j].favorite_business_id) {
+                        console.log('matched');
+                        this.restaurantdata.fav = 1;
+                        break;
+                    } else {
+                        console.log('not matched');
+                        this.restaurantdata.fav = 0;
+                        // break;
+                    }
                 }
+            } else {
+                this.restaurantdata.fav = 0;
             }
         } else {
             this.restaurantdata.fav = 0;
         }
-    }else{
-        this.restaurantdata.fav = 0;
-    }
         console.log(this.restaurantdata);
     }
     /******** function used for social sharing *****************/
@@ -110,49 +110,49 @@ export class ViewproductPage {
 
     /******** function used for open booking modal *****************/
     bookModal() {
-        
+
         let modal = this.modalCtrl.create(BooknowPage);
         modal.onDidDismiss(data => {
             console.log(data);
             console.log(this.modaldata);
-            if(localStorage.getItem('CurrentUser')){
-            var user = JSON.parse(localStorage.getItem('CurrentUser'));
-            if (data.bookingdata) {
-                console.log(new Date(data.bookingdata.date).toISOString());
+            if (localStorage.getItem('CurrentUser')) {
+                var user = JSON.parse(localStorage.getItem('CurrentUser'));
+                if (data.bookingdata) {
+                    console.log(new Date(data.bookingdata.date).toISOString());
 
-                var da = new Date(data.bookingdata.date).toISOString();
-                var t = da.charAt(10);
-                var z = da.match(/.{1,16}/g);
-                console.log(da.charAt(10));
-                console.log(da.match(/.{1,16}/g));
-                console.log(da);
-                var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
-                console.log(startdate);
-                var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
-                console.log(enddate);
-                //return false;
-                let options = this.appsetting.header();
-                let postdata = {
-                    business_id: this.restaurantdata.business_data[0]._id,
-                    order_to: this.restaurantdata._id,
-                    order_from: user._id,
-                    orderdate: da,
-                    orderstart: startdate,
-                    orderend: enddate
-                }
-                let serialized = this.appsetting.serializeObj(postdata);
-                this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
-                    console.log(response);
-                    if (response.status == true) {
-                        this.common.presentConfirm('Book now', response.message, HomePage);
-                    } else {
-                        this.common.presentAlert('Book now', 'Something went wrong!');
+                    var da = new Date(data.bookingdata.date).toISOString();
+                    var t = da.charAt(10);
+                    var z = da.match(/.{1,16}/g);
+                    console.log(da.charAt(10));
+                    console.log(da.match(/.{1,16}/g));
+                    console.log(da);
+                    var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
+                    console.log(startdate);
+                    var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
+                    console.log(enddate);
+                    //return false;
+                    let options = this.appsetting.header();
+                    let postdata = {
+                        business_id: this.restaurantdata.business_data[0]._id,
+                        order_to: this.restaurantdata._id,
+                        order_from: user._id,
+                        orderdate: da,
+                        orderstart: startdate,
+                        orderend: enddate
                     }
-                })
-            }
-            }else{
-            this.common.ConfirmFunction('Book Now','Please login first to confirm booking!',LoginPage)
-              
+                    let serialized = this.appsetting.serializeObj(postdata);
+                    this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
+                        console.log(response);
+                        if (response.status == true) {
+                            this.common.presentConfirm('Book now', response.message, HomePage);
+                        } else {
+                            this.common.presentAlert('Book now', 'Something went wrong!');
+                        }
+                    })
+                }
+            } else {
+                this.common.ConfirmFunction('Book Now', 'Please login first to confirm booking!', LoginPage)
+
             }
         });
         modal.present();
@@ -164,48 +164,59 @@ export class ViewproductPage {
         console.log(user._id);
         let options = this.appsetting.header();
         let postdata = {
-            //                    business_id: this.restaurantdata.business_data[0]._id,
-            //                    order_to: this.restaurantdata._id,
-            //                    order_from: user._id,
-            //                    orderdate: da,
-            //                    orderstart: startdate,
-            //                    orderend: enddate
+            user_id: user._id,
+            business_id: this.restaurantdata.business_data[0]._id,
         }
         let serialized = this.appsetting.serializeObj(postdata);
-        //                this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
-        //                    console.log(response);
-        //                    if (response.status == true) {
-        //                        //this.common.presentAlert('Book now', response.message);
-        //                        this.common.presentAlert('Claim this business',response.message);
-        //                    } else {
-        //                        this.common.presentAlert('Claim this business', 'Something went wrong!');
-        //                    }
-        //                })
+        this.http.post(this.appsetting.url + '/checkin', serialized, options).map(res => res.json()).subscribe(response => {
+            console.log(response);
+            if (response.status == true) {
+                this.restaurantdata = response.data;
+                if (this.favourite) {
+                    if (this.favourite.length > 0) {
+                        for (var j = 0; j < this.favourite.length; j++) {
+                            console.log(this.favourite[j].favorite_business_id);
+                            if (this.restaurantdata.business_data[0]._id == this.favourite[j].favorite_business_id) {
+                                console.log('matched');
+                                this.restaurantdata.fav = 1;
+                                break;
+                            } else {
+                                console.log('not matched');
+                                this.restaurantdata.fav = 0;
+                                // break;
+                            }
+                        }
+                    } else {
+                        this.restaurantdata.fav = 0;
+                    }
+                } else {
+                    this.restaurantdata.fav = 0;
+                }
+                this.common.presentAlert('Check in', response.msg);
+            } else {
+                this.common.presentAlert('Check in', response.msg);
+            }
+        })
     }
 
-    ClaimYourBusiness() {
+    ClaimYourBusiness(businessid) {
         console.log('Claim this business');
         var user = JSON.parse(localStorage.getItem('CurrentUser'));
         console.log(user._id);
         let options = this.appsetting.header();
         let postdata = {
-            //                    business_id: this.restaurantdata.business_data[0]._id,
-            //                    order_to: this.restaurantdata._id,
-            //                    order_from: user._id,
-            //                    orderdate: da,
-            //                    orderstart: startdate,
-            //                    orderend: enddate
+            user_id: user._id,
+            business_id: businessid
         }
         let serialized = this.appsetting.serializeObj(postdata);
-        //                this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
-        //                    console.log(response);
-        //                    if (response.status == true) {
-        //                        //this.common.presentAlert('Book now', response.message);
-        //                        this.common.presentAlert('Claim this business',response.message);
-        //                    } else {
-        //                        this.common.presentAlert('Claim this business', 'Something went wrong!');
-        //                    }
-        //                })
+        this.http.post(this.appsetting.url + 'users/getClaimRequest', serialized, options).map(res => res.json()).subscribe(response => {
+            console.log(response);
+            if (response.status == true) {
+                this.common.presentAlert('Claim this business', response.message);
+            } else {
+                this.common.presentAlert('Claim this business', response.message);
+            }
+        })
     }
 
     /*********** function to favourite a restaurant *******************/
@@ -213,73 +224,73 @@ export class ViewproductPage {
     MarkAsFavourite(businessID) {
         console.log('MarkAsFavourite function');
         console.log(businessID);
-        if(localStorage.getItem('CurrentUser')){
-        var user = JSON.parse(localStorage.getItem('CurrentUser'));
-        let options = this.appsetting.header();
-        let postdata = {
-            user_id: user._id,
-            favorite_business_id: businessID
-        }
-        let serialized = this.appsetting.serializeObj(postdata);
-        this.http.post(this.appsetting.url + 'user/add_to_favarite', serialized, options).map(res => res.json()).subscribe(response => {
-            console.log(response);
-            if (response.status == true) {
-                localStorage.setItem('CurrentUser', JSON.stringify(response.data[0]));
-                console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
-                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                //console.log(this.favourite);
-                console.log(this.restaurantdata._id);
-
-                if (this.favourite.length > 0) {
-                    for (var j = 0; j < this.favourite.length; j++) {
-                        console.log(this.favourite[j].favorite_business_id);
-                        if (businessID == this.favourite[j].favorite_business_id) {
-                            console.log('matched');
-                            this.restaurantdata.fav = 1;
-                            break;
-                        } else {
-                            console.log('not matched');
-                            this.restaurantdata.fav = 0;
-                            // break;
-                        }
-                    }
-                } else {
-                    this.restaurantdata.fav = 0;
-                }
-                console.log(this.restaurantdata);
-
-            } else {
-                this.http.post(this.appsetting.url + 'user/delete_favarite_business ', serialized, options).map(res => res.json()).subscribe(response => {
-                    console.log(response);
-                    if (response.status == true) {
-                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                        console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
-                        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                        if (this.favourite.length > 0) {
-                            for (var j = 0; j < this.favourite.length; j++) {
-                                console.log(this.favourite[j].favorite_business_id);
-                                if (businessID == this.favourite[j].favorite_business_id) {
-                                    console.log('matched');
-                                    this.restaurantdata.fav = 1;
-                                    break;
-                                } else {
-                                    console.log('not matched');
-                                    this.restaurantdata.fav = 0;
-                                    // break;
-                                }
-                            }
-                        } else {
-                            this.restaurantdata.fav = 0;
-                        }
-
-                    } else {
-                        this.common.presentAlert('View detail', 'Something went wrong!')
-                    }
-                })
+        if (localStorage.getItem('CurrentUser')) {
+            var user = JSON.parse(localStorage.getItem('CurrentUser'));
+            let options = this.appsetting.header();
+            let postdata = {
+                user_id: user._id,
+                favorite_business_id: businessID
             }
-        })
-        }else{
-            this.common.ConfirmFunction('Favourite','Please login first to make favourite!',LoginPage)
+            let serialized = this.appsetting.serializeObj(postdata);
+            this.http.post(this.appsetting.url + 'user/add_to_favarite', serialized, options).map(res => res.json()).subscribe(response => {
+                console.log(response);
+                if (response.status == true) {
+                    localStorage.setItem('CurrentUser', JSON.stringify(response.data[0]));
+                    console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
+                    this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                    //console.log(this.favourite);
+                    console.log(this.restaurantdata._id);
+
+                    if (this.favourite.length > 0) {
+                        for (var j = 0; j < this.favourite.length; j++) {
+                            console.log(this.favourite[j].favorite_business_id);
+                            if (businessID == this.favourite[j].favorite_business_id) {
+                                console.log('matched');
+                                this.restaurantdata.fav = 1;
+                                break;
+                            } else {
+                                console.log('not matched');
+                                this.restaurantdata.fav = 0;
+                                // break;
+                            }
+                        }
+                    } else {
+                        this.restaurantdata.fav = 0;
+                    }
+                    console.log(this.restaurantdata);
+
+                } else {
+                    this.http.post(this.appsetting.url + 'user/delete_favarite_business ', serialized, options).map(res => res.json()).subscribe(response => {
+                        console.log(response);
+                        if (response.status == true) {
+                            localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                            console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
+                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                            if (this.favourite.length > 0) {
+                                for (var j = 0; j < this.favourite.length; j++) {
+                                    console.log(this.favourite[j].favorite_business_id);
+                                    if (businessID == this.favourite[j].favorite_business_id) {
+                                        console.log('matched');
+                                        this.restaurantdata.fav = 1;
+                                        break;
+                                    } else {
+                                        console.log('not matched');
+                                        this.restaurantdata.fav = 0;
+                                        // break;
+                                    }
+                                }
+                            } else {
+                                this.restaurantdata.fav = 0;
+                            }
+
+                        } else {
+                            this.common.presentAlert('View detail', 'Something went wrong!')
+                        }
+                    })
+                }
+            })
+        } else {
+            this.common.ConfirmFunction('Favourite', 'Please login first to make favourite!', LoginPage)
         }
     }
 
@@ -298,7 +309,7 @@ export class ViewproductPage {
             };
             var lat = this.restaurantdata.business_data[0].location.coordinates[1];
             var long = this.restaurantdata.business_data[0].location.coordinates[0];
-            var destination = [lat,long];
+            var destination = [lat, long];
             this.launchNavigator.navigate(destination, options)
                 .then(
                 success => console.log('Launched navigator'),
@@ -307,15 +318,10 @@ export class ViewproductPage {
 
         })
     }
-    
+
     /******** Function for open website url in browser ************/
-    OpenWebsiteInfo(link){
+    OpenWebsiteInfo(link) {
         console.log(link);
-        var options = {
-            location:'no'
-        }
-        const browser = this.iab.create(link,'_blank','location:no');
-        console.log(browser);
-        browser.show();
+        this.common.InappBrowser(link);
     }
 }

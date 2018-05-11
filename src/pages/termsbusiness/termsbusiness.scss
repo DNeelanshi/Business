@@ -1,0 +1,22 @@
+page-termsbusiness {
+    .contant-sec h2 {@extend .fontheadding16px; margin: 0;}
+    .contant-sec p {
+        @extend .fontheadding12px;
+        line-height: 18px;
+        width: 100%;
+        float: left;
+        margin-bottom: 0;
+        margin-top: 10px;
+     }
+     .banner{
+         width: 100%;
+         float: left;
+     }
+     .contant-sec{
+         width: 100%;
+         float: left;
+     }
+     .banner img{
+         width:100%;
+     }
+}

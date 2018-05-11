@@ -13,6 +13,7 @@ import {ReservationsPage} from '../reservations/reservations';
 import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook';
 import {GetstartPage} from '../getstart/getstart';
 import {FCM} from '@ionic-native/fcm';
+import {TermsPage} from '../terms/terms';
 
 /**
  * Generated class for the LogintwoPage page.
@@ -27,6 +28,7 @@ import {FCM} from '@ionic-native/fcm';
     templateUrl: 'logintwo.html',
 })
 export class LogintwoPage {
+    terms: any;
     userData: {id: any; email: any; first_name: any; last_name: any; picture: any; username: any;};
     SigninForm: FormGroup;
     public type = 'password';
@@ -121,7 +123,7 @@ export class LogintwoPage {
                 var postdata = {
                     email: signindata.value.email,
                     password: signindata.value.password,
-                    divice_token:'aaa',//token,
+                    divice_token:'k',//token,
                     role: 'business'
                 }
                 console.log(postdata);
@@ -292,5 +294,7 @@ export class LogintwoPage {
     getstart() {
         this.navCtrl.push(GetstartPage);
     }
-
+term(){
+this.navCtrl.push(TermsPage,{role:'business'});
+}
 }

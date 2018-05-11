@@ -56,7 +56,8 @@ export class EditprofiletwoPage {
         console.log('ngOnInit');
         this.getUser();
         this.Editprofile = this.formBuilder.group({
-            name: ['', [Validators.required]],
+            fname: ['', [Validators.required]],
+            lname: ['', [Validators.required]],
             email: ['', [Validators.required, this.emailValidator.bind(this)]],
             phone: ['', [Validators.required]],
         });
@@ -174,7 +175,8 @@ export class EditprofiletwoPage {
                 this.events.publish('Loggedin', 'loginpage');
                 var name = response.data.firstname + ' ' + response.data.lastname;
                 this.Editprofile.patchValue({
-                    name: name,
+                    fname: response.data.firstname,
+                    lname:response.data.lastname,
                     email: response.data.email,
                     phone: response.data.phone_number,
                 });
@@ -200,27 +202,27 @@ export class EditprofiletwoPage {
         }
         var name;
         var postdata: any;
-        console.log(profiledata.value.name.indexOf(' '));
-        if (profiledata.value.name.indexOf(' ') != -1) {
-            console.log('if');
-            name = profiledata.value.name.split(' ');
+       // console.log(profiledata.value.name.indexOf(' '));
+//        if (profiledata.value.name.indexOf(' ') != -1) {
+//            console.log('if');
+//            name = profiledata.value.name.split(' ');
+//            postdata = {
+//                user_id: JSON.parse(localStorage.getItem('CurrentUser'))._id,
+//                firstname: profiledata.value.fname,
+//                lastname: profiledata.value.lname,
+//                phone_number: profiledata.value.phone
+//
+//            }
+//        } else {
+//            console.log('else');
             postdata = {
                 user_id: JSON.parse(localStorage.getItem('CurrentUser'))._id,
-                firstname: name[0],
-                lastname: name[1],
+                firstname: profiledata.value.fname,
+                lastname: profiledata.value.lname,
                 phone_number: profiledata.value.phone
 
             }
-        } else {
-            console.log('else');
-            postdata = {
-                user_id: JSON.parse(localStorage.getItem('CurrentUser'))._id,
-                firstname: profiledata.value.name,
-                lastname: '.',
-                phone_number: profiledata.value.phone
-
-            }
-        }
+      
 
         console.log(postdata);
         var serialized = this.appsetting.serializeObj(postdata);

@@ -34,7 +34,8 @@
       <ion-item>
         <h1>{{restaurantdata?.business_data[0].business_name}}</h1>
         <p>{{restaurantdata?.business_data[0].sub_cat}}</p>
-        <h4><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> 4 Check-Ins</h4>
+        <h4 *ngIf="restaurantdata?.checkin"><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> {{restaurantdata?.checkin.length}} Check-Ins</h4>
+        <h4 *ngIf="!restaurantdata?.checkin"><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> 0 Check-Ins</h4>
         <div item-end class="buttonright">
           <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()">
 <!--              <ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>-->
@@ -79,7 +80,7 @@
       <ion-item text-wrap>
         <p>Claim your business to respond to reviews and messages.
         </p>
-        <button [disabled]="restaurantdata?.role != 'dummy'" class="btneq" full ion-button color="green" (click)="ClaimYourBusiness()">Claim this Business</button>
+        <button [disabled]="restaurantdata?.role != 'dummy'" class="btneq" full ion-button color="green" (click)="ClaimYourBusiness(restaurantdata?.business_data[0]._id)">Claim this Business</button>
       </ion-item>
       <ion-item-divider color="light">Description</ion-item-divider>
       <ion-item text-wrap>

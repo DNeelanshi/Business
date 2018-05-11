@@ -21,6 +21,7 @@ declare var google;
     selector: 'page-realtalk',
     templateUrl: 'realtalk.html',
 })
+
 export class RealtalkPage {
     ourtalks: any = [];
     mytalks: any = [];
@@ -289,12 +290,15 @@ export class RealtalkPage {
                 this.ourtalks = [];
                 
                 response.data.forEach(function (value, key) {
+                    console.log(value);
                     if (value.status == true) {
-                        temp.ourtalks.push(value)
+                        
+                            temp.ourtalks.push(value);
+                      
+                        
                     }
                 })
-               
-                
+                console.log(this.ourtalks);
                 this.totalpageno = response.Toatalpage;
             } else {
                 this.loader = 1;

@@ -49,11 +49,15 @@
     <ion-list>
 
       <ion-item>
-          <ion-label stacked>Name</ion-label>
-          <ion-input type="text" placeholder="Kriston Peeter" formControlName="name"></ion-input>
+          <ion-label stacked>First name</ion-label>
+          <ion-input type="text" placeholder="Enter first name" formControlName="fname"></ion-input>
         </ion-item>
-      <span *ngIf="!isValid('name')" class="validationpop animated bounce">Name required.</span>
-      
+      <span *ngIf="!isValid('fname')" class="validationpop animated bounce">First name required.</span>
+      <ion-item>
+          <ion-label stacked>Last name</ion-label>
+          <ion-input type="text" placeholder="Enter last name" formControlName="lname"></ion-input>
+        </ion-item>
+      <span *ngIf="!isValid('lname')" class="validationpop animated bounce">Last name required.</span>
         <ion-item>
           <ion-label stacked>Email</ion-label>
           <ion-input type="email" placeholder="kristonpeeter@yahoo.com" formControlName="email" readonly></ion-input>

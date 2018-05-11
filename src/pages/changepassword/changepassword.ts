@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController, LoadingController} from 'ionic-angular';
-import {FormsModule, FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {FormsModule, FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl} from '@angular/forms';
 import {Http} from '@angular/http';
 import {Appsetting} from '../../providers/appsetting';
 import {Common} from '../../providers/common';
@@ -57,8 +57,8 @@ export class ChangepasswordPage {
         this.ChangeForm = this.formBuilder.group({
             oldpassword: ['', [Validators.required, Validators.minLength(6)]],
             newpassword: ['', [Validators.required, Validators.minLength(6)]],
-            cnewpassword: ['', [Validators.required]],
-        }, {validator: this.matchingPasswords('newpassword', 'cnewpassword')},
+            cnewpassword: ['', [Validators.required,this.equalto('newpassword')]],
+        }
         );
     }
     
@@ -78,6 +78,19 @@ export class ChangepasswordPage {
                 };
             }
         }
+    }
+    equalto(field_name): ValidatorFn {
+return (control: AbstractControl): {[key: string]: any} => {
+
+let input = control.value;
+
+let isValid=control.root.value[field_name]==input
+if(!isValid){
+return { 'equalTo': {isValid} }
+}else{
+return null;
+};
+}
     }
     showPassword() {
         console.log('showpassword');

@@ -121,7 +121,7 @@ page-review {
 	.top h3{
 		font-size: 12px;
 	    color: #6a6a6a;
-	    font-weight: 500;
+	    //font-weight: 500;
 	    margin-bottom: 4px;
             white-space: normal;
 	}
@@ -246,4 +246,13 @@ page-review {
         .rply{
             text-align: right;
         }
+/*        span.st {
+    height: 70px;
+    overflow: hidden;
+    float: left;
+    text-overflow: ellipsis;
+}*/
+.button-clear {
+    color: #3cc602 !important;
+}
 }

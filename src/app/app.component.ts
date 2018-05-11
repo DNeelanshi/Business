@@ -25,8 +25,8 @@ import {AddbusinessPage} from '../pages/addbusiness/addbusiness';
 import {App} from 'ionic-angular';
 import { NavController, MenuController } from 'ionic-angular/index';
 import {HistorytwoPage} from '../pages/historytwo/historytwo';
-
-//import {FCM} from '@ionic-native/fcm';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {FCM} from '@ionic-native/fcm';
 
 
 
@@ -34,13 +34,12 @@ import {HistorytwoPage} from '../pages/historytwo/historytwo';
     templateUrl: 'app.html'
 })
 export class MyApp {
+    role: any;
     currentuser: any;
     userimage: any;
     @ViewChild(Nav) nav: Nav;
-    
     rootPage: any;
     activePage: any;
-
     pages: Array<{title: string, icon: any, component: any}>;
 
     constructor(
@@ -54,9 +53,11 @@ export class MyApp {
         public toastCtrl: ToastController,
         public events: Events,
         private app: App,
-        private menu: MenuController
+        private menu: MenuController,
+       // private iab: InAppBrowser,
+        public fcm:FCM
     ) {
-    //alert('asdfjk')
+        alert('updaated latest 1')
          platform.ready().then(() => {
             
       // Okay, so the platform is ready and our plugins are available.
@@ -77,7 +78,10 @@ export class MyApp {
         this.initializeApp();
         if (localStorage.getItem('CurrentUser')) {
             this.getUser();
+            this.role = JSON.parse(localStorage.getItem('CurrentUser')).role;
+            
         }
+        
     }
 
     initializeApp() {
@@ -85,7 +89,6 @@ export class MyApp {
         this.events.subscribe('Loggedin', (Loggedin) => {
             console.log(Loggedin);
             console.log('Loggedin');
-            //alert('app logged in');
             this.getUser();
         })
         
@@ -119,15 +122,18 @@ export class MyApp {
         } else {
             this.rootPage = GetstartPage;
         }
-       
-        //        this.fcm.onNotification().subscribe(data => {
-        //            if (data.wasTapped) {
-        //                console.log("Received in background");
-        //            } else {
-        //                console.log("Received in foreground");
-        //            };
-        //        })
+       /******** function for handle notifications **************/
+//                this.fcm.onNotification().subscribe(data => {
+//                    if (data.wasTapped) {
+//                        console.log("Received in background");
+//                    } else {
+//                        console.log("Received in foreground");
+//                    };
+//                })
+                
+                
     }
+    
     tryagain() {
         console.log('rahul');
         console.log(window.navigator.onLine);
@@ -150,20 +156,33 @@ export class MyApp {
             alert.present();
         }
     }
+    
     openPage(page) {
+        console.log(page);
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
+        if(page.component == 'artist'){
+            this.InappbrowserArtist();
+        }else if(page.component == 'career'){
+            this.InappbrowserCareer();
+        }else if(page.component == 'advertising'){
+        this.InappbrowserAdvertisement();
+        }else{
         this.nav.setRoot(page.component);
         this.activePage = page;
+        }
     }
-
+   
+    
     public checkActivePage(page): boolean {
         return page === this.activePage;
     }
+    
     logout() {
         localStorage.clear();
         this.nav.setRoot(GetstartPage);
     }
+    
     getUser() {
         if(localStorage.getItem('CurrentUser')){
         console.log(JSON.parse(localStorage.getItem('CurrentUser'))._id);
@@ -179,11 +198,7 @@ export class MyApp {
                 
                 localStorage.setItem('CurrentUser', JSON.stringify(response.data));
                 if (response.data.profile_pic) {
-                    //                    this.userimage = response.data.profile_pic;
-                    //                    console.log('userimage');
-                    //                    console.log(this.userimage);
-                    //                    alert('user image get:-'+this.userimage);
-                    // response.data
+
                 } else {
                     response.data.profile_pic = 'assets/imgs/profile.png';
                 }
@@ -194,35 +209,36 @@ export class MyApp {
                 this.pages = [
                 {title: 'Home', component: HomePage, icon: 'assets/imgs/home.png'},
                 {title: 'Real Talk', component: RealtalkPage, icon: 'assets/imgs/realtalk.png'},
-                {title: 'Career Network', component: CareernetworkPage, icon: 'assets/imgs/career.png'},
+                {title: 'Career Network', component: 'career', icon: 'assets/imgs/career.png'},
                 {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editprofile.png'},
 //                {title: 'Edit Business Information', component: EditbusinessPage, icon: 'assets/imgs/editprofile.png'},
 //                {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
-                {title: 'New Artist', component: NewartistPage, icon: 'assets/imgs/artist.png'},
+                {title: 'New Artist', component: 'artist', icon: 'assets/imgs/artist.png'},
                 {title: 'View Reservations', component: ViewreservationtwoPage, icon: 'assets/imgs/reservation.png'},
 //                {title: 'Reservations', component: ReservationsPage, icon: 'assets/imgs/reservation.png'},
                 {title: 'History', component: HistoryPage, icon: 'assets/imgs/history.png'},
                 {title: 'View Favorites', component: ViewfavoritesPage, icon: 'assets/imgs/favorites.png'},
                 {title: 'Terms & Conditions', component: TermsPage, icon: 'assets/imgs/terms.png'},
-                {title: 'Privacy Policy', component: PrivacyPage, icon: 'assets/imgs/privacy.png'},
-                //            {title: 'Logout', component: ListPage, icon: 'assets/imgs/logout.png'}
+                {title: 'Privacy Policy', component: PrivacyPage, icon: 'assets/imgs/privacy.png'}
             ];
             }else{
                 this.pages = [
                 {title: 'Home', component: ReservationsPage, icon: 'assets/imgs/home.png'},
-                {title: 'Real Talk', component: RealtalkPage, icon: 'assets/imgs/realtalk.png'},
-                {title: 'Career Network', component: CareernetworkPage, icon: 'assets/imgs/career.png'},
-                {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editprofile.png'},
-                {title: 'Edit Business Info', component: EditbusinessPage, icon: 'assets/imgs/editprofile.png'},
-                {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
-                {title: 'New Artist', component: NewartistPage, icon: 'assets/imgs/artist.png'},
-                {title: 'View Reservations', component: ViewreservationPage, icon: 'assets/imgs/reservation.png'},
-//                {title: 'Reservations', component: ReservationsPage, icon: 'assets/imgs/reservation.png'},
+                {title: 'Reservations', component: ViewreservationPage, icon: 'assets/imgs/reservation.png'},
                 {title: 'History', component: HistorytwoPage, icon: 'assets/imgs/history.png'},
-//                {title: 'View Favorites', component: ViewfavoritesPage, icon: 'assets/imgs/favorites.png'},
+                {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
+                {title: 'Edit Business Info', component: EditbusinessPage, icon: 'assets/imgs/editprofile.png'},
+                {title: 'Advertising', component: 'advertising', icon: 'assets/imgs/editprofile.png'},
+                {title: 'Career Network',  component: 'career', icon: 'assets/imgs/career.png'},
+                {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editprofile.png'},
+                {title: 'Real Talk', component: RealtalkPage, icon: 'assets/imgs/realtalk.png'},
                 {title: 'Terms & Conditions', component: TermsPage, icon: 'assets/imgs/terms.png'},
-                {title: 'Privacy Policy', component: PrivacyPage, icon: 'assets/imgs/privacy.png'},
-                //            {title: 'Logout', component: ListPage, icon: 'assets/imgs/logout.png'}
+                {title: 'Privacy Policy', component: PrivacyPage, icon: 'assets/imgs/privacy.png'}
+                
+//                {title: 'New Artist',  component: 'artist', icon: 'assets/imgs/artist.png'},
+//                {title: 'Reservations', component: ReservationsPage, icon: 'assets/imgs/reservation.png'},
+//                {title: 'View Favorites', component: ViewfavoritesPage, icon: 'assets/imgs/favorites.png'},
+                
             ];
             }
             }
@@ -230,4 +246,41 @@ export class MyApp {
         }
     }
 
+InappbrowserArtist(){
+    let url;
+    if(this.role == 'member'){
+        console.log(this.role)
+    url = 'https://ionicframework.com/';
+    }else{
+    console.log(this.role)
+    url = 'https://google.com/';
+    }
+//     let InAppBrowserOptions = {
+//        locatio:'no',
+//        closebuttoncaption:'Back to app'
+//    }
+    this.common.InappBrowser(url);
+   // const browser = this.iab.create(url,'_blank',InAppBrowserOptions);
+   
+    //browser.close();
+    
+}
+InappbrowserCareer(){
+    let url;
+    if(this.role == 'member'){
+    url = 'https://ionicframework.com/';
+    }else{
+    url = 'https://google.com/';
+    }
+     this.common.InappBrowser(url);
+}
+InappbrowserAdvertisement(){
+    let url;
+    if(this.role == 'member'){
+    url = 'https://ionicframework.com/';
+    }else{
+    url = 'https://google.com/';
+    }
+     this.common.InappBrowser(url);
+}
 }

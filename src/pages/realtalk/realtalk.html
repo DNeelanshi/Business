@@ -45,11 +45,12 @@
             <ion-item *ngFor="let ourtalk of ourtalks" (click)="OurTalkReply(ourtalk)">
                 <ion-thumbnail item-start>
                     <img *ngIf="ourtalk?.talk_data.length>0" [src]="ourtalk.talk_data[0].profile_pic">
-                    <img *ngIf="ourtalk?.talk_data.length>0" src="assets/imgs/user.png">
+                    <img *ngIf="ourtalk?.talk_data.length == 0" src="assets/imgs/user.png">
                 </ion-thumbnail>
                 <h2>{{ourtalk?.topic_name}} </h2>
                 <p style="white-space: normal">{{ourtalk?.message}}</p>
                 <p *ngIf="ourtalk?.talk_data.length>0">By {{ourtalk?.talk_data[0].firstname}}</p>
+                <p *ngIf="ourtalk?.talk_data.length == 0">By Unknown user</p>
                 <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{ourtalk?.comments.length}} Comment</p>
             </ion-item>
 
@@ -74,7 +75,7 @@
                             <p>2 Friends</p>
                             <p><ion-icon name="star-outline" color="gray"></ion-icon>1 Review</p>
                         </ion-item>-->
-            <ion-infinite-scroll (ionInfinite)="doInfiniteOurTalks($event)">
+            <ion-infinite-scroll (ionInfinite)="doInfiniteOurTalks($event)" *ngIf="pageno<totalpageno">
                 <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
             </ion-infinite-scroll>
         </ion-list>
@@ -139,7 +140,7 @@
                             <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>1 Comment</p>
                             <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>2days ago</p>
                         </ion-item>-->
-            <ion-infinite-scroll (ionInfinite)="doInfiniteMyTalks($event)">
+            <ion-infinite-scroll (ionInfinite)="doInfiniteMyTalks($event)" *ngIf="pageno<totalpageno">
                 <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
             </ion-infinite-scroll>
         </ion-list>

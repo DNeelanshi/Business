@@ -37,10 +37,10 @@
         <div class="inputouter">
           <h2>Miles</h2>
           <ion-item>
-            <ion-range min="1" step="1" max="5" formControlName="range" [(ngModel)]="range" name="range">
+            <ion-range min="1" step="5" max="100" formControlName="range" [(ngModel)]="range" name="range">
                <p range-left *ngIf="!range">0 miles</p>
                <p range-left *ngIf="range">{{range}} miles</p>
-               <p range-right>5 miles</p>
+               <p range-right>100 miles</p>
             </ion-range>
           </ion-item>
         </div>
@@ -63,16 +63,15 @@
         <div class="inputouter">
           <h2>Online</h2>
          
-            <ion-list radio-group formControlName="online">
+            <ion-list radio-group>
               <ion-item class="rdo" style="padding-left: 25px !important;">
                
-                <ion-radio checked="yes" value="yes"></ion-radio>
+                <ion-checkbox checked="false" formControlName="online1"></ion-checkbox>
                 <ion-label>Yes</ion-label>
               </ion-item>
             
               <ion-item class="rdo" style="padding-left: 25px !important;">
-                
-                <ion-radio value="no"></ion-radio>
+                <ion-checkbox  formControlName="offline"></ion-checkbox>
                 <ion-label>No</ion-label>
               </ion-item>
             </ion-list>
