@@ -20,15 +20,19 @@
     <ion-list>
         <ion-item *ngFor="let history of historydata">
           <ion-thumbnail item-start>
-            <img [src]="history.order_data[0].business_image[0].business_image">
+            <img *ngIf="history.order_data[0].business_data.length>0" [src]="history.order_data[0].business_image[0].business_image">
+             <img  *ngIf="history.order_data[0].business_data.length == 0" src="assets/imgs/noimage.jpg">
           </ion-thumbnail>
-          <h2>{{history.order_data[0].business_data[0].business_name}}</h2>
-          <p>{{history.order_data[0].business_data[0].sub_cat}}</p>
-          <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="history.order_data[0].avg" name="rate">
+            <h2 *ngIf="history.order_data[0].business_data.length>0">{{history.order_data[0].business_data[0].business_name}}</h2>
+            <h2 *ngIf="history.order_data[0].business_data.length == 0">Unknown business</h2>
+          <p *ngIf="history.order_data[0].business_data.length>0">{{history.order_data[0].business_data[0].sub_cat}}</p>
+          <rating *ngIf="history.order_data.length>0" readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="history.order_data[0].avg" name="rate">
+           </rating>
+          <rating *ngIf="history.order_data.length == 0" readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" name="rate">
            </rating>
           <button class="btneq" ion-button color="yellow" (click)="Review(history.order_data[0])">Review</button>
-          <p>{{history.order_data[0].business_data[0].business_description}}</p>
-          <p><span>{{history.order_data[0].business_data[0].updated_at | date}}</span> <span class="time">{{history.order_data[0].business_data[0].updated_at | date:'shortTime'}}</span></p>
+          <p *ngIf="history.order_data[0].business_data.length>0" [innerHTML]="history.order_data[0].business_data[0].business_description"></p>
+          <p *ngIf="history.order_data[0].business_data.length>0"><span>{{history.order_data[0].business_data[0].updated_at | date}}</span> <span class="time">{{history.order_data[0].business_data[0].updated_at | date:'shortTime'}}</span></p>
         </ion-item>
 
 <!--  
@@ -52,9 +56,9 @@
 
       </ion-list>
     <div *ngIf="historydata?.length<1">
-                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-                    <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
-                    <span> No data found!</span>
+                <div style="text-align: center !important;padding: 40% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="width:100px;margin: auto;display: block;" src="assets/imgs/sorry11.png">
+                    <span> It's empty here!</span>
                 </div>
             </div>
 </ion-content>

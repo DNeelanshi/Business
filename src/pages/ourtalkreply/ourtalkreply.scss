@@ -1,7 +1,7 @@
 page-ourtalkreply {
-     .back-button{
+/*     .back-button{
     display: none !important;
-}
+}*/
     h2{
         white-space: normal;
     }
@@ -21,8 +21,8 @@ page-ourtalkreply {
         .item .label{
             margin: 8px auto 8px 0;
         }
-        .item h2{ @extend .fontheadding16px; margin-top: 0;}
-        .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left;}
+        .item h2{ @extend .fontheadding16px; margin-top: 0; white-space: normal;}
+        .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left; white-space: normal;}
         .item p .icon{
             padding-right: 4px;
             font-weight: 700;
@@ -114,7 +114,7 @@ page-ourtalkreply {
             width: 70px;
             letter-spacing: 1px;
         }
-        .item h2{ @extend .fontheadding16px; margin-top: 0;}
+        .item h2{ @extend .fontheadding16px; margin-top: 0; white-space: normal;}
         .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left; white-space: normal;}
         .item-textarea .item-inner{
             padding-right: 0;

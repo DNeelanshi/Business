@@ -32,6 +32,7 @@ export class ViewreservationPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ViewreservationPage');
+         clearInterval(this.common.interval);
         this.Reservations();
     }
     

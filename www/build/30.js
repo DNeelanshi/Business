@@ -1,14 +1,14 @@
 webpackJsonp([30],{
 
-/***/ 846:
+/***/ 854:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddbusinessPageModule", function() { return AddbusinessPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CareernetworkPageModule", function() { return CareernetworkPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__addbusiness__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__careernetwork__ = __webpack_require__(513);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddbusinessPageModule = (function () {
-    function AddbusinessPageModule() {
+var CareernetworkPageModule = (function () {
+    function CareernetworkPageModule() {
     }
-    AddbusinessPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+    CareernetworkPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__addbusiness__["a" /* AddbusinessPage */],
+                __WEBPACK_IMPORTED_MODULE_2__careernetwork__["a" /* CareernetworkPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__addbusiness__["a" /* AddbusinessPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__careernetwork__["a" /* CareernetworkPage */]),
             ],
         })
-    ], AddbusinessPageModule);
-    return AddbusinessPageModule;
+    ], CareernetworkPageModule);
+    return CareernetworkPageModule;
 }());
 
-//# sourceMappingURL=addbusiness.module.js.map
+//# sourceMappingURL=careernetwork.module.js.map
 
 /***/ })
 

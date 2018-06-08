@@ -7,6 +7,7 @@ import {Common} from '../../providers/common';
 import {Http} from '@angular/http';
 import {FormsModule, FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {HomePage} from '../home/home';
+import {ReservationsPage} from '../reservations/reservations';
 
 /**
  * Generated class for the EditprofiletwoPage page.
@@ -25,8 +26,7 @@ export class EditprofiletwoPage {
     click: boolean;
     Editprofile: FormGroup;
     ImageToSend: any;
-    base64Image: string = 'assets/imgs/profile.png';
-
+    base64Image: string = 'assets/imgs/user.png';
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -51,6 +51,7 @@ export class EditprofiletwoPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad EditprofilePage');
+         clearInterval(this.common.interval);
     }
     ngOnInit(): any {
         console.log('ngOnInit');
@@ -237,7 +238,11 @@ export class EditprofiletwoPage {
                     this.events.publish('Loggedin', 'loginpage');
                     this.common.presentAlert('Profile', response.message);
                     localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                    if(response.data.role == "member"){
                     this.navCtrl.push(HomePage);
+                    }else{
+                        this.navCtrl.push(ReservationsPage);
+                    }
                 }
             })
         })

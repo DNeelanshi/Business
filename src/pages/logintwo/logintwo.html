@@ -33,7 +33,7 @@
 
                 <ion-item>
                     <ion-input type="email" placeholder="Email" formControlName="email" autocapitalize="off"></ion-input>
-                    <ion-icon class="iconinput" item-start><img src="assets/imgs/user.png"></ion-icon>
+                    <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>
                     <span item-content *ngIf="!isValid('email')" class="validationpop animated bounce">Invalid email</span>
                 </ion-item>
 
@@ -57,5 +57,5 @@
     </div>
 
     <div class="haveacc">Don’t have an account? <span color="dark" (click)="signup()" style="font-weight: 600;">Sign Up</span></div>
-    <div class="haveacc" (click)="term()">Terms and Conditions</div>
+<!--    <div class="haveacc" (click)="term()">Terms and Conditions</div>-->
 </ion-content>

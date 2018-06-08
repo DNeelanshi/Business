@@ -1,14 +1,14 @@
 webpackJsonp([27],{
 
-/***/ 866:
+/***/ 858:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangepasswordPageModule", function() { return ChangepasswordPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditprofiletwoPageModule", function() { return EditprofiletwoPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__changepassword__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__editprofiletwo__ = __webpack_require__(178);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ChangepasswordPageModule = (function () {
-    function ChangepasswordPageModule() {
+var EditprofiletwoPageModule = (function () {
+    function EditprofiletwoPageModule() {
     }
-    ChangepasswordPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+    EditprofiletwoPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__changepassword__["a" /* ChangepasswordPage */],
+                __WEBPACK_IMPORTED_MODULE_2__editprofiletwo__["a" /* EditprofiletwoPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__changepassword__["a" /* ChangepasswordPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__editprofiletwo__["a" /* EditprofiletwoPage */]),
             ],
         })
-    ], ChangepasswordPageModule);
-    return ChangepasswordPageModule;
+    ], EditprofiletwoPageModule);
+    return EditprofiletwoPageModule;
 }());
 
-//# sourceMappingURL=changepassword.module.js.map
+//# sourceMappingURL=editprofiletwo.module.js.map
 
 /***/ })
 

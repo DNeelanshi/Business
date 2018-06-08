@@ -182,6 +182,9 @@ left: 110px;
 .btn1.activated {
 background:#008000;
 }
+.btn2.activated {
+    background:#008000;
+    }
 .btn3 {
     min-height: 25px;
     height: 3.2rem;
@@ -307,4 +310,9 @@ ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
 }
 ul.rating[_ngcontent-c1] .ion-ios-star-outline{
     color: #000;
+}
+.logoutclass{
+    .item-inner{
+        background-image: none !important;
+    }
 }

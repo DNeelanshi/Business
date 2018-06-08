@@ -36,10 +36,10 @@
                       </ion-select>
                     </ion-item>-->
 
-            <ion-input type="hidden" disabled  formControlName="businesstype" ></ion-input>
+            <ion-input type="hidden" formControlName="businesstype" ></ion-input>
 
             <ion-item>
-                <ion-input type="text" placeholder="Phone Number" formControlName="phone"></ion-input>
+                <ion-input type="tel" placeholder="Phone Number" formControlName="phone"></ion-input>
             </ion-item>
 
             <ion-item>
@@ -50,7 +50,7 @@
             </div>
             <ion-item>
                 
-                <ion-input type="text" placeholder="Zip code" formControlName="zipcode"></ion-input>
+                <ion-input type="text" placeholder="Zip code" formControlName="zipcode" maxLength="8"></ion-input>
             </ion-item>
             <ion-item class="area">
                 <ion-textarea  placeholder="Description" formControlName="description"></ion-textarea>
@@ -58,9 +58,9 @@
 
             <ion-item>
                 <ion-label>Category</ion-label>
-                <ion-select class="catoption" formControlName="category" (ionChange)="selectedCat($event)">
-                    <ion-option *ngFor="let cat of category" value ="{{cat._id}}">{{cat.title}}
-                        <ion-input type="hidden" [(ngModel)]="data.category_title" formControlName="category_id"></ion-input>
+                <ion-select class="catoption" formControlName="service" (ionChange)="selectedCat($event)">
+                    <ion-option *ngFor="let cat of services" value ="{{cat._id}}">{{cat.sub_category_title}}
+<!--                        <ion-input type="hidden" value="{{cat.sub_category_title}}" formControlName="service_title"></ion-input>-->
                     </ion-option>
                 </ion-select>
                 <!--                <ion-select formControlName="category" [(ngModel)]="data.category" (ionChange)="selectedCat($event)">
@@ -69,50 +69,170 @@
                                 </ion-select>-->
             </ion-item>
 
-            <h2>Add opening and closing hours.</h2>
-
-            <ion-item>
-                <ion-label>Select Day</ion-label>
-                <ion-select formControlName="days" [(ngModel)]="data.days">
-                    <ion-option *ngFor="let day of days;let i = index">{{day}}</ion-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-grid class="paddingnone">
-                <ion-row>
-                    <ion-col col-5 class="padding-left">
-                        <ion-item>
-                            <ion-datetime placeholder="Opening Hours" displayFormat="HH:mm A" [(ngModel)]="data.openinghours" formControlName="openinghours"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-5 class="paddingtopbtm">
-                        <ion-item>
-                            <ion-datetime placeholder="Closing Hours" displayFormat="HH:mm A" [(ngModel)]="data.closinghours" formControlName="closinghours"></ion-datetime>
-                        </ion-item>
-                    </ion-col> 
-                    <ion-col col-2 class="padding-right">
-                        <ion-item class="addbtn">
-                            <button type="button" ion-button clear color="gray" (click)="closingtime(EditbusinessForm)"><ion-icon name="add"></ion-icon></button>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <div class="tagsec" *ngIf="daytime.length>0">
+            <h2 style="margin-bottom: 7px !important;">Add opening and closing hours.</h2>
+            <div class="day-frmt">
+                    <ion-item class="check_box">
+                        <ion-label>Monday</ion-label>
+                        <ion-checkbox color="green" formControlName="monday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="mondayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="mondayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-item class="check_box">
+                        <ion-label>Tuesday</ion-label>
+                        <ion-checkbox color="green" formControlName="tuesday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="tuesdayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="tuesdayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-item class="check_box">
+                        <ion-label>Wednesday</ion-label>
+                        <ion-checkbox color="green" formControlName="wednesday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="wednesdayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="wednesdayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-item class="check_box">
+                        <ion-label>Thursday</ion-label>
+                        <ion-checkbox color="green" formControlName="thursday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="thursdayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="thursdayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-item class="check_box">
+                        <ion-label>Friday</ion-label>
+                        <ion-checkbox color="green" formControlName="friday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="fridayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="fridayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-item class="check_box">
+                        <ion-label>Saturday</ion-label>
+                        <ion-checkbox color="green" formControlName="saturday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="saturdayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="saturdayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-item class="check_box">
+                        <ion-label>Sunday</ion-label>
+                        <ion-checkbox color="green" formControlName="sunday" required="false"></ion-checkbox>
+                    </ion-item>
+                    <ion-grid class="paddingnone">
+                    <ion-row>
+                        <ion-col col-6 class="padding-left">
+                            <ion-item>
+                                <ion-label>From</ion-label>
+                                <ion-datetime  displayFormat="hh:mm A" formControlName="sundayopeninghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6 class="padding-right">
+                            <ion-item>
+                                <ion-label>To</ion-label>
+                                <ion-datetime displayFormat="hh:mm A" formControlName="sundayclosinghours"></ion-datetime>
+                            </ion-item>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <!-- <div class="tagsec" *ngIf="daytime.length>0">
                 <div class="inner-sec" *ngFor="let d of daytime;let i = index">
                      <p style="margin-bottom:1px;">{{d.day}}</p>
                     <p><span>{{d.opening_time}}</span> to <span>{{d.closing_time}}</span></p>
                     <ion-icon name="close" (click)="DeleteTimes(d,i)"></ion-icon>
                 </div>
-            </div>
-            <ion-item *ngIf="services">
+            </div> -->
+<!--            <ion-item *ngIf="services">
                 <ion-label>Services</ion-label>
                 <ion-select class="catoption" formControlName="services" (ionChange)="selectedService($event)">
                     <ion-option *ngFor="let service of services" value="{{service._id}}">{{service.sub_category_title}}
-                        <!--                        <ion-input type="hidden" [(ngModel)]="data.service_title" formControlName="services_title"></ion-input>-->
+                                                <ion-input type="hidden" [(ngModel)]="data.service_title" formControlName="services_title"></ion-input>
                 </ion-option>
             </ion-select>
-        </ion-item>
+        </ion-item>-->
         <!--            <ion-item *ngIf="services">
                         <ion-label>Services</ion-label>
                         <ion-select formControlName="services" [(ngModel)]="data.service">
@@ -125,26 +245,25 @@
         <h2 *ngIf="businessdata?.business_type == 1 ||businessdata?.business_type == 2">Social Links</h2>
         <ion-item *ngIf="businessdata?.business_type == 1 ||businessdata?.business_type == 2">
             <img src="assets/imgs/instgrm.png" item-start class="social">
-            <ion-input type="text" placeholder="https://www.instagram.com/" formControlName="instagramlink"></ion-input>
+            <ion-input type="text" placeholder="https://www.instagram.com/" formControlName="instagramlink" autocapitalize="off"></ion-input>
         </ion-item>
 
         <ion-item *ngIf="businessdata?.business_type == 1 ||businessdata?.business_type == 2">
             <img src="assets/imgs/fb.png" item-start class="social">
-            <ion-input type="text" placeholder="https://www.facebook.com/" formControlName="facebooklink"></ion-input>
+            <ion-input type="text" placeholder="https://www.facebook.com/" formControlName="facebooklink" autocapitalize="off"></ion-input>
         </ion-item>
 
         <ion-item *ngIf="businessdata?.business_type == 1 ||businessdata?.business_type == 2">
             <img src="assets/imgs/twtr.png" item-start class="social">
-            <ion-input type="text" placeholder="https://www.twitter.com/" formControlName="twitterlink"></ion-input>
+            <ion-input type="text" placeholder="https://www.twitter.com/" formControlName="twitterlink" autocapitalize="off"></ion-input>
         </ion-item>
         <ion-item>
-            
-            <ion-input type="text" placeholder="https://www.websitename.com/" formControlName="websiteurl"></ion-input>
+            <ion-input type="text" placeholder="https://www.websitename.com/" formControlName="websiteurl" autocapitalize="off"></ion-input>
         </ion-item>
 
         <h2>Is this a veteran owned business?</h2>
 
-        <ion-list radio-group style="margin:0 !important;" [(ngModel)]="data.veteran" formControlName="veteranowned">
+        <ion-list radio-group style="margin:0 !important;" formControlName="veteranowned">
             <ion-item class="rdo" style="padding-left: 25px !important;">
                 <ion-radio value="true"></ion-radio>
                 <ion-label>Yes</ion-label>
@@ -157,7 +276,7 @@
 
         <h2>Do you own an online marketplace?</h2>
 
-        <ion-list radio-group style="margin:0 !important;" [(ngModel)]="data.marketplace" formControlName="onlinemarketplace">
+        <ion-list radio-group style="margin:0 !important;" formControlName="onlinemarketplace">
             <ion-item class="rdo" style="padding-left: 25px !important;">
                 <ion-radio value="true"></ion-radio>
                 <ion-label>Yes</ion-label>
@@ -187,7 +306,7 @@
     </ion-list>
     <div class="photosec">
         <h2 style="position:relative;">Add Photo <span>( Multiple photos )</span>
-            <button type="button" *ngIf="bit<=4" ion-button color="green" (click)="presentActionSheet()"><ion-icon name="add"></ion-icon></button>
+            <button type="button" ion-button color="green" (click)="presentActionSheet()"><ion-icon name="add"></ion-icon></button>
         </h2>
         <ion-grid class="paddingnone" *ngIf="base64Image">
             <ion-row>
@@ -213,7 +332,7 @@
                     </ion-row>
                 </ion-grid>-->
         <div class="btnsec">
-            <button type="submit" ion-button color="green" full class="btn1">SAVE</button>
+            <button type="submit" ion-button color="green" full class="btn1" [disabled]="!EditbusinessForm.valid">SAVE</button>
         </div>
     </div>
 </form>

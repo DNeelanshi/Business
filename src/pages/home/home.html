@@ -4,39 +4,56 @@
             <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>
         </button>
         <ion-title text-center >Home</ion-title>
-        <ion-buttons right (click)="filterModal()">
-                     <button ion-button>
+        <ion-buttons right (click)="filterModal()" *ngIf="restaurantlist?.length >0">
+            <button ion-button>
                 <ion-icon><img width="22px" src="assets/imgs/filter.png"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 
-    <div class="searchouter">
-        <ion-searchbar class="bfr searchbar" placeholder="Search location" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)"></ion-searchbar>        
-        <p (click)="ShowHide()">{{name}}</p>
+<!--    <div class="searchouter">
+        <ion-searchbar id="input" class="brfone searchbar" placeholder="Search..." (click)="SearchModal()"></ion-searchbar>
+        <p ion-button [disabled]="!disabled" (click)="ShowHide()">{{name}}</p>
+        <button type="button" ion-button class="disab" [disabled]="disable == true" (click)="ShowHide()">{{name}}</button>
         <div *ngIf="show == true">
-            <ion-searchbar class="bfr brfone searchbar animated" [(ngModel)]="data.text" name="text" placeholder="Search by name">
-
+            <form [formGroup]="SearchForm" (submit)="Searchbyname(SearchForm)">
+            <ion-searchbar id="byname" class="bfr brfone searchbar animated" placeholder="Search by name" formControlName="searchname">
             </ion-searchbar>
-            <ion-icon class="gosrch" name="arrow-dropright-circle" (click)="Searchbyname(data.text)"></ion-icon>
-
+            </form>
         </div>
         <ion-list class="searchtogle animated bounceIn">
             <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
                 {{ item }}
         </ion-item>
-    </ion-list>
-</div>
+        </ion-list>
+</div>-->
+    <div class="buttonout">
+        <button type="button" class="btn1" ion-button icon-start block (click)="SearchModal()"><ion-icon><img src="assets/imgs/srch.png" style="width:18px;float: left;"></ion-icon>Search...</button>
+    </div>
+    
+<!--    <div class="searchouter">
+        <div>
+            <ion-searchbar class="brfone searchbar animated" placeholder="Search by category" [(ngModel)]="data.term" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)">
+            </ion-searchbar>
+        </div>
+        <ion-list class="searchtogle animated" *ngIf="disable == true">
+            <ion-item *ngFor="let sub of categorydata | filter:data.term" (click)="SearchbyCategory(sub)">
+                {{sub.sub_category_title}}
+        </ion-item>
+        </ion-list>
+    </div>-->
+    
 
 <ion-toolbar>
     <div class="procatout">
         <ul class="procat">
             <li *ngFor="let sub of subcat" (click)="FilterBySubCat(sub._id)" [class.highlighted]="sub._id == categoryid">
-                <!-- <div class="icons"><img [src]="sub.sub_category_image"></div>-->
-                <div class="icons">
-                    <svg-icon src="assets/imgs/default-wax.svg" [svgStyle]="{ 'width.px':22 }"></svg-icon>
-</div>
+                 <div class="icons"><img [src]="sub.sub_category_image"></div>
+<!--                <div class="icons">
+                   <svg-icon src="https://gatheringmanal.s3.eu-central-1.amazonaws.com/blogimage/1527222876101Entertainments.svg" [svgStyle]="{ 'width.px':22 }"></svg-icon>
+                </div>-->
                 <p>{{sub.sub_category_title}}</p>
+                
             </li>
         </ul>
     </div>
@@ -81,8 +98,8 @@
     
     <ion-slides pager *ngIf="premiumBusiness.length>0">
         <ion-slide *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">
-            <img src="{{premium.business_image[0].business_image}}">
-            <img src="assets/imgs/PREMIERE.png" class="premium">
+            <img *ngIf="premium.business_image[0]?.business_image" src="{{premium.business_image[0]?.business_image}}">
+            <img *ngIf="premium.business_image[0]?.business_image" src="assets/imgs/PREMIERE.png" class="premium">
         </ion-slide>
     </ion-slides>
 
@@ -93,7 +110,7 @@
                     <img [src]="res.business_image[0].business_image">
                 </ion-thumbnail>
                 <ion-note class="online" *ngIf="res.business_data[0].own_online_market_place == true"><span class="dot"></span> Online</ion-note>
-                <!--                <span *ngIf="res.business_data[0].own_online_market_place == true">Online</span>-->
+<!--                                <span *ngIf="res.business_data[0].own_online_market_place == true">Online</span>-->
                 <h2>{{res.business_data[0].business_name}}</h2>
                 <div class="fullwidth">
                     <h4 class="listcol">
@@ -123,7 +140,6 @@
                 </div>
                 <img *ngIf="res.business_data[0].business_type == 1 || res.business_data[0].business_type == 2" src="assets/imgs/premium.png" class="premim">
             </ion-item>
-
             <!--  <ion-item>
                 <ion-thumbnail item-start>
                 <img src="assets/imgs/img1.jpg">
@@ -147,15 +163,12 @@
                 <button class="btneq" ion-button color="yellow">Review</button>
                 </div>
               </ion-item>-->
-
-
-
         </ion-list>
     </div>
     <div *ngIf="restaurantlist?.length == 0">
-        <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-            <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
-            <span> No data found!</span>
+        <div style="text-align: center !important;padding: 15% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+            <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">
+            
         </div>
     </div>
     <ion-infinite-scroll *ngIf="pageno<=totalpageno" (ionInfinite)="doInfinite($event)">

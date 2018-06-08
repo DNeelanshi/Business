@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 876:
+/***/ 883:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewreservationtwoPageModule", function() { return ViewreservationtwoPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewreservationPageModule", function() { return ViewreservationPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__viewreservationtwo__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__viewreservation__ = __webpack_require__(189);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ViewreservationtwoPageModule = (function () {
-    function ViewreservationtwoPageModule() {
+var ViewreservationPageModule = (function () {
+    function ViewreservationPageModule() {
     }
-    ViewreservationtwoPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+    ViewreservationPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__viewreservationtwo__["a" /* ViewreservationtwoPage */],
+                __WEBPACK_IMPORTED_MODULE_2__viewreservation__["a" /* ViewreservationPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__viewreservationtwo__["a" /* ViewreservationtwoPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__viewreservation__["a" /* ViewreservationPage */]),
             ],
         })
-    ], ViewreservationtwoPageModule);
-    return ViewreservationtwoPageModule;
+    ], ViewreservationPageModule);
+    return ViewreservationPageModule;
 }());
 
-//# sourceMappingURL=viewreservationtwo.module.js.map
+//# sourceMappingURL=viewreservation.module.js.map
 
 /***/ })
 

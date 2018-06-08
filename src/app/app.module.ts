@@ -37,7 +37,6 @@ import { EditbusinessPage } from '../pages/editbusiness/editbusiness';
 import { AddbusinessPage } from '../pages/addbusiness/addbusiness';
 import { ForgottwoPage } from '../pages/forgottwo/forgottwo';
 import {HttpModule} from '@angular/http';
-import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { FCM } from '@ionic-native/fcm';
 import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
@@ -53,6 +52,14 @@ import { OurtalkreplyPage } from '../pages/ourtalkreply/ourtalkreply';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
 import { TruncateModule } from '@yellowspot/ng-truncate';
+import { CallNumber } from '@ionic-native/call-number';
+import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {SearchPage} from '../pages/search/search';
+import { TermsbusinessPage } from '../pages/termsbusiness/termsbusiness';
+import { PrivacytwoPage } from '../pages/privacytwo/privacytwo';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -86,16 +93,19 @@ import { TruncateModule } from '@yellowspot/ng-truncate';
     ForgottwoPage,
     ViewreservationtwoPage,
     TalkreplyPage,
-    OurtalkreplyPage
+    OurtalkreplyPage,
+    SearchPage,
+    TermsbusinessPage,
+    PrivacytwoPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    PasswordStrengthBarModule,
     Ionic2RatingModule,
     AngularSvgIconModule,
     TruncateModule,
+    Ng2SearchPipeModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -131,7 +141,10 @@ import { TruncateModule } from '@yellowspot/ng-truncate';
     ForgottwoPage,
     ViewreservationtwoPage,
     TalkreplyPage,
-    OurtalkreplyPage
+    OurtalkreplyPage,
+    SearchPage,
+    TermsbusinessPage,
+    PrivacytwoPage
     
   ],
   providers: [
@@ -147,6 +160,8 @@ import { TruncateModule } from '@yellowspot/ng-truncate';
     LaunchNavigator,
     InAppBrowser,
     LocationComponent,
+    CallNumber,
+    OpenNativeSettings,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

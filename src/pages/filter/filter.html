@@ -24,7 +24,7 @@
  
       <ion-list no-lines>
         <div class="inputouter">
-          <h2>Services</h2>
+          <h2>Category</h2>
           <ion-item>
             <ion-select formControlName="services">
               <ion-option selected *ngFor="let service of services" value="{{service._id}}">{{service.sub_category_title}}</ion-option>
@@ -64,14 +64,14 @@
           <h2>Online</h2>
          
             <ion-list radio-group>
-              <ion-item class="rdo" style="padding-left: 25px !important;">
+              <ion-item class="rdo" style="padding-left: 0 !important;">
                
-                <ion-checkbox checked="false" formControlName="online1"></ion-checkbox>
+                <ion-checkbox color="green" checked="false" formControlName="online1"></ion-checkbox>
                 <ion-label>Yes</ion-label>
               </ion-item>
             
               <ion-item class="rdo" style="padding-left: 25px !important;">
-                <ion-checkbox  formControlName="offline"></ion-checkbox>
+                <ion-checkbox  color="green" formControlName="offline"></ion-checkbox>
                 <ion-label>No</ion-label>
               </ion-item>
             </ion-list>

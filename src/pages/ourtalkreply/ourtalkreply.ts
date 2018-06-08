@@ -47,13 +47,15 @@ export class OurtalkreplyPage {
         console.log(this.navParams.get('topidata'));
         this.topicdata = this.navParams.get('topidata');
         this.Topicdata();
-        this.interval = setInterval(() => {
-                    this.Topicdata();
-                }, 10000);
+//        this.common.interval = setInterval(() => {
+//                    this.Topicdata();
+//                }, 10000);
         
     }
     scrollBottom(){
+        if(this.content != null){
         this.content.scrollToBottom(300);
+    }
     }
       Topicdata() {
         var temp = this;
@@ -80,34 +82,32 @@ export class OurtalkreplyPage {
                             }
                         }
                     })
-                     var a = new Date();
-                        console.log(new Date(value.created_at))
-                        var startDate = moment(new Date(value.comment_time), "DD.MM.YYYY");
-                        var endDate = moment(a, "DD.MM.YYYY");
-                        var milliseconds = endDate.diff(startDate);
-                        var duration = moment.duration(milliseconds, 'milliseconds');
+                    var startDate = moment(new Date(value.comment_time));
+                        var endDate = moment(new Date());
+                       // var milliseconds = endDate.diff(startDate);
                         
-                        console.log('Hours' + duration.hours())
-                        console.log('minutes' + duration.minutes());
-                        if(duration.hours()>24){
-                            value.days = duration.asDays();
+                        console.log(endDate.diff(startDate, 'minutes'));
+                        console.log(endDate.diff(startDate, 'hours'));
+                        console.log(endDate.diff(startDate, 'days'));
+
+                         var aba = endDate.diff(startDate, 'hours')+':'+endDate.diff(startDate, 'minutes');
+                         console.log(endDate.diff(startDate, 'hours')+':'+endDate.diff(startDate, 'minutes'));
+                         console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
+                            
+//                        var duration = moment.duration(milliseconds, 'milliseconds');
+//                        console.log('Hours' + duration.hours())
+//                        console.log('minutes' + duration.minutes());
+                        if(endDate.diff(startDate, 'days')>0){
+                            value.days = endDate.diff(startDate, 'days');
                             value.time = 'day';
                         }else{
-                        if(duration.minutes()>9){
-                            if(duration.hours()>9){
-                            value.days = duration.hours()+':'+duration.minutes();
-                            }else{
-                                value.days = '0'+duration.hours()+':'+duration.minutes();
-                            }
+                        if(endDate.diff(startDate, 'hours')>1){
+                        value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+                         value.time = 'hours';
                         }else{
-                         if(duration.hours()>9){
-                            value.days = duration.hours()+':'+duration.minutes();
-                            }else{
-                                value.days = '0'+duration.hours()+':'+duration.minutes();
-                            }
-                            value.days = '0'+duration.hours()+':0'+duration.minutes();
+                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+                         value.time = 'hour';
                         }
-                            value.time = 'hour';
                         }
                 })
                 if(response.data[0].comments.length>0){
@@ -121,6 +121,7 @@ export class OurtalkreplyPage {
 
         })
     }
+    
 PostComment(formdata){
     console.log(formdata.value);
      let options = this.appsetting.header();
@@ -135,24 +136,25 @@ PostComment(formdata){
                
                     this.http.post(this.appsetting.url + 'talks/addComment', serialized, options).map(res => res.json()).subscribe(response => {
                         console.log(response);
+                        
                         if (response.status == true) {
-                           //this.topicdata.comments = response.data[0].comments;
-                           
+                            this.commentdata = '';
+                            this.commentdata = response.data[0];
                             this.ourtalk.patchValue({
                                 comment:''
                             })
                              
                            this.Topicdata();
                         } else {
-                            this.common.presentAlert('Login', response.message);
+                            this.common.presentAlert('Talk', response.message);
                         }
 
                     })
                // })
            
 }
- back() {
-      clearInterval(this.interval);
-      this.navCtrl.push(RealtalkPage);
-  }
+// back() {
+//      clearInterval(this.interval);
+//      this.navCtrl.push(RealtalkPage);
+//  }
 }

@@ -5,7 +5,7 @@ import {Appsetting} from '../../providers/appsetting';
 import {Http} from '@angular/http';
 import {Common} from '../../providers/common';
 import {LoginPage} from '../login/login';
-import moment from 'moment';
+import * as moment from 'moment';
 /**
  * Generated class for the BooknowPage page.
  *
@@ -19,6 +19,10 @@ import moment from 'moment';
     templateUrl: 'booknow.html',
 })
 export class BooknowPage {
+    currentdate1: any;
+    year: string;
+    month: string;
+    day: string;
     minute: any;
     hours: any;
     currentdate: any;
@@ -36,12 +40,20 @@ export class BooknowPage {
         public toastCtrl: ToastController,
         public alertCtrl: AlertController
     ) {
-        console.log('rahul');
+        //alert('rahul');
         console.log(new Date());
+
         this.currentdate = moment(new Date().toISOString()).locale('es').format();
         console.log(this.currentdate);
-        var a = new Date();
-        console.log(a.getTime());
+        var time = moment(new Date().toISOString()).locale('es').format('hh:mm');
+        console.log(time);
+        var a = moment(new Date().toISOString()).locale('es').format('DD-MM-YYYY');
+        console.log(a);
+        var b = a.split('-');
+        console.log(b);
+        this.day = b[0];
+        this.month = b[1];
+        this.year = b[2];
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             console.log('You are online');
@@ -59,27 +71,39 @@ export class BooknowPage {
         this.BookingForm = this.formBuilder.group({
             date: ['', [Validators.required]],
             startTime: ['', [Validators.required]],
-            endTime: ['', [Validators.required]],
+            //endTime: ['', [Validators.required]],
             specialAccomo: [''],
         })
     }
+    
     dismiss() {
         this.viewCtrl.dismiss();
     }
+    
     MakeBooking(BookingForm) {
         console.log(BookingForm.value);
-       // return false;
         var startTime = BookingForm.value.startTime.split(':');
         console.log(startTime);
         console.log(startTime[0]);
-        var endTime = BookingForm.value.endTime.split(':');
-        console.log(endTime[0]);
-       
-        if(startTime[0] < endTime[0]){
-            console.log('true');
+        //var endTime = "";
+        var a = BookingForm.value.date+' '+BookingForm.value.startTime
+        var endTime = new Date(a);
+        var compareTo = new Date();
+        //var mins = moment.utc(moment(endTime, "HH:mm:ss").diff(moment(BookingForm.value.startTime, "HH:mm:ss"))).format("mm")
+        console.log('enddate:'+endTime);
+        console.log(compareTo);
+        console.log(a);
+        var isAfter = moment(endTime).isAfter(compareTo);
+         console.log(isAfter);
+        return false;
         console.log(window.navigator.onLine);
         if (localStorage.getItem('CurrentUser')) {
+           // if(isAfter == true){
+            console.log('true');
             this.viewCtrl.dismiss({bookingdata: BookingForm.value});
+//            }else{
+//                this.common.presentAlert('Book Now','Time must be greater than current time!');
+//            }
         } else {
             let alert = this.alertCtrl.create({
                 title: 'Book now',
@@ -103,22 +127,32 @@ export class BooknowPage {
             });
             alert.present();
         }
-    }else{
-        let alert = this.alertCtrl.create({
-                title: 'Book now',
-                message: 'End time must be greater than start time!',
-                buttons: [
-                    {
-                        text: 'Ok',
-                        handler: () => {
-                            console.log('Ok clicked');
-                            
-                        }
-                    }
-                ]
-            });
-            alert.present();
-            console.log('Please select time greater than start time');
+
+    }
+
+
+    changedate(event) {
+        console.log(event);
+        console.log(typeof (event.day));
+        console.log(event.month);
+        console.log(event.year);
+        console.log(typeof (parseInt(this.day)));
+        console.log(typeof (parseInt(this.month)));
+        console.log(typeof (parseInt(this.year)));
+        if (event.day == parseInt(this.day) && event.month == parseInt(this.month) && event.year == parseInt(this.year)) {
+            var b = moment(new Date()).format('HH:mm');
+            // this.currentdate1 = '2037'
+            this.BookingForm.patchValue({
+                startTime:b
+            })
+            console.log(this.currentdate1);
+            console.log('matched');
+        } else {
+           this.currentdate1 = '2037'
+           this.BookingForm.patchValue({
+                startTime:''
+            })
+            console.log('not matched');
         }
     }
 }

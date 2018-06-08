@@ -128,17 +128,18 @@ export class SignupPage {
             if (formdata.value.password.indexOf(' ') != 0) {
 
                 let options = this.appsetting.header();
-                this.fcm.getToken().then(token => {
-                console.log('Tokenid-->'+token);
+               this.fcm.getToken().then(token => {
+               // console.log('Tokenid-->'+token);
                     var postdata = {
                         firstname: formdata.value.fname,
                         lastname: formdata.value.lname,
                         email: formdata.value.email,
                         phone_number: formdata.value.phone,
                         role: 'member',
-                        divice_token: token,
+                        divice_token:token,
                         password: formdata.value.password
                     }
+                    
                     var serialized = this.appsetting.serializeObj(postdata);
                     var Loading = this.loadingCtrl.create({
                         spinner: 'bubbles',
@@ -156,8 +157,6 @@ export class SignupPage {
                             } else {
                                 this.common.presentAlert('Signup', response.message);
                             }
-
-
                         })
                     })
                 }, err => {

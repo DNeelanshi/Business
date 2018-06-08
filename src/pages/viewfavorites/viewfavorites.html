@@ -25,7 +25,7 @@
             
           </ion-thumbnail>
           <h2>{{favlist.business_data[0].business_name}}</h2>
-          <p>{{favlist.business_data[0].business_description}}</p>
+          <p [innerHTML]="favlist.business_data[0].business_description"></p>
           
         </ion-item>
         <ion-icon name="heart" color="red" class="hrt" (click)="MakeAsUnfavourite(favlist.business_data[0]._id)"></ion-icon>
@@ -41,7 +41,12 @@
           </ion-item>-->
                   
       </ion-list>
+   
     <ion-list text-wrap *ngIf="favouritelist?.length == 0">
-              <p>Oops! Looks like you didn't make favourite yet.</p>
+               <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">
+                    
+                </div>
+              
       </ion-list>
 </ion-content>

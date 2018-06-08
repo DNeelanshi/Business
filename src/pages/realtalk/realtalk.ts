@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
 import {TalkreplyPage} from '../talkreply/talkreply';
 import * as moment from 'moment';
 import { OurtalkreplyPage } from '../ourtalkreply/ourtalkreply';
+import {Geolocation} from '@ionic-native/geolocation';
 /**
  * Generated class for the RealtalkPage page.
  *
@@ -25,6 +26,7 @@ declare var google;
 export class RealtalkPage {
     ourtalks: any = [];
     mytalks: any = [];
+    categories:any = [];
     totalpageno: any;
     interval: any;
     autocomplete: {query: string};
@@ -48,9 +50,11 @@ export class RealtalkPage {
         public http: Http,
         public formBuilder: FormBuilder,
         private zone: NgZone,
+        private geolocation: Geolocation,
     ) {
     //alert('asdfa');
-    
+    console.log(this.common.interval);
+      clearInterval(this.common.interval);
         this.autocompleteItems = [];
         this.realTalk = this.formBuilder.group({
             topicname: ['', [Validators.required]],
@@ -58,36 +62,52 @@ export class RealtalkPage {
             category: ['', [Validators.required]],
             message: ['', [Validators.required]]
         })
+        this.categories = [
+        {name:'Coffee House Talk'},{name:'Family & Parenting'},{name:'Food'},{name:'Humor & Offbeat'},
+        {name:'Local Conversations'},{name:'Local MeetUps Events'},{name:'New Music Alert!'},{name:'News & Politics'},
+        {name:'Other'},{name:'Relationships and Dating'},{name:'Shopping and Products'},{name:'Sports'},
+        {name:'Theatre, Movies, Entertainment'},{name:'Travel'}
+        ]
+         var reverseSortedArray =  this.categories.sort(function (a, b) {
+//               console.log(a);
+//               console.log(b);
+                if (a.name < b.name) return -1;
+                    else if (a.name > b.name) return 1;
+                    return 0;
+              });
+//              console.log(reverseSortedArray);
+//              console.log(this.categories);
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad RealtalkPage');
-        this.getSubCatList();
+       
+        clearInterval(this.common.interval);
+        //this.getSubCatList();
         if (this.talk == 'mytalk') {
             this.MyTalk();
         }
-
     }
     /********* function used for get subcatlist to show on top of the page ***********/
-    getSubCatList() {
-        this.subcat = [];
-        var temp = this;
-        this.http.get(this.appsetting.url + 'categories/get').map(res => res.json()).subscribe(response => {
-            console.log(response);
-            response.forEach(function (value, key) {
-                value.sub_category.forEach(function (val, ke) {
-                    if (!val.sub_category_image) {
-                        val.sub_category_image = 'assets/imgs/iconnot.png';
-                        temp.subcat.push(val);
-                    } else {
-                        temp.subcat.push(val);
-                    }
-                })
-            })
-            //this.subcat = response;
-            console.log(this.subcat);
-        })
-    }
+//    getSubCatList() {
+//        this.subcat = [];
+//        var temp = this;
+//        this.http.get(this.appsetting.url + 'categories/get').map(res => res.json()).subscribe(response => {
+//            console.log(response);
+//            response.forEach(function (value, key) {
+//                value.sub_category.forEach(function (val, ke) {
+//                    if (!val.sub_category_image) {
+//                        val.sub_category_image = 'assets/imgs/iconnot.png';
+//                        temp.subcat.push(val);
+//                    } else {
+//                        temp.subcat.push(val);
+//                    }
+//                })
+//            })
+//            //this.subcat = response;
+//            console.log(this.subcat);
+//        })
+//    }
     /****** function used for autocomplete prediction ***********/
     updateSearch(formvalue) {
         console.log('update');
@@ -136,22 +156,22 @@ export class RealtalkPage {
         // this.category = cat;
     }
     postTalk(formValue) {
+        clearInterval(this.common.interval);
         console.log(formValue.value);
         let options = this.appsetting.header();
         console.log(formValue.value.category);
-        var a = formValue.value.category.split(',');
-        console.log(a);
+//        var a = formValue.value.category.split(',');
+//        console.log(a);
 
         var postdata = {
             created_by: JSON.parse(localStorage.getItem('CurrentUser'))._id,
             topic_name: formValue.value.topicname,
             loc_address: formValue.value.location,
             message: formValue.value.message,
-            category_name: a[1],
-            category_id: a[0],
+            category_name: formValue.value.category,
+            //admin_notify:false,
             long: this.longitude,
             lat: this.latitude
-
         }
 
         console.log(postdata);
@@ -182,6 +202,7 @@ export class RealtalkPage {
     }
 
     MyTalk() {
+        clearInterval(this.common.interval);
         var temp = this;
         this.loader = 0;
         let options = this.appsetting.header();
@@ -208,34 +229,56 @@ export class RealtalkPage {
                     this.loader = 1;
                     response.data.forEach(function (value, key) {
                           /****** code to get date and time difference ************/
-                        var a = new Date();
-                        console.log(new Date(value.created_at))
-                        var startDate = moment(new Date(value.created_at), "DD.MM.YYYY");
-                        var endDate = moment(a, "DD.MM.YYYY");
-                        var milliseconds = endDate.diff(startDate);
-                        var duration = moment.duration(milliseconds, 'milliseconds');
+//                        var a = new Date();
+//                        console.log(new Date(value.created_at))
+//                        var ab = moment(new Date(value.created_at));
+//                        var b = moment(new Date());
+//                        console.log(b.diff(ab));
+//                        
                         
-                        console.log('Hours' + duration.hours())
-                        console.log('minutes' + duration.minutes());
-                        if(duration.hours()>24){
-                            value.days = duration.asDays();
+                        var startDate = moment(new Date(value.created_at));
+                        var endDate = moment(new Date());
+                       // var milliseconds = endDate.diff(startDate);
+                        
+                        console.log(endDate.diff(startDate, 'minutes'));
+                        console.log(endDate.diff(startDate, 'hours'));
+                        console.log(endDate.diff(startDate, 'days'));
+
+                         var aba = endDate.diff(startDate, 'hours')+':'+endDate.diff(startDate, 'minutes');
+                         console.log(endDate.diff(startDate, 'hours')+':'+endDate.diff(startDate, 'minutes'));
+                         console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
+                            
+//                        var duration = moment.duration(milliseconds, 'milliseconds');
+//                        console.log('Hours' + duration.hours())
+//                        console.log('minutes' + duration.minutes());
+                        if(endDate.diff(startDate, 'days')>0){
+                            value.days = endDate.diff(startDate, 'days');
                             value.time = 'day';
                         }else{
-                        if(duration.minutes()>9){
-                            if(duration.hours()>9){
-                            value.days = duration.hours()+':'+duration.minutes();
-                            }else{
-                                value.days = '0'+duration.hours()+':'+duration.minutes();
-                            }
+                        if(endDate.diff(startDate, 'hours')>1){
+                        value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+                         value.time = 'hours';
                         }else{
-                         if(duration.hours()>9){
-                            value.days = duration.hours()+':'+duration.minutes();
-                            }else{
-                                value.days = '0'+duration.hours()+':'+duration.minutes();
-                            }
-                            value.days = '0'+duration.hours()+':0'+duration.minutes();
+                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+                         value.time = 'hour';
                         }
-                            value.time = 'hour';
+                       // if(endDate.diff(startDate, 'hours')>9)
+                        
+//                        if(duration.minutes()>9){
+//                            if(duration.hours()>9){
+//                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+//                            }else{
+//                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+//                            }
+//                        }else{
+//                         if(duration.hours()>9){
+//                            value.days = duration.hours()+':'+duration.minutes();
+//                            }else{
+//                                value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+//                            }
+//                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+//                        }
+                           // value.time = 'hour';
                         }
                         
                         if (JSON.parse(localStorage.getItem('CurrentUser')).profile_pic) {
@@ -266,14 +309,23 @@ export class RealtalkPage {
 
     GetOurTalks() {
         this.loader = 0;
-       //clearInterval(this.interval);
+       clearInterval(this.common.interval);
         var temp = this;
         if(this.pageno >= this.totalpageno){
                     this.pageno = 1;
                 }
+            this.geolocation.getCurrentPosition().then((resp) => {
+            console.log('getCurrentPosition');
+            console.log(resp.coords.latitude);
+            console.log(resp.coords.longitude);
+            this.latitude = resp.coords.latitude;// resp.coords.latitude
+            this.longitude = resp.coords.longitude;// resp.coords.longitude
+      
         let options = this.appsetting.header();
         var postdata = {
-            page:this.pageno
+            page:this.pageno,
+            lat: this.latitude,
+            long:this.longitude
         }
         var serialized = this.appsetting.serializeObj(postdata);
         //        var Loading = this.loadingCtrl.create({
@@ -292,30 +344,27 @@ export class RealtalkPage {
                 response.data.forEach(function (value, key) {
                     console.log(value);
                     if (value.status == true) {
-                        
                             temp.ourtalks.push(value);
-                      
-                        
                     }
                 })
                 console.log(this.ourtalks);
                 this.totalpageno = response.Toatalpage;
             } else {
                 this.loader = 1;
-                //                    this.common.presentAlert('Talk', response.message);
             }
-
-            // })
         })
+          })
     }
 /********* this function is use for infinite scroll **********/
  GetOurTalks1() {
         this.loader = 0;
-       //clearInterval(this.interval);
+       clearInterval(this.common.interval);
         var temp = this;
         let options = this.appsetting.header();
         var postdata = {
-            page:this.pageno
+            page:this.pageno,
+            lat:this.latitude,
+            long:this.longitude
         }
         var serialized = this.appsetting.serializeObj(postdata);
         this.http.post(this.appsetting.url + 'talks/getallTalks',serialized, options).map(res => res.json()).subscribe(response => {

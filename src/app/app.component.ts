@@ -25,10 +25,11 @@ import {AddbusinessPage} from '../pages/addbusiness/addbusiness';
 import {App} from 'ionic-angular';
 import { NavController, MenuController } from 'ionic-angular/index';
 import {HistorytwoPage} from '../pages/historytwo/historytwo';
-//import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {FCM} from '@ionic-native/fcm';
-
-
+import {Geolocation} from '@ionic-native/geolocation';
+import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import {TermsbusinessPage} from '../pages/termsbusiness/termsbusiness';
+import {PrivacytwoPage} from '../pages/privacytwo/privacytwo';
 
 @Component({
     templateUrl: 'app.html'
@@ -54,10 +55,13 @@ export class MyApp {
         public events: Events,
         private app: App,
         private menu: MenuController,
-       // private iab: InAppBrowser,
-        public fcm:FCM
+        public fcm:FCM,
+        private geolocation: Geolocation,
+        private openNativeSettings: OpenNativeSettings
     ) {
-        alert('updaated latest 1')
+    
+       // alert('updaated latest 1');
+
          platform.ready().then(() => {
             
       // Okay, so the platform is ready and our plugins are available.
@@ -81,8 +85,28 @@ export class MyApp {
             this.role = JSON.parse(localStorage.getItem('CurrentUser')).role;
             
         }
-        
-    }
+   this.geolocation.getCurrentPosition().then((resp) => {
+            
+        }).catch((error) => {
+            console.log('Error getting location', error);
+//            let alert = this.alertCtrl.create({
+//                title: 'Location',
+//                message: 'Please enable your location to use Melanin Enterprises.',
+//                buttons: [
+//                  {
+//                    text: 'Ok',
+//                    role: 'submit',
+//                    handler: () => {
+//                      console.log('submit clicked');
+//                      this.openNativeSettings.open('location');
+//                    }
+//                  }
+//                ]
+//              });
+//              alert.present();
+            
+        });
+                }
 
     initializeApp() {
         this.app.getRootNav();
@@ -97,9 +121,10 @@ export class MyApp {
             console.log('skip');
             this.currentuser = null;
             this.pages = [
+                {title: 'Home', component: HomePage, icon: 'assets/imgs/home.png'},
                 {title: 'Sign in or create account', component: GetstartPage, icon: 'assets/imgs/user.png'},
-                {title: 'Terms & Conditions', component: TermsPage, icon: 'assets/imgs/terms.png'},
-                {title: 'Privacy Policy', component: PrivacyPage, icon: 'assets/imgs/privacy.png'},
+                {title: 'Terms & Conditions', component: TermsbusinessPage, icon: 'assets/imgs/terms.png'},
+                {title: 'Privacy Policy', component: PrivacytwoPage, icon: 'assets/imgs/privacy.png'},
                 //            {title: 'Logout', component: ListPage, icon: 'assets/imgs/logout.png'}
             ];
 
@@ -121,6 +146,7 @@ export class MyApp {
             }
         } else {
             this.rootPage = GetstartPage;
+            
         }
        /******** function for handle notifications **************/
 //                this.fcm.onNotification().subscribe(data => {
@@ -200,7 +226,7 @@ export class MyApp {
                 if (response.data.profile_pic) {
 
                 } else {
-                    response.data.profile_pic = 'assets/imgs/profile.png';
+                    response.data.profile_pic = 'assets/imgs/user.png';
                 }
                 this.currentuser = null;
                 this.currentuser = response.data;
@@ -209,11 +235,11 @@ export class MyApp {
                 this.pages = [
                 {title: 'Home', component: HomePage, icon: 'assets/imgs/home.png'},
                 {title: 'Real Talk', component: RealtalkPage, icon: 'assets/imgs/realtalk.png'},
-                {title: 'Career Network', component: 'career', icon: 'assets/imgs/career.png'},
-                {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editprofile.png'},
+//                {title: 'Career Network', component: 'career', icon: 'assets/imgs/career.png'},
+                {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editb.png'},
 //                {title: 'Edit Business Information', component: EditbusinessPage, icon: 'assets/imgs/editprofile.png'},
 //                {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
-                {title: 'New Artist', component: 'artist', icon: 'assets/imgs/artist.png'},
+//                {title: 'New Artist', component: 'artist', icon: 'assets/imgs/artist.png'},
                 {title: 'View Reservations', component: ViewreservationtwoPage, icon: 'assets/imgs/reservation.png'},
 //                {title: 'Reservations', component: ReservationsPage, icon: 'assets/imgs/reservation.png'},
                 {title: 'History', component: HistoryPage, icon: 'assets/imgs/history.png'},
@@ -228,9 +254,9 @@ export class MyApp {
                 {title: 'History', component: HistorytwoPage, icon: 'assets/imgs/history.png'},
                 {title: 'Reviews', component: Reviews2Page, icon: 'assets/imgs/reviews.png'},
                 {title: 'Edit Business Info', component: EditbusinessPage, icon: 'assets/imgs/editprofile.png'},
-                {title: 'Advertising', component: 'advertising', icon: 'assets/imgs/editprofile.png'},
-                {title: 'Career Network',  component: 'career', icon: 'assets/imgs/career.png'},
-                {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editprofile.png'},
+                {title: 'Advertising', component: 'advertising', icon: 'assets/imgs/add.png'},
+//                {title: 'Career Network',  component: 'career', icon: 'assets/imgs/career.png'},
+                {title: 'Edit Profile', component: EditprofiletwoPage, icon: 'assets/imgs/editb.png'},
                 {title: 'Real Talk', component: RealtalkPage, icon: 'assets/imgs/realtalk.png'},
                 {title: 'Terms & Conditions', component: TermsPage, icon: 'assets/imgs/terms.png'},
                 {title: 'Privacy Policy', component: PrivacyPage, icon: 'assets/imgs/privacy.png'}

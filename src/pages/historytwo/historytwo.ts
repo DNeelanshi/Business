@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {Appsetting} from '../../providers/appsetting';
 
 import {Common} from '../../providers/common';
@@ -27,12 +27,14 @@ totalpageno;
         public appsetting: Appsetting,
         public http: Http,
         public common: Common,
+        public loadingCtrl:LoadingController
     ) {
        
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HistorytwoPage');
+         clearInterval(this.common.interval);
          this.History();
     }
     /*********** function to accept the reservations *******************/
@@ -45,15 +47,22 @@ totalpageno;
             role: user.role,
             user_id: user._id
         }
+           var Loading = this.loadingCtrl.create({
+                    spinner: 'bubbles',
+                    content: 'Loading...'
+                });
+                Loading.present().then(() => {
         let serialized = this.appsetting.serializeObj(postdata);
                 this.http.post(this.appsetting.url + 'orders/getoldreservation ', serialized, options).map(res => res.json()).subscribe(response => {
                     console.log(response);
+                    Loading.dismiss();
                     if (response.status == true) {
                         this.history = response.data;
                         this.totalpageno = response.page;
                     } else {
                         //this.common.presentAlert('Book now', 'Something went wrong!');
                     }
+                })
                 })
     }
     

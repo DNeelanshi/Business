@@ -1,4 +1,16 @@
 page-editbusiness {
+    .datetime-text{
+        text-align: right;
+    }
+    .day-frmt{
+        width: 100%;
+        float: left;
+        margin-bottom: 9px;
+
+        .item{
+            margin-bottom: 6px;
+        }
+    }
     .catoption {
         width: 100%;
         right: 0;
@@ -184,12 +196,20 @@ page-editbusiness {
     .photosec .image-wrapper{
         width: 100%;
         float: left;
+        height: 100px;
+
+        img{
+            width: 100%;
+            float: left;
+            height: 100%;
+        }
     }
     .photosec .image-wrapper .delete-img{
         position: absolute;
         right: 3px;
         top: 3px;
         width: 12px;
+        height: 12px;
     }
     .btnsec{
         width: 100%;
@@ -227,5 +247,17 @@ page-editbusiness {
    .item .datetime {
     padding: 0 0 0 0!important;
     width: 87%;
+}
+.check_box{
+    padding: 0;
+    background: transparent;
+    border: none !important;
+    margin-bottom: 5px;
+
+    .label{
+        font-size: 17px !important;
+        font-weight: 500 !important;
+        color: #000 !important;
+    }
 }
 }

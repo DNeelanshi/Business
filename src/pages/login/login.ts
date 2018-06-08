@@ -118,7 +118,7 @@ export class LoginPage {
         console.log('rahul');
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
-             // this.fcm.getToken().then(token => {
+            //  this.fcm.getToken().then(token => {
                          //   console.log('Tokenid-->'+token);
                            // alert(token)
             let options = this.appsetting.header();
@@ -126,7 +126,7 @@ export class LoginPage {
             var postdata = {
                 email: signindata.value.email,
                 password: signindata.value.password,
-                divice_token:'g',//token,
+                divice_token:'',//token,
                 role: 'member'
             }
 
@@ -148,7 +148,6 @@ export class LoginPage {
                     } else {
                         this.common.presentAlert('Login', response.message);
                     }
-
                 })
                  })
 //            }, err => {

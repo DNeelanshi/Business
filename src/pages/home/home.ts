@@ -11,14 +11,23 @@ import {Http} from '@angular/http';
 import {Geolocation} from '@ionic-native/geolocation';
 import * as moment from 'moment';
 import {LoginPage} from '../login/login';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {OpenNativeSettings} from '@ionic-native/open-native-settings';
+import {SearchPage} from '../search/search';
 
 declare var google;
 @Component({
     selector: 'page-home',
-    templateUrl: 'home.html'
+    templateUrl: 'home.html',
 })
 
 export class HomePage {
+    searchd: any;
+    longitude: number;
+    latitude: number;
+    disable: boolean = false;
+    SearchcatForm: FormGroup;
+    SearchForm: FormGroup;
     name: string = 'By name';
     categoryid: any;
     class: string;
@@ -31,19 +40,14 @@ export class HomePage {
     restaurantlist: any = [];
     searchQuery: string = '';
     data: any = {};
-    /**** parameters for autocomplete *****/
-    autocompleteItems;//variable used for autocomplete on address field
-    public autocomplete: any = {};//variable used for autocomplete on address field
-    service = new google.maps.places.AutocompleteService();
-    geocoder = new google.maps.Geocoder();
-    public latitude: number;
-    public longitude: number;
+
     subcat: any = [];
+    categorydata: any = [];
     premiumBusiness: any = [];
     fav = 0;
     rating: any = {};
     show: boolean = false;
-    
+    keyword: string;
     constructor(
         public navCtrl: NavController,
         public modalCtrl: ModalController,
@@ -56,28 +60,43 @@ export class HomePage {
         public http: Http,
         private zone: NgZone,
         private geolocation: Geolocation,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public formBuilder: FormBuilder,
+        private openNativeSettings: OpenNativeSettings
     ) {
-        console.log('rahul');
+        //alert('constructor');
+        this.currentLocation();
+        clearInterval(this.common.interval);
+        this.getSubCatList();
         if (localStorage.getItem('CurrentUser')) {
             console.log(JSON.parse(localStorage.getItem('CurrentUser')));
             this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
         }
-        this.autocompleteItems = [];
-        this.autocomplete = {
-            query: ''
-        };
+        localStorage.removeItem('Seachdata');
 
     }
+    ngOnInit(): any {
+        //alert('ngOnInit');
+        var temp = this;
+        console.log('ngOnInit');
+        this.SearchForm = this.formBuilder.group({
+            searchname: ['']
+        });
+        this.SearchcatForm = this.formBuilder.group({
+            searchcat: ['']
+        });
+        // this.tryagain();
 
+    }
     ionViewDidLoad() {
-        //alert('ionViewDidLoad');
+        // alert('ionViewDidLoad');
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             console.log('You are online');
-            this.currentLocation();
+            //this.currentLocation();
+            localStorage.removeItem('filterdata');
             console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
-            this.getSubCatList();
+
             console.log('ionViewDidLoad HomePage');
             //        this.Getlist(1, 30.723839099999996, 76.8465082);
             //        this.latitude = 30.723839099999996;
@@ -100,27 +119,10 @@ export class HomePage {
             this.longitude = resp.coords.longitude;// resp.coords.longitude
             this.currentLat = resp.coords.latitude;
             this.currentLong = resp.coords.longitude;
-
             this.Getlist(this.pageno, resp.coords.latitude, resp.coords.longitude);
-            var geocoder = new google.maps.Geocoder;
-            var latlng = {lat: resp.coords.latitude, lng: resp.coords.longitude};
 
-
-            geocoder.geocode({'location': latlng}, function (results, status) {
-                if (status === 'OK') {
-                    console.log(results[0]);
-                    if (results[0]) {
-                        temp.autocomplete.query = results[0].formatted_address;
-
-                    } else {
-                        temp.autocomplete.query = '';
-                    }
-                } else {
-                    console.log('Error getting address by location');
-                }
-            });
         }).catch((error) => {
-            console.log('Error getting location', error);
+            console.log('Error getting locatio            n', error);
         });
     }
 
@@ -134,34 +136,42 @@ export class HomePage {
                 value.sub_category.forEach(function (val, ke) {
                     if (!val.sub_category_image) {
                         val.sub_category_image = 'assets/imgs/iconnot.png';
-                        temp.subcat.push(val);
+                        // console.log(val);
+                        if (val.status == true) {
+                            temp.subcat.push(val);
+                        } else {
+                            //val.status = false;
+                        }
                     } else {
-                        temp.subcat.push(val);
+                        if (val.status == true) {
+                            temp.subcat.push(val);
+                            //temp.categorydata.push(val);
+                        } else {
+                            //val.status = false;
+                        }
                     }
                 })
             })
-            //this.subcat = response;
-            console.log(this.subcat);
+            this.subcat.sort(function (a, b) {
+                if (a.sub_category_title < b.sub_category_title) return -1;
+                else if (a.sub_category_title > b.sub_category_title) return 1;
+                return 0;
+            });
+
         })
+        console.log(this.subcat);
     }
 
-    /****** functions used for run ionViewDidLoad() function after clear the search bar ************/
-        ionClear() {
-            console.log('clear');
-            this.autocomplete.query = '';
-        }
 
     /****** functions used for getlist of restaurants by default when user visit on page ************/
     Getlist(pageno, lat, long) {
-
         console.log('Getlist');
         var temp = this;
-
         let options = this.appsetting.header();
         var postdata = {
             lat: lat,
             long: long,
-            page: pageno
+            page: parseInt(pageno)
         }
         var serialized = this.appsetting.serializeObj(postdata);
         var Loading = this.loadingCtrl.create({
@@ -175,63 +185,63 @@ export class HomePage {
                     console.log(response.data);
                     console.log(this.latitude);
                     console.log(this.longitude);
-                    // this.geolocation.getCurrentPosition().then((resp) => {
-                    // alert('here');
                     this.restaurantlist = [];
-                    temp.premiumBusiness = [];
-                    //                        console.log(resp.coords.latitude);
-                    //                        console.log(resp.coords.longitude);
-                    for (var i = 0; i < response.data.length; i++) {
+                    this.premiumBusiness = [];
 
-                        if (localStorage.getItem('CurrentUser')) {
-                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                            if (this.favourite.length > 0) {
-                                for (var j = 0; j < this.favourite.length; j++) {
-                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                        console.log('matched');
-                                        response.data[i].business_data[0].fav = 1;
-                                        break;
-                                    } else {
-                                        console.log('not matched');
-                                        response.data[i].business_data[0].fav = 0;
-                                        // break;
+                    for (var i = 0; i < response.data.length; i++) {
+                        console.log('for loop')
+                        if (response.data[i].business_data[0].business_status == true) {
+                            if (localStorage.getItem('CurrentUser')) {
+                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                if (this.favourite.length > 0) {
+                                    for (var j = 0; j < this.favourite.length; j++) {
+                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                            console.log('matched');
+                                            response.data[i].business_data[0].fav = 1;
+                                            break;
+                                        } else {
+                                            console.log('not matched');
+                                            response.data[i].business_data[0].fav = 0;
+                                        }
                                     }
+                                } else {
+                                    response.data[i].business_data[0].fav = 0;
                                 }
                             } else {
                                 response.data[i].business_data[0].fav = 0;
                             }
-                        } else {
-                            response.data[i].business_data[0].fav = 0;
-                        }
-                        var sum = 0;
-                        if (response.data[i].review.length > 0) {
-                            response.data[i].review.forEach(function (val, ke) {
-                                console.log(val);
-                                sum += val.stars;
-                                console.log(sum);
-                                response.data[i].avg = sum / response.data[i].review.length;
-                            })
-                        } else {
-                            response.data[i].avg = 0;
+                            
                         }
                     }
                     response.data.forEach(function (value, key) {
-                        console.log(value);
-                        console.log(key);
-                        //                            console.log(value.business_data[0].location.coordinates[1]);
-                        //                            console.log(typeof (value.business_data[0].business_type));
-                        console.log()
-                        if (value.business_data[0].business_type == 1) {
-                            console.log('if');
-                            temp.premiumBusiness.push(value);
-                        } else {
-                            console.log('else');
-                            temp.restaurantlist.push(value);
-                        }
-
+                        console.log('foreach loop')
                         value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
+                        if (value.business_data[0].business_status == true) {
+                            if (value.business_data[0].business_type == 1) {
+                                console.log('if');
+                                temp.premiumBusiness.push(value);
+                            } else {
+                                console.log('else');
+                                temp.restaurantlist.push(value);
+                                var sum = 0;
+                            if (value.review.length > 0) {
+                                 if(value.status == true){
+                                value.review.forEach(function (val, ke) {    
+                                    console.log(val);
+                                    sum += val.stars;
+                                    console.log(sum);
+                                    value.avg = sum / value.review.length;
+                                    
+                                })
+                                }
+                            } else {
+                                value.avg = 0;
+                            }
+                                
+                            }
+                        }
                     })
-                    //})
                     this.totalpageno = response.pages;
                     console.log(this.restaurantlist);
                     console.log(temp.premiumBusiness);
@@ -239,47 +249,136 @@ export class HomePage {
             })
         })
     }
-    /****** function used for autocomplete prediction ***********/
-    updateSearch() {
-        console.log('update');
-        console.log(this.autocomplete.query);
-        if (this.autocomplete.query == '') {
-            this.autocompleteItems = [];
-            return;
-        }
-        let me = this;
-        this.service.getPlacePredictions({input: this.autocomplete.query}, function (predictions, status) {
-            me.autocompleteItems = [];
-            console.log('here');
-            me.zone.run(function () {
-                predictions.forEach(function (prediction) {
-                    console.log(prediction);
-                    me.autocompleteItems.push(prediction.description);
-                });
-                console.log(me.autocompleteItems);
-            });
-        });
-    }
-    /****** function used for choose item from autocomplete prediction ***********/
-    chooseItem(item) {
-        var temp = this;
-        console.log(item);
-        this.autocomplete.query = item;
-        this.autocompleteItems = [];
-        this.geocoder.geocode({'address': item}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-                console.log(results[0].geometry.location.lat());
-                console.log(results[0].geometry.location.lng());
-                temp.latitude = results[0].geometry.location.lat();
-                temp.longitude = results[0].geometry.location.lng();
-                temp.pageno = 1;
-                temp.Getlist(temp.pageno, temp.latitude, temp.longitude);
 
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+
+    /******** Search modal ************/
+    SearchModal() {
+        var temp = this;
+        let modal = this.modalCtrl.create(SearchPage);
+        modal.onDidDismiss(data => {
+            console.log(data);
+            this.pageno = 1;
+            this.categoryid = '';
+            console.log('Search');
+            console.log(data);
+            
+            if (data != undefined) {
+                console.log(data.searchedlist);
+                let postdata;
+                let options = this.appsetting.header();
+                if (data.searchedlist.category != undefined) {
+                    data.searchedlist.category = data.searchedlist.category;
+                } else {
+                    data.searchedlist.category = '';
+                }
+                if (data.type == 'name') {
+                    this.latitude = data.searchedlist.latitude;
+                    this.longitude = data.searchedlist.longitude;
+                    postdata = {
+                        name: data.searchedlist.category,
+                        lat: data.searchedlist.latitude,
+                        long: data.searchedlist.longitude,
+                        page: this.pageno
+                    }
+                } else if (data.type == 'category') {
+                    this.latitude = data.searchedlist.latitude;
+                    this.longitude = data.searchedlist.longitude;
+                    postdata = {
+                        name: data.searchedlist.sub_category_title,
+                        lat: data.searchedlist.latitude,
+                        long: data.searchedlist.longitude,
+                        page: this.pageno
+                    }
+                } else {
+                    this.latitude = data.searchedlist.latitude;
+                    this.longitude = data.searchedlist.longitude;
+                    postdata = {
+                        name: data.searchedlist.category,
+                        lat: data.searchedlist.latitude,
+                        long: data.searchedlist.longitude,
+                        page: this.pageno
+                    }
+                }
+                console.log(postdata);
+                let serialized = this.appsetting.serializeObj(postdata);
+                this.http.post(this.appsetting.url + 'users/GetSearch', serialized, options).map(res => res.json()).subscribe(response => {
+                    console.log(response);
+                    if (response.status == true) {
+                        temp.pageno = parseInt(response.current);
+                        this.totalpageno = response.pages;
+                        if (response.data.length > 0) {
+                            console.log(response.data);
+                            this.premiumBusiness = [];
+                            this.restaurantlist = [];
+                            this.totalpageno = response.pages;
+                            this.geolocation.getCurrentPosition().then((resp) => {
+                                console.log(resp.coords.latitude);
+                                console.log(resp.coords.longitude);
+                                for (var i = 0; i < response.data.length; i++) {
+                                    if (localStorage.getItem('CurrentUser')) {
+                                        if (response.data[i].business_data[0].business_status == true) {
+                                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                            if (this.favourite.length > 0) {
+                                                for (var j = 0; j < this.favourite.length; j++) {
+                                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                                        console.log('matched');
+                                                        response.data[i].business_data[0].fav = 1;
+                                                        break;
+                                                    } else {
+                                                        console.log('not matched');
+                                                        response.data[i].business_data[0].fav = 0;
+                                                        // break;
+                                                    }
+                                                }
+                                            } else {
+                                                response.data[i].business_data[0].fav = 0;
+                                            }
+                                        }
+                                    } else {
+                                        response.data[i].business_data[0].fav = 0;
+                                    }
+                                }
+                                response.data.forEach(function (value, key) {
+                                    if (value.business_data[0].business_status == true) {
+                                        console.log(value.business_data[0].location.coordinates[1]);
+                                        if (value.business_data[0].business_type == 1) {
+                                            console.log('if');
+                                            temp.premiumBusiness.push(value);
+                                        } else {
+                                            console.log('else');
+                                            temp.restaurantlist.push(value);
+                                             var sum = 0;
+                                            if (value.review.length > 0) {
+                                                 if(value.status == true){
+                                                value.review.forEach(function (val, ke) {    
+                                                    console.log(val);
+                                                    sum += val.stars;
+                                                    console.log(sum);
+                                                    value.avg = sum / value.review.length;
+
+                                                })
+                                                }
+                                            } else {
+                                                value.avg = 0;
+                                            }
+                                        }
+                                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
+                                    }
+                                })
+                            }).catch((error) => {
+                                console.log('Error getting location', error);
+                            });
+                            // this.restaurantlist = response.data;
+                        } else {
+                            this.restaurantlist = [];
+                            this.premiumBusiness = [];
+                        }
+                    }
+                })
             }
-        });
+        })
+        modal.present();
     }
     /******** function used for open filter modal after click on header *****************/
     filterModal() {
@@ -288,39 +387,62 @@ export class HomePage {
         modal.onDidDismiss(data => {
             if (data) {
                 if (data.type == 'search') {
+                    this.pageno = 1;
                     console.log('Search');
+                    localStorage.removeItem('Seachdata');
                     if (data.searchedlist) {
                         console.log(data.searchedlist);
                         let options = this.appsetting.header();
                         let postdata = {
                             sub_cat_id: data.searchedlist.services,
                             max_distance: data.searchedlist.range,
-                            zip_code: '',
+                            zip_code: data.searchedlist.zipcode,
                             business_online: data.searchedlist.online,
                             lat: this.latitude,
-                            long: this.longitude
+                            long: this.longitude,
+                            page: this.pageno
                         }
                         let serialized = this.appsetting.serializeObj(postdata);
                         this.http.post(this.appsetting.url + 'users/filterall', serialized, options).map(res => res.json()).subscribe(response => {
                             console.log(response);
                             if (response.status == true) {
+                                temp.pageno = parseInt(response.current);
+                                this.totalpageno = response.pages;
                                 if (response.data.length > 0) {
                                     console.log(response.data);
                                     this.premiumBusiness = [];
                                     this.restaurantlist = [];
+                                    this.totalpageno = response.pages;
                                     this.geolocation.getCurrentPosition().then((resp) => {
                                         console.log(resp.coords.latitude);
                                         console.log(resp.coords.longitude);
                                         response.data.forEach(function (value, key) {
-                                            console.log(value.business_data[0].location.coordinates[1]);
-                                            if (value.business_data[0].business_type == 1) {
-                                                console.log('if');
-                                                temp.premiumBusiness.push(value);
-                                            } else {
-                                                console.log('else');
-                                                temp.restaurantlist.push(value);
+                                            if (value.business_data[0].business_status == true) {
+                                                console.log(value.business_data[0].location.coordinates[1]);
+                                                if (value.business_data[0].business_type == 1) {
+                                                    console.log('if');
+                                                    temp.premiumBusiness.push(value);
+                                                } else {
+                                                    console.log('else');
+                                                    temp.restaurantlist.push(value);
+                                                     var sum = 0;
+                                                        if (value.review.length > 0) {
+                                                             if(value.status == true){
+                                                            value.review.forEach(function (val, ke) {    
+                                                                console.log(val);
+                                                                sum += val.stars;
+                                                                console.log(sum);
+                                                                value.avg = sum / value.review.length;
+
+                                                            })
+                                                            }
+                                                        } else {
+                                                            value.avg = 0;
+                                                        }
+                                                }
+                                                value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
                                             }
-                                            value.business_data[0].distance = temp.common.distance(resp.coords.latitude, resp.coords.longitude, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
                                         })
                                     }).catch((error) => {
                                         console.log('Error getting location', error);
@@ -336,6 +458,7 @@ export class HomePage {
                 } else {
                     console.log('reset');
                     localStorage.removeItem('filterdata');
+                     localStorage.removeItem('Seachdata');
                     this.geolocation.getCurrentPosition().then((resp) => {
                         console.log('getCurrentPosition');
                         console.log(resp.coords.latitude);
@@ -366,8 +489,9 @@ export class HomePage {
                 console.log(this.modaldata);
                 if (data.bookingdata) {
                     console.log(new Date());
+                    
                     console.log(new Date(data.bookingdata.date).toISOString());
-                    var da = new Date(data.bookingdata.date).toISOString();
+                    var da = moment(new Date(data.bookingdata.date).toISOString()).locale('es').format();
                     var t = da.charAt(10);
                     var z = da.match(/.{1,16}/g);
                     console.log(da.charAt(10));
@@ -375,20 +499,21 @@ export class HomePage {
                     console.log(da);
                     var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
                     console.log(startdate);
-                    var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
-                    console.log(enddate);
+                    //                    var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
+                    //                    console.log(enddate);
                     //return false;
                     let options = this.appsetting.header();
                     let postdata = {
                         business_id: this.modaldata.business_data[0]._id,
                         order_to: this.modaldata._id,
                         order_from: user._id,
-                        orderdate: da,
+                        orderdate: startdate,
                         orderstart: startdate,
-                        orderend: enddate,
+                        orderend: '',// enddate,
                         spacial_accomodation: data.bookingdata.specialAccomo
                     }
-
+                    console.log(postdata);
+                   // return false;
                     let serialized = this.appsetting.serializeObj(postdata);
                     this.http.post(this.appsetting.url + 'orders/addOrders', serialized, options).map(res => res.json()).subscribe(response => {
                         console.log(response);
@@ -406,12 +531,12 @@ export class HomePage {
     /******** function used for social sharing *****************/
     socialsharing(name, address, image) {
         console.log(name);
-        console.log(address);
+        console.log(address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play');
         console.log(image);
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             // Check if sharing via email is supported
-            var message = address;//'Amazing restaurant';
+            var message = address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play';//'Amazing restaurant';
             var subject = name;//'Restaurant name';
             var file = '';
             var url = image.business_image;//'https://www.google.co.in';
@@ -437,10 +562,11 @@ export class HomePage {
 
     /********* function used for filter by subcat(by clicking on top scroll bar) *************/
     FilterBySubCat(id) {
-
         console.log(id);
         var temp = this;
         this.categoryid = id;
+        localStorage.removeItem('Seachdata');
+        localStorage.removeItem('filterdata');
         let options = this.appsetting.header();
         var postdata = {
             lat: this.latitude,
@@ -463,21 +589,23 @@ export class HomePage {
 
                         for (var i = 0; i < response.data.length; i++) {
                             if (localStorage.getItem('CurrentUser')) {
-                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                                if (this.favourite.length > 0) {
-                                    for (var j = 0; j < this.favourite.length; j++) {
-                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                            console.log('matched');
-                                            response.data[i].business_data[0].fav = 1;
-                                            break;
-                                        } else {
-                                            console.log('not matched');
-                                            response.data[i].business_data[0].fav = 0;
-                                            // break;
+                                if (response.data[i].business_data[0].business_status == true) {
+                                    this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                    if (this.favourite.length > 0) {
+                                        for (var j = 0; j < this.favourite.length; j++) {
+                                            if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                                console.log('matched');
+                                                response.data[i].business_data[0].fav = 1;
+                                                break;
+                                            } else {
+                                                console.log('not matched');
+                                                response.data[i].business_data[0].fav = 0;
+                                                // break;
+                                            }
                                         }
+                                    } else {
+                                        response.data[i].business_data[0].fav = 0;
                                     }
-                                } else {
-                                    response.data[i].business_data[0].fav = 0;
                                 }
                             } else {
                                 response.data[i].business_data[0].fav = 0;
@@ -490,15 +618,31 @@ export class HomePage {
                             console.log(key);
                             console.log(value.business_data[0].location.coordinates[1]);
                             console.log(typeof (value.business_data[0].business_type));
-                            if (value.business_data[0].business_type == 1) {
-                                console.log('if');
-                                temp.premiumBusiness.push(value);
-                            } else {
-                                console.log('else');
-                                temp.restaurantlist.push(value);
+                            if (value.business_data[0].business_status == true) {
+                                if (value.business_data[0].business_type == 1) {
+                                    console.log('if');
+                                    temp.premiumBusiness.push(value);
+                                } else {
+                                    console.log('else');
+                                    temp.restaurantlist.push(value);
+                                     var sum = 0;
+                                    if (value.review.length > 0) {
+                                         if(value.status == true){
+                                        value.review.forEach(function (val, ke) {    
+                                            console.log(val);
+                                            sum += val.stars;
+                                            console.log(sum);
+                                            value.avg = sum / value.review.length;
+
+                                        })
+                                        }
+                                    } else {
+                                        value.avg = 0;
+                                    }
+                                }
+                                value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
                             }
-                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-                            //})
                         })
 
                         this.totalpageno = response.pages;
@@ -631,10 +775,9 @@ export class HomePage {
     }
     /****** functions used only for getdata of restaurants when infinite scroll hit ************/
     Getdata(pageno, lat, long) {
-
         console.log('Getlist');
         var temp = this;
-        var sum = 0;
+        
         let options = this.appsetting.header();
         var postdata = {
             lat: lat,
@@ -653,60 +796,60 @@ export class HomePage {
                     console.log(response.data);
                     console.log(this.latitude);
                     console.log(this.longitude);
-                    //this.geolocation.getCurrentPosition().then((resp) => {
-                    // alert('here');
-                    //                    this.restaurantlist = [];
-                    //                    temp.premiumBusiness = [];
-                    //                        console.log(resp.coords.latitude);
-                    //                        console.log(resp.coords.longitude);
                     for (var i = 0; i < response.data.length; i++) {
                         if (localStorage.getItem('CurrentUser')) {
-                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                            if (this.favourite.length > 0) {
-                                for (var j = 0; j < this.favourite.length; j++) {
-                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                        console.log('matched');
-                                        response.data[i].business_data[0].fav = 1;
-                                        break;
-                                    } else {
-                                        console.log('not matched');
-                                        response.data[i].business_data[0].fav = 0;
-                                        // break;
+                            if (response.data[i].business_data[0].business_status == true) {
+                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                if (this.favourite.length > 0) {
+                                    for (var j = 0; j < this.favourite.length; j++) {
+                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                            console.log('matched');
+                                            response.data[i].business_data[0].fav = 1;
+                                            break;
+                                        } else {
+                                            console.log('not matched');
+                                            response.data[i].business_data[0].fav = 0;
+                                            // break;
+                                        }
                                     }
+                                } else {
+                                    response.data[i].business_data[0].fav = 0;
                                 }
-                            } else {
-                                response.data[i].business_data[0].fav = 0;
                             }
                         } else {
                             response.data[i].business_data[0].fav = 0;
-                        }
-                        if (response.data[i].review.length > 0) {
-                            response.data[i].review.forEach(function (val, ke) {
-                                console.log(val);
-                                sum += val.stars;
-                                console.log(sum);
-                                response.data[i].avg = sum / response.data[i].review.length;
-                            })
-                        } else {
-                            response.data[i].avg = 0;
                         }
                     }
 
                     response.data.forEach(function (value, key) {
                         console.log(value);
                         console.log(key);
-                        if (value.business_data[0].business_type == 1) {
-                            console.log('if');
-                            temp.premiumBusiness.push(value);
-                        } else {
-                            console.log('else');
-                            temp.restaurantlist.push(value);
+                        var sum = 0;
+                        if (value.business_data[0].business_status == true) {
+                            if (value.business_data[0].business_type == 1) {
+                                console.log('if');
+                                temp.premiumBusiness.push(value);
+                            } else {
+                                console.log('else');
+                                temp.restaurantlist.push(value);
+                                 if (value.review.length > 0) {
+                                 if(value.status == true){
+                                value.review.forEach(function (val, ke) {    
+                                    console.log(val);
+                                    sum += val.stars;
+                                    console.log(sum);
+                                    value.avg = sum / value.review.length;
+                                    
+                                })
+                                }
+                            } else {
+                                value.avg = 0;
+                            }
+                            }
+                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
                         }
-                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-
-
                     })
-
 
                     this.totalpageno = response.pages;
                     console.log(this.restaurantlist);
@@ -725,94 +868,385 @@ export class HomePage {
             this.class = 'slideOutRight';
             console.log('true');
         } else {
-            this.name = 'By location';
+            this.name = 'Location';
             this.class = 'slideInRight';
             this.show = true;
             console.log('false');
 
         }
-         console.log(this.name);
+        console.log(this.name);
     }
-    Searchbyname(text) {
-        console.log(text);
+//    Searchbyname(text) {
+//        console.log(text.value);
+//        var temp = this;
+//        this.categoryid = '';
+//        var sum = 0;
+//        let options = this.appsetting.header();
+//        var postdata = {
+//            name: text.value.searchname
+//        }
+//        console.log(postdata);
+//        var serialized = this.appsetting.serializeObj(postdata);
+//        var Loading = this.loadingCtrl.create({
+//            spinner: 'bubbles',
+//            content: 'Loading...'
+//        });
+//        Loading.present().then(() => {
+//            this.http.post(this.appsetting.url + 'users/GetSearch', serialized, options).map(res => res.json()).subscribe(response => {
+//                console.log(response);
+//                Loading.dismiss();
+//                if (response.status == true) {
+//                    this.premiumBusiness = [];
+//                    this.restaurantlist = [];
+//                    this.pageno = 1;
+//                    this.totalpageno = 1;
+//                    for (var i = 0; i < response.data.length; i++) {
+//                        if (localStorage.getItem('CurrentUser')) {
+//                            if (response.data[i].business_data[0].business_status == true) {
+//                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+//                                if (this.favourite.length > 0) {
+//                                    for (var j = 0; j < this.favourite.length; j++) {
+//                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+//                                            console.log('matched');
+//                                            response.data[i].business_data[0].fav = 1;
+//                                            break;
+//                                        } else {
+//                                            console.log('not matched');
+//                                            response.data[i].business_data[0].fav = 0;
+//                                            // break;
+//                                        }
+//                                    }
+//                                } else {
+//                                    response.data[i].business_data[0].fav = 0;
+//                                }
+//                            }
+//                        } else {
+//                            response.data[i].business_data[0].fav = 0;
+//                        }
+//                        if (response.data[i].review.length > 0) {
+//                            response.data[i].review.forEach(function (val, ke) {
+//                                console.log(val);
+//                                sum += val.stars;
+//                                console.log(sum);
+//                                response.data[i].avg = sum / response.data[i].review.length;
+//                            })
+//                        } else {
+//                            response.data[i].avg = 0;
+//                        }
+//                    }
+//                    response.data.forEach(function (value, key) {
+//                        console.log(value);
+//                        console.log(key);
+//                        if (value.business_data[0].business_status == true) {
+//                            if (value.business_data[0].business_type == 1) {
+//                                console.log('if');
+//                                temp.premiumBusiness.push(value);
+//                            } else {
+//                                console.log('else');
+//                                temp.restaurantlist.push(value);
+//                            }
+//                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+//
+//                        }
+//                    })
+//                } else {
+//                    this.common.presentAlert('Search', response.message);
+//                }
+//            })
+//        })
+//    }
+    Filter() {
         var temp = this;
-        this.categoryid = '';
         var sum = 0;
+        var da = JSON.parse(localStorage.getItem('filterdata'));
+        console.log(da);
         let options = this.appsetting.header();
-        var postdata = {
-            name: text
+        let postdata = {
+            sub_cat_id: da.services,
+            max_distance: da.range,
+            zip_code: da.zipcode,
+            business_online: da.online,
+            lat: this.latitude,
+            long: this.longitude,
+            page: this.pageno
         }
-        console.log(postdata);
-        var serialized = this.appsetting.serializeObj(postdata);
-        var Loading = this.loadingCtrl.create({
-            spinner: 'bubbles',
-            content: 'Loading...'
-        });
-        Loading.present().then(() => {
-            this.http.post(this.appsetting.url + 'users/Searchbyname', serialized, options).map(res => res.json()).subscribe(response => {
-                console.log(response);
-                Loading.dismiss();
-                if (response.status == true) {
-                    this.premiumBusiness = [];
-                    this.restaurantlist = [];
-                    for (var i = 0; i < response.data.length; i++) {
+        let serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'users/filterall', serialized, options).map(res => res.json()).subscribe(response => {
+            console.log(response);
+            if (response.status == true) {
+                //temp.pageno = response.current;
+                this.totalpageno = response.pages;
+                if (response.data.length > 0) {
+                    console.log(response.data);
+//                    this.premiumBusiness = [];
+//                    this.restaurantlist = [];
+                    this.totalpageno = response.pages;
+                    this.geolocation.getCurrentPosition().then((resp) => {
+                        console.log(resp.coords.latitude);
+                        console.log(resp.coords.longitude);
+                        for (var i = 0; i < response.data.length; i++) {
                         if (localStorage.getItem('CurrentUser')) {
-                            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                            if (this.favourite.length > 0) {
-                                for (var j = 0; j < this.favourite.length; j++) {
-                                    if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-                                        console.log('matched');
-                                        response.data[i].business_data[0].fav = 1;
-                                        break;
-                                    } else {
-                                        console.log('not matched');
-                                        response.data[i].business_data[0].fav = 0;
-                                        // break;
+                            if (response.data[i].business_data[0].business_status == true) {
+                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                if (this.favourite.length > 0) {
+                                    for (var j = 0; j < this.favourite.length; j++) {
+                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                            console.log('matched');
+                                            response.data[i].business_data[0].fav = 1;
+                                            break;
+                                        } else {
+                                            console.log('not matched');
+                                            response.data[i].business_data[0].fav = 0;
+                                            // break;
+                                        }
                                     }
+                                } else {
+                                    response.data[i].business_data[0].fav = 0;
                                 }
-                            } else {
-                                response.data[i].business_data[0].fav = 0;
                             }
                         } else {
                             response.data[i].business_data[0].fav = 0;
                         }
-                        if (response.data[i].review.length > 0) {
-                            response.data[i].review.forEach(function (val, ke) {
-                                console.log(val);
-                                sum += val.stars;
-                                console.log(sum);
-                                response.data[i].avg = sum / response.data[i].review.length;
-                            })
-                        } else {
-                            response.data[i].avg = 0;
-                        }
+                       
                     }
-                    response.data.forEach(function (value, key) {
-                        console.log(value);
-                        console.log(key);
-                        if (value.business_data[0].business_type == 1) {
-                            console.log('if');
-                            temp.premiumBusiness.push(value);
-                        } else {
-                            console.log('else');
-                            temp.restaurantlist.push(value);
-                        }
-                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-                    })
-                } else {
-                    this.common.presentAlert('Search', response.message);
-                }
+                        response.data.forEach(function (value, key) {
+                            if (value.business_data[0].business_status == true) {
+                                console.log(value.business_data[0].location.coordinates[1]);
+                                if (value.business_data[0].business_type == 1) {
+                                    console.log('if');
+                                    temp.premiumBusiness.push(value);
+                                } else {
+                                    console.log('else');
+                                    temp.restaurantlist.push(value);
+                                     var sum = 0;
+                                    if (value.review.length > 0) {
+                                         if(value.status == true){
+                                        value.review.forEach(function (val, ke) {    
+                                            console.log(val);
+                                            sum += val.stars;
+                                            console.log(sum);
+                                            value.avg = sum / value.review.length;
 
-            })
+                                        })
+                                        }
+                                    } else {
+                                        value.avg = 0;
+                                    }
+                                }
+                                value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
+                            }
+                        })
+                    }).catch((error) => {
+                        console.log('Error getting location', error);
+                    });
+                    // this.restaurantlist = response.data;
+                } else {
+                    this.restaurantlist = [];
+                    this.premiumBusiness = [];
+                }
+            }
         })
     }
+
+    SearchbyCategory(formdata) {
+        var temp = this;
+        console.log(formdata);
+        this.data.term = formdata.sub_category_title;
+        this.categorydata = [];
+        let options = this.appsetting.header();
+        let postdata = {
+            sub_cat_id: formdata._id,
+            max_distance: '',
+            zip_code: '',
+            business_online: '',
+            lat: this.latitude,
+            long: this.longitude,
+            pages: this.pageno
+        }
+        let serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'users/filterall', serialized, options).map(res => res.json()).subscribe(response => {
+            console.log(response);
+            if (response.status == true) {
+                //temp.pageno = response.current;
+                this.totalpageno = response.pages;
+                if (response.data.length > 0) {
+                    console.log(response.data);
+                    this.premiumBusiness = [];
+                    this.restaurantlist = [];
+                    this.totalpageno = response.pages;
+                    this.geolocation.getCurrentPosition().then((resp) => {
+                        console.log(resp.coords.latitude);
+                        console.log(resp.coords.longitude);
+                        response.data.forEach(function (value, key) {
+                            if (value.business_data[0].business_status == true) {
+                                console.log(value.business_data[0].location.coordinates[1]);
+                                if (value.business_data[0].business_type == 1) {
+                                    console.log('if');
+                                    temp.premiumBusiness.push(value);
+                                } else {
+                                    console.log('else');
+                                    temp.restaurantlist.push(value);
+                                     var sum = 0;
+                                    if (value.review.length > 0) {
+                                         if(value.status == true){
+                                        value.review.forEach(function (val, ke) {    
+                                            console.log(val);
+                                            sum += val.stars;
+                                            console.log(sum);
+                                            value.avg = sum / value.review.length;
+
+                                        })
+                                        }
+                                    } else {
+                                        value.avg = 0;
+                                    }
+                                }
+                                value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
+                            }
+                        })
+                    }).catch((error) => {
+                        console.log('Error getting location', error);
+                    });
+                    // this.restaurantlist = response.data;
+                } else {
+                    this.restaurantlist = [];
+                    this.premiumBusiness = [];
+                }
+            }
+        })
+    }
+
+    /******* This function is used for infinite scroll if user search *****************/
+    SeachInfinite() {
+        var temp = this;
+        console.log('Search');
+        this.searchd = JSON.parse(localStorage.getItem('Seachdata'));
+        console.log(this.searchd);
+        if (this.searchd != undefined) {
+            console.log(this.searchd);
+            let postdata;
+            let options = this.appsetting.header();
+            if (this.searchd.type == "name") {
+                this.searchd.category = this.searchd.category;
+            }else if (this.searchd.type == "category"){
+                this.searchd.category = this.searchd.sub_category_title;
+            } else if(this.searchd.type == "location"){
+                if(this.searchd.category){
+                    this.searchd.category = this.searchd.category;
+                }else{
+                    this.searchd.category = '';
+                }
+                
+            }else{
+                this.searchd.category = '';
+            }
+                this.latitude = this.searchd.latitude;
+                this.longitude = this.searchd.longitude;
+                postdata = {
+                    name: this.searchd.category,
+                    lat: this.searchd.latitude,
+                    long: this.searchd.longitude,
+                    page: this.pageno
+                }
+            
+            console.log(postdata);
+            let serialized = this.appsetting.serializeObj(postdata);
+            this.http.post(this.appsetting.url + 'users/GetSearch', serialized, options).map(res => res.json()).subscribe(response => {
+                console.log(response);
+                if (response.status == true) {
+                    //this.pageno = response.current;
+                    //this.totalpageno = response.pages;
+                    if (response.data.length > 0) {
+                        console.log(response.data);
+//                        this.premiumBusiness = [];
+//                        this.restaurantlist = [];
+                        this.totalpageno = response.pages;
+                        this.geolocation.getCurrentPosition().then((resp) => {
+                            console.log(resp.coords.latitude);
+                            console.log(resp.coords.longitude);
+                            for (var i = 0; i < response.data.length; i++) {
+                                if (localStorage.getItem('CurrentUser')) {
+                                    if (response.data[i].business_data[0].business_status == true) {
+                                        this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                        if (this.favourite.length > 0) {
+                                            for (var j = 0; j < this.favourite.length; j++) {
+                                                if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
+                                                    console.log('matched');
+                                                    response.data[i].business_data[0].fav = 1;
+                                                    break;
+                                                } else {
+                                                    console.log('not matched');
+                                                    response.data[i].business_data[0].fav = 0;
+                                                    // break;
+                                                }
+                                            }
+                                        } else {
+                                            response.data[i].business_data[0].fav = 0;
+                                        }
+                                    }
+                                } else {
+                                    response.data[i].business_data[0].fav = 0;
+                                }
+                            }
+                            response.data.forEach(function (value, key) {
+                                if (value.business_data[0].business_status == true) {
+                                    console.log(value.business_data[0].location.coordinates[1]);
+                                    if (value.business_data[0].business_type == 1) {
+                                        console.log('if');
+                                        temp.premiumBusiness.push(value);
+                                    } else {
+                                        console.log('else');
+                                        temp.restaurantlist.push(value);
+                                         var sum = 0;
+                                            if (value.review.length > 0) {
+                                                 if(value.status == true){
+                                                value.review.forEach(function (val, ke) {    
+                                                    console.log(val);
+                                                    sum += val.stars;
+                                                    console.log(sum);
+                                                    value.avg = sum / value.review.length;
+
+                                                })
+                                                }
+                                            } else {
+                                                value.avg = 0;
+                                            }
+                                    }
+                                    value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
+                                }
+                            })
+                        }).catch((error) => {
+                            console.log('Error getting location', error);
+                        });
+                        // this.restaurantlist = response.data;
+                    } else {
+                        this.restaurantlist = [];
+                        this.premiumBusiness = [];
+                    }
+                }
+            })
+        }
+    }
+
+
+
+    /************ End *********************/
     /****** functions used for getlist on refresh ************/
     doRefresh(refresher) {
         console.log('Begin async operation', refresher);
         //this.getSubCatList();
+        localStorage.removeItem('filterdata');
+        localStorage.removeItem('Seachdata');
         this.pageno = 1;
         this.categoryid = '';
+        this.geolocation.getCurrentPosition().then((resp) => {
+        this.latitude = resp.coords.latitude;
+        this.longitude = resp.coords.longitude;
         this.Getlist(this.pageno, this.latitude, this.longitude);
+         })
         setTimeout(() => {
             console.log('Async operation has ended');
             refresher.complete();
@@ -824,17 +1258,26 @@ export class HomePage {
         this.pageno = this.pageno + 1;
         console.log(this.totalpageno)
         console.log(this.pageno)
+        if (localStorage.getItem('filterdata')) {
+            if (this.pageno <= this.totalpageno) {
+            this.Filter();
+            }
+        } else if (localStorage.getItem('Seachdata')) {
         if (this.pageno <= this.totalpageno) {
-            this.Getdata(this.pageno, this.latitude, this.longitude);
+            this.SeachInfinite();
+        }
         } else {
-            //this.pageno = 1;
-            console.log('No more data to load');
+            if (this.pageno <= this.totalpageno) {
+                this.Getdata(this.pageno, this.latitude, this.longitude);
+            } else {
+                //this.pageno = 1;
+                console.log('No more data to load');
+            }
         }
         setTimeout(() => {
             console.log('Async operation has ended');
             infiniteScroll.complete();
         }, 500);
     }
-
 
 }

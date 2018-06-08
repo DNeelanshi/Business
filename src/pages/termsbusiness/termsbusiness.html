@@ -18,10 +18,10 @@
 
 <ion-content>
     <div class="banner">
-        <img [src]="terms?.pageimage" (load)="terms.loaded = true" [hidden]="!terms?.loaded" >
-             <img src="assets/imgs/no-image.png" [hidden]="terms?.loaded">
+<!--        <img [src]="terms?.pageimage" (load)="terms.loaded = true" [hidden]="!terms?.loaded" >-->
+<!--             <img src="assets/imgs/no-image.png" [hidden]="terms?.loaded">-->
       </div>
       <div class="contant-sec" padding>
 <!--        <h2>Dummy text of the printing</h2>-->
-<p [innerHTML]="terms?.pagedata"></p></div>
+<div class="pcontent" [innerHTML]="terms?.pagedata"></div></div>
 </ion-content>

@@ -1,4 +1,16 @@
 page-review {
+	.bottom_sec{
+		width: 100%;
+		float: left;
+		position: absolute;
+		bottom: 0px;
+		left: 0;
+		right: 0;
+		margin: auto;
+		padding: 15px;
+                background-color: #fff;
+                z-index: 99999;
+	}
     .content h2 {@extend .fontheadding16px; font-weight: 700; margin-bottom: 5px;}
      h5{
         width: 100%;
@@ -27,6 +39,7 @@ page-review {
         font-weight: 700;
         font-size: 20px;
     }
+    
     .item{
         padding: 0;
     }
@@ -69,7 +82,8 @@ page-review {
 	.top{
 		width: 100%;
 	    float: left;
-	    padding: 10px 0px 0px 0px;
+		padding: 10px 0px 0px 0px;
+		margin-bottom: 10px;
 	   
 	}
 	.top .list{
@@ -135,7 +149,9 @@ page-review {
 		width: 100%;
 		float: left;
 		padding-top: 4px;
-	    margin-bottom: 15vh;
+		max-height: calc(100% - 293px);
+		overflow: hidden;
+		overflow-y: scroll;
 	}
 	.bottom .list{
 		margin: 0;
@@ -149,7 +165,7 @@ page-review {
    .item ion-thumbnail {
 		width: 55px !important;
 		height: 55px !important;
-		margin: 0 8px 0 0 !important;
+/*		margin: 0 8px 0 0 !important;*/
         min-width: auto;
         min-height: auto;
 
@@ -171,6 +187,16 @@ page-review {
 		color:#6a6a6a;
 		float: right;
 	}
+        .bottom ul{
+            margin-top: 0;
+        }
+        .bottom ul li .icon{            
+                font-size: 14px;            
+        }
+        .bottom .item{
+            align-items: start;
+        }
+        
 	.bottom p{
 		width: 100%;
 		float: left;

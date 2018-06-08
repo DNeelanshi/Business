@@ -1,4 +1,25 @@
 page-home {
+    .buttonout{
+        width: 100%;
+        float: left;
+        padding: 4px 8px;
+        
+        .button{
+            background: transparent;
+            border: 1px solid #ccc;
+            color: #828282;
+            //text-transform: capitalize;
+            font-weight: 400;
+            font-size: 14px;
+            padding-left: 6px;
+            
+            
+            span{
+                justify-content: left;
+                text-transform: capitalize;
+            }
+        }
+    }
     ion-slides{
         height: 160px;
         float: left;
@@ -65,9 +86,9 @@ ul.rating[_ngcontent-c1] .ion-ios-star-outline{
         width: 100%;
         float: left;
     }
-    .brfone .searchbar-clear-icon{
+/*    .brfone .searchbar-clear-icon{
         display: none !important;
-    }
+    }*/
     .searchtogle {
         position: absolute;
         left: 0;
@@ -76,8 +97,8 @@ ul.rating[_ngcontent-c1] .ion-ios-star-outline{
         z-index: 9999;
     }
     .searchtogle .item{
-        font-size: 12px;
-        min-height: 25px;
+        font-size: 14px;
+    min-height: 30px;
     }
     .searchtogle .label{
         margin-top: 5px;
@@ -93,7 +114,7 @@ ul.rating[_ngcontent-c1] .ion-ios-star-outline{
     .searchbar {
         background: #fff;
     }
-    .searchouter p{
+    .searchouter .disab{
         width: 77px;
         float: right;
         line-height: 27px;
@@ -105,6 +126,10 @@ ul.rating[_ngcontent-c1] .ion-ios-star-outline{
         overflow: hidden;
         border: 1px solid #3cc602;
         color: #fff;
+        height: 30px;
+    }
+    .searchouter .disab.activated{
+        background-color: #298602;
     }
     .gosrch {
         position: absolute;

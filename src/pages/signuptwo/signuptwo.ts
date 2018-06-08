@@ -134,14 +134,14 @@ export class SignuptwoPage {
             if (formdata.value.password.indexOf(' ') != 0) {
                 let options = this.appsetting.header();
                 this.fcm.getToken().then(token => {
-                    console.log('Tokenid-->' + token);
+                    //console.log('Tokenid-->' + token);
                     var postdata = {
                         firstname: formdata.value.fname,
                         lastname: formdata.value.lname,
                         email: formdata.value.email,
                         phone_number: formdata.value.phone,
                         role: 'business',
-                        divice_token: token,
+                        divice_token:token,
                         password: formdata.value.password
                     }
                     var serialized = this.appsetting.serializeObj(postdata);

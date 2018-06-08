@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import {Http} from '@angular/http';
 import {Appsetting} from '../../providers/appsetting';
+import {Common} from '../../providers/common';
 
 /**
  * Generated class for the TermsPage page.
@@ -23,12 +24,15 @@ terms;
       public navParams: NavParams,
       private http: Http,
       public appsetting: Appsetting,
+       public common: Common,
+       public loadingCtrl:LoadingController
       ) {
       
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsPage');
+     clearInterval(this.common.interval);
     if(localStorage.getItem('CurrentUser')){
     this.role = JSON.parse(localStorage.getItem('CurrentUser')).role;
     console.log(JSON.parse(localStorage.getItem('CurrentUser')));
@@ -53,8 +57,15 @@ terms;
         } 
         }
         var serialized = this.appsetting.serializeObj(postdata);
+        var Loading = this.loadingCtrl.create({
+                spinner: 'bubbles',
+                content: 'Loading...'
+            });
+            Loading.present().then(() => {
+                
         this.http.post(this.appsetting.url + 'static/getstaticpagedata',serialized,options).map(res => res.json()).subscribe(response => {
             console.log(response);
+            Loading.dismiss();
             if(response.status == true){
                 if(response.data[0].pageimage){
                     response.data[0].loaded = true;
@@ -67,5 +78,6 @@ terms;
             }
             
         })
+            })
     }
 }

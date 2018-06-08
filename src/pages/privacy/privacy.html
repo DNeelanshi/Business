@@ -15,11 +15,11 @@
 
 <ion-content>
     <div class="banner">
-        <img [src]="privacy?.pageimage" (load)="privacy.loaded = true" [hidden]="!privacy?.loaded" >
-        <img src="assets/imgs/loader.gif" [hidden]="privacy?.loaded">
+<!--        <img [src]="privacy?.pageimage" (load)="privacy.loaded = true" [hidden]="!privacy?.loaded" >-->
+<!--        <img src="assets/imgs/loader.gif" [hidden]="privacy?.loaded">-->
     </div>
     <div class="contant-sec" padding>
         <!--    <h2>Dummy text of the printing</h2>-->
-        <p [innerHTML]="privacy?.pagedata"></p>
+        <div class="pcontent" [innerHTML]="privacy?.pagedata"></div>
     </div>
 </ion-content>

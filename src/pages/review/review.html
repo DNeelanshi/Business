@@ -23,6 +23,8 @@
 		    <h2 color="green">{{resdetail?.business_data[0].business_name}}</h2>
 			<h3 *ngIf="truncating && resdetail?.business_data[0].business_description.length > limit" [innerHTML]="resdetail?.business_data[0].business_description | truncate : 80">
                         </h3>
+                    <h3 *ngIf="truncating && resdetail?.business_data[0].business_description.length < limit" [innerHTML]="resdetail?.business_data[0].business_description">
+                        </h3>
                     <button ion-button clear *ngIf="truncating && resdetail?.business_data[0].business_description.length > limit" ion-button (click)="truncating = false">Show more</button>
                     <h3 *ngIf="!truncating && resdetail?.business_data[0].business_description.length > limit" [innerHTML]="resdetail?.business_data[0].business_description">
                              <button ion-button (click)="truncating = true">show less</button>
@@ -31,8 +33,8 @@
 		      <div class="btn" item-end *ngIf="resdetail?.review">
 		      	<rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="data.rate" name="rate">
                         </rating>
-                          <h4 *ngIf="resdetail?.review.length>0">{{resdetail?.review.length}} Reviews</h4>
-                          <h4 *ngIf="resdetail?.review.length == 0">0 Review</h4>
+                          <h4 *ngIf="details?.length>0">{{details?.length}} Reviews</h4>
+                          <h4 *ngIf="details?.length == 0">0 Review</h4>
 		      </div>     
 		 
 		  </ion-item>
@@ -40,14 +42,19 @@
 	</div>
     <div class="bottom">
 		<ion-list>
-		  <ion-item *ngFor="let reviews of resdetail?.review">
-		    <ion-thumbnail item-start>
+		  <ion-item *ngFor="let reviews of details">
+		    <ion-thumbnail item-start *ngIf="reviews.status == true">
 		        <img *ngIf="reviews.profile_pic" [src]="reviews.profile_pic">
                         <img *ngIf="!reviews.profile_pic" src="assets/imgs/user.png">
 		    </ion-thumbnail>
-		    <h2>{{reviews.firstname}} {{reviews.lastname}} <span>{{reviews.created_at | date:"shortDate"}}</span></h2>
-		    <p style="padding-bottom: 10px;">{{reviews.comment}}</p>
-                    <div class="rply">
+                      <h2 *ngIf="reviews.status == true">
+                          <strong *ngIf="reviews.firstname">{{reviews.firstname}} {{reviews.lastname}}</strong>
+                           <strong *ngIf="!reviews.firstname">Unknown user</strong>
+                          <span>{{reviews.created_at | date:"shortDate"}}</span></h2>
+		    <rating *ngIf="reviews.status == true" readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="reviews.stars" name="rate">
+                        </rating>
+                      <p *ngIf="reviews.status == true" style="padding-bottom: 10px;">{{reviews.comment}}</p>
+                    <div class="rply" *ngIf="reviews.status == true">
                         <h5>REPLY</h5>       
                         <p *ngIf="reviews.reply.length>0">{{reviews.reply[0].comment}}</p>
                     </div>
@@ -68,7 +75,7 @@
 		  </ion-item>-->
 		</ion-list>
 	</div>
-    <form [formGroup]="ReviewForm" (submit)="MakeReview(ReviewForm)">
+    <form class="bottom_sec" [formGroup]="ReviewForm" (submit)="MakeReview(ReviewForm)">
   <h2>Please rate your experience</h2>
   <rating readOnly="false" max="5" emptyStarIconName="star-outline" starIconName="star" formControlName="rating"
         nullable="false" (ngModelChange)="onModelChange($event)">

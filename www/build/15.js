@@ -1,14 +1,14 @@
 webpackJsonp([15],{
 
-/***/ 861:
+/***/ 871:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OurtalkreplyPageModule", function() { return OurtalkreplyPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivacytwoPageModule", function() { return PrivacytwoPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ourtalkreply__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__privacytwo__ = __webpack_require__(183);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var OurtalkreplyPageModule = (function () {
-    function OurtalkreplyPageModule() {
+var PrivacytwoPageModule = (function () {
+    function PrivacytwoPageModule() {
     }
-    OurtalkreplyPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+    PrivacytwoPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__ourtalkreply__["a" /* OurtalkreplyPage */],
+                __WEBPACK_IMPORTED_MODULE_2__privacytwo__["a" /* PrivacytwoPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__ourtalkreply__["a" /* OurtalkreplyPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__privacytwo__["a" /* PrivacytwoPage */]),
             ],
         })
-    ], OurtalkreplyPageModule);
-    return OurtalkreplyPageModule;
+    ], PrivacytwoPageModule);
+    return PrivacytwoPageModule;
 }());
 
-//# sourceMappingURL=ourtalkreply.module.js.map
+//# sourceMappingURL=privacytwo.module.js.map
 
 /***/ })
 

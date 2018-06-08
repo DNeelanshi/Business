@@ -1,4 +1,4 @@
-.fontsize, page-getstart .vcenter p, page-signup .loginform p {
+.fontsize, page-signup .loginform p {
   color: #fefefe;
   margin-bottom: 0;
   font-size: 12px;
@@ -14,7 +14,7 @@
   color: #000;
 }
 
-.fontheadding16px, page-addbusiness h2, page-booknow h2, page-editbusiness h2, page-editprofile .head-sec h2, page-editprofile .input-sec h2, page-editprofiletwo .head-sec h2, page-editprofiletwo .input-sec h2, page-filter .loginform h2, page-history .item h2, page-historytwo .item h2, page-home .productlist .item h2, page-login .loginform p, page-login h2, page-logintwo .loginform p, page-ourtalkreply .mytlk .item h2, page-ourtalkreply .bottom-sec .item h2, page-privacy .contant-sec h2, page-realtalk .item h2, page-realtalk .newtalk h2, page-reservations .item h2, page-review .content h2, page-reviews2 .content h2, page-signuptwo .loginform h5, page-signuptwo .loginform p, page-talkreply .mytlk .item h2, page-talkreply .bottom-sec .item h2, page-terms .contant-sec h2, page-termsbusiness .contant-sec h2, page-viewfavorites .item h2, page-viewproduct .product_content .item h1, page-viewreservation .item h2, page-viewreservationtwo .item h2 {
+.fontheadding16px, page-addbusiness h2, page-booknow h2, page-editbusiness h2, page-editprofile .head-sec h2, page-editprofile .input-sec h2, page-editprofiletwo .head-sec h2, page-editprofiletwo .input-sec h2, page-filter .loginform h2, page-history .item h2, page-historytwo .item h2, page-home .productlist .item h2, page-login .loginform p, page-login h2, page-logintwo .loginform p, page-ourtalkreply .mytlk .item h2, page-ourtalkreply .bottom-sec .item h2, page-privacy .contant-sec h2, page-realtalk .item h2, page-realtalk .newtalk h2, page-reservations .item h2, page-review .content h2, page-reviews2 .content h2, page-search .loginform h2, page-signuptwo .loginform h5, page-signuptwo .loginform p, page-talkreply .mytlk .item h2, page-talkreply .bottom-sec .item h2, page-terms .contant-sec h2, page-termsbusiness .contant-sec h2, page-viewfavorites .item h2, page-viewproduct .product_content .item h1, page-viewreservation .item h2, page-viewreservationtwo .item h2 {
   font-size: 17px;
   font-weight: 500;
   color: #000;
@@ -26,7 +26,7 @@
   color: #434343;
 }
 
-.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-ourtalkreply .mytlk .item p, page-ourtalkreply .bottom-sec h2 span, page-ourtalkreply .bottom-sec .item p, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-talkreply .mytlk .item p, page-talkreply .bottom-sec h2 span, page-talkreply .bottom-sec .item p, page-terms .contant-sec p, page-termsbusiness .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
+.fontheadding12px, page-addbusiness p, page-addbusiness .text-input, page-addbusiness .item .label, page-addbusiness .item .datetime, page-addbusiness .select-text, page-booknow p, page-changepassword .chngpwd p, page-editbusiness p, page-editbusiness .text-input, page-editbusiness .item .label, page-editbusiness .item .datetime, page-editbusiness .select-text, page-editprofile .label, page-editprofiletwo .label, page-filter .loginform p, page-forgot .text-input, page-history .item p, page-historytwo .item p, page-home .productlist .item p, page-home .productlist .item h4, page-ourtalkreply .mytlk .item p, page-ourtalkreply .bottom-sec h2 span, page-ourtalkreply .bottom-sec .item p, page-privacy .contant-sec p, page-realtalk .item p, page-realtalk .category .item .label, page-reservations .item p, page-reservations .item h5, page-reviews2 .content p, page-reviews2 h2 span, page-search .loginform p, page-talkreply .mytlk .item p, page-talkreply .bottom-sec h2 span, page-talkreply .bottom-sec .item p, page-terms .contant-sec p, page-termsbusiness .contant-sec p, page-viewfavorites .item p, page-viewproduct .product_content .item p, page-viewreservation .item p, page-viewreservationtwo .item p {
   font-size: 15px;
   font-weight: 400;
   color: #434343;
@@ -40004,6 +40004,10 @@ ion-navbar.toolbar {
   background: #008000;
 }
 
+.btn2.activated {
+  background: #008000;
+}
+
 .btn3 {
   min-height: 25px;
   height: 3.2rem;
@@ -40142,6 +40146,24 @@ ul.rating[_ngcontent-c1] .ion-ios-star-outline {
   color: #000;
 }
 
+.logoutclass .item-inner {
+  background-image: none !important;
+}
+
+page-addbusiness .datetime-text {
+  text-align: right;
+}
+
+page-addbusiness .day-frmt {
+  width: 100%;
+  float: left;
+  margin-bottom: 9px;
+}
+
+page-addbusiness .day-frmt .item {
+  margin-bottom: 6px;
+}
+
 page-addbusiness .catoption {
   width: 100%;
   right: 0;
@@ -40150,7 +40172,7 @@ page-addbusiness .catoption {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin-right: -14px;
+  margin-right: -7px;
   text-align: right;
 }
 
@@ -40384,6 +40406,26 @@ page-addbusiness .photosec h2 .button .icon {
   color: #fff;
 }
 
+page-addbusiness .photosec .image-wrapper {
+  width: 100%;
+  float: left;
+  height: 100px;
+}
+
+page-addbusiness .photosec .image-wrapper img {
+  width: 100%;
+  float: left;
+  height: 100%;
+}
+
+page-addbusiness .photosec .image-wrapper .delete-img {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+}
+
 page-addbusiness .btnsec {
   width: 100%;
   float: left;
@@ -40419,6 +40461,19 @@ page-addbusiness .ion-md-add:before {
 
 page-addbusiness .ion-md-close:before {
   content: "\f406" !important;
+}
+
+page-addbusiness .check_box {
+  padding: 0;
+  background: transparent;
+  border: none !important;
+  margin-bottom: 5px;
+}
+
+page-addbusiness .check_box .label {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #000 !important;
 }
 
 page-booknow .show-page {
@@ -40626,6 +40681,20 @@ page-changepassword .strnth {
   width: 144px;
   float: left;
   margin: 0;
+  margin-bottom: 6px;
+}
+
+page-editbusiness .datetime-text {
+  text-align: right;
+}
+
+page-editbusiness .day-frmt {
+  width: 100%;
+  float: left;
+  margin-bottom: 9px;
+}
+
+page-editbusiness .day-frmt .item {
   margin-bottom: 6px;
 }
 
@@ -40865,6 +40934,13 @@ page-editbusiness .photosec .image-wrapper {
 page-editbusiness .photosec .image-wrapper {
   width: 100%;
   float: left;
+  height: 100px;
+}
+
+page-editbusiness .photosec .image-wrapper img {
+  width: 100%;
+  float: left;
+  height: 100%;
 }
 
 page-editbusiness .photosec .image-wrapper .delete-img {
@@ -40872,6 +40948,7 @@ page-editbusiness .photosec .image-wrapper .delete-img {
   right: 3px;
   top: 3px;
   width: 12px;
+  height: 12px;
 }
 
 page-editbusiness .btnsec {
@@ -40926,6 +41003,19 @@ page-editbusiness .checkbox-checked {
 page-editbusiness .item .datetime {
   padding: 0 0 0 0 !important;
   width: 87%;
+}
+
+page-editbusiness .check_box {
+  padding: 0;
+  background: transparent;
+  border: none !important;
+  margin-bottom: 5px;
+}
+
+page-editbusiness .check_box .label {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #000 !important;
 }
 
 page-editprofile .head-sec {
@@ -41026,6 +41116,12 @@ page-editprofiletwo .head-sec .image-wrapper {
   overflow: hidden;
   border: 3px solid #4ae742;
   margin: auto;
+}
+
+page-editprofiletwo .head-sec .image-wrapper img {
+  width: 100%;
+  float: left;
+  height: 100%;
 }
 
 page-editprofiletwo .head-sec h2 {
@@ -41347,14 +41443,10 @@ page-getstart .getbg {
   background: url(../assets/imgs/bg1.jpg) no-repeat;
   background-size: cover;
   height: 100%;
+  background-position: top center;
 }
 
 page-getstart .vcenter {
-  position: absolute;
-  /*    top: 0;*/
-  left: 0;
-  bottom: 0;
-  right: 0;
   margin: auto;
   height: -webkit-min-content;
   height: -moz-min-content;
@@ -41362,16 +41454,22 @@ page-getstart .vcenter {
   text-align: center;
   padding: 15px;
   padding-bottom: 5px !important;
+  position: absolute;
+  bottom: 15px;
 }
 
 page-getstart .logo {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
-  border-radius: 50%;
   display: inline-block;
-  padding: 10px;
-  background: #fff;
+  padding: 8px;
+  margin-bottom: 22px;
+}
+
+page-getstart .logo img {
+  width: 100%;
+  float: left;
 }
 
 page-getstart .vcenter h4 {
@@ -41383,6 +41481,15 @@ page-getstart .vcenter h4 {
 
 page-getstart .vcenter p {
   margin-top: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #000;
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 22px;
+  margin-bottom: 0;
+  letter-spacing: 1px;
+  font-weight: 400;
+  padding: 13px;
 }
 
 page-getstart .box {
@@ -41553,7 +41660,33 @@ page-historytwo .btnsec button {
 }
 
 page-home {
+  /*    .brfone .searchbar-clear-icon{
+        display: none !important;
+    }*/
   /*====================Scroll Css Include Here===================*/
+}
+
+page-home .buttonout {
+  width: 100%;
+  float: left;
+  padding: 4px 8px;
+}
+
+page-home .buttonout .button {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #828282;
+  font-weight: 400;
+  font-size: 14px;
+  padding-left: 6px;
+}
+
+page-home .buttonout .button span {
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
+  text-transform: capitalize;
 }
 
 page-home ion-slides {
@@ -41631,10 +41764,6 @@ page-home .searchouter {
   float: left;
 }
 
-page-home .brfone .searchbar-clear-icon {
-  display: none !important;
-}
-
 page-home .searchtogle {
   position: absolute;
   left: 0;
@@ -41644,8 +41773,8 @@ page-home .searchtogle {
 }
 
 page-home .searchtogle .item {
-  font-size: 12px;
-  min-height: 25px;
+  font-size: 14px;
+  min-height: 30px;
 }
 
 page-home .searchtogle .label {
@@ -41665,7 +41794,7 @@ page-home .searchbar {
   background: #fff;
 }
 
-page-home .searchouter p {
+page-home .searchouter .disab {
   width: 77px;
   float: right;
   line-height: 27px;
@@ -41677,6 +41806,11 @@ page-home .searchouter p {
   overflow: hidden;
   border: 1px solid #3cc602;
   color: #fff;
+  height: 30px;
+}
+
+page-home .searchouter .disab.activated {
+  background-color: #298602;
 }
 
 page-home .gosrch {
@@ -42053,8 +42187,10 @@ page-logintwo .orstrip span::after {
   left: 27px;
 }
 
-page-ourtalkreply .back-button {
-  display: none !important;
+page-ourtalkreply {
+  /*     .back-button{
+    display: none !important;
+}*/
 }
 
 page-ourtalkreply h2 {
@@ -42086,12 +42222,14 @@ page-ourtalkreply .mytlk .item .label {
 
 page-ourtalkreply .mytlk .item h2 {
   margin-top: 0;
+  white-space: normal;
 }
 
 page-ourtalkreply .mytlk .item p {
   line-height: 16px;
   width: 100%;
   float: left;
+  white-space: normal;
 }
 
 page-ourtalkreply .mytlk .item p .icon {
@@ -42216,6 +42354,7 @@ page-ourtalkreply .bottom-sec .btn1 {
 
 page-ourtalkreply .bottom-sec .item h2 {
   margin-top: 0;
+  white-space: normal;
 }
 
 page-ourtalkreply .bottom-sec .item p {
@@ -42296,6 +42435,10 @@ page-privacy .contant-sec p {
   margin-top: 10px;
 }
 
+page-privacy .contant-sec p:first-child {
+  margin-top: 5px;
+}
+
 page-privacy .banner {
   width: 100%;
   float: left;
@@ -42304,10 +42447,44 @@ page-privacy .banner {
 page-privacy .contant-sec {
   width: 100%;
   float: left;
+  padding-top: 0px !important;
 }
 
 page-privacy .banner img {
   width: 100%;
+  float: left;
+}
+
+page-privacy .contant-sec h2 {
+  margin: 0;
+}
+
+page-privacy .contant-sec p {
+  line-height: 18px;
+  width: 100%;
+  float: left;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+page-privacy .contant-sec p:first-child {
+  margin-top: 5px;
+}
+
+page-privacy .banner {
+  width: 100%;
+  float: left;
+}
+
+page-privacy .contant-sec {
+  width: 100%;
+  float: left;
+  padding: 0px 16px !important;
+}
+
+page-privacy .banner img {
+  width: 100%;
+  float: left;
 }
 
 page-realtalk .back-button {
@@ -42402,6 +42579,7 @@ page-realtalk .item p {
 page-realtalk .item p .icon {
   padding-right: 4px;
   font-weight: 700;
+  float: left;
 }
 
 page-realtalk .mytlk .item p .icon {
@@ -42663,6 +42841,19 @@ page-review {
 }*/
 }
 
+page-review .bottom_sec {
+  width: 100%;
+  float: left;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 15px;
+  background-color: #fff;
+  z-index: 99999;
+}
+
 page-review .content h2 {
   font-weight: 700;
   margin-bottom: 5px;
@@ -42749,6 +42940,7 @@ page-review .top {
   width: 100%;
   float: left;
   padding: 10px 0px 0px 0px;
+  margin-bottom: 10px;
 }
 
 page-review .top .list {
@@ -42826,7 +43018,9 @@ page-review .bottom {
   width: 100%;
   float: left;
   padding-top: 4px;
-  margin-bottom: 15vh;
+  max-height: calc(100% - 293px);
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 page-review .bottom .list {
@@ -42844,7 +43038,7 @@ page-review .bottom .item:last-child .item-inner {
 page-review .item ion-thumbnail {
   width: 55px !important;
   height: 55px !important;
-  margin: 0 8px 0 0 !important;
+  /*		margin: 0 8px 0 0 !important;*/
   min-width: auto;
   min-height: auto;
 }
@@ -42867,6 +43061,21 @@ page-review .bottom h2 span {
   font-size: 12px;
   color: #6a6a6a;
   float: right;
+}
+
+page-review .bottom ul {
+  margin-top: 0;
+}
+
+page-review .bottom ul li .icon {
+  font-size: 14px;
+}
+
+page-review .bottom .item {
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
 }
 
 page-review .bottom p {
@@ -43049,6 +43258,108 @@ page-reviews2 ul.rating[_ngcontent-c0] li[_ngcontent-c0] {
   padding: 0 !important;
 }
 
+page-search {
+  /*    .list-ios {
+    margin: 23px 0 32px !important;
+}*/
+}
+
+page-search .changeimg .searchbar-search-icon {
+  background-image: url("../assets/imgs/currentloc.png") !important;
+  background-size: 16px;
+}
+
+page-search .loginform {
+  text-align: left;
+}
+
+page-search .loginform h2 {
+  margin-bottom: 11px;
+  margin-top: 8px !important;
+}
+
+page-search .loginform p {
+  color: #000;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+page-search .text-input {
+  border: 1px solid #c3c3c3;
+  margin: 0;
+  padding: 8px 10px 8px 10px;
+  border-radius: 5px;
+  line-height: 18px;
+  background: transparent;
+}
+
+page-search .searchouter {
+  background-color: #0bc502;
+}
+
+page-search .inputouter {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+page-search .inputouter .item-inner {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+page-search .inputouter .item {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: auto;
+  border: none !important;
+}
+
+page-search .btn2 {
+  width: 49%;
+}
+
+page-search .buttonout {
+  width: 100%;
+  float: left;
+  background-color: #3cc602;
+  padding: 3px 8px 10px 8px;
+}
+
+page-search .buttonout .button {
+  background-color: #fff;
+  margin: 0;
+  color: #4285F4;
+  text-align: left;
+  height: 32px;
+}
+
+page-search .buttonout .button span {
+  -webkit-box-pack: left !important;
+  -webkit-justify-content: left !important;
+  -ms-flex-pack: left !important;
+  justify-content: left !important;
+}
+
+page-search ion-searchbar {
+  background: transparent !important;
+}
+
+page-search ion-searchbar .searchbar-input {
+  height: 32px !important;
+}
+
+page-search .currentloc .label {
+  color: #4285F4 !important;
+}
+
+page-search .currentloc .icon {
+  color: #4285F4;
+  margin-right: 10px;
+  font-size: 20px;
+  min-height: auto !important;
+}
+
 page-signup .loginform {
   padding: 20px;
   text-align: center;
@@ -43195,8 +43506,10 @@ page-signuptwo .strnth {
   margin-bottom: 6px;
 }
 
-page-talkreply .back-button {
-  display: none !important;
+page-talkreply {
+  /*    .back-button{
+        display: none !important;
+    }*/
 }
 
 page-talkreply .mytlk {
@@ -43231,6 +43544,7 @@ page-talkreply .mytlk .item p {
   line-height: 16px;
   width: 100%;
   float: left;
+  white-space: normal;
 }
 
 page-talkreply .mytlk .item p .icon {
@@ -43333,6 +43647,10 @@ page-talkreply .bottom-sec .reply img {
   margin-right: 8px;
 }
 
+page-talkreply .bottom-sec .report.activated {
+  background-color: #d20000;
+}
+
 page-talkreply .bottom-sec .text-input {
   border: 1px solid #d4d4d4;
   border-radius: 5px;
@@ -43351,6 +43669,12 @@ page-talkreply .bottom-sec .btnsec {
 page-talkreply .bottom-sec .btn1 {
   width: 70px;
   letter-spacing: 1px;
+}
+
+page-talkreply .bottom-sec .report {
+  width: 60px;
+  float: right;
+  background-color: #ff0000;
 }
 
 page-talkreply .bottom-sec .item h2 {
@@ -43381,6 +43705,10 @@ page-terms .contant-sec p {
   margin-top: 10px;
 }
 
+page-terms .contant-sec p:first-child {
+  margin-top: 5px;
+}
+
 page-terms .banner {
   width: 100%;
   float: left;
@@ -43389,10 +43717,12 @@ page-terms .banner {
 page-terms .contant-sec {
   width: 100%;
   float: left;
+  padding-top: 0px !important;
 }
 
 page-terms .banner img {
   width: 100%;
+  float: left;
 }
 
 page-termsbusiness .contant-sec h2 {
@@ -43407,6 +43737,10 @@ page-termsbusiness .contant-sec p {
   margin-top: 10px;
 }
 
+page-termsbusiness .contant-sec p:first-child {
+  margin-top: 5px;
+}
+
 page-termsbusiness .banner {
   width: 100%;
   float: left;
@@ -43415,10 +43749,12 @@ page-termsbusiness .banner {
 page-termsbusiness .contant-sec {
   width: 100%;
   float: left;
+  padding-top: 0px !important;
 }
 
 page-termsbusiness .banner img {
   width: 100%;
+  float: left;
 }
 
 page-viewfavorites .item {
@@ -43530,7 +43866,8 @@ page-viewproduct .timesec h4 span {
 }
 
 page-viewproduct .checkin {
-  background-color: silver;
+  background-color: #f8d71d;
+  color: #000;
 }
 
 page-viewproduct ion-slides {

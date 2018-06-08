@@ -8,8 +8,9 @@ import {Http} from '@angular/http';
 import {HomePage} from '../home/home';
 import {LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
 import {Geolocation} from '@ionic-native/geolocation';
-//import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {LoginPage} from '../login/login';
+import {CallNumber} from '@ionic-native/call-number';
+import * as moment from 'moment';
 
 /**
  * Generated class for the ViewproductPage page.
@@ -22,7 +23,10 @@ import {LoginPage} from '../login/login';
 @Component({
     selector: 'page-viewproduct',
     templateUrl: 'viewproduct.html',
+    //pipes: [PhonePipe]
+
 })
+
 export class ViewproductPage {
     favourite: any;
     modaldata: any;
@@ -41,6 +45,8 @@ export class ViewproductPage {
         public common: Common,
         private launchNavigator: LaunchNavigator,
         private geolocation: Geolocation,
+        private callNumber: CallNumber,
+        // public phone: PhonePipe
         // private iab: InAppBrowser
     ) {
         if (localStorage.getItem('CurrentUser')) {
@@ -50,9 +56,21 @@ export class ViewproductPage {
     }
 
     ionViewDidLoad() {
+       // alert('updated df');
+        var date = new Date();
+        var today_date = new Date(moment(date).format("YYYY-MM-DD") + "T" + "00:00:00.000Z");
+        
         console.log('ionViewDidLoad ViewproductPage');
         console.log(this.navParams.get('restdata'));
         let resdata = this.navParams.get('restdata').business_data[0].opening_days_and_timings;
+        var a = this.navParams.get('restdata').business_data[0].business_phone_number;
+        console.log(typeof (a));
+        console.log(a.toString());
+        var mystring = a.toString();
+        console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1) $2-$3"));
+        a = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1) $2-$3");
+        console.log(a);
+        this.navParams.get('restdata').business_data[0].business_phone_number = a;
         this.restaurantdata = this.navParams.get('restdata');
         if (this.favourite) {
             if (this.favourite.length > 0) {
@@ -74,17 +92,25 @@ export class ViewproductPage {
         } else {
             this.restaurantdata.fav = 0;
         }
+        this.navParams.get('restdata').business_data[0].opening_days_and_timings.forEach(function(value,key){
+            console.log(value);
+           value.opening_time = moment(value.opening_time, ["h:mm A"]).format("hh:mm A");
+           value.closing_time = moment(value.closing_time, ["h:mm A"]).format("hh:mm A");
+//            var dt = moment(value.closing_time, ["h:mm A"]).format("hh:mm A");
+//           console.log(dt);
+        })
+        
         console.log(this.restaurantdata);
     }
     /******** function used for social sharing *****************/
     socialsharing(name, address, image) {
         console.log(name);
-        console.log(address);
+        console.log(address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play');
         console.log(image);
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
             // Check if sharing via email is supported
-            var message = address;//'Amazing restaurant';
+            var message = address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play';//'Amazing restaurant';
             var subject = name;//'Restaurant name';
             var file = '';
             var url = image.business_image;//'https://www.google.co.in';
@@ -160,15 +186,17 @@ export class ViewproductPage {
 
     CheckIn() {
         console.log('Check in');
+        if(localStorage.getItem('CurrentUser')){
         var user = JSON.parse(localStorage.getItem('CurrentUser'));
         console.log(user._id);
         let options = this.appsetting.header();
         let postdata = {
             user_id: user._id,
             business_id: this.restaurantdata.business_data[0]._id,
+            date:new Date().toISOString()
         }
         let serialized = this.appsetting.serializeObj(postdata);
-        this.http.post(this.appsetting.url + '/checkin', serialized, options).map(res => res.json()).subscribe(response => {
+        this.http.post(this.appsetting.url + 'checkin', serialized, options).map(res => res.json()).subscribe(response => {
             console.log(response);
             if (response.status == true) {
                 this.restaurantdata = response.data;
@@ -197,6 +225,9 @@ export class ViewproductPage {
                 this.common.presentAlert('Check in', response.msg);
             }
         })
+        }else{
+            this.common.presentAlert(' View detail','Login first to check in!')
+        }
     }
 
     ClaimYourBusiness(businessid) {
@@ -218,7 +249,7 @@ export class ViewproductPage {
             }
         })
     }
-
+    
     /*********** function to favourite a restaurant *******************/
 
     MarkAsFavourite(businessID) {
@@ -324,4 +355,10 @@ export class ViewproductPage {
         console.log(link);
         this.common.InappBrowser(link);
     }
+    
+    DialNumber(phone) {
+        this.callNumber.callNumber(phone, true).then(res => console.log('Launched dialer!', res))
+            .catch(err => console.log('Error launching dialer', err));
+    }
+
 }

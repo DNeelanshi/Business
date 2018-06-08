@@ -85,7 +85,8 @@ export class Reviews2Page {
                         var endDate = moment(a, "DD.MM.YYYY");
                         var milliseconds = endDate.diff(startDate);
                         var duration = moment.duration(milliseconds, 'milliseconds');
-                        
+                        var aba = duration.hours()+':'+duration.minutes();
+                        console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
                         console.log('Hours' + duration.hours())
                         console.log('minutes' + duration.minutes());
                         if(duration.hours()>24){

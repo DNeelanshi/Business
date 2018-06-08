@@ -1,0 +1,83 @@
+page-search {
+    .changeimg .searchbar-search-icon {
+    background-image: url("../assets/imgs/currentloc.png") !important;
+    background-size: 16px;
+  }
+    .loginform{
+        text-align: left;
+    }
+    .loginform h2 {@extend .fontheadding16px; margin-bottom: 11px; margin-top: 8px !important;}
+    .loginform p{ @extend .fontheadding12px; color: #000; font-weight: 400; margin-bottom: 15px;}
+    .text-input{
+        border: 1px solid #c3c3c3;
+        margin: 0;
+        padding: 8px 10px 8px 10px;
+        border-radius: 5px;
+        line-height: 18px;
+        background: transparent;
+    }
+    .searchouter{
+            background-color: #0bc502;
+    }
+/*    .list-ios {
+    margin: 23px 0 32px !important;
+}*/
+    .inputouter{
+        position: relative;
+        padding-bottom: 10px;
+    }
+    .inputouter .item-inner{
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+    
+    }
+    .inputouter .item{
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: auto;
+        border: none !important;
+    }
+
+ .btn2 {
+    width: 49%;
+}
+.buttonout{
+    width: 100%;
+    float: left;
+    background-color: #3cc602;
+    padding: 3px 8px 10px 8px;
+    
+    .button{
+        background-color: #fff;
+        margin: 0;
+        color: #4285F4;
+        text-align: left;
+        height: 32px;
+        
+        span{
+            justify-content: left !important;
+        }
+    }
+}
+ion-searchbar{
+    background: transparent !important;
+    
+    .searchbar-input{
+        height: 32px !important;
+    }
+}
+.currentloc{
+    .label{
+         color:#4285F4 !important;
+    }
+    .icon{
+        color: #4285F4;
+        margin-right: 10px;
+        font-size: 20px;
+        min-height: auto !important;
+    }
+   
+}
+   
+}

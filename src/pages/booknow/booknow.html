@@ -31,28 +31,27 @@
               <ion-row>
                 <ion-col col-12 class="left right">
                   <ion-item class="clandr">
-                    <ion-datetime class="inputtxt" placeholder="Date" displayFormat="DDDD  MM-DD-YYYY" pickerFormat="MM-DD-YYYY" min="2018" max="2037" formControlName="date"></ion-datetime>
+                    <ion-datetime class="inputtxt" placeholder="Date" displayFormat="DDDD  MM-DD-YYYY" pickerFormat="MM-DD-YYYY" min="{{currentdate}}" formControlName="date" (ionChange)="changedate($event)"></ion-datetime>
                     <img src="assets/imgs/calander.png" item-end>
                   </ion-item>
                 </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col col-6 class="left">
+                <ion-col col-12 class="left">
                   <ion-item>
-                    <ion-datetime class="inputtxt" placeholder="Start Time" displayFormat="HH:mm A" pickerFormat="HH:mm A" min="{{currentdate}}" formControlName="startTime"></ion-datetime>
+                    <ion-datetime class="inputtxt" placeholder="Time" displayFormat="hh:mm A" pickerFormat="hh:mm A" formControlName="startTime"></ion-datetime>
                   </ion-item>
                 </ion-col>
-
-                <ion-col col-6 class="right">
+<!--                <ion-col col-6 class="right">
                   <ion-item>
-                    <ion-datetime class="inputtxt" placeholder="End Time" displayFormat="HH:mm A" min="{{currentdate}}" formControlName="endTime"></ion-datetime>
+                    <ion-datetime class="inputtxt" placeholder="End Time" displayFormat="HH:mm" pickerFormat="HH:mm" formControlName="endTime"></ion-datetime>
                   </ion-item>
-                </ion-col>
+                </ion-col>-->
               </ion-row>
             </ion-grid>
-            <h2>Special accomodations</h2>
+            <h2>Special accommodations</h2>
             <ion-item class="discripation">
-              <ion-textarea class="inputtxt" placeholder="Write special accomodations..." formControlName="specialAccomo"></ion-textarea>
+              <ion-textarea class="inputtxt" placeholder="Write special accommodations..." formControlName="specialAccomo"></ion-textarea>
             </ion-item>
         </div>
         <div class="btnsec">

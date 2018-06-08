@@ -1,12 +1,12 @@
 page-talkreply {
-    .back-button{
-    display: none !important;
-}
+    /*    .back-button{
+        display: none !important;
+    }*/
     .mytlk{
         width: 100%;
         float: left;
         margin: 10px 0 0 0;
-        
+
         .item{
             border-bottom: 1px solid #c8c8c8;
             align-items: start;
@@ -19,7 +19,7 @@ page-talkreply {
             margin: 8px auto 8px 0;
         }
         .item h2{ @extend .fontheadding16px; margin-top: 0; white-space: normal;}
-        .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left;}
+        .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left; white-space: normal;}
         .item p .icon{
             padding-right: 4px;
             font-weight: 700;
@@ -34,11 +34,11 @@ page-talkreply {
     }
 
     .bottom-sec{
-            width: 100%;
-            float: left;
-            margin: 0;
-            padding-top: 5px;
-            background-color: #f9f9f9;
+        width: 100%;
+        float: left;
+        margin: 0;
+        padding-top: 5px;
+        background-color: #f9f9f9;
 
         .item{
             align-items: start;
@@ -74,6 +74,7 @@ page-talkreply {
             width: 78px;   
         }
         h2 span{@extend .fontheadding12px; float: right; line-height: 22px; }
+        
         .revw{
             margin-top: 2px !important;
             line-height: 19px !important;
@@ -94,6 +95,9 @@ page-talkreply {
             width: 12px;
             margin-right: 8px;
         }
+        .report.activated{
+            background-color: #d20000;
+        }
         .text-input{
             border: 1px solid rgb(212, 212, 212);
             border-radius: 5px;
@@ -111,10 +115,16 @@ page-talkreply {
             width: 70px;
             letter-spacing: 1px;
         }
+        .report{
+            width: 60px;
+            float: right;
+            background-color: #ff0000;
+        }
         .item h2{ @extend .fontheadding16px; margin-top: 0; white-space: normal;}
         .item p{ @extend .fontheadding12px; line-height: 16px; width: 100%; float: left; white-space: normal;}
         .item-textarea .item-inner{
             padding-right: 0;
         }
     }
+
 }

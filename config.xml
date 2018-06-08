@@ -98,4 +98,6 @@
     <plugin name="cordova-plugin-themeablebrowser" spec="^0.2.17" />
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <plugin name="cordova-open-native-settings" spec="^1.5.1" />
 </widget>

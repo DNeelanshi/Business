@@ -1,0 +1,74 @@
+<!--
+  Generated template for the FilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+   
+<ion-header>
+
+  <ion-navbar color="green">
+    <ion-buttons left (click)="dismiss()">
+    <button ion-button clear>
+      <ion-icon ion-icon icon-only name="close" style="font-size:30px; font-weight: 700;"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title text-center>Search</ion-title>
+  </ion-navbar>
+ 
+  
+</ion-header>
+
+<!--<form style="height: 100%; margin-top: 44px;">-->
+<ion-content>
+       <form [formGroup]="SearchForm" (submit)="Search(SearchForm)">
+    <div class="searchouter" color="green">
+             <ion-searchbar id="inputaaa" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (click)="currentLocation()" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)" formControlName="category"></ion-searchbar>
+             <div class="buttonout" *ngIf="bit == false" >
+             <button type="button" class="btn1" ion-button icon-start color="green" block (click)="funClicked()"><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>
+             </div>
+             <div *ngIf="bit == true">
+             <ion-searchbar class="bfr searchbar changeimg" placeholder="Neighborhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)" formControlName="location"></ion-searchbar>
+<!--             <button type="button" class="btn1" ion-button icon-start block (click)="currentLocation()"><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>-->
+          </div>
+             
+    </div>
+    </form>
+    
+    
+    
+  <div class="loginform">
+      <ion-list no-lines style="padding-left: 16px;margin:0px !important;">
+        <div class="inputouter">
+            <ion-item (click)="currentLocation()" *ngIf="bit == true" class="currentloc">
+                <ion-icon item-start><img src="assets/imgs/locate.png" style="width:15px;float: left;"></ion-icon>
+               Current Location
+            </ion-item>
+<!--          <ion-item>
+             <ion-searchbar id="input" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)"></ion-searchbar>
+             <button *ngIf="bit == false" type="button" class="btn1" ion-button icon-start color="green" block (click)="funClicked()"><ion-icon name="locate"></ion-icon>Current location</button>
+          </ion-item>-->
+<!--            <ion-item *ngIf="bit == true">
+             <ion-searchbar id="input" class="bfr searchbar" placeholder="neighbourhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)"></ion-searchbar>
+             <button type="button" class="btn1" ion-button icon-start color="green" block (click)="LocateMe()"><ion-icon name="locate"></ion-icon>Current location</button>
+          </ion-item>-->
+            <ion-list class="searchtogle animated" *ngIf="disable == true">
+            <ion-item *ngFor="let sub of categorydata | filter:data.term" (click)="CategorySearch(sub)">
+                {{sub.sub_category_title}}
+            </ion-item>
+            </ion-list>
+            <ion-list class="searchtogle animated">
+            <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item,SearchForm)">
+                {{ item }}
+        </ion-item>
+        </ion-list>
+        </div>
+      </ion-list>
+
+  </div>
+</ion-content>
+<!--<ion-footer>
+  <button type="submit" ion-button color="green" class="btn2">Search</button>
+  <button type="button" ion-button color="green" class="btn2" (click)="Reset()">Reset</button>
+</ion-footer>
+           </form>-->

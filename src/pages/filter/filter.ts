@@ -83,7 +83,7 @@ export class FilterPage {
     Search(filterformdata) {
         console.log(filterformdata.value);
             if (filterformdata.value.online1 == true && filterformdata.value.offline == true) {
-                filterformdata.value.online = 3;
+                filterformdata.value.online = '';
             }else if (filterformdata.value.online1 == true) {
                 filterformdata.value.online = 1;
             }else if (filterformdata.value.offline == true) {
@@ -91,7 +91,7 @@ export class FilterPage {
             }
             
             if (filterformdata.value.online1 == false && filterformdata.value.offline == false) {
-                filterformdata.value.online = 3;
+                filterformdata.value.online = '';
             }
             
         if (filterformdata.value.range != undefined) {

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController, Events} from 'ionic-angular';
 import {Http} from '@angular/http';
 import {Appsetting} from '../../providers/appsetting';
 /**
@@ -21,7 +21,8 @@ export class PrivacyPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         private http: Http,
-        public appsetting: Appsetting, ) {
+        public appsetting: Appsetting,
+        public loadingCtrl: LoadingController,public events: Events, ) {
     }
 
     ionViewDidLoad() {
@@ -45,8 +46,14 @@ export class PrivacyPage {
         }
       
         var serialized = this.appsetting.serializeObj(postdata);
+        var Loading = this.loadingCtrl.create({
+                spinner: 'bubbles',
+                content: 'Loading...'
+            });
+            Loading.present().then(() => {
         this.http.post(this.appsetting.url + 'static/getstaticpagedata', serialized, options).map(res => res.json()).subscribe(response => {
             console.log(response);
+            Loading.dismiss();
             if(response.status == true){
                 if(response.data[0].pageimage){
                     response.data[0].loaded = true;
@@ -58,5 +65,6 @@ export class PrivacyPage {
                 
             }
         })
+            })
     }
 }

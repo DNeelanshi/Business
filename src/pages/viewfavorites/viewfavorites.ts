@@ -32,6 +32,7 @@ export class ViewfavoritesPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ViewfavoritesPage');
+         clearInterval(this.common.interval);
         this.ViewFavourites();
     }
     /*********** function to accept the reservations *******************/

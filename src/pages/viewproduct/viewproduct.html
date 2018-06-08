@@ -40,7 +40,7 @@
           <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()">
 <!--              <ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>-->
               Book Now</button>
-          <button [disabled]="restaurantdata?.role == 'dummy'" class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()">
+          <button class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()">
 <!--              <ion-icon ><img width="16px" src="assets/imgs/checkin.png"></ion-icon>-->
               Check In</button>
         </div>
@@ -51,7 +51,8 @@
           <h4><img width="20px" src="assets/imgs/contactinfo.png"> Contact Info</h4>
 <!--          <p><img width="12px" src="assets/imgs/city.png"> 508 Virginia </p>-->
           <p (click)="LaunchNavigator()"><img width="12px" src="assets/imgs/location.png"> {{restaurantdata?.business_data[0].address}} </p>
-          <p><img width="12px" src="assets/imgs/phone.png"> Phone: {{restaurantdata?.business_data[0].business_phone_number}}</p>
+          <p (click)="DialNumber(restaurantdata?.business_data[0].business_phone_number)"><img width="12px" src="assets/imgs/phone.png">{{restaurantdata?.business_data[0].business_phone_number}}</p>
+          
         </div>
         <div class="contactbox">
           <h4><img width="20px" src="assets/imgs/website.png"> Website Info</h4>
@@ -70,14 +71,17 @@
             Favorite</button>
         <button class="share" clear ion-button icon-left color="dark" (click)="socialsharing(restaurantdata?.business_data[0].business_name,restaurantdata?.business_data[0].address,restaurantdata?.business_image[0])"><ion-icon ><img width="16px" src="assets/imgs/share.png"></ion-icon>Share</button>
       </ion-item>
-      <ion-item-divider color="light">Time</ion-item-divider>
+      <ion-item-divider color="light">HOURS OF OPERATION</ion-item-divider>
       <ion-item text-wrap>
-        <div class="timesec">
+          <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length>0">
           <h4 *ngFor="let days of restaurantdata?.business_data[0].opening_days_and_timings"><span>{{days.day}}</span> {{days.opening_time}} to {{days.closing_time}} </h4>
         </div>
+          <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length == 0">
+          <h4>Not added yet!</h4>
+        </div>
       </ion-item>
-      <ion-item-divider color="light">IS THIS YOUR BUSINESS?</ion-item-divider>
-      <ion-item text-wrap>
+      <ion-item-divider *ngIf="(restaurantdata?.role == 'dummy') && (restaurantdata?.Claimed_requests?.length == 0)" color="light">IS THIS YOUR BUSINESS?</ion-item-divider>
+      <ion-item text-wrap *ngIf="(restaurantdata?.role == 'dummy') && (restaurantdata?.Claimed_requests?.length == 0)">
         <p>Claim your business to respond to reviews and messages.
         </p>
         <button [disabled]="restaurantdata?.role != 'dummy'" class="btneq" full ion-button color="green" (click)="ClaimYourBusiness(restaurantdata?.business_data[0]._id)">Claim this Business</button>

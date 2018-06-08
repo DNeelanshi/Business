@@ -22,8 +22,9 @@ export class ReviewPage {
     resdetail: any;
     ReviewForm: any;
     data:any = {};
-      limit: number = 40;
+    limit: number = 40;
     truncating = true;
+    details:any=[];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -50,7 +51,7 @@ export class ReviewPage {
         this.GetReview();
         console.log(this.navParams.get('prod_id'));
         this.resdetail = this.navParams.get('prod_id');
-        this.data.rate = this.resdetail.avg;
+        //this.data.rate = this.resdetail.avg;
          console.log(this.navParams.get('prod_id').business_data[0]._id);
         console.log(JSON.parse(localStorage.getItem('CurrentUser')));
     }
@@ -71,13 +72,15 @@ export class ReviewPage {
     MakeReview(MakeReview) {
         console.log(MakeReview.value);
         console.log(window.navigator.onLine);
+        if(localStorage.getItem('CurrentUser')){
         if (window.navigator.onLine == true) {
             let options = this.appsetting.header();
             var postdata = {
                 user_id: JSON.parse(localStorage.getItem('CurrentUser'))._id,
                 business_id: this.navParams.get('prod_id').business_data[0]._id,
                 stars:MakeReview.value.rating,
-                comment:MakeReview.value.comment
+                comment:MakeReview.value.comment,
+                status:true
             }
             var serialized = this.appsetting.serializeObj(postdata);
             var Loading = this.loadingCtrl.create({
@@ -110,8 +113,13 @@ export class ReviewPage {
             });
             toast.present();
         }
+        }else{
+            this.common.presentAlert('Review','Please login to review!');
+        }
     }
     GetReview(){
+        var temp = this;
+        var sum = 0;
          let options = this.appsetting.header();
             var postdata = {
                 business_id: this.navParams.get('prod_id').business_data[0]._id,
@@ -126,20 +134,35 @@ export class ReviewPage {
                     console.log(response);
                     Loading.dismiss();
                     if(response.status == true){
+                        console.log(temp.resdetail.review.length);
                         if(this.resdetail.review.length>0){
                         this.resdetail.review.forEach(function(value,key){
                             console.log(value);
+                           if(value.status == true){
                             response.userinfo.forEach(function(val,ke){
                                 console.log(val)
+                                if(val != null){
                                 if(value.user_id == val._id){
                                 value.firstname = val.firstname;
                                 value.lastname = val.lastname;
                                 value.profile_pic = val.profile_pic;
                                 }
+                            }
+                            
                             })
+                             temp.details.push(value);
+                                    console.log(value);
+                                    sum += value.stars;
+                                    console.log(sum);
+                                    temp.data.rate = sum / temp.details.length;
+                               
+                            
+                           // temp.details.push(value);
+                           }
                         })
-                        console.log(this.resdetail);
+                       
                         }
+                        console.log(this.details);
                     }else{
                         
                           

@@ -43,26 +43,26 @@
         </ion-refresher>
             
             <ion-item *ngFor="let ourtalk of ourtalks" (click)="OurTalkReply(ourtalk)">
-                <ion-thumbnail item-start>
-                    <img *ngIf="ourtalk?.talk_data.length>0" [src]="ourtalk.talk_data[0].profile_pic">
-                    <img *ngIf="ourtalk?.talk_data.length == 0" src="assets/imgs/user.png">
+                <ion-thumbnail item-start *ngIf="ourtalk.talk_data">
+                    <img *ngIf="ourtalk?.talk_data.length>0 && ourtalk.talk_data[0]?.profile_pic != null" [src]="ourtalk.talk_data[0].profile_pic">
+                    <img *ngIf="ourtalk?.talk_data.length == 0 || ourtalk.talk_data[0]?.profile_pic == null" src="assets/imgs/user.png">
                 </ion-thumbnail>
                 <h2>{{ourtalk?.topic_name}} </h2>
                 <p style="white-space: normal">{{ourtalk?.message}}</p>
+                <p>{{ourtalk?.category_name}}</p>
                 <p *ngIf="ourtalk?.talk_data.length>0">By {{ourtalk?.talk_data[0].firstname}}</p>
                 <p *ngIf="ourtalk?.talk_data.length == 0">By Unknown user</p>
-                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{ourtalk?.comments.length}} Comment</p>
+                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{ourtalk?.comments.length}} Reply</p>
             </ion-item>
 
             <div *ngIf="loader == 0">
                 <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-                <img src="assets/imgs/loader.gif">
+                <img height="100" width="100" src="assets/imgs/loader.gif">
                 </div>
             </div>
             <div *ngIf="ourtalks.length<1 && loader != 0">
-                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-                    <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
-                    <span> No data found!</span>
+                <div style="text-align: center !important;padding: 26% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">
                 </div>
             </div>
             <!-- 
@@ -93,21 +93,22 @@
                     <img *ngIf="mytalk.profile_pic" [src]="mytalk.profile_pic">
                 </ion-thumbnail>
                 <h2>{{mytalk?.topic_name}}</h2>
+                <p style="white-space: normal">{{mytalk?.category_name}}</p>
                 <p style="white-space: normal">{{mytalk?.message}}</p>
                 <p>{{mytalk?.loc_address}}</p>
-                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{mytalk?.comments.length}} Comment</p>
+                <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{mytalk?.comments.length}} Reply</p>
                 <p><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>{{mytalk?.days}} {{mytalk?.time}} ago</p>
         
             </ion-item>
             <div *ngIf="loader == 0">
                 <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-                <img src="assets/imgs/loader.gif">
+                <img height="100" width="100" src="assets/imgs/loader.gif">
                 </div>
             </div>
             <div *ngIf="mytalks.length<1 && loader != 0">
-                <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-                    <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
-                    <span> No data found!</span>
+                <div style="text-align: center !important;padding: 26% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">
+     
                 </div>
             </div>
 
@@ -165,7 +166,7 @@
                 <h2>Category</h2>
                 <ion-item> 
                     <ion-select placeholder="Select Category" formControlName="category">
-                        <ion-option *ngFor="let cat of subcat" value="{{cat._id}},{{cat.sub_category_title}}">{{cat.sub_category_title}}</ion-option>
+                        <ion-option *ngFor="let cat of categories" value="{{cat.name}}">{{cat.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <!--              <ion-list radio-group class="category">

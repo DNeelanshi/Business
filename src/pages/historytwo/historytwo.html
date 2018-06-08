@@ -29,10 +29,11 @@
       
         <ion-item *ngFor="let reservation of history">
             <ion-thumbnail item-start>
-              <img [src]="reservation?.order_data[0].profile_pic">
+                <img *ngIf="reservation?.order_data[0]?.profile_pic" [src]="reservation?.order_data[0]?.profile_pic">
+              <img *ngIf="!reservation?.order_data[0]?.profile_pic" src="assets/imgs/user.svg">
             </ion-thumbnail>
           <h2>{{reservation?.order_data[0].firstname}} {{reservation?.order_data[0].lastname}}</h2>
-          <p>Special Food</p>
+          <p>{{reservation?.spacial_accomodation}}</p>
           <div class="left">
             <p>Booking Date</p>
             <p>{{reservation?.orderstart | date}}</p>
@@ -45,10 +46,10 @@
       
     </ion-list>
 <ion-list *ngIf="!history">
-    <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-          <img style="width:200px;margin: auto;display: block;" src="assets/imgs/sorry.png">
-          <span> Looks like we couldn't booked any restaurant yet!</span>
-    </div>
+    <div style="text-align: center !important;padding: 50% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+                    <img style="width:100px;margin: auto;display: block;" src="assets/imgs/sorry11.png">
+                    <span> it's empty here!</span>
+                </div>
     </ion-list>
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>

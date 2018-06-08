@@ -105,6 +105,15 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
+  },
+  {
     "id": "cordova-plugin-ionic-keyboard.keyboard",
     "file": "plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js",
     "pluginId": "cordova-plugin-ionic-keyboard",
@@ -159,6 +168,14 @@ module.exports = [
     ]
   },
   {
+    "id": "mx.ferreyra.callnumber.CallNumber",
+    "file": "plugins/mx.ferreyra.callnumber/www/CallNumber.js",
+    "pluginId": "mx.ferreyra.callnumber",
+    "clobbers": [
+      "call"
+    ]
+  },
+  {
     "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.Common",
     "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/common.js",
     "pluginId": "uk.co.workingedge.phonegap.plugin.launchnavigator",
@@ -183,12 +200,11 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-inappbrowser.inappbrowser",
-    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-    "pluginId": "cordova-plugin-inappbrowser",
+    "id": "cordova-open-native-settings.Settings",
+    "file": "plugins/cordova-open-native-settings/www/settings.js",
+    "pluginId": "cordova-open-native-settings",
     "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
+      "cordova.plugins.settings"
     ]
   }
 ];
@@ -203,6 +219,7 @@ module.exports.metadata =
   "cordova-plugin-facebook4": "1.9.1",
   "cordova-plugin-fcm": "2.1.2",
   "cordova-plugin-geolocation": "4.0.1",
+  "cordova-plugin-inappbrowser": "3.0.0",
   "cordova-plugin-ionic-keyboard": "2.0.5",
   "cordova-plugin-ionic-webview": "1.1.16",
   "cordova-plugin-splashscreen": "5.0.2",
@@ -211,8 +228,9 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "es6-promise-plugin": "4.1.0",
   "cordova-plugin-x-socialsharing": "5.3.1",
+  "mx.ferreyra.callnumber": "0.0.2",
   "uk.co.workingedge.phonegap.plugin.launchnavigator": "4.2.0",
-  "cordova-plugin-inappbrowser": "3.0.0"
+  "cordova-open-native-settings": "1.5.1"
 };
 // BOTTOM OF METADATA
 });

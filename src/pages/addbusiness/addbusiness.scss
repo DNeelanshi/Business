@@ -1,4 +1,16 @@
 page-addbusiness {
+    .datetime-text{
+        text-align: right;
+    }
+    .day-frmt{
+        width: 100%;
+        float: left;
+        margin-bottom: 9px;
+
+        .item{
+            margin-bottom: 6px;
+        }
+    }
 .catoption {
         width: 100%;
         right: 0;
@@ -7,7 +19,7 @@ page-addbusiness {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        margin-right: -14px;
+        margin-right: -7px;
         text-align: right;
     }
       .item .datetime {
@@ -169,7 +181,7 @@ page-addbusiness {
     }
     .photosec{
         width: 100%;
-        float: left;
+        float: left;       
     }
     .photosec h2 span{
         font-size: 15px;
@@ -189,6 +201,24 @@ page-addbusiness {
         font-size: 22px;
         font-weight: 600;
         color: #fff;
+    }
+    .photosec .image-wrapper{
+        width: 100%;
+        float: left;
+        height: 100px;
+
+        img{
+            width: 100%;
+            float: left;
+            height: 100%;
+        }
+    }
+    .photosec .image-wrapper .delete-img{
+        position: absolute;
+        right: 3px;
+        top: 3px;
+        width: 12px;
+        height: 12px;
     }
     .btnsec{
         width: 100%;
@@ -214,4 +244,16 @@ page-addbusiness {
     }
     .ion-md-add:before{ content: "\f102" !important; }
     .ion-md-close:before{ content: "\f406" !important; }
+    .check_box{
+        padding: 0;
+        background: transparent;
+        border: none !important;
+        margin-bottom: 5px;
+
+        .label{
+            font-size: 17px !important;
+            font-weight: 500 !important;
+            color: #000 !important;
+        }
+    }
 }

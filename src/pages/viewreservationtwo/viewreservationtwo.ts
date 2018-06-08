@@ -3,7 +3,7 @@ import {IonicPage, NavController, NavParams,LoadingController} from 'ionic-angul
 import {Appsetting} from '../../providers/appsetting';
 import {Http} from '@angular/http';
 import {Common} from '../../providers/common';
-
+import * as moment from 'moment';
 /**
  * Generated class for the ViewreservationPage page.
  *
@@ -33,6 +33,7 @@ export class ViewreservationtwoPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ViewreservationtwoPage');
+         clearInterval(this.common.interval);
         this.Reservations();
     }
     
@@ -56,6 +57,8 @@ export class ViewreservationtwoPage {
                     console.log(response);
                     Loading.dismiss();
                     if (response.status == true) {
+                        console.log(response.data[0].orderstart);
+                     console.log(moment(response.data[0].orderstart));
                      this.reservations = response.data;
                      console.log(response.page);
                      this.totalpageno = response.page;

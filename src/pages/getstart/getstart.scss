@@ -3,28 +3,31 @@ page-getstart {
     background:url(../assets/imgs/bg1.jpg) no-repeat; 
     background-size:cover;
     height: 100%;
+    background-position: top center;
 }
 .vcenter{
-    position: absolute;
-/*    top: 0;*/
-    left: 0;
-    bottom: 0;
-    right: 0;
+
     margin: auto;
     height: min-content;
     text-align: center;
     padding: 15px;
     padding-bottom: 5px !important;
+    position: absolute;
+    bottom: 15px;
 }
 
 .logo{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    border-radius: 50%;
     display: inline-block;
-    padding: 10px;
-    background: #fff;
+    padding: 8px;
+    margin-bottom: 22px;
+    
+    img{
+        width: 100%;
+        float: left;
+    }
 }
 .vcenter h4{
     color: #fff;
@@ -32,7 +35,19 @@ page-getstart {
     letter-spacing: 1px;
     font-size: 15px;
 }
-.vcenter p{ @extend .fontsize; margin-top: 0;}
+.vcenter p{
+   margin-top: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #000;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 22px;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    font-weight: 400;
+    padding: 13px;
+   
+}
 .box { @include border-radius(5px);font-weight: 600;} 
 .button-ios {
     height: 3.6rem;

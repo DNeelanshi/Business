@@ -35,7 +35,9 @@ export class HistoryPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HistoryPage');
+         clearInterval(this.common.interval);
         this.History();
+        
     }
     /*********** function to accept the reservations *******************/
     History() {
@@ -60,8 +62,8 @@ export class HistoryPage {
             if (response.status == true) {
                 response.data.forEach(function(value,key){
                     console.log(value);
-                    
                     var sum = 0;
+                    if(value.order_data.length>0){
                     if(value.order_data[0].review){
                         if (value.order_data[0].review.length > 0) {
                             value.order_data[0].review.forEach(function (val, ke) {
@@ -76,12 +78,12 @@ export class HistoryPage {
                     }else{
                         value.order_data[0].avg = 0;
                     }
-                    
+                } 
                 })
                 this.historydata = response.data;
                 this.totalpageno = response.page;
             } else {
-                this.common.presentAlert('History', 'No data found!');
+                //this.common.presentAlert('History', 'No data found!');
             }
         })
                 })

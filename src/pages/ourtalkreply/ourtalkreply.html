@@ -8,9 +8,7 @@
 
   <ion-navbar color="green">
     <ion-title>{{topicdata?.topic_name}}</ion-title>
-    <button style="height:28px;" start ion-button clear>
-     <img width="11px" src="assets/imgs/back_btn.svg" (click)="back()">
-     </button>
+    
   </ion-navbar>
 
 </ion-header>
@@ -20,23 +18,27 @@
     <ion-list class="mytlk">
           <ion-item>
             <ion-thumbnail item-start>
-              <img *ngIf="topicdata?.talk_data[0].profile_pic" [src]="topicdata?.talk_data[0].profile_pic">
-              <img *ngIf="!topicdata?.talk_data[0].profile_pic" src="assets/imgs/user.png">
+              <img *ngIf=" topicdata?.talk_data.length>0 && topicdata?.talk_data[0]?.profile_pic !=null" [src]="topicdata?.talk_data[0].profile_pic">
+              <img *ngIf="topicdata?.talk_data.length == 0 || topicdata?.talk_data[0]?.profile_pic == null" src="assets/imgs/user.png">
             </ion-thumbnail>
             <h2>{{topicdata?.topic_name}}</h2>
             <p style="white-space: normal">{{topicdata?.message}}</p>
             <p>{{topicdata?.loc_address}}</p>
-            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{commentdata?.comments.length}} Comment</p>
+            <p><ion-icon><img src="assets/imgs/chat.png"></ion-icon>{{commentdata?.comments.length}} Reply</p>
            <p *ngIf="topicdata?.time == 'day'"><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>{{topicdata?.days}} days ago</p>
         <p *ngIf="topicdata?.time == 'time'"><ion-icon><img src="assets/imgs/watch.png" style="margin:0;"></ion-icon>{{topicdata?.days}} hour ago</p>
           </ion-item>
     </ion-list>
-    <ion-list no-lines  class="bottom-sec" *ngIf="topicdata?.comments?.length>0">
+    <ion-list no-lines  class="bottom-sec" *ngIf="commentdata?.comments.length>0">
         <ion-item style="padding-right: 8px;" *ngFor="let comment of commentdata?.comments; let last = last">
           <ion-avatar item-start>{{last ? scrollBottom() : ''}}
-            <img [src]="comment.profile_pic">
+            <img *ngIf="comment.profile_pic" [src]="comment.profile_pic">
+            <img *ngIf="!comment.profile_pic" src="assets/imgs/user.png">
           </ion-avatar>
-          <h2>{{comment.firstname}} {{comment.lastname}}<span>{{comment.days}} {{comment.time}} ago</span></h2>
+                  <h2>
+                      <strong *ngIf="comment.firstname">{{comment.firstname}} {{comment.lastname}}</strong>
+                      <strong *ngIf="!comment.firstname">Unknown user</strong>
+                <span>{{comment.days}} {{comment.time}} ago</span></h2>
           
           <p>{{comment.comment_msg}}</p>
         </ion-item>
@@ -64,10 +66,10 @@
           </div>
         </ion-item>-->
       </ion-list>
-    <div *ngIf="commentdata?.comments?.length == 0">
-       <div style="text-align: center !important;padding: 52% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
-          <img style="width:160px;margin: auto;display: block;" src="assets/imgs/sorry.png">
-          <span> Oops no one replied on this topic!</span>
+    <div *ngIf="commentdata?.comments.length == 0">
+       <div style="text-align: center !important;padding: 30% 0 !important;color: grey;font-weight: 500; font-size: 15px;">
+          <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">
+<!--          <span> Oops no one replied on this topic!</span>-->
     </div>
     </div>
 </ion-content>
