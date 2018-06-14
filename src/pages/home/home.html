@@ -48,7 +48,9 @@
     <div class="procatout">
         <ul class="procat">
             <li *ngFor="let sub of subcat" (click)="FilterBySubCat(sub._id)" [class.highlighted]="sub._id == categoryid">
-                 <div class="icons"><img [src]="sub.sub_category_image"></div>
+                 <div class="icons">
+                    <img [src]="sub.sub_category_image">
+                </div>
 <!--                <div class="icons">
                    <svg-icon src="https://gatheringmanal.s3.eu-central-1.amazonaws.com/blogimage/1527222876101Entertainments.svg" [svgStyle]="{ 'width.px':22 }"></svg-icon>
                 </div>-->

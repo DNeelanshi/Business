@@ -1,5 +1,5 @@
 import {Component, NgZone} from '@angular/core';
-import {NavController, ModalController, ViewController, ToastController, LoadingController, AlertController} from 'ionic-angular';
+import {NavController, ModalController, Events, ViewController, ToastController, LoadingController, AlertController} from 'ionic-angular';
 import {FilterPage} from "../filter/filter";
 import {ViewproductPage} from '../viewproduct/viewproduct';
 import {BooknowPage} from '../booknow/booknow';
@@ -55,6 +55,7 @@ export class HomePage {
         private socialSharing: SocialSharing,
         public loadingCtrl: LoadingController,
         public common: Common,
+        public events : Events,
         public toastCtrl: ToastController,
         public appsetting: Appsetting,
         public http: Http,
@@ -64,7 +65,6 @@ export class HomePage {
         public formBuilder: FormBuilder,
         private openNativeSettings: OpenNativeSettings
     ) {
-        //alert('constructor');
         this.currentLocation();
         clearInterval(this.common.interval);
         this.getSubCatList();
@@ -76,7 +76,6 @@ export class HomePage {
 
     }
     ngOnInit(): any {
-        //alert('ngOnInit');
         var temp = this;
         console.log('ngOnInit');
         this.SearchForm = this.formBuilder.group({
@@ -85,7 +84,6 @@ export class HomePage {
         this.SearchcatForm = this.formBuilder.group({
             searchcat: ['']
         });
-        // this.tryagain();
 
     }
     ionViewDidLoad() {
@@ -98,9 +96,9 @@ export class HomePage {
             console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
 
             console.log('ionViewDidLoad HomePage');
-            //        this.Getlist(1, 30.723839099999996, 76.8465082);
-            //        this.latitude = 30.723839099999996;
-            //        this.longitude = 76.8465082;
+//                    this.Getlist(1, 34.0521734, -118.255586);
+//                    this.latitude = 34.0521734;
+//                    this.longitude = -118.255586;
         } else {
             this.common.tryagain();
         }
@@ -111,8 +109,9 @@ export class HomePage {
     currentLocation() {
         var temp = this;
         console.log('current location');
+         //alert('current location');
         this.geolocation.getCurrentPosition().then((resp) => {
-            console.log('getCurrentPosition');
+           // alert('getCurrentPosition');
             console.log(resp.coords.latitude);
             console.log(resp.coords.longitude);
             this.latitude = resp.coords.latitude;// resp.coords.latitude
@@ -122,10 +121,10 @@ export class HomePage {
             this.Getlist(this.pageno, resp.coords.latitude, resp.coords.longitude);
 
         }).catch((error) => {
-            console.log('Error getting locatio            n', error);
+        //alert('Error getting');
+            console.log('Error getting location', error);
         });
     }
-
     /********* function used for get subcatlist to show on top of the page ***********/
     getSubCatList() {
         this.subcat = [];
@@ -211,38 +210,75 @@ export class HomePage {
                                 response.data[i].business_data[0].fav = 0;
                             }
                             
-                        }
-                    }
-                    response.data.forEach(function (value, key) {
-                        console.log('foreach loop')
-                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-
-                        if (value.business_data[0].business_status == true) {
-                            if (value.business_data[0].business_type == 1) {
-                                console.log('if');
-                                temp.premiumBusiness.push(value);
-                            } else {
-                                console.log('else');
-                                temp.restaurantlist.push(value);
-                                var sum = 0;
-                            if (value.review.length > 0) {
-                                 if(value.status == true){
-                                value.review.forEach(function (val, ke) {    
+                               var sum = 0;
+                            if (response.data[i].review.length > 0) {
+                                 if(response.data[i].status == true){
+                                response.data[i].review.forEach(function (val, ke) {    
                                     console.log(val);
                                     sum += val.stars;
                                     console.log(sum);
-                                    value.avg = sum / value.review.length;
+                                    response.data[i].avg = sum / response.data[i].review.length;
                                     
                                 })
                                 }
                             } else {
-                                value.avg = 0;
+                                response.data[i].avg = 0;
                             }
-                                
+                            response.data[i].business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, response.data[i].business_data[0].location.coordinates[1], response.data[i].business_data[0].location.coordinates[0], 'K')
+                            
+                              if (response.data[i].business_data[0].business_type == 1) {
+                                console.log('if');
+                                temp.premiumBusiness.push(response.data[i]);
+                            } else {
+                                console.log('else');
+                                temp.restaurantlist.push(response.data[i]); 
                             }
+                            
+                            
+                            
                         }
-                    })
+                    }
                     this.totalpageno = response.pages;
+                    if(this.restaurantlist.length<3){
+                        this.pageno = this.pageno+1;
+                        this.Getdata(this.pageno, this.latitude, this.longitude);
+                    }
+                    
+//                    response.data.forEach(function (value, key) {
+//                        console.log('foreach loop')
+//                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+//
+//                        if (value.business_data[0].business_status == true) {
+//                            if (value.business_data[0].business_type == 1) {
+//                                console.log('if');
+//                                temp.premiumBusiness.push(value);
+//                            } else {
+//                                console.log('else');
+//                                temp.restaurantlist.push(value);
+//                                var sum = 0;
+//                            if (value.review.length > 0) {
+//                                 if(value.status == true){
+//                                value.review.forEach(function (val, ke) {    
+//                                    console.log(val);
+//                                    sum += val.stars;
+//                                    console.log(sum);
+//                                    value.avg = sum / value.review.length;
+//                                    
+//                                })
+//                                }
+//                            } else {
+//                                value.avg = 0;
+//                            }
+//                                
+//                            }
+//                        }
+//                    })
+                
+//                    this.totalpageno = response.pages;
+//                    if(this.restaurantlist.length<3){
+//                        this.pageno = this.pageno+1;
+//                        this.Getdata(this.pageno, this.latitude, this.longitude);
+//                    }
                     console.log(this.restaurantlist);
                     console.log(temp.premiumBusiness);
                 }
@@ -610,41 +646,31 @@ export class HomePage {
                             } else {
                                 response.data[i].business_data[0].fav = 0;
                             }
-                        }
-
-
-                        response.data.forEach(function (value, key) {
-                            console.log(value);
-                            console.log(key);
-                            console.log(value.business_data[0].location.coordinates[1]);
-                            console.log(typeof (value.business_data[0].business_type));
-                            if (value.business_data[0].business_status == true) {
-                                if (value.business_data[0].business_type == 1) {
+                            
+                             if (response.data[i].business_data[0].business_type == 1) {
                                     console.log('if');
-                                    temp.premiumBusiness.push(value);
+                                    temp.premiumBusiness.push(response.data[i]);
                                 } else {
                                     console.log('else');
-                                    temp.restaurantlist.push(value);
+                                    temp.restaurantlist.push(response.data[i]);
                                      var sum = 0;
-                                    if (value.review.length > 0) {
-                                         if(value.status == true){
-                                        value.review.forEach(function (val, ke) {    
+                                    if (response.data[i].review.length > 0) {
+                                         if(response.data[i].status == true){
+                                        response.data[i].review.forEach(function (val, ke) {    
                                             console.log(val);
                                             sum += val.stars;
                                             console.log(sum);
-                                            value.avg = sum / value.review.length;
+                                            response.data[i].avg = sum / response.data[i].review.length;
 
                                         })
                                         }
                                     } else {
-                                        value.avg = 0;
+                                        response.data[i].avg = 0;
                                     }
                                 }
-                                value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                                response.data[i].business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, response.data[i].business_data[0].location.coordinates[1], response.data[i].business_data[0].location.coordinates[0], 'K')
 
-                            }
-                        })
-
+                        }
                         this.totalpageno = response.pages;
                     } else {
                         temp.premiumBusiness = [];
@@ -796,6 +822,7 @@ export class HomePage {
                     console.log(response.data);
                     console.log(this.latitude);
                     console.log(this.longitude);
+                    if(response.data.length>0){
                     for (var i = 0; i < response.data.length; i++) {
                         if (localStorage.getItem('CurrentUser')) {
                             if (response.data[i].business_data[0].business_status == true) {
@@ -815,43 +842,75 @@ export class HomePage {
                                 } else {
                                     response.data[i].business_data[0].fav = 0;
                                 }
+                                
+                                var sum = 0;
+                                if (response.data[i].business_data[0].business_type == 1) {
+                                console.log('if');
+                                temp.premiumBusiness.push(response.data[i]);
+                            } else {
+                                console.log('else');
+                                temp.restaurantlist.push(response.data[i]);
+                                 if (response.data[i].review.length > 0) {
+                                 if(response.data[i].status == true){
+                                response.data[i].review.forEach(function (val, ke) {    
+                                    console.log(val);
+                                    sum += val.stars;
+                                    console.log(sum);
+                                    response.data[i].avg = sum / response.data[i].review.length;
+                                    
+                                })
+                                }
+                            } else {
+                                response.data[i].avg = 0;
+                            }
+                            }
+                            response.data[i].business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, response.data[i].business_data[0].location.coordinates[1], response.data[i].business_data[0].location.coordinates[0], 'K')
                             }
                         } else {
                             response.data[i].business_data[0].fav = 0;
                         }
                     }
-
-                    response.data.forEach(function (value, key) {
-                        console.log(value);
-                        console.log(key);
-                        var sum = 0;
-                        if (value.business_data[0].business_status == true) {
-                            if (value.business_data[0].business_type == 1) {
-                                console.log('if');
-                                temp.premiumBusiness.push(value);
-                            } else {
-                                console.log('else');
-                                temp.restaurantlist.push(value);
-                                 if (value.review.length > 0) {
-                                 if(value.status == true){
-                                value.review.forEach(function (val, ke) {    
-                                    console.log(val);
-                                    sum += val.stars;
-                                    console.log(sum);
-                                    value.avg = sum / value.review.length;
-                                    
-                                })
-                                }
-                            } else {
-                                value.avg = 0;
-                            }
-                            }
-                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-
-                        }
-                    })
-
                     this.totalpageno = response.pages;
+                    if(this.restaurantlist.length<4){
+                        this.pageno = this.pageno+1;
+                        this.Getdata(this.pageno, this.latitude, this.longitude);
+                    }
+                    }
+
+//                    response.data.forEach(function (value, key) {
+//                        console.log(value);
+//                        console.log(key);
+//                        var sum = 0;
+//                        if (value.business_data[0].business_status == true) {
+//                            if (value.business_data[0].business_type == 1) {
+//                                console.log('if');
+//                                temp.premiumBusiness.push(value);
+//                            } else {
+//                                console.log('else');
+//                                temp.restaurantlist.push(value);
+//                                 if (value.review.length > 0) {
+//                                 if(value.status == true){
+//                                value.review.forEach(function (val, ke) {    
+//                                    console.log(val);
+//                                    sum += val.stars;
+//                                    console.log(sum);
+//                                    value.avg = sum / value.review.length;
+//                                    
+//                                })
+//                                }
+//                            } else {
+//                                value.avg = 0;
+//                            }
+//                            }
+//                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+
+//                        }
+//                    })
+//                    this.totalpageno = response.pages;
+//                    if(this.restaurantlist.length<4){
+//                        this.pageno = this.pageno+1;
+//                        this.Getdata(this.pageno, this.latitude, this.longitude);
+//                    }
                     console.log(this.restaurantlist);
                     console.log(temp.premiumBusiness);
                 }
@@ -876,85 +935,7 @@ export class HomePage {
         }
         console.log(this.name);
     }
-//    Searchbyname(text) {
-//        console.log(text.value);
-//        var temp = this;
-//        this.categoryid = '';
-//        var sum = 0;
-//        let options = this.appsetting.header();
-//        var postdata = {
-//            name: text.value.searchname
-//        }
-//        console.log(postdata);
-//        var serialized = this.appsetting.serializeObj(postdata);
-//        var Loading = this.loadingCtrl.create({
-//            spinner: 'bubbles',
-//            content: 'Loading...'
-//        });
-//        Loading.present().then(() => {
-//            this.http.post(this.appsetting.url + 'users/GetSearch', serialized, options).map(res => res.json()).subscribe(response => {
-//                console.log(response);
-//                Loading.dismiss();
-//                if (response.status == true) {
-//                    this.premiumBusiness = [];
-//                    this.restaurantlist = [];
-//                    this.pageno = 1;
-//                    this.totalpageno = 1;
-//                    for (var i = 0; i < response.data.length; i++) {
-//                        if (localStorage.getItem('CurrentUser')) {
-//                            if (response.data[i].business_data[0].business_status == true) {
-//                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-//                                if (this.favourite.length > 0) {
-//                                    for (var j = 0; j < this.favourite.length; j++) {
-//                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-//                                            console.log('matched');
-//                                            response.data[i].business_data[0].fav = 1;
-//                                            break;
-//                                        } else {
-//                                            console.log('not matched');
-//                                            response.data[i].business_data[0].fav = 0;
-//                                            // break;
-//                                        }
-//                                    }
-//                                } else {
-//                                    response.data[i].business_data[0].fav = 0;
-//                                }
-//                            }
-//                        } else {
-//                            response.data[i].business_data[0].fav = 0;
-//                        }
-//                        if (response.data[i].review.length > 0) {
-//                            response.data[i].review.forEach(function (val, ke) {
-//                                console.log(val);
-//                                sum += val.stars;
-//                                console.log(sum);
-//                                response.data[i].avg = sum / response.data[i].review.length;
-//                            })
-//                        } else {
-//                            response.data[i].avg = 0;
-//                        }
-//                    }
-//                    response.data.forEach(function (value, key) {
-//                        console.log(value);
-//                        console.log(key);
-//                        if (value.business_data[0].business_status == true) {
-//                            if (value.business_data[0].business_type == 1) {
-//                                console.log('if');
-//                                temp.premiumBusiness.push(value);
-//                            } else {
-//                                console.log('else');
-//                                temp.restaurantlist.push(value);
-//                            }
-//                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-//
-//                        }
-//                    })
-//                } else {
-//                    this.common.presentAlert('Search', response.message);
-//                }
-//            })
-//        })
-//    }
+
     Filter() {
         var temp = this;
         var sum = 0;
@@ -1243,6 +1224,8 @@ export class HomePage {
         this.pageno = 1;
         this.categoryid = '';
         this.geolocation.getCurrentPosition().then((resp) => {
+//            this.latitude = 34.0521734;
+//                    this.longitude = -118.255586;
         this.latitude = resp.coords.latitude;
         this.longitude = resp.coords.longitude;
         this.Getlist(this.pageno, this.latitude, this.longitude);

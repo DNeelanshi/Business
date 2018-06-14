@@ -82,4 +82,23 @@ page-viewproduct {
             }*/
         }
     }
+    
+    .social {
+    margin: 0;
+    }
+
+    .social .item .icon {
+        margin: 0;
+    }
+
+    .social .item .item-inner {
+        padding: 0;
+    }
+
+    .social .item {
+        padding: 0 15px !important;
+    }
+    .social .item .item-inner .label{
+    font-size: 15px;
+    }
 }

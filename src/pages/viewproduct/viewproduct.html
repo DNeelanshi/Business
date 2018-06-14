@@ -51,16 +51,18 @@
           <h4><img width="20px" src="assets/imgs/contactinfo.png"> Contact Info</h4>
 <!--          <p><img width="12px" src="assets/imgs/city.png"> 508 Virginia </p>-->
           <p (click)="LaunchNavigator()"><img width="12px" src="assets/imgs/location.png"> {{restaurantdata?.business_data[0].address}} </p>
-          <p (click)="DialNumber(restaurantdata?.business_data[0].business_phone_number)"><img width="12px" src="assets/imgs/phone.png">{{restaurantdata?.business_data[0].business_phone_number}}</p>
-          
+          <p *ngIf="restaurantdata?.business_data[0].business_phone_number" (click)="DialNumber(restaurantdata?.business_data[0].business_phone_number)"><img width="12px" src="assets/imgs/phone.png"> {{ restaurantdata?.business_data[0].business_phone_number}}</p>
         </div>
         <div class="contactbox">
           <h4><img width="20px" src="assets/imgs/website.png"> Website Info</h4>
           <p *ngIf="restaurantdata?.business_data[0].website_url" style="font-size: 14px !important;" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].website_url)"> {{restaurantdata?.business_data[0].website_url}}</p>
-<!--          <p *ngIf="restaurantdata?.business_data[0].facebook_link"> {{restaurantdata?.business_data[0].facebook_link}}</p>
-          <p *ngIf="restaurantdata?.business_data[0].instagram_link"> {{restaurantdata?.business_data[0].instagram_link}}</p>
-          <p *ngIf="restaurantdata?.business_data[0].twitter_link"> {{restaurantdata?.business_data[0].twitter_link}}</p>-->
-        </div>
+          </div>
+<!--          <div class="contactbox" style="padding-top: 7px;">
+          <h4><img width="20px" src="assets/imgs/website.png"> Social Info</h4>
+           <p *ngIf="restaurantdata?.business_data[0].facebook_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].facebook_link)"> {{restaurantdata?.business_data[0].facebook_link}}</p>
+          <p *ngIf="restaurantdata?.business_data[0].instagram_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].instagram_link)"> {{restaurantdata?.business_data[0].instagram_link}}</p>
+          <p *ngIf="restaurantdata?.business_data[0].twitter_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].twitter_link)"> {{restaurantdata?.business_data[0].twitter_link}}</p>
+        </div>-->
       </ion-item>
       <ion-item>
           <button class="share" clear ion-button icon-left color="dark" (click)="LaunchNavigator()"><ion-icon ><img width="16px" src="assets/imgs/download.png"></ion-icon>Map view</button>
@@ -71,6 +73,25 @@
             Favorite</button>
         <button class="share" clear ion-button icon-left color="dark" (click)="socialsharing(restaurantdata?.business_data[0].business_name,restaurantdata?.business_data[0].address,restaurantdata?.business_image[0])"><ion-icon ><img width="16px" src="assets/imgs/share.png"></ion-icon>Share</button>
       </ion-item>
+      
+      <ion-item-divider color="light" *ngIf="(restaurantdata?.business_data[0].facebook_link != '') || (restaurantdata?.business_data[0].twitter_link != '') || (restaurantdata?.business_data[0].instagram_link != '')">Social Info</ion-item-divider>
+      <ion-list class="social">
+        <ion-item *ngIf="restaurantdata?.business_data[0].facebook_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].facebook_link)">
+          <ion-icon name="logo-facebook" item-start style='color: #315C96;'></ion-icon>
+            {{restaurantdata?.business_data[0].facebook_link}}
+        </ion-item>
+          <ion-item *ngIf="restaurantdata?.business_data[0].twitter_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].twitter_link)">
+          <ion-icon name="logo-twitter" item-start style='color: #00A6EF;'></ion-icon>
+             {{restaurantdata?.business_data[0].twitter_link}}
+        </ion-item>
+          <ion-item *ngIf="restaurantdata?.business_data[0].instagram_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].instagram_link)">
+              <ion-icon name="" item-start>
+                  <img width="25px" src="assets/imgs/insta.png" />
+              </ion-icon>
+             {{restaurantdata?.business_data[0].instagram_link}}
+        </ion-item>
+      </ion-list>
+      
       <ion-item-divider color="light">HOURS OF OPERATION</ion-item-divider>
       <ion-item text-wrap>
           <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length>0">
@@ -80,11 +101,11 @@
           <h4>Not added yet!</h4>
         </div>
       </ion-item>
-      <ion-item-divider *ngIf="(restaurantdata?.role == 'dummy') && (restaurantdata?.Claimed_requests?.length == 0)" color="light">IS THIS YOUR BUSINESS?</ion-item-divider>
-      <ion-item text-wrap *ngIf="(restaurantdata?.role == 'dummy') && (restaurantdata?.Claimed_requests?.length == 0)">
+      <ion-item-divider *ngIf="(restaurantdata?.role == 'dummy') && (restaurantdata?.Claimed_requests?.length == 0) && currentUser != ''" color="light">IS THIS YOUR BUSINESS?</ion-item-divider>
+      <ion-item text-wrap *ngIf="(restaurantdata?.role == 'dummy') && (restaurantdata?.Claimed_requests?.length == 0) && currentUser != ''">
         <p>Claim your business to respond to reviews and messages.
         </p>
-        <button [disabled]="restaurantdata?.role != 'dummy'" class="btneq" full ion-button color="green" (click)="ClaimYourBusiness(restaurantdata?.business_data[0]._id)">Claim this Business</button>
+        <button class="btneq" full ion-button color="green" (click)="ClaimYourBusiness(restaurantdata?.business_data[0]._id)">Claim this Business</button>
       </ion-item>
       <ion-item-divider color="light">Description</ion-item-divider>
       <ion-item text-wrap>

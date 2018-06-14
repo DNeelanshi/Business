@@ -85,25 +85,29 @@ export class BooknowPage {
         var startTime = BookingForm.value.startTime.split(':');
         console.log(startTime);
         console.log(startTime[0]);
-        //var endTime = "";
-        var a = BookingForm.value.date+' '+BookingForm.value.startTime
-        var endTime = new Date(a);
+        var splitdate = BookingForm.value.date.split('-');
+        console.log(splitdate);
+        console.log('year:'+splitdate[0]+' month:'+splitdate[1]+' date:'+splitdate[2]);
+        console.log(new Date(splitdate[0], splitdate[1]-1, splitdate[2], startTime[0], startTime[1]));
+       // var a = BookingForm.value.date+' '+BookingForm.value.startTime;
+        var endTime = new Date(splitdate[0], splitdate[1]-1, splitdate[2], startTime[0], startTime[1]);
         var compareTo = new Date();
+        
         //var mins = moment.utc(moment(endTime, "HH:mm:ss").diff(moment(BookingForm.value.startTime, "HH:mm:ss"))).format("mm")
         console.log('enddate:'+endTime);
-        console.log(compareTo);
-        console.log(a);
+        console.log('startdate:'+compareTo);
+        //return false;
         var isAfter = moment(endTime).isAfter(compareTo);
          console.log(isAfter);
-        return false;
+        //return false;
         console.log(window.navigator.onLine);
         if (localStorage.getItem('CurrentUser')) {
-           // if(isAfter == true){
+            if(isAfter == true){
             console.log('true');
             this.viewCtrl.dismiss({bookingdata: BookingForm.value});
-//            }else{
-//                this.common.presentAlert('Book Now','Time must be greater than current time!');
-//            }
+            }else{
+                this.common.presentAlert('Book Now','Time must be greater than current time!');
+            }
         } else {
             let alert = this.alertCtrl.create({
                 title: 'Book now',

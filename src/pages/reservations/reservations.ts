@@ -33,7 +33,9 @@ export class ReservationsPage {
         
     ) {
     //alert('reservationsffff');
-    
+            this.common.interval = setInterval(() => {
+                    this.GetData();
+                }, 20000);
    
     }
 
@@ -80,6 +82,45 @@ export class ReservationsPage {
             }
         })
         })
+    }
+
+
+/********* this function for autoload ************/
+ GetData() {
+     
+        console.log('hereeee');
+        var user = JSON.parse(localStorage.getItem('CurrentUser'));
+        let options = this.appsetting.header();
+        let postdata = {
+            role: user.role,
+            user_id: user._id,
+            page:this.pageno
+        }
+        let serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'orders/getorders', serialized, options).map(res => res.json()).subscribe(response => {
+            console.log(response);
+           
+            if (response.status == true) {
+                this.reservationsdata = '';
+                response.data.forEach(function (value, key) {
+                    console.log(value);
+                    var datetime = value.orderstart;
+                    value.bookingtime = moment(datetime).format('hh:mm A');
+                    value.bookingdate = moment(datetime).format('MM-DD-YYYY');
+                   // value.bookingtime = parseInt( value.orderstart);
+                   
+                    console.log(value.bookingtime)
+                })
+                this.reservationsdata = response.data;
+                this.totalpageno = response.page;
+//                this.reservationsdata[0].bookingtime =  parseInt(this.reservationsdata[0].bookingtime);
+                console.log(this.reservationsdata);
+            } else {
+                this.reservationsdata = '';
+                //this.common.presentAlert('Book now', 'Something went wrong!');
+            }
+        })
+       
     }
 
 /*********** function to accept the reservations *******************/

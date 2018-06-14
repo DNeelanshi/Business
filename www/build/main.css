@@ -42436,7 +42436,7 @@ page-privacy .contant-sec p {
 }
 
 page-privacy .contant-sec p:first-child {
-  margin-top: 5px;
+  margin-top: 16px !important;
 }
 
 page-privacy .banner {
@@ -42844,10 +42844,6 @@ page-review {
 page-review .bottom_sec {
   width: 100%;
   float: left;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  right: 0;
   margin: auto;
   padding: 15px;
   background-color: #fff;
@@ -43098,6 +43094,7 @@ page-review .rply {
 
 page-review .button-clear {
   color: #3cc602 !important;
+  padding: 0px !important;
 }
 
 page-reviews2 h5 {
@@ -43890,6 +43887,26 @@ page-viewproduct ion-slides ion-slide img {
   width: 100% !important;
   float: left !important;
   height: 100% !important;
+}
+
+page-viewproduct .social {
+  margin: 0;
+}
+
+page-viewproduct .social .item .icon {
+  margin: 0;
+}
+
+page-viewproduct .social .item .item-inner {
+  padding: 0;
+}
+
+page-viewproduct .social .item {
+  padding: 0 15px !important;
+}
+
+page-viewproduct .social .item .item-inner .label {
+  font-size: 15px;
 }
 
 page-viewreservation .item {

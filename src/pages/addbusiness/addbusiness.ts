@@ -128,7 +128,7 @@ export class AddbusinessPage {
             accept: [false],
             reservation: [false],
             zipcode: ['', [Validators.required]],
-            websiteurl: ['', [Validators.required]],
+            websiteurl: [''],
             /******* controls for days,opening and closing hours *************/
             monday:[false],
             mondayopeninghours: [''],

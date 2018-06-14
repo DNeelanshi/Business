@@ -92,7 +92,7 @@ export class EditbusinessPage {
             accept: [false],
             reservation: [false],
             zipcode: ['', [Validators.required]],
-            websiteurl: ['', [Validators.required]],
+            websiteurl: [''],
             //Controls for manage day,opening and closing hours.
             monday:[false],
             mondayopeninghours: [''],

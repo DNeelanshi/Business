@@ -23,7 +23,7 @@
     <div class="content-sec" padding>
         <div class="top-sec" >
             <h2>{{businessData?.business_name}}</h2>
-            <p>{{businessData?.business_description}}</p>
+            <p [innerHTML]="businessData?.business_description"></p>
             <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="data.rating" name="rating"
                     nullable="false">
             </rating>
@@ -36,7 +36,7 @@
                 </ion-avatar>
                 <h2>{{reviews.firstname}} {{reviews.lastname}}
                     <span *ngIf="reviews.time == 'day'">{{reviews.days}} Day ago</span>
-                    <span *ngIf="reviews.time== 'time'">{{reviews.days}} Hour ago</span>
+                    <span *ngIf="reviews.time == 'time'">{{reviews.days}} Hour ago</span>
                 </h2>
 
                 <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="reviews.stars" name="rating"

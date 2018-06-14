@@ -4,21 +4,16 @@ webpackJsonp([33],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewproductPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BooknowPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_social_sharing__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__booknow_booknow__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_launch_navigator__ = __webpack_require__(252);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_geolocation__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_login__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_call_number__ = __webpack_require__(253);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_appsetting__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_common__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -36,366 +31,159 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-
-
 /**
- * Generated class for the ViewproductPage page.
+ * Generated class for the BooknowPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ViewproductPage = (function () {
-    function ViewproductPage(navCtrl, navParams, socialSharing, toastCtrl, modalCtrl, ViewCtrl, appsetting, http, loadingCtrl, common, launchNavigator, geolocation, callNumber) {
+var BooknowPage = (function () {
+    function BooknowPage(navCtrl, navParams, viewCtrl, formBuilder, appsetting, http, loadingCtrl, common, toastCtrl, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.socialSharing = socialSharing;
-        this.toastCtrl = toastCtrl;
-        this.modalCtrl = modalCtrl;
-        this.ViewCtrl = ViewCtrl;
+        this.viewCtrl = viewCtrl;
+        this.formBuilder = formBuilder;
         this.appsetting = appsetting;
         this.http = http;
         this.loadingCtrl = loadingCtrl;
         this.common = common;
-        this.launchNavigator = launchNavigator;
-        this.geolocation = geolocation;
-        this.callNumber = callNumber;
-        if (localStorage.getItem('CurrentUser')) {
-            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-        }
-    }
-    ViewproductPage.prototype.ionViewDidLoad = function () {
-        // alert('updated df');
-        var date = new Date();
-        var today_date = new Date(__WEBPACK_IMPORTED_MODULE_12_moment__(date).format("YYYY-MM-DD") + "T" + "00:00:00.000Z");
-        console.log('ionViewDidLoad ViewproductPage');
-        console.log(this.navParams.get('restdata'));
-        var resdata = this.navParams.get('restdata').business_data[0].opening_days_and_timings;
-        var a = this.navParams.get('restdata').business_data[0].business_phone_number;
-        console.log(typeof (a));
-        console.log(a.toString());
-        var mystring = a.toString();
-        console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1) $2-$3"));
-        a = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1) $2-$3");
+        this.toastCtrl = toastCtrl;
+        this.alertCtrl = alertCtrl;
+        this.data = {};
+        //alert('rahul');
+        console.log(new Date());
+        this.currentdate = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date().toISOString()).locale('es').format();
+        console.log(this.currentdate);
+        var time = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date().toISOString()).locale('es').format('hh:mm');
+        console.log(time);
+        var a = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date().toISOString()).locale('es').format('DD-MM-YYYY');
         console.log(a);
-        this.navParams.get('restdata').business_data[0].business_phone_number = a;
-        this.restaurantdata = this.navParams.get('restdata');
-        if (this.favourite) {
-            if (this.favourite.length > 0) {
-                for (var j = 0; j < this.favourite.length; j++) {
-                    console.log(this.favourite[j].favorite_business_id);
-                    if (this.restaurantdata.business_data[0]._id == this.favourite[j].favorite_business_id) {
-                        console.log('matched');
-                        this.restaurantdata.fav = 1;
-                        break;
-                    }
-                    else {
-                        console.log('not matched');
-                        this.restaurantdata.fav = 0;
-                        // break;
-                    }
-                }
-            }
-            else {
-                this.restaurantdata.fav = 0;
-            }
-        }
-        else {
-            this.restaurantdata.fav = 0;
-        }
-        this.navParams.get('restdata').business_data[0].opening_days_and_timings.forEach(function (value, key) {
-            console.log(value);
-            value.opening_time = __WEBPACK_IMPORTED_MODULE_12_moment__(value.opening_time, ["h:mm A"]).format("hh:mm A");
-            value.closing_time = __WEBPACK_IMPORTED_MODULE_12_moment__(value.closing_time, ["h:mm A"]).format("hh:mm A");
-            //            var dt = moment(value.closing_time, ["h:mm A"]).format("hh:mm A");
-            //           console.log(dt);
-        });
-        console.log(this.restaurantdata);
-    };
-    /******** function used for social sharing *****************/
-    ViewproductPage.prototype.socialsharing = function (name, address, image) {
-        console.log(name);
-        console.log(address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play');
-        console.log(image);
+        var b = a.split('-');
+        console.log(b);
+        this.day = b[0];
+        this.month = b[1];
+        this.year = b[2];
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
-            // Check if sharing via email is supported
-            var message = address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play'; //'Amazing restaurant';
-            var subject = name; //'Restaurant name';
-            var file = '';
-            var url = image.business_image; //'https://www.google.co.in';
-            this.socialSharing.share(message, subject, file, url).then(function (res) {
-                // Sharing via email is possible
-                console.log(JSON.stringify(res));
-            }).catch(function (err) {
-                // Sharing via email is not possible
-                console.log(JSON.stringify(err));
-            });
+            console.log('You are online');
         }
         else {
-            var toast = this.toastCtrl.create({
-                message: 'Check your internet connection',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.onDidDismiss(function () {
-                console.log('Dismissed toast');
-            });
-            toast.present();
+            this.common.tryagain();
         }
+    }
+    BooknowPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad BooknowPage');
     };
-    /******** function used for open booking modal *****************/
-    ViewproductPage.prototype.bookModal = function () {
-        var _this = this;
-        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__booknow_booknow__["a" /* BooknowPage */]);
-        modal.onDidDismiss(function (data) {
-            console.log(data);
-            console.log(_this.modaldata);
-            if (localStorage.getItem('CurrentUser')) {
-                var user = JSON.parse(localStorage.getItem('CurrentUser'));
-                if (data.bookingdata) {
-                    console.log(new Date(data.bookingdata.date).toISOString());
-                    var da = new Date(data.bookingdata.date).toISOString();
-                    var t = da.charAt(10);
-                    var z = da.match(/.{1,16}/g);
-                    console.log(da.charAt(10));
-                    console.log(da.match(/.{1,16}/g));
-                    console.log(da);
-                    var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
-                    console.log(startdate);
-                    var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
-                    console.log(enddate);
-                    //return false;
-                    var options = _this.appsetting.header();
-                    var postdata = {
-                        business_id: _this.restaurantdata.business_data[0]._id,
-                        order_to: _this.restaurantdata._id,
-                        order_from: user._id,
-                        orderdate: da,
-                        orderstart: startdate,
-                        orderend: enddate
-                    };
-                    var serialized = _this.appsetting.serializeObj(postdata);
-                    _this.http.post(_this.appsetting.url + 'orders/addOrders', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
-                        console.log(response);
-                        if (response.status == true) {
-                            _this.common.presentConfirm('Book now', response.message, __WEBPACK_IMPORTED_MODULE_7__home_home__["a" /* HomePage */]);
-                        }
-                        else {
-                            _this.common.presentAlert('Book now', 'Something went wrong!');
-                        }
-                    });
-                }
-            }
-            else {
-                _this.common.ConfirmFunction('Book Now', 'Please login first to confirm booking!', __WEBPACK_IMPORTED_MODULE_10__login_login__["a" /* LoginPage */]);
-            }
-        });
-        modal.present();
-    };
-    ViewproductPage.prototype.CheckIn = function () {
-        var _this = this;
-        console.log('Check in');
-        if (localStorage.getItem('CurrentUser')) {
-            var user = JSON.parse(localStorage.getItem('CurrentUser'));
-            console.log(user._id);
-            var options = this.appsetting.header();
-            var postdata = {
-                user_id: user._id,
-                business_id: this.restaurantdata.business_data[0]._id,
-                date: new Date().toISOString()
-            };
-            var serialized = this.appsetting.serializeObj(postdata);
-            this.http.post(this.appsetting.url + 'checkin', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
-                console.log(response);
-                if (response.status == true) {
-                    _this.restaurantdata = response.data;
-                    if (_this.favourite) {
-                        if (_this.favourite.length > 0) {
-                            for (var j = 0; j < _this.favourite.length; j++) {
-                                console.log(_this.favourite[j].favorite_business_id);
-                                if (_this.restaurantdata.business_data[0]._id == _this.favourite[j].favorite_business_id) {
-                                    console.log('matched');
-                                    _this.restaurantdata.fav = 1;
-                                    break;
-                                }
-                                else {
-                                    console.log('not matched');
-                                    _this.restaurantdata.fav = 0;
-                                    // break;
-                                }
-                            }
-                        }
-                        else {
-                            _this.restaurantdata.fav = 0;
-                        }
-                    }
-                    else {
-                        _this.restaurantdata.fav = 0;
-                    }
-                    _this.common.presentAlert('Check in', response.msg);
-                }
-                else {
-                    _this.common.presentAlert('Check in', response.msg);
-                }
-            });
-        }
-        else {
-            this.common.presentAlert(' View detail', 'Login first to check in!');
-        }
-    };
-    ViewproductPage.prototype.ClaimYourBusiness = function (businessid) {
-        var _this = this;
-        console.log('Claim this business');
-        var user = JSON.parse(localStorage.getItem('CurrentUser'));
-        console.log(user._id);
-        var options = this.appsetting.header();
-        var postdata = {
-            user_id: user._id,
-            business_id: businessid
-        };
-        var serialized = this.appsetting.serializeObj(postdata);
-        this.http.post(this.appsetting.url + 'users/getClaimRequest', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
-            console.log(response);
-            if (response.status == true) {
-                _this.common.presentAlert('Claim this business', response.message);
-            }
-            else {
-                _this.common.presentAlert('Claim this business', response.message);
-            }
+    BooknowPage.prototype.ngOnInit = function () {
+        console.log('ngOnInit');
+        this.BookingForm = this.formBuilder.group({
+            date: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            startTime: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            //endTime: ['', [Validators.required]],
+            specialAccomo: [''],
         });
     };
-    /*********** function to favourite a restaurant *******************/
-    ViewproductPage.prototype.MarkAsFavourite = function (businessID) {
-        var _this = this;
-        console.log('MarkAsFavourite function');
-        console.log(businessID);
-        if (localStorage.getItem('CurrentUser')) {
-            var user = JSON.parse(localStorage.getItem('CurrentUser'));
-            var options_1 = this.appsetting.header();
-            var postdata = {
-                user_id: user._id,
-                favorite_business_id: businessID
-            };
-            var serialized_1 = this.appsetting.serializeObj(postdata);
-            this.http.post(this.appsetting.url + 'user/add_to_favarite', serialized_1, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
-                console.log(response);
-                if (response.status == true) {
-                    localStorage.setItem('CurrentUser', JSON.stringify(response.data[0]));
-                    console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
-                    _this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                    //console.log(this.favourite);
-                    console.log(_this.restaurantdata._id);
-                    if (_this.favourite.length > 0) {
-                        for (var j = 0; j < _this.favourite.length; j++) {
-                            console.log(_this.favourite[j].favorite_business_id);
-                            if (businessID == _this.favourite[j].favorite_business_id) {
-                                console.log('matched');
-                                _this.restaurantdata.fav = 1;
-                                break;
-                            }
-                            else {
-                                console.log('not matched');
-                                _this.restaurantdata.fav = 0;
-                                // break;
-                            }
-                        }
-                    }
-                    else {
-                        _this.restaurantdata.fav = 0;
-                    }
-                    console.log(_this.restaurantdata);
-                }
-                else {
-                    _this.http.post(_this.appsetting.url + 'user/delete_favarite_business ', serialized_1, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
-                        console.log(response);
-                        if (response.status == true) {
-                            localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                            console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
-                            _this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                            if (_this.favourite.length > 0) {
-                                for (var j = 0; j < _this.favourite.length; j++) {
-                                    console.log(_this.favourite[j].favorite_business_id);
-                                    if (businessID == _this.favourite[j].favorite_business_id) {
-                                        console.log('matched');
-                                        _this.restaurantdata.fav = 1;
-                                        break;
-                                    }
-                                    else {
-                                        console.log('not matched');
-                                        _this.restaurantdata.fav = 0;
-                                        // break;
-                                    }
-                                }
-                            }
-                            else {
-                                _this.restaurantdata.fav = 0;
-                            }
-                        }
-                        else {
-                            _this.common.presentAlert('View detail', 'Something went wrong!');
-                        }
-                    });
-                }
-            });
-        }
-        else {
-            this.common.ConfirmFunction('Favourite', 'Please login first to make favourite!', __WEBPACK_IMPORTED_MODULE_10__login_login__["a" /* LoginPage */]);
-        }
+    BooknowPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
-    /*********** Function for launch navigator after click on address ***************/
-    ViewproductPage.prototype.LaunchNavigator = function () {
+    BooknowPage.prototype.MakeBooking = function (BookingForm) {
         var _this = this;
-        console.log(this.restaurantdata.business_data[0].location.coordinates);
+        console.log(BookingForm.value);
+        var startTime = BookingForm.value.startTime.split(':');
+        console.log(startTime);
+        console.log(startTime[0]);
+        var splitdate = BookingForm.value.date.split('-');
+        console.log(splitdate);
+        console.log('year:' + splitdate[0] + ' month:' + splitdate[1] + ' date:' + splitdate[2]);
+        console.log(new Date(splitdate[0], splitdate[1] - 1, splitdate[2], startTime[0], startTime[1]));
+        // var a = BookingForm.value.date+' '+BookingForm.value.startTime;
+        var endTime = new Date(splitdate[0], splitdate[1] - 1, splitdate[2], startTime[0], startTime[1]);
+        var compareTo = new Date();
+        //var mins = moment.utc(moment(endTime, "HH:mm:ss").diff(moment(BookingForm.value.startTime, "HH:mm:ss"))).format("mm")
+        console.log('enddate:' + endTime);
+        console.log('startdate:' + compareTo);
         //return false;
-        this.geolocation.getCurrentPosition().then(function (resp) {
-            console.log('getCurrentPosition');
-            console.log(resp.coords.latitude);
-            console.log(resp.coords.longitude);
-            var start = [resp.coords.latitude, resp.coords.longitude];
-            var options = {
-                start: start,
-            };
-            var lat = _this.restaurantdata.business_data[0].location.coordinates[1];
-            var long = _this.restaurantdata.business_data[0].location.coordinates[0];
-            var destination = [lat, long];
-            _this.launchNavigator.navigate(destination, options)
-                .then(function (success) { return console.log('Launched navigator'); }, function (error) { return console.log('Error launching navigator', error); });
-        });
+        var isAfter = __WEBPACK_IMPORTED_MODULE_7_moment__(endTime).isAfter(compareTo);
+        console.log(isAfter);
+        //return false;
+        console.log(window.navigator.onLine);
+        if (localStorage.getItem('CurrentUser')) {
+            if (isAfter == true) {
+                console.log('true');
+                this.viewCtrl.dismiss({ bookingdata: BookingForm.value });
+            }
+            else {
+                this.common.presentAlert('Book Now', 'Time must be greater than current time!');
+            }
+        }
+        else {
+            var alert_1 = this.alertCtrl.create({
+                title: 'Book now',
+                message: 'Please login first to confirm booking!',
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: function () {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'Login',
+                        handler: function () {
+                            console.log('login clicked');
+                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__login_login__["a" /* LoginPage */]);
+                        }
+                    }
+                ]
+            });
+            alert_1.present();
+        }
     };
-    /******** Function for open website url in browser ************/
-    ViewproductPage.prototype.OpenWebsiteInfo = function (link) {
-        console.log(link);
-        this.common.InappBrowser(link);
+    BooknowPage.prototype.changedate = function (event) {
+        console.log(event);
+        console.log(typeof (event.day));
+        console.log(event.month);
+        console.log(event.year);
+        console.log(typeof (parseInt(this.day)));
+        console.log(typeof (parseInt(this.month)));
+        console.log(typeof (parseInt(this.year)));
+        if (event.day == parseInt(this.day) && event.month == parseInt(this.month) && event.year == parseInt(this.year)) {
+            var b = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date()).format('HH:mm');
+            // this.currentdate1 = '2037'
+            this.BookingForm.patchValue({
+                startTime: b
+            });
+            console.log(this.currentdate1);
+            console.log('matched');
+        }
+        else {
+            this.currentdate1 = '2037';
+            this.BookingForm.patchValue({
+                startTime: ''
+            });
+            console.log('not matched');
+        }
     };
-    ViewproductPage.prototype.DialNumber = function (phone) {
-        this.callNumber.callNumber(phone, true).then(function (res) { return console.log('Launched dialer!', res); })
-            .catch(function (err) { return console.log('Error launching dialer', err); });
-    };
-    ViewproductPage = __decorate([
+    BooknowPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-viewproduct',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/viewproduct/viewproduct.html"*/'<!--\n  Generated template for the ViewproductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-title text-center>View</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content style="background: #dee1e4;">\n  <div class="productslide">\n    <ion-slides pager>\n      <ion-slide *ngFor="let img of restaurantdata?.business_image">\n        <div class="imagebox">\n          <img [src]="img.business_image">\n        </div>\n      </ion-slide>\n<!--      <ion-slide *ngIf="restaurantdata?.business_image1">\n        <div class="imagebox">\n          <img [src]="restaurantdata?.business_image1">\n        </div>\n      </ion-slide>-->\n    </ion-slides>\n  </div>\n\n  <div class="product_content">\n    <ion-list>\n      <ion-item>\n        <h1>{{restaurantdata?.business_data[0].business_name}}</h1>\n        <p>{{restaurantdata?.business_data[0].sub_cat}}</p>\n        <h4 *ngIf="restaurantdata?.checkin"><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> {{restaurantdata?.checkin.length}} Check-Ins</h4>\n        <h4 *ngIf="!restaurantdata?.checkin"><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> 0 Check-Ins</h4>\n        <div item-end class="buttonright">\n          <button [disabled]="restaurantdata?.role == \'dummy\'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()">\n<!--              <ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>-->\n              Book Now</button>\n          <button class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()">\n<!--              <ion-icon ><img width="16px" src="assets/imgs/checkin.png"></ion-icon>-->\n              Check In</button>\n        </div>\n      </ion-item>\n      <ion-item-divider color="light">Info</ion-item-divider>\n      <ion-item text-wrap>\n        <div class="contactbox">\n          <h4><img width="20px" src="assets/imgs/contactinfo.png"> Contact Info</h4>\n<!--          <p><img width="12px" src="assets/imgs/city.png"> 508 Virginia </p>-->\n          <p (click)="LaunchNavigator()"><img width="12px" src="assets/imgs/location.png"> {{restaurantdata?.business_data[0].address}} </p>\n          <p (click)="DialNumber(restaurantdata?.business_data[0].business_phone_number)"><img width="12px" src="assets/imgs/phone.png">{{restaurantdata?.business_data[0].business_phone_number}}</p>\n          \n        </div>\n        <div class="contactbox">\n          <h4><img width="20px" src="assets/imgs/website.png"> Website Info</h4>\n          <p *ngIf="restaurantdata?.business_data[0].website_url" style="font-size: 14px !important;" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].website_url)"> {{restaurantdata?.business_data[0].website_url}}</p>\n<!--          <p *ngIf="restaurantdata?.business_data[0].facebook_link"> {{restaurantdata?.business_data[0].facebook_link}}</p>\n          <p *ngIf="restaurantdata?.business_data[0].instagram_link"> {{restaurantdata?.business_data[0].instagram_link}}</p>\n          <p *ngIf="restaurantdata?.business_data[0].twitter_link"> {{restaurantdata?.business_data[0].twitter_link}}</p>-->\n        </div>\n      </ion-item>\n      <ion-item>\n          <button class="share" clear ion-button icon-left color="dark" (click)="LaunchNavigator()"><ion-icon ><img width="16px" src="assets/imgs/download.png"></ion-icon>Map view</button>\n        <button class="fav" clear ion-button icon-left color="dark" (click)="MarkAsFavourite(restaurantdata?.business_data[0]._id)">\n            <ion-icon *ngIf="restaurantdata?.fav == 0"><img width="16px" src="assets/imgs/fav.png"></ion-icon>\n            <ion-icon *ngIf="restaurantdata?.fav == 1"><img width="16px" src="assets/imgs/favactive.png"></ion-icon>\n            \n            Favorite</button>\n        <button class="share" clear ion-button icon-left color="dark" (click)="socialsharing(restaurantdata?.business_data[0].business_name,restaurantdata?.business_data[0].address,restaurantdata?.business_image[0])"><ion-icon ><img width="16px" src="assets/imgs/share.png"></ion-icon>Share</button>\n      </ion-item>\n      <ion-item-divider color="light">HOURS OF OPERATION</ion-item-divider>\n      <ion-item text-wrap>\n          <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length>0">\n          <h4 *ngFor="let days of restaurantdata?.business_data[0].opening_days_and_timings"><span>{{days.day}}</span> {{days.opening_time}} to {{days.closing_time}} </h4>\n        </div>\n          <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length == 0">\n          <h4>Not added yet!</h4>\n        </div>\n      </ion-item>\n      <ion-item-divider *ngIf="(restaurantdata?.role == \'dummy\') && (restaurantdata?.Claimed_requests?.length == 0)" color="light">IS THIS YOUR BUSINESS?</ion-item-divider>\n      <ion-item text-wrap *ngIf="(restaurantdata?.role == \'dummy\') && (restaurantdata?.Claimed_requests?.length == 0)">\n        <p>Claim your business to respond to reviews and messages.\n        </p>\n        <button [disabled]="restaurantdata?.role != \'dummy\'" class="btneq" full ion-button color="green" (click)="ClaimYourBusiness(restaurantdata?.business_data[0]._id)">Claim this Business</button>\n      </ion-item>\n      <ion-item-divider color="light">Description</ion-item-divider>\n      <ion-item text-wrap>\n        <p [innerHTML]="restaurantdata?.business_data[0].business_description">\n        </p>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/viewproduct/viewproduct.html"*/,
+            selector: 'page-booknow',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/booknow/booknow.html"*/'<!--\n  Generated template for the BooknowPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header hidden>\n\n  <ion-navbar>\n      <button ion-button menuToggle style="display:block !important;">\n          <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n      </button>\n    <ion-title>booknow</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <div class="overouter" (click)="dismiss()"></div>\n    <div class="centerbox">\n    <form class="formsec" [formGroup]="BookingForm" (submit)="MakeBooking(BookingForm)">\n      <div class="topsec">\n        <div class="image-wrapper">\n          <img src="assets/imgs/bookpopup.png">\n        </div>\n        <p>Please let us know if you\'re celebrating or \n          have a special accommodation!</p>\n          <h2>Add Booking Day / Time</h2>\n         \n            <ion-grid>\n              <ion-row>\n                <ion-col col-12 class="left right">\n                  <ion-item class="clandr">\n                    <ion-datetime class="inputtxt" placeholder="Date" displayFormat="DDDD  MM-DD-YYYY" pickerFormat="MM-DD-YYYY" min="{{currentdate}}" formControlName="date" (ionChange)="changedate($event)"></ion-datetime>\n                    <img src="assets/imgs/calander.png" item-end>\n                  </ion-item>\n                </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col col-12 class="left">\n                  <ion-item>\n                    <ion-datetime class="inputtxt" placeholder="Time" displayFormat="hh:mm A" pickerFormat="hh:mm A" formControlName="startTime"></ion-datetime>\n                  </ion-item>\n                </ion-col>\n<!--                <ion-col col-6 class="right">\n                  <ion-item>\n                    <ion-datetime class="inputtxt" placeholder="End Time" displayFormat="HH:mm" pickerFormat="HH:mm" formControlName="endTime"></ion-datetime>\n                  </ion-item>\n                </ion-col>-->\n              </ion-row>\n            </ion-grid>\n            <h2>Special accommodations</h2>\n            <ion-item class="discripation">\n              <ion-textarea class="inputtxt" placeholder="Write special accommodations..." formControlName="specialAccomo"></ion-textarea>\n            </ion-item>\n        </div>\n        <div class="btnsec">\n            <button type="button" clear color="green" (click)="dismiss()">Cancel</button>\n          <button type="submit" clear color="green" style="border-right:1px solid #bdbdbd;" [disabled]="!BookingForm.valid">Confirm</button>\n          \n        </div>\n      </form>\n\n    </div>\n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/booknow/booknow.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_social_sharing__["a" /* SocialSharing */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* Http */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_appsetting__["a" /* Appsetting */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_launch_navigator__["a" /* LaunchNavigator */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_call_number__["a" /* CallNumber */]])
-    ], ViewproductPage);
-    return ViewproductPage;
+            __WEBPACK_IMPORTED_MODULE_5__providers_common__["a" /* Common */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
+    ], BooknowPage);
+    return BooknowPage;
 }());
 
-//# sourceMappingURL=viewproduct.js.map
+//# sourceMappingURL=booknow.js.map
 
 /***/ }),
 
@@ -1078,10 +866,262 @@ var ChangepasswordPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignuptwoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logintwo_logintwo__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_common__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_fcm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__forgot_forgot__ = __webpack_require__(55);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+/**
+ * Generated class for the SignuptwoPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var SignuptwoPage = (function () {
+    function SignuptwoPage(navCtrl, navParams, formBuilder, http, appsetting, common, toastCtrl, events, loadingCtrl, fcm) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.http = http;
+        this.appsetting = appsetting;
+        this.common = common;
+        this.toastCtrl = toastCtrl;
+        this.events = events;
+        this.loadingCtrl = loadingCtrl;
+        this.fcm = fcm;
+        this.type = 'password';
+        this.Ctype = 'password';
+        this.showPass = false;
+        this.showCpass = false;
+        this.iconname = 'eye';
+        this.iconname1 = 'eye';
+        this.myColors = [];
+        this.bar0 = '#DDD';
+        this.bar1 = '#DDD';
+        this.bar2 = '#DDD';
+        this.bar3 = '#DDD';
+        this.bar4 = '#DDD';
+        console.log('rahul');
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            console.log('You are online');
+        }
+        else {
+            this.common.tryagain();
+        }
+    }
+    SignuptwoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SignuptwoPage');
+    };
+    SignuptwoPage.prototype.ngOnInit = function () {
+        console.log('ngOnInit');
+        this.SignupForm = this.formBuilder.group({
+            fname: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            lname: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            phone: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].minLength(6)]],
+            cpassword: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].minLength(6)]],
+        }, { validator: this.matchingPasswords('password', 'cpassword') });
+    };
+    SignuptwoPage.prototype.emailValidator = function (control) {
+        if (!(control.value.toLowerCase().match('^[a-z0-9]+(\.[_a-z0-9]+)+([@{1}])+(\.[a-z0-9-]+)+([.{1}])(\.[a-z]{1,15})$'))) {
+            return { invalidEmail: true };
+        }
+    };
+    SignuptwoPage.prototype.matchingPasswords = function (passwordKey, confirmPasswordKey) {
+        return function (group) {
+            var password = group.controls[passwordKey];
+            var confirmPassword = group.controls[confirmPasswordKey];
+            if (password.value !== confirmPassword.value) {
+                return {
+                    mismatchedPasswords: true
+                };
+            }
+        };
+    };
+    SignuptwoPage.prototype.showPassword = function () {
+        console.log('showpassword');
+        this.showPass = !this.showPass;
+        if (this.showPass) {
+            this.type = 'text';
+            this.iconname = 'eye-off';
+        }
+        else {
+            this.type = 'password';
+            this.iconname = 'eye';
+        }
+    };
+    SignuptwoPage.prototype.showCPassword = function () {
+        console.log('showCpassword');
+        this.showCpass = !this.showCpass;
+        if (this.showCpass) {
+            this.Ctype = 'text';
+            this.iconname1 = 'eye-off';
+        }
+        else {
+            this.Ctype = 'password';
+            this.iconname1 = 'eye';
+        }
+    };
+    SignuptwoPage.prototype.isValid = function (field) {
+        var formField = this.SignupForm.get(field);
+        return formField.valid || formField.pristine;
+    };
+    SignuptwoPage.prototype.CreateAccount = function (formdata) {
+        var _this = this;
+        console.log(formdata.value);
+        console.log(formdata.value.password.indexOf(' '));
+        console.log('rahul');
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            if (formdata.value.password.indexOf(' ') != 0) {
+                var options_1 = this.appsetting.header();
+                this.fcm.getToken().then(function (token) {
+                    //console.log('Tokenid-->' + token);
+                    var postdata = {
+                        firstname: formdata.value.fname,
+                        lastname: formdata.value.lname,
+                        email: formdata.value.email,
+                        phone_number: formdata.value.phone,
+                        role: 'business',
+                        divice_token: token,
+                        password: formdata.value.password
+                    };
+                    var serialized = _this.appsetting.serializeObj(postdata);
+                    var Loading = _this.loadingCtrl.create({
+                        spinner: 'bubbles',
+                        content: 'Loading...'
+                    });
+                    Loading.present().then(function () {
+                        _this.http.post(_this.appsetting.url + 'users/registration', serialized, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
+                            console.log(response);
+                            Loading.dismiss();
+                            if (response.status == true) {
+                                localStorage.removeItem('filterdata');
+                                localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                                _this.events.publish('Loggedin', 'loginpage');
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
+                            }
+                            else {
+                                _this.common.presentAlert('Signup', response.message);
+                            }
+                        });
+                    });
+                }, function (err) {
+                    console.log(err);
+                });
+            }
+            else {
+                this.common.presentAlert('Signup', 'Space not allowed in password.');
+            }
+            //}).catch((error: any) => console.log(error));
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: 'Check your internet connection',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.onDidDismiss(function () {
+                console.log('Dismissed toast');
+            });
+            toast.present();
+        }
+    };
+    SignuptwoPage.prototype.pass_strength = function (pass) {
+        console.log(pass.value);
+        var strongRegularExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*()<>{}:;+'~|,-_?/=])(?=.{8,})");
+        var mediumRegularExp = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+        if (strongRegularExp.test(pass.value)) {
+            console.log('strong');
+            this.bar0 = '#00FF00';
+            this.bar1 = '#00FF00';
+            this.bar2 = '#00FF00';
+            this.bar3 = '#00FF00';
+            this.bar4 = '#00FF00';
+        }
+        else if (mediumRegularExp.test(pass.value)) {
+            console.log('medium');
+            this.bar0 = '#FFA500';
+            this.bar1 = '#FFA500';
+            this.bar2 = '#DDD';
+            this.bar3 = '#DDD';
+            this.bar4 = '#DDD';
+        }
+        else {
+            console.log('low');
+            this.bar0 = '#FF0000';
+            this.bar1 = '#DDD';
+            this.bar2 = '#DDD';
+            this.bar3 = '#DDD';
+            this.bar4 = '#DDD';
+        }
+    };
+    SignuptwoPage.prototype.forgot = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__forgot_forgot__["a" /* ForgotPage */]);
+    };
+    SignuptwoPage.prototype.add = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
+    };
+    SignuptwoPage.prototype.login = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__logintwo_logintwo__["a" /* LogintwoPage */]);
+    };
+    SignuptwoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-signuptwo',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/signuptwo/signuptwo.html"*/'<!--\n  Generated template for the SignuptwoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-title text-center>Register</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n  <div class="loginform formmain">\n    <h5>Benefits of becoming an “ME” Valued Business</h5>\n    <ul>\n\n      <li>Gain maximum exposure for your business</li>\n\n      <li>Connect directly with your potential customers in our fun and active RealTalk! Chat Room</li>\n\n      <li>Create a better online customer experience by scheduling appointment or reservations</li>\n\n      <li>…and much more!</li>\n    </ul>\n\n    <form [formGroup]="SignupForm" (submit)="CreateAccount(SignupForm)">\n      <ion-list no-lines>\n        \n          <ion-item>\n            <ion-input type="text" placeholder="First Name" formControlName="fname"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n             <span tem-content *ngIf="!isValid(\'fname\')" class="validationpop animated bounce">Firstname required.</span>\n          </ion-item>\n           \n       \n       \n          <ion-item>\n            <ion-input type="text" placeholder="Last Name" formControlName="lname"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n             <span tem-content *ngIf="!isValid(\'lname\')" class="validationpop animated bounce">Lastname required.</span>\n          </ion-item>\n            \n       \n       \n          <ion-item>\n            <ion-input type="tel" placeholder="Phone Number" formControlName="phone" maxLength="12"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/phn.png"></ion-icon>\n            <span tem-content *ngIf="!isValid(\'phone\')" class="validationpop animated bounce">Invalid phone number.</span>\n          </ion-item>\n          \n    \n          <ion-item>\n            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/email.png"></ion-icon>\n            <span tem-content *ngIf="!isValid(\'email\')" class="validationpop animated bounce">Invalid email.</span>\n          </ion-item>\n          \n      \n          <ion-item>\n            <ion-input type="{{type}}" placeholder="Password" formControlName="password" (input)="pass_strength(SignupForm.controls.password)"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n            <button item-end type="button" color="dark" class="eyebutton" (click)="showPassword()" ion-button icon-only clear>\n                <ion-icon name="{{iconname}}"></ion-icon>\n          </button>\n          <span tem-content *ngIf="!isValid(\'password\')" class="validationpop animated bounce">Password should at least 6 char.</span>\n          </ion-item>\n            \n<!--           <div id="strength">\n                    <p class="strnth">Password strength:</p>\n                        <ul id="strengthBar">\n                            <li class="point" [style.background-color]="bar0"></li>\n                            <li class="point" [style.background-color]="bar1"></li>\n                            <li class="point" [style.background-color]="bar2"></li>\n                            <li class="point" [style.background-color]="bar3"></li>\n                            <li class="point" [style.background-color]="bar4"></li>\n                        </ul>\n                    </div>-->\n    \n          <ion-item>\n            <ion-input type="{{Ctype}}" placeholder="Confirm Password" formControlName="cpassword"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n            \n            <button item-end type="button" color="dark" class="eyebutton" (click)="showCPassword()" ion-button icon-only clear>\n                <ion-icon name="{{iconname1}}"></ion-icon>\n          </button>\n          <span tem-content *ngIf="SignupForm.hasError(\'mismatchedPasswords\')"  class="validationpop animated bounce">Password mismatch.</span>\n          </ion-item>\n           \n       \n        <button type="submit" class="btn1" ion-button color="green" block  [disabled]="!SignupForm.valid">Sign up</button>\n<!--        <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>-->\n      </ion-list>\n    </form>\n  </div>\n\n  <div class="haveacc">Have an account? <span color="dark" (click)="login()" style="font-weight: 600;">Sign In</span></div>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/signuptwo/signuptwo.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */],
+            __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */],
+            __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_fcm__["a" /* FCM */]])
+    ], SignuptwoPage);
+    return SignuptwoPage;
+}());
+
+//# sourceMappingURL=signuptwo.js.map
+
+/***/ }),
+
+/***/ 174:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__forgot_forgot__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(15);
@@ -1326,7 +1366,7 @@ var SignupPage = (function () {
 
 /***/ }),
 
-/***/ 174:
+/***/ 175:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1462,7 +1502,7 @@ var FilterPage = (function () {
 
 /***/ }),
 
-/***/ 175:
+/***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1734,7 +1774,7 @@ var SearchPage = (function () {
     };
     SearchPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-search',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/search/search.html"*/'<!--\n  Generated template for the FilterPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n   \n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-buttons left (click)="dismiss()">\n    <button ion-button clear>\n      <ion-icon ion-icon icon-only name="close" style="font-size:30px; font-weight: 700;"></ion-icon>\n    </button>\n    </ion-buttons>\n    <ion-title text-center>Search</ion-title>\n  </ion-navbar>\n \n  \n</ion-header>\n\n<!--<form style="height: 100%; margin-top: 44px;">-->\n<ion-content>\n       <form [formGroup]="SearchForm" (submit)="Search(SearchForm)">\n    <div class="searchouter" color="green">\n             <ion-searchbar id="inputaaa" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (click)="currentLocation()" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)" formControlName="category"></ion-searchbar>\n             <div class="buttonout" *ngIf="bit == false" >\n             <button type="button" class="btn1" ion-button icon-start color="green" block (click)="funClicked()"><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>\n             </div>\n             <div *ngIf="bit == true">\n             <ion-searchbar class="bfr searchbar changeimg" placeholder="Neighborhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)" formControlName="location"></ion-searchbar>\n<!--             <button type="button" class="btn1" ion-button icon-start block (click)="currentLocation()"><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>-->\n          </div>\n             \n    </div>\n    </form>\n    \n    \n    \n  <div class="loginform">\n      <ion-list no-lines style="padding-left: 16px;margin:0px !important;">\n        <div class="inputouter">\n            <ion-item (click)="currentLocation()" *ngIf="bit == true" class="currentloc">\n                <ion-icon item-start><img src="assets/imgs/locate.png" style="width:15px;float: left;"></ion-icon>\n               Current Location\n            </ion-item>\n<!--          <ion-item>\n             <ion-searchbar id="input" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)"></ion-searchbar>\n             <button *ngIf="bit == false" type="button" class="btn1" ion-button icon-start color="green" block (click)="funClicked()"><ion-icon name="locate"></ion-icon>Current location</button>\n          </ion-item>-->\n<!--            <ion-item *ngIf="bit == true">\n             <ion-searchbar id="input" class="bfr searchbar" placeholder="neighbourhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)"></ion-searchbar>\n             <button type="button" class="btn1" ion-button icon-start color="green" block (click)="LocateMe()"><ion-icon name="locate"></ion-icon>Current location</button>\n          </ion-item>-->\n            <ion-list class="searchtogle animated" *ngIf="disable == true">\n            <ion-item *ngFor="let sub of categorydata | filter:data.term" (click)="CategorySearch(sub)">\n                {{sub.sub_category_title}}\n            </ion-item>\n            </ion-list>\n            <ion-list class="searchtogle animated">\n            <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item,SearchForm)">\n                {{ item }}\n        </ion-item>\n        </ion-list>\n        </div>\n      </ion-list>\n\n  </div>\n</ion-content>\n<!--<ion-footer>\n  <button type="submit" ion-button color="green" class="btn2">Search</button>\n  <button type="button" ion-button color="green" class="btn2" (click)="Reset()">Reset</button>\n</ion-footer>\n           </form>-->\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/search/search.html"*/,
+            selector: 'page-search',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/search/search.html"*/'<!--\n  Generated template for the FilterPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n   \n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-buttons left (click)="dismiss()">\n    <button ion-button clear>\n      <ion-icon ion-icon icon-only name="close" style="font-size:30px; font-weight: 700;"></ion-icon>\n    </button>\n    </ion-buttons>\n    <ion-title text-center>Search</ion-title>\n  </ion-navbar>\n \n  \n</ion-header>\n\n<!--<form style="height: 100%; margin-top: 44px;">-->\n<ion-content>\n       <form [formGroup]="SearchForm" (submit)="Search(SearchForm)">\n    <div class="searchouter" color="green">\n             <ion-searchbar id="inputaaa" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (click)="currentLocation()" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)" formControlName="category"></ion-searchbar>\n             <div class="buttonout" *ngIf="bit == false" (click)="funClicked()">\n             <button type="button" class="btn1" ion-button icon-start color="green" block><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>\n             </div>\n             <div *ngIf="bit == true">\n             <ion-searchbar class="bfr searchbar changeimg" placeholder="Neighborhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)" formControlName="location"></ion-searchbar>\n<!--             <button type="button" class="btn1" ion-button icon-start block (click)="currentLocation()"><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>-->\n          </div>\n             \n    </div>\n    </form>\n    \n    \n    \n  <div class="loginform">\n      <ion-list no-lines style="padding-left: 16px;margin:0px !important;">\n        <div class="inputouter">\n            <ion-item (click)="currentLocation()" *ngIf="bit == true" class="currentloc">\n                <ion-icon item-start><img src="assets/imgs/locate.png" style="width:15px;float: left;"></ion-icon>\n               Current Location\n            </ion-item>\n<!--          <ion-item>\n             <ion-searchbar id="input" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)"></ion-searchbar>\n             <button *ngIf="bit == false" type="button" class="btn1" ion-button icon-start color="green" block (click)="funClicked()"><ion-icon name="locate"></ion-icon>Current location</button>\n          </ion-item>-->\n<!--            <ion-item *ngIf="bit == true">\n             <ion-searchbar id="input" class="bfr searchbar" placeholder="neighbourhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)"></ion-searchbar>\n             <button type="button" class="btn1" ion-button icon-start color="green" block (click)="LocateMe()"><ion-icon name="locate"></ion-icon>Current location</button>\n          </ion-item>-->\n            <ion-list class="searchtogle animated" *ngIf="disable == true">\n            <ion-item *ngFor="let sub of categorydata | filter:data.term" (click)="CategorySearch(sub)">\n                {{sub.sub_category_title}}\n            </ion-item>\n            </ion-list>\n            <ion-list class="searchtogle animated">\n            <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item,SearchForm)">\n                {{ item }}\n        </ion-item>\n        </ion-list>\n        </div>\n      </ion-list>\n\n  </div>\n</ion-content>\n<!--<ion-footer>\n  <button type="submit" ion-button color="green" class="btn2">Search</button>\n  <button type="button" ion-button color="green" class="btn2" (click)="Reset()">Reset</button>\n</ion-footer>\n           </form>-->\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/search/search.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
@@ -1755,258 +1795,6 @@ var SearchPage = (function () {
 
 /***/ }),
 
-/***/ 176:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignuptwoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logintwo_logintwo__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_fcm__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__forgot_forgot__ = __webpack_require__(55);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-/**
- * Generated class for the SignuptwoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var SignuptwoPage = (function () {
-    function SignuptwoPage(navCtrl, navParams, formBuilder, http, appsetting, common, toastCtrl, events, loadingCtrl, fcm) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.http = http;
-        this.appsetting = appsetting;
-        this.common = common;
-        this.toastCtrl = toastCtrl;
-        this.events = events;
-        this.loadingCtrl = loadingCtrl;
-        this.fcm = fcm;
-        this.type = 'password';
-        this.Ctype = 'password';
-        this.showPass = false;
-        this.showCpass = false;
-        this.iconname = 'eye';
-        this.iconname1 = 'eye';
-        this.myColors = [];
-        this.bar0 = '#DDD';
-        this.bar1 = '#DDD';
-        this.bar2 = '#DDD';
-        this.bar3 = '#DDD';
-        this.bar4 = '#DDD';
-        console.log('rahul');
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            console.log('You are online');
-        }
-        else {
-            this.common.tryagain();
-        }
-    }
-    SignuptwoPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SignuptwoPage');
-    };
-    SignuptwoPage.prototype.ngOnInit = function () {
-        console.log('ngOnInit');
-        this.SignupForm = this.formBuilder.group({
-            fname: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            lname: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            phone: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].minLength(6)]],
-            cpassword: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].minLength(6)]],
-        }, { validator: this.matchingPasswords('password', 'cpassword') });
-    };
-    SignuptwoPage.prototype.emailValidator = function (control) {
-        if (!(control.value.toLowerCase().match('^[a-z0-9]+(\.[_a-z0-9]+)+([@{1}])+(\.[a-z0-9-]+)+([.{1}])(\.[a-z]{1,15})$'))) {
-            return { invalidEmail: true };
-        }
-    };
-    SignuptwoPage.prototype.matchingPasswords = function (passwordKey, confirmPasswordKey) {
-        return function (group) {
-            var password = group.controls[passwordKey];
-            var confirmPassword = group.controls[confirmPasswordKey];
-            if (password.value !== confirmPassword.value) {
-                return {
-                    mismatchedPasswords: true
-                };
-            }
-        };
-    };
-    SignuptwoPage.prototype.showPassword = function () {
-        console.log('showpassword');
-        this.showPass = !this.showPass;
-        if (this.showPass) {
-            this.type = 'text';
-            this.iconname = 'eye-off';
-        }
-        else {
-            this.type = 'password';
-            this.iconname = 'eye';
-        }
-    };
-    SignuptwoPage.prototype.showCPassword = function () {
-        console.log('showCpassword');
-        this.showCpass = !this.showCpass;
-        if (this.showCpass) {
-            this.Ctype = 'text';
-            this.iconname1 = 'eye-off';
-        }
-        else {
-            this.Ctype = 'password';
-            this.iconname1 = 'eye';
-        }
-    };
-    SignuptwoPage.prototype.isValid = function (field) {
-        var formField = this.SignupForm.get(field);
-        return formField.valid || formField.pristine;
-    };
-    SignuptwoPage.prototype.CreateAccount = function (formdata) {
-        var _this = this;
-        console.log(formdata.value);
-        console.log(formdata.value.password.indexOf(' '));
-        console.log('rahul');
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            if (formdata.value.password.indexOf(' ') != 0) {
-                var options_1 = this.appsetting.header();
-                this.fcm.getToken().then(function (token) {
-                    //console.log('Tokenid-->' + token);
-                    var postdata = {
-                        firstname: formdata.value.fname,
-                        lastname: formdata.value.lname,
-                        email: formdata.value.email,
-                        phone_number: formdata.value.phone,
-                        role: 'business',
-                        divice_token: token,
-                        password: formdata.value.password
-                    };
-                    var serialized = _this.appsetting.serializeObj(postdata);
-                    var Loading = _this.loadingCtrl.create({
-                        spinner: 'bubbles',
-                        content: 'Loading...'
-                    });
-                    Loading.present().then(function () {
-                        _this.http.post(_this.appsetting.url + 'users/registration', serialized, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
-                            console.log(response);
-                            Loading.dismiss();
-                            if (response.status == true) {
-                                localStorage.removeItem('filterdata');
-                                localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                                _this.events.publish('Loggedin', 'loginpage');
-                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
-                            }
-                            else {
-                                _this.common.presentAlert('Signup', response.message);
-                            }
-                        });
-                    });
-                }, function (err) {
-                    console.log(err);
-                });
-            }
-            else {
-                this.common.presentAlert('Signup', 'Space not allowed in password.');
-            }
-            //}).catch((error: any) => console.log(error));
-        }
-        else {
-            var toast = this.toastCtrl.create({
-                message: 'Check your internet connection',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.onDidDismiss(function () {
-                console.log('Dismissed toast');
-            });
-            toast.present();
-        }
-    };
-    SignuptwoPage.prototype.pass_strength = function (pass) {
-        console.log(pass.value);
-        var strongRegularExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*()<>{}:;+'~|,-_?/=])(?=.{8,})");
-        var mediumRegularExp = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-        if (strongRegularExp.test(pass.value)) {
-            console.log('strong');
-            this.bar0 = '#00FF00';
-            this.bar1 = '#00FF00';
-            this.bar2 = '#00FF00';
-            this.bar3 = '#00FF00';
-            this.bar4 = '#00FF00';
-        }
-        else if (mediumRegularExp.test(pass.value)) {
-            console.log('medium');
-            this.bar0 = '#FFA500';
-            this.bar1 = '#FFA500';
-            this.bar2 = '#DDD';
-            this.bar3 = '#DDD';
-            this.bar4 = '#DDD';
-        }
-        else {
-            console.log('low');
-            this.bar0 = '#FF0000';
-            this.bar1 = '#DDD';
-            this.bar2 = '#DDD';
-            this.bar3 = '#DDD';
-            this.bar4 = '#DDD';
-        }
-    };
-    SignuptwoPage.prototype.forgot = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__forgot_forgot__["a" /* ForgotPage */]);
-    };
-    SignuptwoPage.prototype.add = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
-    };
-    SignuptwoPage.prototype.login = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__logintwo_logintwo__["a" /* LogintwoPage */]);
-    };
-    SignuptwoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-signuptwo',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/signuptwo/signuptwo.html"*/'<!--\n  Generated template for the SignuptwoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-title text-center>Register</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n  <div class="loginform formmain">\n    <h5>Benefits of becoming an “ME” Valued Business</h5>\n    <ul>\n\n      <li>Gain maximum exposure for your business</li>\n\n      <li>Connect directly with your potential customers in our fun and active RealTalk! Chat Room</li>\n\n      <li>Create a better online customer experience by scheduling appointment or reservations</li>\n\n      <li>…and much more!</li>\n    </ul>\n\n    <form [formGroup]="SignupForm" (submit)="CreateAccount(SignupForm)">\n      <ion-list no-lines>\n        \n          <ion-item>\n            <ion-input type="text" placeholder="First Name" formControlName="fname"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n             <span tem-content *ngIf="!isValid(\'fname\')" class="validationpop animated bounce">Firstname required.</span>\n          </ion-item>\n           \n       \n       \n          <ion-item>\n            <ion-input type="text" placeholder="Last Name" formControlName="lname"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n             <span tem-content *ngIf="!isValid(\'lname\')" class="validationpop animated bounce">Lastname required.</span>\n          </ion-item>\n            \n       \n       \n          <ion-item>\n            <ion-input type="tel" placeholder="Phone Number" formControlName="phone" maxLength="12"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/phn.png"></ion-icon>\n            <span tem-content *ngIf="!isValid(\'phone\')" class="validationpop animated bounce">Invalid phone number.</span>\n          </ion-item>\n          \n    \n          <ion-item>\n            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/email.png"></ion-icon>\n            <span tem-content *ngIf="!isValid(\'email\')" class="validationpop animated bounce">Invalid email.</span>\n          </ion-item>\n          \n      \n          <ion-item>\n            <ion-input type="{{type}}" placeholder="Password" formControlName="password" (input)="pass_strength(SignupForm.controls.password)"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n            <button item-end type="button" color="dark" class="eyebutton" (click)="showPassword()" ion-button icon-only clear>\n                <ion-icon name="{{iconname}}"></ion-icon>\n          </button>\n          <span tem-content *ngIf="!isValid(\'password\')" class="validationpop animated bounce">Password should at least 6 char.</span>\n          </ion-item>\n            \n<!--           <div id="strength">\n                    <p class="strnth">Password strength:</p>\n                        <ul id="strengthBar">\n                            <li class="point" [style.background-color]="bar0"></li>\n                            <li class="point" [style.background-color]="bar1"></li>\n                            <li class="point" [style.background-color]="bar2"></li>\n                            <li class="point" [style.background-color]="bar3"></li>\n                            <li class="point" [style.background-color]="bar4"></li>\n                        </ul>\n                    </div>-->\n    \n          <ion-item>\n            <ion-input type="{{Ctype}}" placeholder="Confirm Password" formControlName="cpassword"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n            \n            <button item-end type="button" color="dark" class="eyebutton" (click)="showCPassword()" ion-button icon-only clear>\n                <ion-icon name="{{iconname1}}"></ion-icon>\n          </button>\n          <span tem-content *ngIf="SignupForm.hasError(\'mismatchedPasswords\')"  class="validationpop animated bounce">Password mismatch.</span>\n          </ion-item>\n           \n       \n        <button type="submit" class="btn1" ion-button color="green" block  [disabled]="!SignupForm.valid">Sign up</button>\n<!--        <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>-->\n      </ion-list>\n    </form>\n  </div>\n\n  <div class="haveacc">Have an account? <span color="dark" (click)="login()" style="font-weight: 600;">Sign In</span></div>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/signuptwo/signuptwo.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_fcm__["a" /* FCM */]])
-    ], SignuptwoPage);
-    return SignuptwoPage;
-}());
-
-//# sourceMappingURL=signuptwo.js.map
-
-/***/ }),
-
 /***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2018,8 +1806,8 @@ var SignuptwoPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_common__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reservations_reservations__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reservations_reservations__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2096,7 +1884,7 @@ var EditbusinessPage = (function () {
             accept: [false],
             reservation: [false],
             zipcode: ['', [__WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* Validators */].required]],
-            websiteurl: ['', [__WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* Validators */].required]],
+            websiteurl: [''],
             //Controls for manage day,opening and closing hours.
             monday: [false],
             mondayopeninghours: [''],
@@ -2711,13 +2499,13 @@ var EditbusinessPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__changepassword_changepassword__ = __webpack_require__(172);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_common__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__reservations_reservations__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__reservations_reservations__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2776,7 +2564,7 @@ var EditprofiletwoPage = (function () {
             fname: ['', [__WEBPACK_IMPORTED_MODULE_7__angular_forms__["f" /* Validators */].required]],
             lname: ['', [__WEBPACK_IMPORTED_MODULE_7__angular_forms__["f" /* Validators */].required]],
             email: ['', [__WEBPACK_IMPORTED_MODULE_7__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
-            phone: ['', [__WEBPACK_IMPORTED_MODULE_7__angular_forms__["f" /* Validators */].required]],
+            phone: [''],
         });
     };
     EditprofiletwoPage.prototype.emailValidator = function (control) {
@@ -2889,6 +2677,15 @@ var EditprofiletwoPage = (function () {
                 console.log(_this.base64Image);
                 _this.events.publish('Loggedin', 'loginpage');
                 var name = response.data.firstname + ' ' + response.data.lastname;
+                if (response.data.phone_number) {
+                    var a = response.data.phone_number;
+                    console.log(typeof (a));
+                    console.log(a.toString());
+                    var mystring = a.toString();
+                    console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3"));
+                    response.data.phone_number = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3");
+                    //console.log(a);
+                }
                 _this.Editprofile.patchValue({
                     fname: response.data.firstname,
                     lname: response.data.lastname,
@@ -2896,6 +2693,20 @@ var EditprofiletwoPage = (function () {
                     phone: response.data.phone_number,
                 });
             }
+        });
+    };
+    EditprofiletwoPage.prototype.phonePattern = function (formdata) {
+        console.log(formdata.value.phone);
+        if (formdata.value.phone) {
+            var a = formdata.value.phone;
+            console.log(typeof (a));
+            console.log(a.toString());
+            var mystring = a.toString();
+            console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3"));
+            formdata.value.phone = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3");
+        }
+        this.Editprofile.patchValue({
+            phone: formdata.value.phone,
         });
     };
     EditprofiletwoPage.prototype.doRefresh = function (refresher) {
@@ -2961,20 +2772,12 @@ var EditprofiletwoPage = (function () {
     };
     EditprofiletwoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-editprofiletwo',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/editprofiletwo/editprofiletwo.html"*/'<!--\n  Generated template for the EditprofilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n<ion-header>\n\n  <ion-navbar color="green">\n      <button ion-button menuToggle style="display:block !important;">\n        <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n      </button>\n    <ion-title>edit profile</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="Editprofile">\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n     <ion-refresher-content\n      pullingIcon="arrow-dropdown"\n      pullingText="Pull to refresh"\n      refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n    \n  <div class="head-sec">\n    <div class="image-wrapper">\n      <img [src]="base64Image">\n    </div>\n      <ion-fab center>\n    <h2 ion-fab mini icon-only>EDIT</h2>\n    <ion-fab-list side="left">\n      <button ion-fab (click)="chooseImage(0)"><ion-icon name="images"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="right">\n      <button ion-fab (click)="chooseImage(1)"><ion-icon name="camera"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n   \n  </div>\n    \n  <div class="input-sec">\n    <ion-list>\n\n      <ion-item>\n          <ion-label stacked>First name</ion-label>\n          <ion-input type="text" placeholder="Enter first name" formControlName="fname"></ion-input>\n        </ion-item>\n      <span *ngIf="!isValid(\'fname\')" class="validationpop animated bounce">First name required.</span>\n      <ion-item>\n          <ion-label stacked>Last name</ion-label>\n          <ion-input type="text" placeholder="Enter last name" formControlName="lname"></ion-input>\n        </ion-item>\n      <span *ngIf="!isValid(\'lname\')" class="validationpop animated bounce">Last name required.</span>\n        <ion-item>\n          <ion-label stacked>Email</ion-label>\n          <ion-input type="email" placeholder="kristonpeeter@yahoo.com" formControlName="email" readonly></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked>Phone Number</ion-label>\n          <ion-input type="tel" placeholder="XXX-XXX-XXXX" formControlName="phone" maxLength="12"></ion-input>\n        </ion-item>\n        <h2>User Setting</h2>\n        <ion-item *ngIf=\'profiledata?.regitration_type == "simple_registarion"\' (click)="changepwd()">\n          <p>Change Password</p>\n          <ion-icon name="arrow-forward" item-end></ion-icon>\n        </ion-item>\n        \n\n    </ion-list>\n  </div>\n        </form> \n<!--    <ion-fab center>\n    <button ion-fab mini><ion-icon name="add"></ion-icon></button>\n    <ion-fab-list side="top">\n      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="bottom">\n      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="left">\n      <button ion-fab><ion-icon name="images"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="right">\n      <button ion-fab><ion-icon name="camera"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>-->\n</ion-content>\n<ion-footer>\n  <button type="submit" (click)="editProfile(Editprofile)" ion-button full color="green" class="btn2">SAVE</button>\n</ion-footer>\n\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/editprofiletwo/editprofiletwo.html"*/,
+            selector: 'page-editprofiletwo',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/editprofiletwo/editprofiletwo.html"*/'<!--\n  Generated template for the EditprofilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n\n<ion-header>\n\n  <ion-navbar color="green">\n      <button ion-button menuToggle style="display:block !important;">\n        <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n      </button>\n    <ion-title>edit profile</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="Editprofile">\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n     <ion-refresher-content\n      pullingIcon="arrow-dropdown"\n      pullingText="Pull to refresh"\n      refreshingSpinner="circles"\n      refreshingText="Refreshing...">\n    </ion-refresher-content>\n  </ion-refresher>\n    \n  <div class="head-sec">\n    <div class="image-wrapper">\n      <img [src]="base64Image">\n    </div>\n      <ion-fab center>\n    <h2 ion-fab mini icon-only>EDIT</h2>\n    <ion-fab-list side="left">\n      <button ion-fab (click)="chooseImage(0)"><ion-icon name="images"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="right">\n      <button ion-fab (click)="chooseImage(1)"><ion-icon name="camera"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n   \n  </div>\n    \n  <div class="input-sec">\n    <ion-list>\n\n      <ion-item>\n          <ion-label stacked>First name</ion-label>\n          <ion-input type="text" placeholder="Enter first name" formControlName="fname"></ion-input>\n        </ion-item>\n      <span *ngIf="!isValid(\'fname\')" class="validationpop animated bounce">First name required.</span>\n      <ion-item>\n          <ion-label stacked>Last name</ion-label>\n          <ion-input type="text" placeholder="Enter last name" formControlName="lname"></ion-input>\n        </ion-item>\n      <span *ngIf="!isValid(\'lname\')" class="validationpop animated bounce">Last name required.</span>\n        <ion-item>\n          <ion-label stacked>Email</ion-label>\n          <ion-input type="email" placeholder="kristonpeeter@yahoo.com" formControlName="email" readonly></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked>Phone Number</ion-label>\n          <ion-input type="tel" placeholder="(XXX)-XXX-XXXX" formControlName="phone" (input)="phonePattern(Editprofile)"></ion-input>\n        </ion-item>\n        <h2>User Setting</h2>\n        <ion-item *ngIf=\'profiledata?.regitration_type == "simple_registarion"\' (click)="changepwd()">\n          <p>Change Password</p>\n          <ion-icon name="arrow-forward" item-end></ion-icon>\n        </ion-item>\n        \n\n    </ion-list>\n  </div>\n        </form> \n<!--    <ion-fab center>\n    <button ion-fab mini><ion-icon name="add"></ion-icon></button>\n    <ion-fab-list side="top">\n      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="bottom">\n      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="left">\n      <button ion-fab><ion-icon name="images"></ion-icon></button>\n    </ion-fab-list>\n    <ion-fab-list side="right">\n      <button ion-fab><ion-icon name="camera"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>-->\n</ion-content>\n<ion-footer>\n  <button type="submit" (click)="editProfile(Editprofile)" ion-button full color="green" class="btn2">SAVE</button>\n</ion-footer>\n\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/editprofiletwo/editprofiletwo.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_7__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__["a" /* Appsetting */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_common__["a" /* Common */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* Http */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _k || Object])
     ], EditprofiletwoPage);
     return EditprofiletwoPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 }());
 
 //# sourceMappingURL=editprofiletwo.js.map
@@ -3871,22 +3674,6 @@ var RealtalkPage = (function () {
                                 value.days = __WEBPACK_IMPORTED_MODULE_8_moment__(aba, ["HH:mm"]).format("HH:mm");
                                 value.time = 'hour';
                             }
-                            // if(endDate.diff(startDate, 'hours')>9)
-                            //                        if(duration.minutes()>9){
-                            //                            if(duration.hours()>9){
-                            //                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-                            //                            }else{
-                            //                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-                            //                            }
-                            //                        }else{
-                            //                         if(duration.hours()>9){
-                            //                            value.days = duration.hours()+':'+duration.minutes();
-                            //                            }else{
-                            //                                value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-                            //                            }
-                            //                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-                            //                        }
-                            // value.time = 'hour';
                         }
                         if (JSON.parse(localStorage.getItem('CurrentUser')).profile_pic) {
                             value.profile_pic = JSON.parse(localStorage.getItem('CurrentUser')).profile_pic;
@@ -4343,24 +4130,49 @@ var Reviews2Page = (function () {
                                 }
                             });
                             /****** code to get date and time difference ************/
-                            var a = new Date();
-                            console.log(new Date(value.created_at));
-                            var startDate = __WEBPACK_IMPORTED_MODULE_5_moment__(new Date(value.created_at), "DD.MM.YYYY");
-                            var endDate = __WEBPACK_IMPORTED_MODULE_5_moment__(a, "DD.MM.YYYY");
-                            var milliseconds = endDate.diff(startDate);
-                            var duration = __WEBPACK_IMPORTED_MODULE_5_moment__["duration"](milliseconds, 'milliseconds');
-                            var aba = duration.hours() + ':' + duration.minutes();
+                            var startDate = __WEBPACK_IMPORTED_MODULE_5_moment__(new Date(value.created_at));
+                            var endDate = __WEBPACK_IMPORTED_MODULE_5_moment__(new Date());
+                            // var milliseconds = endDate.diff(startDate);
+                            console.log(endDate.diff(startDate, 'minutes'));
+                            console.log(endDate.diff(startDate, 'hours'));
+                            console.log(endDate.diff(startDate, 'days'));
+                            var aba = endDate.diff(startDate, 'hours') + ':' + endDate.diff(startDate, 'minutes');
+                            console.log(endDate.diff(startDate, 'hours') + ':' + endDate.diff(startDate, 'minutes'));
                             console.log(__WEBPACK_IMPORTED_MODULE_5_moment__(aba, ["HH:mm"]).format("HH:mm"));
-                            console.log('Hours' + duration.hours());
-                            console.log('minutes' + duration.minutes());
-                            if (duration.hours() > 24) {
-                                value.days = duration.asDays();
+                            //                        var duration = moment.duration(milliseconds, 'milliseconds');
+                            //                        console.log('Hours' + duration.hours())
+                            //                        console.log('minutes' + duration.minutes());
+                            if (endDate.diff(startDate, 'days') > 0) {
+                                value.days = endDate.diff(startDate, 'days');
                                 value.time = 'day';
                             }
                             else {
-                                value.days = duration.hours() + ':' + duration.minutes();
-                                value.time = 'time';
+                                if (endDate.diff(startDate, 'hours') > 1) {
+                                    value.days = __WEBPACK_IMPORTED_MODULE_5_moment__(aba, ["HH:mm"]).format("HH:mm");
+                                    value.time = 'time';
+                                }
+                                else {
+                                    value.days = __WEBPACK_IMPORTED_MODULE_5_moment__(aba, ["HH:mm"]).format("HH:mm");
+                                    value.time = 'time';
+                                }
                             }
+                            //                        var a = new Date();
+                            //                        console.log(new Date(value.created_at))
+                            //                        var startDate = moment(new Date(value.created_at), "DD.MM.YYYY");
+                            //                        var endDate = moment(a, "DD.MM.YYYY");
+                            //                        var milliseconds = endDate.diff(startDate);
+                            //                        var duration = moment.duration(milliseconds, 'milliseconds');
+                            //                        var aba = duration.hours()+':'+duration.minutes();
+                            //                        console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
+                            //                        console.log('Hours' + duration.hours())
+                            //                        console.log('minutes' + duration.minutes());
+                            //                        if(duration.hours()>24){
+                            //                            value.days = duration.asDays();
+                            //                            value.time = 'day';
+                            //                        }else{
+                            //                            value.days = duration.hours()+':'+duration.minutes();
+                            //                            value.time = 'time';
+                            //                        }
                         });
                         response.data.review.avg = sum / length;
                         _this.data.rating = response.data.review.avg;
@@ -4412,7 +4224,7 @@ var Reviews2Page = (function () {
     };
     Reviews2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-reviews2',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reviews2/reviews2.html"*/'<!--\n  Generated template for the Reviews2Page page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar color="green">\n        <button ion-button menuToggle style="display:block !important;">\n            <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n        </button>\n        <ion-title>{{businessData?.business_name}}</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div class="image-wrapper">\n        <img [src]="currentuser?.business_image[0].business_image">\n    </div>\n    <div class="content-sec" padding>\n        <div class="top-sec" >\n            <h2>{{businessData?.business_name}}</h2>\n            <p>{{businessData?.business_description}}</p>\n            <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="data.rating" name="rating"\n                    nullable="false">\n            </rating>\n            <p class="revw">Reviews {{currentuser?.review.length | number:0}}</p>\n        </div>\n        <ion-list no-lines  class="bottom-sec">\n            <ion-item *ngFor="let reviews of currentuser?.review;let i = index">\n                <ion-avatar item-start>\n                    <img [src]="reviews.profilePic">\n                </ion-avatar>\n                <h2>{{reviews.firstname}} {{reviews.lastname}}\n                    <span *ngIf="reviews.time == \'day\'">{{reviews.days}} Day ago</span>\n                    <span *ngIf="reviews.time== \'time\'">{{reviews.days}} Hour ago</span>\n                </h2>\n\n                <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="reviews.stars" name="rating"\n                        nullable="false">\n                </rating>\n                <!-- <p class="revw" style="line-height: 17px !important; margin-top:0 !important;">Rating</p>-->\n                <p style="padding-bottom: 10px;">{{reviews.comment}}  </p>\n                \n                <h5>REPLY</h5>\n                <ion-item *ngFor="let replies of reviews.reply">\n                   \n                    <p style="text-align: left; background-color: #f2f2f2; padding: 10px !important;">{{replies.comment}}</p>\n                </ion-item>\n                <div *ngIf="reviews.reply.length<1">\n                    <p class="reply" (click)="Reply(reviews._id)"><img src="assets/imgs/reply.png">Reply</p>\n                    <ion-item *ngIf="replybtn == reviews._id">\n                        <ion-textarea placeholder="" [(ngModel)]="data.comment" required></ion-textarea>\n                    </ion-item>\n                    <div class="btnsec" *ngIf="replybtn == reviews._id">\n                         <button ion-button color="green" class="btn1" (click)="ReplyComment(data.comment,reviews._id)" [disabled]="!data.comment">POST</button>\n                    </div>\n                </div>\n            </ion-item>\n        </ion-list>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reviews2/reviews2.html"*/,
+            selector: 'page-reviews2',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reviews2/reviews2.html"*/'<!--\n  Generated template for the Reviews2Page page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar color="green">\n        <button ion-button menuToggle style="display:block !important;">\n            <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n        </button>\n        <ion-title>{{businessData?.business_name}}</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div class="image-wrapper">\n        <img [src]="currentuser?.business_image[0].business_image">\n    </div>\n    <div class="content-sec" padding>\n        <div class="top-sec" >\n            <h2>{{businessData?.business_name}}</h2>\n            <p [innerHTML]="businessData?.business_description"></p>\n            <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="data.rating" name="rating"\n                    nullable="false">\n            </rating>\n            <p class="revw">Reviews {{currentuser?.review.length | number:0}}</p>\n        </div>\n        <ion-list no-lines  class="bottom-sec">\n            <ion-item *ngFor="let reviews of currentuser?.review;let i = index">\n                <ion-avatar item-start>\n                    <img [src]="reviews.profilePic">\n                </ion-avatar>\n                <h2>{{reviews.firstname}} {{reviews.lastname}}\n                    <span *ngIf="reviews.time == \'day\'">{{reviews.days}} Day ago</span>\n                    <span *ngIf="reviews.time == \'time\'">{{reviews.days}} Hour ago</span>\n                </h2>\n\n                <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" [(ngModel)]="reviews.stars" name="rating"\n                        nullable="false">\n                </rating>\n                <!-- <p class="revw" style="line-height: 17px !important; margin-top:0 !important;">Rating</p>-->\n                <p style="padding-bottom: 10px;">{{reviews.comment}}  </p>\n                \n                <h5>REPLY</h5>\n                <ion-item *ngFor="let replies of reviews.reply">\n                   \n                    <p style="text-align: left; background-color: #f2f2f2; padding: 10px !important;">{{replies.comment}}</p>\n                </ion-item>\n                <div *ngIf="reviews.reply.length<1">\n                    <p class="reply" (click)="Reply(reviews._id)"><img src="assets/imgs/reply.png">Reply</p>\n                    <ion-item *ngIf="replybtn == reviews._id">\n                        <ion-textarea placeholder="" [(ngModel)]="data.comment" required></ion-textarea>\n                    </ion-item>\n                    <div class="btnsec" *ngIf="replybtn == reviews._id">\n                         <button ion-button color="green" class="btn1" (click)="ReplyComment(data.comment,reviews._id)" [disabled]="!data.comment">POST</button>\n                    </div>\n                </div>\n            </ion-item>\n        </ion-list>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reviews2/reviews2.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
@@ -4529,7 +4341,7 @@ var TermsbusinessPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_appsetting__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__viewproduct_viewproduct__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__viewproduct_viewproduct__ = __webpack_require__(99);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4890,11 +4702,11 @@ webpackEmptyAsyncContext.id = 203;
 
 var map = {
 	"../pages/addbusiness/addbusiness.module": [
-		861,
+		853,
 		32
 	],
 	"../pages/booknow/booknow.module": [
-		853,
+		857,
 		31
 	],
 	"../pages/careernetwork/careernetwork.module": [
@@ -4910,7 +4722,7 @@ var map = {
 		28
 	],
 	"../pages/editprofile/editprofile.module": [
-		857,
+		859,
 		0
 	],
 	"../pages/editprofiletwo/editprofiletwo.module": [
@@ -4918,7 +4730,7 @@ var map = {
 		27
 	],
 	"../pages/filter/filter.module": [
-		859,
+		862,
 		26
 	],
 	"../pages/forgot/forgot.module": [
@@ -4926,15 +4738,15 @@ var map = {
 		25
 	],
 	"../pages/forgottwo/forgottwo.module": [
-		862,
+		861,
 		24
 	],
 	"../pages/getstart/getstart.module": [
-		863,
+		864,
 		23
 	],
 	"../pages/history/history.module": [
-		864,
+		863,
 		22
 	],
 	"../pages/historytwo/historytwo.module": [
@@ -4942,11 +4754,11 @@ var map = {
 		21
 	],
 	"../pages/login/login.module": [
-		866,
+		867,
 		20
 	],
 	"../pages/logintwo/logintwo.module": [
-		867,
+		866,
 		19
 	],
 	"../pages/newartist/newartist.module": [
@@ -4966,11 +4778,11 @@ var map = {
 		15
 	],
 	"../pages/realtalk/realtalk.module": [
-		873,
+		872,
 		14
 	],
 	"../pages/reservations/reservations.module": [
-		872,
+		873,
 		13
 	],
 	"../pages/review/review.module": [
@@ -4978,23 +4790,23 @@ var map = {
 		12
 	],
 	"../pages/reviews2/reviews2.module": [
-		875,
+		877,
 		11
 	],
 	"../pages/search/search.module": [
-		876,
+		875,
 		10
 	],
 	"../pages/signup/signup.module": [
-		877,
+		876,
 		9
 	],
 	"../pages/signuptwo/signuptwo.module": [
-		878,
+		879,
 		8
 	],
 	"../pages/talkreply/talkreply.module": [
-		879,
+		878,
 		7
 	],
 	"../pages/terms/terms.module": [
@@ -5045,9 +4857,9 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filter_filter__ = __webpack_require__(174);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__viewproduct_viewproduct__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__booknow_booknow__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filter_filter__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__viewproduct_viewproduct__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__booknow_booknow__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__review_review__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_social_sharing__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_common__ = __webpack_require__(13);
@@ -5056,10 +4868,10 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__login_login__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__login_login__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_open_native_settings__ = __webpack_require__(134);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__search_search__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__search_search__ = __webpack_require__(176);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5086,13 +4898,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = (function () {
-    function HomePage(navCtrl, modalCtrl, ViewCtrl, socialSharing, loadingCtrl, common, toastCtrl, appsetting, http, zone, geolocation, alertCtrl, formBuilder, openNativeSettings) {
+    function HomePage(navCtrl, modalCtrl, ViewCtrl, socialSharing, loadingCtrl, common, events, toastCtrl, appsetting, http, zone, geolocation, alertCtrl, formBuilder, openNativeSettings) {
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
         this.ViewCtrl = ViewCtrl;
         this.socialSharing = socialSharing;
         this.loadingCtrl = loadingCtrl;
         this.common = common;
+        this.events = events;
         this.toastCtrl = toastCtrl;
         this.appsetting = appsetting;
         this.http = http;
@@ -5113,7 +4926,6 @@ var HomePage = (function () {
         this.fav = 0;
         this.rating = {};
         this.show = false;
-        //alert('constructor');
         this.currentLocation();
         clearInterval(this.common.interval);
         this.getSubCatList();
@@ -5124,7 +4936,6 @@ var HomePage = (function () {
         localStorage.removeItem('Seachdata');
     }
     HomePage.prototype.ngOnInit = function () {
-        //alert('ngOnInit');
         var temp = this;
         console.log('ngOnInit');
         this.SearchForm = this.formBuilder.group({
@@ -5133,7 +4944,6 @@ var HomePage = (function () {
         this.SearchcatForm = this.formBuilder.group({
             searchcat: ['']
         });
-        // this.tryagain();
     };
     HomePage.prototype.ionViewDidLoad = function () {
         // alert('ionViewDidLoad');
@@ -5144,9 +4954,9 @@ var HomePage = (function () {
             localStorage.removeItem('filterdata');
             console.log((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString());
             console.log('ionViewDidLoad HomePage');
-            //        this.Getlist(1, 30.723839099999996, 76.8465082);
-            //        this.latitude = 30.723839099999996;
-            //        this.longitude = 76.8465082;
+            //                    this.Getlist(1, 34.0521734, -118.255586);
+            //                    this.latitude = 34.0521734;
+            //                    this.longitude = -118.255586;
         }
         else {
             this.common.tryagain();
@@ -5156,8 +4966,9 @@ var HomePage = (function () {
         var _this = this;
         var temp = this;
         console.log('current location');
+        //alert('current location');
         this.geolocation.getCurrentPosition().then(function (resp) {
-            console.log('getCurrentPosition');
+            // alert('getCurrentPosition');
             console.log(resp.coords.latitude);
             console.log(resp.coords.longitude);
             _this.latitude = resp.coords.latitude; // resp.coords.latitude
@@ -5166,7 +4977,8 @@ var HomePage = (function () {
             _this.currentLong = resp.coords.longitude;
             _this.Getlist(_this.pageno, resp.coords.latitude, resp.coords.longitude);
         }).catch(function (error) {
-            console.log('Error getting locatio            n', error);
+            //alert('Error getting');
+            console.log('Error getting location', error);
         });
     };
     /********* function used for get subcatlist to show on top of the page ***********/
@@ -5259,37 +5071,70 @@ var HomePage = (function () {
                             else {
                                 response.data[i].business_data[0].fav = 0;
                             }
-                        }
-                    }
-                    response.data.forEach(function (value, key) {
-                        console.log('foreach loop');
-                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K');
-                        if (value.business_data[0].business_status == true) {
-                            if (value.business_data[0].business_type == 1) {
+                            var sum = 0;
+                            if (response.data[i].review.length > 0) {
+                                if (response.data[i].status == true) {
+                                    response.data[i].review.forEach(function (val, ke) {
+                                        console.log(val);
+                                        sum += val.stars;
+                                        console.log(sum);
+                                        response.data[i].avg = sum / response.data[i].review.length;
+                                    });
+                                }
+                            }
+                            else {
+                                response.data[i].avg = 0;
+                            }
+                            response.data[i].business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, response.data[i].business_data[0].location.coordinates[1], response.data[i].business_data[0].location.coordinates[0], 'K');
+                            if (response.data[i].business_data[0].business_type == 1) {
                                 console.log('if');
-                                temp.premiumBusiness.push(value);
+                                temp.premiumBusiness.push(response.data[i]);
                             }
                             else {
                                 console.log('else');
-                                temp.restaurantlist.push(value);
-                                var sum = 0;
-                                if (value.review.length > 0) {
-                                    if (value.status == true) {
-                                        value.review.forEach(function (val, ke) {
-                                            console.log(val);
-                                            sum += val.stars;
-                                            console.log(sum);
-                                            value.avg = sum / value.review.length;
-                                        });
-                                    }
-                                }
-                                else {
-                                    value.avg = 0;
-                                }
+                                temp.restaurantlist.push(response.data[i]);
                             }
                         }
-                    });
+                    }
                     _this.totalpageno = response.pages;
+                    if (_this.restaurantlist.length < 3) {
+                        _this.pageno = _this.pageno + 1;
+                        _this.Getdata(_this.pageno, _this.latitude, _this.longitude);
+                    }
+                    //                    response.data.forEach(function (value, key) {
+                    //                        console.log('foreach loop')
+                    //                        value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                    //
+                    //                        if (value.business_data[0].business_status == true) {
+                    //                            if (value.business_data[0].business_type == 1) {
+                    //                                console.log('if');
+                    //                                temp.premiumBusiness.push(value);
+                    //                            } else {
+                    //                                console.log('else');
+                    //                                temp.restaurantlist.push(value);
+                    //                                var sum = 0;
+                    //                            if (value.review.length > 0) {
+                    //                                 if(value.status == true){
+                    //                                value.review.forEach(function (val, ke) {    
+                    //                                    console.log(val);
+                    //                                    sum += val.stars;
+                    //                                    console.log(sum);
+                    //                                    value.avg = sum / value.review.length;
+                    //                                    
+                    //                                })
+                    //                                }
+                    //                            } else {
+                    //                                value.avg = 0;
+                    //                            }
+                    //                                
+                    //                            }
+                    //                        }
+                    //                    })
+                    //                    this.totalpageno = response.pages;
+                    //                    if(this.restaurantlist.length<3){
+                    //                        this.pageno = this.pageno+1;
+                    //                        this.Getdata(this.pageno, this.latitude, this.longitude);
+                    //                    }
                     console.log(_this.restaurantlist);
                     console.log(temp.premiumBusiness);
                 }
@@ -5668,38 +5513,30 @@ var HomePage = (function () {
                             else {
                                 response.data[i].business_data[0].fav = 0;
                             }
-                        }
-                        response.data.forEach(function (value, key) {
-                            console.log(value);
-                            console.log(key);
-                            console.log(value.business_data[0].location.coordinates[1]);
-                            console.log(typeof (value.business_data[0].business_type));
-                            if (value.business_data[0].business_status == true) {
-                                if (value.business_data[0].business_type == 1) {
-                                    console.log('if');
-                                    temp.premiumBusiness.push(value);
+                            if (response.data[i].business_data[0].business_type == 1) {
+                                console.log('if');
+                                temp.premiumBusiness.push(response.data[i]);
+                            }
+                            else {
+                                console.log('else');
+                                temp.restaurantlist.push(response.data[i]);
+                                var sum = 0;
+                                if (response.data[i].review.length > 0) {
+                                    if (response.data[i].status == true) {
+                                        response.data[i].review.forEach(function (val, ke) {
+                                            console.log(val);
+                                            sum += val.stars;
+                                            console.log(sum);
+                                            response.data[i].avg = sum / response.data[i].review.length;
+                                        });
+                                    }
                                 }
                                 else {
-                                    console.log('else');
-                                    temp.restaurantlist.push(value);
-                                    var sum = 0;
-                                    if (value.review.length > 0) {
-                                        if (value.status == true) {
-                                            value.review.forEach(function (val, ke) {
-                                                console.log(val);
-                                                sum += val.stars;
-                                                console.log(sum);
-                                                value.avg = sum / value.review.length;
-                                            });
-                                        }
-                                    }
-                                    else {
-                                        value.avg = 0;
-                                    }
+                                    response.data[i].avg = 0;
                                 }
-                                value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K');
                             }
-                        });
+                            response.data[i].business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, response.data[i].business_data[0].location.coordinates[1], response.data[i].business_data[0].location.coordinates[0], 'K');
+                        }
                         _this.totalpageno = response.pages;
                     }
                     else {
@@ -5858,63 +5695,96 @@ var HomePage = (function () {
                     console.log(response.data);
                     console.log(_this.latitude);
                     console.log(_this.longitude);
-                    for (var i = 0; i < response.data.length; i++) {
-                        if (localStorage.getItem('CurrentUser')) {
-                            if (response.data[i].business_data[0].business_status == true) {
-                                _this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-                                if (_this.favourite.length > 0) {
-                                    for (var j = 0; j < _this.favourite.length; j++) {
-                                        if ((response.data[i].business_data[0]._id) == (_this.favourite[j].favorite_business_id)) {
-                                            console.log('matched');
-                                            response.data[i].business_data[0].fav = 1;
-                                            break;
+                    if (response.data.length > 0) {
+                        for (var i = 0; i < response.data.length; i++) {
+                            if (localStorage.getItem('CurrentUser')) {
+                                if (response.data[i].business_data[0].business_status == true) {
+                                    _this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                                    if (_this.favourite.length > 0) {
+                                        for (var j = 0; j < _this.favourite.length; j++) {
+                                            if ((response.data[i].business_data[0]._id) == (_this.favourite[j].favorite_business_id)) {
+                                                console.log('matched');
+                                                response.data[i].business_data[0].fav = 1;
+                                                break;
+                                            }
+                                            else {
+                                                console.log('not matched');
+                                                response.data[i].business_data[0].fav = 0;
+                                                // break;
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        response.data[i].business_data[0].fav = 0;
+                                    }
+                                    var sum = 0;
+                                    if (response.data[i].business_data[0].business_type == 1) {
+                                        console.log('if');
+                                        temp.premiumBusiness.push(response.data[i]);
+                                    }
+                                    else {
+                                        console.log('else');
+                                        temp.restaurantlist.push(response.data[i]);
+                                        if (response.data[i].review.length > 0) {
+                                            if (response.data[i].status == true) {
+                                                response.data[i].review.forEach(function (val, ke) {
+                                                    console.log(val);
+                                                    sum += val.stars;
+                                                    console.log(sum);
+                                                    response.data[i].avg = sum / response.data[i].review.length;
+                                                });
+                                            }
                                         }
                                         else {
-                                            console.log('not matched');
-                                            response.data[i].business_data[0].fav = 0;
-                                            // break;
+                                            response.data[i].avg = 0;
                                         }
                                     }
+                                    response.data[i].business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, response.data[i].business_data[0].location.coordinates[1], response.data[i].business_data[0].location.coordinates[0], 'K');
                                 }
-                                else {
-                                    response.data[i].business_data[0].fav = 0;
-                                }
-                            }
-                        }
-                        else {
-                            response.data[i].business_data[0].fav = 0;
-                        }
-                    }
-                    response.data.forEach(function (value, key) {
-                        console.log(value);
-                        console.log(key);
-                        var sum = 0;
-                        if (value.business_data[0].business_status == true) {
-                            if (value.business_data[0].business_type == 1) {
-                                console.log('if');
-                                temp.premiumBusiness.push(value);
                             }
                             else {
-                                console.log('else');
-                                temp.restaurantlist.push(value);
-                                if (value.review.length > 0) {
-                                    if (value.status == true) {
-                                        value.review.forEach(function (val, ke) {
-                                            console.log(val);
-                                            sum += val.stars;
-                                            console.log(sum);
-                                            value.avg = sum / value.review.length;
-                                        });
-                                    }
-                                }
-                                else {
-                                    value.avg = 0;
-                                }
+                                response.data[i].business_data[0].fav = 0;
                             }
-                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K');
                         }
-                    });
-                    _this.totalpageno = response.pages;
+                        _this.totalpageno = response.pages;
+                        if (_this.restaurantlist.length < 4) {
+                            _this.pageno = _this.pageno + 1;
+                            _this.Getdata(_this.pageno, _this.latitude, _this.longitude);
+                        }
+                    }
+                    //                    response.data.forEach(function (value, key) {
+                    //                        console.log(value);
+                    //                        console.log(key);
+                    //                        var sum = 0;
+                    //                        if (value.business_data[0].business_status == true) {
+                    //                            if (value.business_data[0].business_type == 1) {
+                    //                                console.log('if');
+                    //                                temp.premiumBusiness.push(value);
+                    //                            } else {
+                    //                                console.log('else');
+                    //                                temp.restaurantlist.push(value);
+                    //                                 if (value.review.length > 0) {
+                    //                                 if(value.status == true){
+                    //                                value.review.forEach(function (val, ke) {    
+                    //                                    console.log(val);
+                    //                                    sum += val.stars;
+                    //                                    console.log(sum);
+                    //                                    value.avg = sum / value.review.length;
+                    //                                    
+                    //                                })
+                    //                                }
+                    //                            } else {
+                    //                                value.avg = 0;
+                    //                            }
+                    //                            }
+                    //                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
+                    //                        }
+                    //                    })
+                    //                    this.totalpageno = response.pages;
+                    //                    if(this.restaurantlist.length<4){
+                    //                        this.pageno = this.pageno+1;
+                    //                        this.Getdata(this.pageno, this.latitude, this.longitude);
+                    //                    }
                     console.log(_this.restaurantlist);
                     console.log(temp.premiumBusiness);
                 }
@@ -5937,85 +5807,6 @@ var HomePage = (function () {
         }
         console.log(this.name);
     };
-    //    Searchbyname(text) {
-    //        console.log(text.value);
-    //        var temp = this;
-    //        this.categoryid = '';
-    //        var sum = 0;
-    //        let options = this.appsetting.header();
-    //        var postdata = {
-    //            name: text.value.searchname
-    //        }
-    //        console.log(postdata);
-    //        var serialized = this.appsetting.serializeObj(postdata);
-    //        var Loading = this.loadingCtrl.create({
-    //            spinner: 'bubbles',
-    //            content: 'Loading...'
-    //        });
-    //        Loading.present().then(() => {
-    //            this.http.post(this.appsetting.url + 'users/GetSearch', serialized, options).map(res => res.json()).subscribe(response => {
-    //                console.log(response);
-    //                Loading.dismiss();
-    //                if (response.status == true) {
-    //                    this.premiumBusiness = [];
-    //                    this.restaurantlist = [];
-    //                    this.pageno = 1;
-    //                    this.totalpageno = 1;
-    //                    for (var i = 0; i < response.data.length; i++) {
-    //                        if (localStorage.getItem('CurrentUser')) {
-    //                            if (response.data[i].business_data[0].business_status == true) {
-    //                                this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
-    //                                if (this.favourite.length > 0) {
-    //                                    for (var j = 0; j < this.favourite.length; j++) {
-    //                                        if ((response.data[i].business_data[0]._id) == (this.favourite[j].favorite_business_id)) {
-    //                                            console.log('matched');
-    //                                            response.data[i].business_data[0].fav = 1;
-    //                                            break;
-    //                                        } else {
-    //                                            console.log('not matched');
-    //                                            response.data[i].business_data[0].fav = 0;
-    //                                            // break;
-    //                                        }
-    //                                    }
-    //                                } else {
-    //                                    response.data[i].business_data[0].fav = 0;
-    //                                }
-    //                            }
-    //                        } else {
-    //                            response.data[i].business_data[0].fav = 0;
-    //                        }
-    //                        if (response.data[i].review.length > 0) {
-    //                            response.data[i].review.forEach(function (val, ke) {
-    //                                console.log(val);
-    //                                sum += val.stars;
-    //                                console.log(sum);
-    //                                response.data[i].avg = sum / response.data[i].review.length;
-    //                            })
-    //                        } else {
-    //                            response.data[i].avg = 0;
-    //                        }
-    //                    }
-    //                    response.data.forEach(function (value, key) {
-    //                        console.log(value);
-    //                        console.log(key);
-    //                        if (value.business_data[0].business_status == true) {
-    //                            if (value.business_data[0].business_type == 1) {
-    //                                console.log('if');
-    //                                temp.premiumBusiness.push(value);
-    //                            } else {
-    //                                console.log('else');
-    //                                temp.restaurantlist.push(value);
-    //                            }
-    //                            value.business_data[0].distance = temp.common.distance(temp.currentLat, temp.currentLong, value.business_data[0].location.coordinates[1], value.business_data[0].location.coordinates[0], 'K')
-    //
-    //                        }
-    //                    })
-    //                } else {
-    //                    this.common.presentAlert('Search', response.message);
-    //                }
-    //            })
-    //        })
-    //    }
     HomePage.prototype.Filter = function () {
         var _this = this;
         var temp = this;
@@ -6313,6 +6104,8 @@ var HomePage = (function () {
         this.pageno = 1;
         this.categoryid = '';
         this.geolocation.getCurrentPosition().then(function (resp) {
+            //            this.latitude = 34.0521734;
+            //                    this.longitude = -118.255586;
             _this.latitude = resp.coords.latitude;
             _this.longitude = resp.coords.longitude;
             _this.Getlist(_this.pageno, _this.latitude, _this.longitude);
@@ -6354,24 +6147,12 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar hideBackButton color="green">\n        <button ion-button menuToggle style="display:block !important;">\n            <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n        </button>\n        <ion-title text-center >Home</ion-title>\n        <ion-buttons right (click)="filterModal()" *ngIf="restaurantlist?.length >0">\n            <button ion-button>\n                <ion-icon><img width="22px" src="assets/imgs/filter.png"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n\n<!--    <div class="searchouter">\n        <ion-searchbar id="input" class="brfone searchbar" placeholder="Search..." (click)="SearchModal()"></ion-searchbar>\n        <p ion-button [disabled]="!disabled" (click)="ShowHide()">{{name}}</p>\n        <button type="button" ion-button class="disab" [disabled]="disable == true" (click)="ShowHide()">{{name}}</button>\n        <div *ngIf="show == true">\n            <form [formGroup]="SearchForm" (submit)="Searchbyname(SearchForm)">\n            <ion-searchbar id="byname" class="bfr brfone searchbar animated" placeholder="Search by name" formControlName="searchname">\n            </ion-searchbar>\n            </form>\n        </div>\n        <ion-list class="searchtogle animated bounceIn">\n            <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">\n                {{ item }}\n        </ion-item>\n        </ion-list>\n</div>-->\n    <div class="buttonout">\n        <button type="button" class="btn1" ion-button icon-start block (click)="SearchModal()"><ion-icon><img src="assets/imgs/srch.png" style="width:18px;float: left;"></ion-icon>Search...</button>\n    </div>\n    \n<!--    <div class="searchouter">\n        <div>\n            <ion-searchbar class="brfone searchbar animated" placeholder="Search by category" [(ngModel)]="data.term" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)">\n            </ion-searchbar>\n        </div>\n        <ion-list class="searchtogle animated" *ngIf="disable == true">\n            <ion-item *ngFor="let sub of categorydata | filter:data.term" (click)="SearchbyCategory(sub)">\n                {{sub.sub_category_title}}\n        </ion-item>\n        </ion-list>\n    </div>-->\n    \n\n<ion-toolbar>\n    <div class="procatout">\n        <ul class="procat">\n            <li *ngFor="let sub of subcat" (click)="FilterBySubCat(sub._id)" [class.highlighted]="sub._id == categoryid">\n                 <div class="icons"><img [src]="sub.sub_category_image"></div>\n<!--                <div class="icons">\n                   <svg-icon src="https://gatheringmanal.s3.eu-central-1.amazonaws.com/blogimage/1527222876101Entertainments.svg" [svgStyle]="{ \'width.px\':22 }"></svg-icon>\n                </div>-->\n                <p>{{sub.sub_category_title}}</p>\n                \n            </li>\n        </ul>\n    </div>\n</ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n    \n    \n  \n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content\n            pullingIcon="arrow-dropdown"\n            pullingText="Pull to refresh"\n            refreshingSpinner="circles"\n            refreshingText="Refreshing...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <!--    <ion-scroll direction="x" class="wideslide">\n            <ul class="imglist">\n                <li *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">\n                    <div class="boxxgrid">\n                        <div class="imgbox">\n                            <img src="{{premium.business_image[0].business_image}}">\n                            \n                        </div>\n                        <img src="assets/imgs/premium.png" class="premium">\n                    </div>\n                </li>\n                <li>\n                    <div class="boxxgrid">\n                        <div class="imgbox">\n                            <img src="assets/imgs/sqar.png">\n                        </div>\n                        <img src="assets/imgs/premium.png" class="premium">\n                    </div>\n                </li>\n               \n            </ul>\n        </ion-scroll>-->\n    \n    <ion-slides pager *ngIf="premiumBusiness.length>0">\n        <ion-slide *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">\n            <img *ngIf="premium.business_image[0]?.business_image" src="{{premium.business_image[0]?.business_image}}">\n            <img *ngIf="premium.business_image[0]?.business_image" src="assets/imgs/PREMIERE.png" class="premium">\n        </ion-slide>\n    </ion-slides>\n\n    <div class="productlist" *ngIf="restaurantlist?.length>0">\n        <ion-list text-wrap>\n            <ion-item *ngFor="let res of restaurantlist">\n                <ion-thumbnail item-start (click)="viewproduct(res)">\n                    <img [src]="res.business_image[0].business_image">\n                </ion-thumbnail>\n                <ion-note class="online" *ngIf="res.business_data[0].own_online_market_place == true"><span class="dot"></span> Online</ion-note>\n<!--                                <span *ngIf="res.business_data[0].own_online_market_place == true">Online</span>-->\n                <h2>{{res.business_data[0].business_name}}</h2>\n                <div class="fullwidth">\n                    <h4 class="listcol">\n                        <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="res.avg" name="rate">\n                        </rating>\n                    </h4>\n                    <h4 *ngIf="res.business_data[0].own_online_market_place == true" class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>\n                </div>\n                <div class="fullwidth">\n                    <h4 class="listcol"><span class="proicon"><img src="assets/imgs/mile.png"></span> {{res.business_data[0].distance}} Miles</h4>\n                    <h4 class="listcol" *ngIf="res.checkin"><span class="proicon"><img src="assets/imgs/check.png"></span> {{res.checkin.length}} Check-Ins</h4>\n                    <h4 class="listcol" *ngIf="!res.checkin"><span class="proicon"><img src="assets/imgs/check.png"></span> 0 Check-Ins</h4>\n\n                </div>\n                <p>{{res.business_data[0].sub_cat}}</p>\n                <div class="fullwidth">\n                    <h4 class="listcol" (click)="MarkAsFavourite(res.business_data[0]._id)">\n                        <span class="proicon">\n                            <img *ngIf="res.business_data[0].fav == 0" src="assets/imgs/fav.png">\n                            <img *ngIf="res.business_data[0].fav == 1" src="assets/imgs/favactive.png">\n                        </span> Favorite</h4>\n                    <h4 class="listcol" (click)="socialsharing(res.business_data[0].business_name,res.business_data[0].address,res.business_image[0].business_image)"><span class="proicon"><img src="assets/imgs/share.png"></span> Share</h4>\n                </div>\n                <div class="fullwidth">\n                    <button class="btneq" ion-button color="green" (click)="bookModal(res)">Book Now</button>\n                    <button class="btneq yelo" ion-button color="yellow" (click)="view(res)">Review</button>\n                </div>\n                <img *ngIf="res.business_data[0].business_type == 1 || res.business_data[0].business_type == 2" src="assets/imgs/premium.png" class="premim">\n            </ion-item>\n            <!--  <ion-item>\n                <ion-thumbnail item-start>\n                <img src="assets/imgs/img1.jpg">\n                </ion-thumbnail>\n                <h2>Rudford’s Restaurant</h2>\n                <div class="fullwidth">\n                <h4 class="listcol">sdfdssaf</h4>\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>\n                </div>\n                <div class="fullwidth">\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/mile.png"></span> 7.4 Miles</h4>\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/check.png"></span> 4 Check-Ins</h4>\n                </div>\n                <p>Diners, Breakfast & Brunch, Burgers</p>\n                <div class="fullwidth">\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/favactive.png"></span> Favorite</h4>\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/share.png"></span> Share</h4>\n                </div>\n                <div class="fullwidth">\n                <button class="btneq" ion-button color="green">Book Now</button>\n                <button class="btneq" ion-button color="yellow">Review</button>\n                </div>\n              </ion-item>-->\n        </ion-list>\n    </div>\n    <div *ngIf="restaurantlist?.length == 0">\n        <div style="text-align: center !important;padding: 15% 0 !important;color: grey;font-weight: 500; font-size: 15px;">\n            <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">\n            \n        </div>\n    </div>\n    <ion-infinite-scroll *ngIf="pageno<=totalpageno" (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/home/home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar hideBackButton color="green">\n        <button ion-button menuToggle style="display:block !important;">\n            <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n        </button>\n        <ion-title text-center >Home</ion-title>\n        <ion-buttons right (click)="filterModal()" *ngIf="restaurantlist?.length >0">\n            <button ion-button>\n                <ion-icon><img width="22px" src="assets/imgs/filter.png"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n\n<!--    <div class="searchouter">\n        <ion-searchbar id="input" class="brfone searchbar" placeholder="Search..." (click)="SearchModal()"></ion-searchbar>\n        <p ion-button [disabled]="!disabled" (click)="ShowHide()">{{name}}</p>\n        <button type="button" ion-button class="disab" [disabled]="disable == true" (click)="ShowHide()">{{name}}</button>\n        <div *ngIf="show == true">\n            <form [formGroup]="SearchForm" (submit)="Searchbyname(SearchForm)">\n            <ion-searchbar id="byname" class="bfr brfone searchbar animated" placeholder="Search by name" formControlName="searchname">\n            </ion-searchbar>\n            </form>\n        </div>\n        <ion-list class="searchtogle animated bounceIn">\n            <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">\n                {{ item }}\n        </ion-item>\n        </ion-list>\n</div>-->\n    <div class="buttonout">\n        <button type="button" class="btn1" ion-button icon-start block (click)="SearchModal()"><ion-icon><img src="assets/imgs/srch.png" style="width:18px;float: left;"></ion-icon>Search...</button>\n    </div>\n    \n<!--    <div class="searchouter">\n        <div>\n            <ion-searchbar class="brfone searchbar animated" placeholder="Search by category" [(ngModel)]="data.term" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)">\n            </ion-searchbar>\n        </div>\n        <ion-list class="searchtogle animated" *ngIf="disable == true">\n            <ion-item *ngFor="let sub of categorydata | filter:data.term" (click)="SearchbyCategory(sub)">\n                {{sub.sub_category_title}}\n        </ion-item>\n        </ion-list>\n    </div>-->\n    \n\n<ion-toolbar>\n    <div class="procatout">\n        <ul class="procat">\n            <li *ngFor="let sub of subcat" (click)="FilterBySubCat(sub._id)" [class.highlighted]="sub._id == categoryid">\n                 <div class="icons">\n                    <img [src]="sub.sub_category_image">\n                </div>\n<!--                <div class="icons">\n                   <svg-icon src="https://gatheringmanal.s3.eu-central-1.amazonaws.com/blogimage/1527222876101Entertainments.svg" [svgStyle]="{ \'width.px\':22 }"></svg-icon>\n                </div>-->\n                <p>{{sub.sub_category_title}}</p>\n                \n            </li>\n        </ul>\n    </div>\n</ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n    \n    \n  \n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content\n            pullingIcon="arrow-dropdown"\n            pullingText="Pull to refresh"\n            refreshingSpinner="circles"\n            refreshingText="Refreshing...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <!--    <ion-scroll direction="x" class="wideslide">\n            <ul class="imglist">\n                <li *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">\n                    <div class="boxxgrid">\n                        <div class="imgbox">\n                            <img src="{{premium.business_image[0].business_image}}">\n                            \n                        </div>\n                        <img src="assets/imgs/premium.png" class="premium">\n                    </div>\n                </li>\n                <li>\n                    <div class="boxxgrid">\n                        <div class="imgbox">\n                            <img src="assets/imgs/sqar.png">\n                        </div>\n                        <img src="assets/imgs/premium.png" class="premium">\n                    </div>\n                </li>\n               \n            </ul>\n        </ion-scroll>-->\n    \n    <ion-slides pager *ngIf="premiumBusiness.length>0">\n        <ion-slide *ngFor="let premium of premiumBusiness" (click)="viewproduct(premium)">\n            <img *ngIf="premium.business_image[0]?.business_image" src="{{premium.business_image[0]?.business_image}}">\n            <img *ngIf="premium.business_image[0]?.business_image" src="assets/imgs/PREMIERE.png" class="premium">\n        </ion-slide>\n    </ion-slides>\n\n    <div class="productlist" *ngIf="restaurantlist?.length>0">\n        <ion-list text-wrap>\n            <ion-item *ngFor="let res of restaurantlist">\n                <ion-thumbnail item-start (click)="viewproduct(res)">\n                    <img [src]="res.business_image[0].business_image">\n                </ion-thumbnail>\n                <ion-note class="online" *ngIf="res.business_data[0].own_online_market_place == true"><span class="dot"></span> Online</ion-note>\n<!--                                <span *ngIf="res.business_data[0].own_online_market_place == true">Online</span>-->\n                <h2>{{res.business_data[0].business_name}}</h2>\n                <div class="fullwidth">\n                    <h4 class="listcol">\n                        <rating readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false" [(ngModel)]="res.avg" name="rate">\n                        </rating>\n                    </h4>\n                    <h4 *ngIf="res.business_data[0].own_online_market_place == true" class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>\n                </div>\n                <div class="fullwidth">\n                    <h4 class="listcol"><span class="proicon"><img src="assets/imgs/mile.png"></span> {{res.business_data[0].distance}} Miles</h4>\n                    <h4 class="listcol" *ngIf="res.checkin"><span class="proicon"><img src="assets/imgs/check.png"></span> {{res.checkin.length}} Check-Ins</h4>\n                    <h4 class="listcol" *ngIf="!res.checkin"><span class="proicon"><img src="assets/imgs/check.png"></span> 0 Check-Ins</h4>\n\n                </div>\n                <p>{{res.business_data[0].sub_cat}}</p>\n                <div class="fullwidth">\n                    <h4 class="listcol" (click)="MarkAsFavourite(res.business_data[0]._id)">\n                        <span class="proicon">\n                            <img *ngIf="res.business_data[0].fav == 0" src="assets/imgs/fav.png">\n                            <img *ngIf="res.business_data[0].fav == 1" src="assets/imgs/favactive.png">\n                        </span> Favorite</h4>\n                    <h4 class="listcol" (click)="socialsharing(res.business_data[0].business_name,res.business_data[0].address,res.business_image[0].business_image)"><span class="proicon"><img src="assets/imgs/share.png"></span> Share</h4>\n                </div>\n                <div class="fullwidth">\n                    <button class="btneq" ion-button color="green" (click)="bookModal(res)">Book Now</button>\n                    <button class="btneq yelo" ion-button color="yellow" (click)="view(res)">Review</button>\n                </div>\n                <img *ngIf="res.business_data[0].business_type == 1 || res.business_data[0].business_type == 2" src="assets/imgs/premium.png" class="premim">\n            </ion-item>\n            <!--  <ion-item>\n                <ion-thumbnail item-start>\n                <img src="assets/imgs/img1.jpg">\n                </ion-thumbnail>\n                <h2>Rudford’s Restaurant</h2>\n                <div class="fullwidth">\n                <h4 class="listcol">sdfdssaf</h4>\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/hrs.png"></span> Open 24/7</h4>\n                </div>\n                <div class="fullwidth">\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/mile.png"></span> 7.4 Miles</h4>\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/check.png"></span> 4 Check-Ins</h4>\n                </div>\n                <p>Diners, Breakfast & Brunch, Burgers</p>\n                <div class="fullwidth">\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/favactive.png"></span> Favorite</h4>\n                <h4 class="listcol"><span class="proicon"><img src="assets/imgs/share.png"></span> Share</h4>\n                </div>\n                <div class="fullwidth">\n                <button class="btneq" ion-button color="green">Book Now</button>\n                <button class="btneq" ion-button color="yellow">Review</button>\n                </div>\n              </ion-item>-->\n        </ion-list>\n    </div>\n    <div *ngIf="restaurantlist?.length == 0">\n        <div style="text-align: center !important;padding: 15% 0 !important;color: grey;font-weight: 500; font-size: 15px;">\n            <img style="margin: auto;display: block;" src="assets/imgs/sorry.png">\n            \n        </div>\n    </div>\n    <ion-infinite-scroll *ngIf="pageno<=totalpageno" (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/home/home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_social_sharing__["a" /* SocialSharing */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_8__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_9__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */],
-            __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_14__ionic_native_open_native_settings__["a" /* OpenNativeSettings */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ModalController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_social_sharing__["a" /* SocialSharing */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_social_sharing__["a" /* SocialSharing */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_8__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_appsetting__["a" /* Appsetting */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_9__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__angular_http__["b" /* Http */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_13__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_forms__["a" /* FormBuilder */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_14__ionic_native_open_native_settings__["a" /* OpenNativeSettings */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_14__ionic_native_open_native_settings__["a" /* OpenNativeSettings */]) === "function" && _q || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -6382,19 +6163,14 @@ var HomePage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReservationsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__forgot_forgot__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_facebook__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_fcm__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__terms_terms__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_appsetting__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_common__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_moment__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6410,291 +6186,221 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-
-
-
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the ReservationsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var LoginPage = (function () {
-    function LoginPage(platform, navCtrl, navParams, alertCtrl, formBuilder, appsetting, http, events, common, toastCtrl, loadingCtrl, fb, fcm) {
-        //alert('login oage');
-        this.platform = platform;
+var ReservationsPage = (function () {
+    function ReservationsPage(navCtrl, navParams, appsetting, http, common, loadingCtrl, alertCtrl) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
-        this.formBuilder = formBuilder;
         this.appsetting = appsetting;
         this.http = http;
-        this.events = events;
         this.common = common;
-        this.toastCtrl = toastCtrl;
         this.loadingCtrl = loadingCtrl;
-        this.fb = fb;
-        this.fcm = fcm;
-        this.type = 'password';
-        this.showPass = false;
-        this.iconname = 'eye';
-        console.log('rahul');
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            console.log('You are online');
-        }
-        else {
-            this.common.tryagain();
-        }
+        this.alertCtrl = alertCtrl;
+        this.pageno = 1;
+        //alert('reservationsffff');
+        this.common.interval = setInterval(function () {
+            _this.GetData();
+        }, 20000);
     }
-    LoginPage.prototype.ionViewDidLoad = function () {
+    ReservationsPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ReservationsPage');
+        this.GetList();
+    };
+    ReservationsPage.prototype.GetList = function () {
         var _this = this;
-        console.log('ionViewDidLoad SigninPage');
-        this.platform.ready().then(function () {
-            var lastTimeBackPress = 0;
-            var timePeriodToExit = 2000;
-            _this.platform.registerBackButtonAction(function () {
-                // get current active page
-                var view = _this.navCtrl.getActive();
-                if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-                    _this.platform.exitApp(); //Exit from app
+        console.log('hereeee');
+        var user = JSON.parse(localStorage.getItem('CurrentUser'));
+        var options = this.appsetting.header();
+        var postdata = {
+            role: user.role,
+            user_id: user._id,
+            page: this.pageno
+        };
+        var serialized = this.appsetting.serializeObj(postdata);
+        var Loading = this.loadingCtrl.create({
+            spinner: 'bubbles',
+        });
+        Loading.present().then(function () {
+            _this.http.post(_this.appsetting.url + 'orders/getorders', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+                console.log(response);
+                Loading.dismiss();
+                if (response.status == true) {
+                    _this.reservationsdata = '';
+                    response.data.forEach(function (value, key) {
+                        console.log(value);
+                        var datetime = value.orderstart;
+                        value.bookingtime = __WEBPACK_IMPORTED_MODULE_5_moment__(datetime).format('hh:mm A');
+                        value.bookingdate = __WEBPACK_IMPORTED_MODULE_5_moment__(datetime).format('MM-DD-YYYY');
+                        // value.bookingtime = parseInt( value.orderstart);
+                        console.log(value.bookingtime);
+                    });
+                    _this.reservationsdata = response.data;
+                    _this.totalpageno = response.page;
+                    //                this.reservationsdata[0].bookingtime =  parseInt(this.reservationsdata[0].bookingtime);
+                    console.log(_this.reservationsdata);
                 }
                 else {
-                    // alert('Press back again to exit App?');
-                    var toast = _this.toastCtrl.create({
-                        message: 'Press back again to exit from app?',
-                        duration: 3000,
-                        position: 'bottom'
-                    });
-                    toast.present();
-                    lastTimeBackPress = new Date().getTime();
+                    _this.reservationsdata = '';
+                    //this.common.presentAlert('Book now', 'Something went wrong!');
                 }
             });
         });
     };
-    LoginPage.prototype.ngOnInit = function () {
-        console.log('ngOnInit');
-        this.SigninForm = this.formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* Validators */].required]],
-        });
-        // this.tryagain();
-    };
-    LoginPage.prototype.emailValidator = function (control) {
-        if (!(control.value.toLowerCase().match('^[a-z0-9]+(\.[_a-z0-9]+)+([@{1}])+(\.[a-z0-9-]+)+([.{1}])(\.[a-z]{1,15})$'))) {
-            return { invalidEmail: true };
-        }
-    };
-    LoginPage.prototype.isValid = function (field) {
-        var formField = this.SigninForm.get(field);
-        return formField.valid || formField.pristine;
-    };
-    LoginPage.prototype.showPassword = function () {
-        console.log('showpassword');
-        this.showPass = !this.showPass;
-        if (this.showPass) {
-            this.type = 'text';
-            this.iconname = 'eye-off';
-        }
-        else {
-            this.type = 'password';
-            this.iconname = 'eye';
-        }
-    };
-    LoginPage.prototype.Signin = function (signindata) {
+    /********* this function for autoload ************/
+    ReservationsPage.prototype.GetData = function () {
         var _this = this;
-        console.log(signindata.value);
-        console.log('rahul');
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            //  this.fcm.getToken().then(token => {
-            //   console.log('Tokenid-->'+token);
-            // alert(token)
-            var options_1 = this.appsetting.header();
-            var postdata = {
-                email: signindata.value.email,
-                password: signindata.value.password,
-                divice_token: '',
-                role: 'member'
-            };
-            console.log(postdata);
-            var serialized = this.appsetting.serializeObj(postdata);
-            var Loading = this.loadingCtrl.create({
-                spinner: 'bubbles',
-                content: 'Loading...'
-            });
-            Loading.present().then(function () {
-                _this.http.post(_this.appsetting.url + 'users/loginuser', serialized, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
-                    console.log(response);
-                    Loading.dismiss();
-                    if (response.status == true) {
-                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                        _this.events.publish('Loggedin', 'loginpage');
-                        _this.appsetting.userprofile = response.userinfo;
-                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
-                    }
-                    else {
-                        _this.common.presentAlert('Login', response.message);
-                    }
+        console.log('hereeee');
+        var user = JSON.parse(localStorage.getItem('CurrentUser'));
+        var options = this.appsetting.header();
+        var postdata = {
+            role: user.role,
+            user_id: user._id,
+            page: this.pageno
+        };
+        var serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'orders/getorders', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+            console.log(response);
+            if (response.status == true) {
+                _this.reservationsdata = '';
+                response.data.forEach(function (value, key) {
+                    console.log(value);
+                    var datetime = value.orderstart;
+                    value.bookingtime = __WEBPACK_IMPORTED_MODULE_5_moment__(datetime).format('hh:mm A');
+                    value.bookingdate = __WEBPACK_IMPORTED_MODULE_5_moment__(datetime).format('MM-DD-YYYY');
+                    // value.bookingtime = parseInt( value.orderstart);
+                    console.log(value.bookingtime);
                 });
-            });
-            //            }, err => {
-            //                console.log(err);
-            //            })
-        }
-        else {
-            var toast = this.toastCtrl.create({
-                message: 'Check your internet connection',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.onDidDismiss(function () {
-                console.log('Dismissed toast');
-            });
-            toast.present();
-        }
-    };
-    LoginPage.prototype.home = function () {
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            this.events.publish('skip', 'skip');
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
-        }
-        else {
-            var toast = this.toastCtrl.create({
-                message: 'Check your internet connection',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.onDidDismiss(function () {
-                console.log('Dismissed toast');
-            });
-            toast.present();
-        }
-    };
-    LoginPage.prototype.Facebooklogin = function () {
-        var _this = this;
-        this.fb.login(['public_profile', 'user_friends', 'email'])
-            .then(function (res) {
-            console.log('Logged into Facebook!', JSON.stringify(res));
-            var userId = res.authResponse.userID;
-            var accesstoken = res.authResponse.accessToken;
-            console.log(accesstoken);
-            console.log(userId);
-            _this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', []).then(function (profile) {
-                _this.userData = {
-                    id: profile['id'],
-                    email: profile['email'],
-                    first_name: profile['first_name'],
-                    last_name: profile['last_name'],
-                    picture: profile['picture_large']['data']['url'],
-                    username: profile['name']
-                };
-                console.log('User profile');
-                console.log(_this.userData);
-                console.log('User profile stringify');
-                console.log(JSON.stringify(_this.userData));
-                console.log('rahul');
-                console.log(window.navigator.onLine);
-                if (window.navigator.onLine == true) {
-                    var options_2 = _this.appsetting.header();
-                    _this.fcm.getToken().then(function (token) {
-                        //                    alert(token);
-                        //                })
-                        var postdata = {
-                            fb_id: _this.userData.id,
-                            firstname: _this.userData.first_name,
-                            lastname: _this.userData.last_name,
-                            email: _this.userData.email,
-                            role: 'member',
-                            regitration_type: 'facebook',
-                            divice_token: token,
-                            profile_pic: _this.userData.picture,
-                            password: _this.userData.id,
-                        };
-                        console.log('postdata------->');
-                        console.log(postdata);
-                        var serialized = _this.appsetting.serializeObj(postdata);
-                        var Loading = _this.loadingCtrl.create({
-                            spinner: 'bubbles',
-                            content: 'Loading...'
-                        });
-                        Loading.present().then(function () {
-                            _this.http.post(_this.appsetting.url + 'users/fbregistration', serialized, options_2).map(function (res) { return res.json(); }).subscribe(function (response) {
-                                console.log(response);
-                                Loading.dismiss();
-                                if (response.status == true) {
-                                    // alert('succes facebook');
-                                    if (response.data) {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                                        _this.events.publish('Loggedin', 'loginpage');
-                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
-                                    }
-                                    else {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                                        _this.events.publish('Loggedin', 'loginpage');
-                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
-                                    }
-                                }
-                                else {
-                                    //alert('fail facebook');
-                                    _this.common.presentAlert('Signin', response.message);
-                                }
-                            });
-                        });
-                    }).catch(function (error) { return console.log(error); });
-                }
-                else {
-                    var toast = _this.toastCtrl.create({
-                        message: 'Check your internet connection',
-                        duration: 3000,
-                        position: 'bottom'
-                    });
-                    toast.onDidDismiss(function () {
-                        console.log('Dismissed toast');
-                    });
-                    toast.present();
-                }
-            });
-        })
-            .catch(function (e) {
-            console.log('Error logging into Facebook', JSON.stringify(e));
+                _this.reservationsdata = response.data;
+                _this.totalpageno = response.page;
+                //                this.reservationsdata[0].bookingtime =  parseInt(this.reservationsdata[0].bookingtime);
+                console.log(_this.reservationsdata);
+            }
+            else {
+                _this.reservationsdata = '';
+                //this.common.presentAlert('Book now', 'Something went wrong!');
+            }
         });
     };
-    LoginPage.prototype.signup = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignupPage */]);
+    /*********** function to accept the reservations *******************/
+    ReservationsPage.prototype.Accept = function (orderid) {
+        var _this = this;
+        console.log('Accept clicked');
+        console.log(orderid);
+        //return false;
+        var user = JSON.parse(localStorage.getItem('CurrentUser'));
+        var options = this.appsetting.header();
+        var postdata = {
+            order_id: orderid,
+            orderstatus: 1
+        };
+        var serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'orders/changeOrderStatus', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+            console.log(response);
+            if (response.status == true) {
+                _this.common.presentAlert('Reservation', 'Reservation accepted successfully!');
+                _this.GetList();
+            }
+            else {
+                _this.common.presentAlert('Reservation', 'Something went wrong!');
+            }
+        });
     };
-    LoginPage.prototype.forgot = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__forgot_forgot__["a" /* ForgotPage */]);
+    /*********** function to accept the reservations *******************/
+    ReservationsPage.prototype.Decline = function (orderid, dec) {
+        var _this = this;
+        console.log('Decline clicked');
+        if (dec != 2) {
+            var user = JSON.parse(localStorage.getItem('CurrentUser'));
+            var options = this.appsetting.header();
+            var postdata = {
+                order_id: orderid,
+                orderstatus: 0
+            };
+            var serialized = this.appsetting.serializeObj(postdata);
+            this.http.post(this.appsetting.url + 'orders/changeOrderStatus', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+                console.log(response);
+                if (response.status == true) {
+                    _this.GetList();
+                    _this.common.presentAlert('Reservation', 'Reservation declined!');
+                }
+                else {
+                    _this.common.presentAlert('Reservation', 'Something went wrong!');
+                }
+            });
+        }
+        else {
+            var alert_1 = this.alertCtrl.create({
+                title: 'Reservation',
+                message: 'Are you sure you want to decline?',
+                buttons: [
+                    {
+                        text: 'Disagree',
+                        role: 'cancel',
+                        handler: function () {
+                            console.log('alertCtrl clicked');
+                        }
+                    },
+                    {
+                        text: 'Agree',
+                        handler: function () {
+                            console.log('Agree clicked');
+                            _this.Decline(orderid, 1);
+                        }
+                    }
+                ]
+            });
+            alert_1.present();
+        }
     };
-    LoginPage.prototype.term = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_11__terms_terms__["a" /* TermsPage */], { role: 'member' });
+    /****** functions used for pagination ************/
+    ReservationsPage.prototype.doInfinite = function (infiniteScroll) {
+        console.log('Begin async operation');
+        this.pageno = this.pageno + 1;
+        console.log(this.totalpageno);
+        console.log(this.pageno);
+        if (this.pageno < this.totalpageno) {
+            this.GetList();
+        }
+        else {
+            console.log('No more data to load');
+        }
+        setTimeout(function () {
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+        }, 500);
     };
-    LoginPage = __decorate([
+    /****** functions used for getlist on refresh ************/
+    ReservationsPage.prototype.doRefresh = function (refresher) {
+        console.log('Begin async operation', refresher);
+        this.ionViewDidLoad();
+        this.GetList();
+        setTimeout(function () {
+            console.log('Async operation has ended');
+            refresher.complete();
+        }, 2000);
+    };
+    ReservationsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-title text-center>login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <div class="loginform formmain">\n    <p style="font-weight: 600;">Thank you for becoming a part of <br> our community!</p>\n    <form [formGroup]="SigninForm" (submit)="Signin(SigninForm)">\n      <ion-list no-lines>\n       \n          <ion-item>\n            <ion-input type="email" placeholder="Email" formControlName="email" autocapitalize="off"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n            <span item-content *ngIf="!isValid(\'email\')" class="validationpop animated bounce">Invalid email</span>\n          </ion-item>\n          \n        \n       \n          <ion-item>\n            <ion-input type="{{type}}" placeholder="Password" formControlName="password" ></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n            <button item-end type="button" color="dark" class="" (click)="showPassword()" ion-button icon-only clear>\n                <ion-icon  name="{{iconname}}" ></ion-icon>\n            </button>\n            <span item-content *ngIf="!isValid(\'password\')" class="validationpop animated bounce">Invalid Password</span>\n          </ion-item>\n            \n          \n        \n        <button type="submit" class="btn1" ion-button color="green" block [disabled]="!SigninForm.valid">Login</button>\n        <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>\n        <h2 class="orstrip"><span style="font-weight: 600;">OR</span></h2>\n        <button (click)="Facebooklogin()" type="button" class="btn3" ion-button block >Login with facebook</button>\n      </ion-list>\n    </form>\n  </div>\n\n  <div class="haveacc">Don’t have an account? <span color="dark" (click)="signup()" style="font-weight: 600;">Sign Up</span></div>\n<!--  <div class="haveacc" (click)="term()">Terms and conditions </div>-->\n  <div class="haveacc"><button ion-button clear (click)="home()">Skip</button></div>\n  \n  \n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/login/login.html"*/,
+            selector: 'page-reservations',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reservations/reservations.html"*/'<!--\n  Generated template for the ReservationsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton color="green">\n    <button ion-button menuToggle style="display:block !important;">\n      <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n    </button>\n  <ion-title>Home</ion-title>\n</ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n<ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content\n            pullingIcon="arrow-dropdown"\n            pullingText="Pull to refresh"\n            refreshingSpinner="circles"\n            refreshingText="Refreshing...">\n        </ion-refresher-content>\n    </ion-refresher>\n    \n<!--<ion-list *ngIf="reservationsdata">\n  <ion-item-sliding #item>\n    <ion-item *ngFor="let reservation of reservationsdata;let i = index;">\n      Itemhhhhhh{{i}}hhh\n       <img [src]="reservation?.order_data[0]?.profile_pic">\n      <h2>{{reservation?.order_data[0]?.firstname}} {{reservation?.order_data[0]?.lastname}} </h2>\n        <p>{{reservation?.spacial_accomodation}}</p>\n        <div class="left"><p>Booking Date</p> <h5>{{reservation?.orderstart}} </h5></div>\n        <div class="right"><p>Booking Time</p><h5>{{reservation?.orderstart}}</h5></div>\n    </ion-item>\n    <ion-item-options side="left">\n      <button ion-button (click)="favorite(item)">Favorite</button>\n      <button ion-button color="danger" (click)="share(item)">Share</button>\n    </ion-item-options>\n    <ion-item-options side="right">\n      <button ion-button (click)="unread(item)">Unread</button>\n    </ion-item-options>\n  </ion-item-sliding>\n</ion-list>-->\n  <ion-list *ngIf="reservationsdata">\n      <ion-item-sliding *ngFor="let reservation of reservationsdata">\n        <ion-item>\n            <ion-thumbnail item-start>\n              <img *ngIf="reservation?.order_data[0]?.profile_pic" [src]="reservation?.order_data[0]?.profile_pic">\n              <img *ngIf="!reservation?.order_data[0]?.profile_pic" src="assets/imgs/user.svg">\n            </ion-thumbnail>\n          <h2>{{reservation?.order_data[0]?.firstname}} {{reservation?.order_data[0]?.lastname}}</h2>\n          <p>{{reservation?.spacial_accomodation}}</p>\n          <div class="left">\n            <p>Booking Date</p>\n            <h5>{{reservation?.bookingdate}}</h5>\n          </div>\n          <div class="right">\n            <p>Booking Time</p>\n            <h5>{{reservation?.bookingtime}}</h5>\n          </div>\n        </ion-item>\n          \n       <ion-item-options side="right" class="btnsec">\n          <button ion-button color="green" (click)="Accept(reservation?._id,1)">\n<!--            <ion-icon><img src="assets/imgs/accept.png"></ion-icon>-->\n  <ion-icon style="font-size: 31px;font-weight: 700;" name="checkmark"></ion-icon>\n            Accept\n          </button>\n          <button ion-button color="reddrk" (click)="Decline(reservation?._id,2)">\n            <ion-icon><img src="assets/imgs/delete.png"></ion-icon>\n            Decline\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n<ion-list *ngIf="!reservationsdata">\n    <div style="text-align: center !important;padding: 50% 0 !important;color: grey;font-weight: 500; font-size: 15px;">\n          <img style="width:100px;margin: auto;display: block;" src="assets/imgs/sorry11.png">\n          <span> it\'s empty here!</span>\n    </div>\n    </ion-list>\n<ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reservations/reservations.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_8__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_appsetting__["a" /* Appsetting */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_common__["a" /* Common */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_facebook__["a" /* Facebook */],
-            __WEBPACK_IMPORTED_MODULE_10__ionic_native_fcm__["a" /* FCM */]])
-    ], LoginPage);
-    return LoginPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
+    ], ReservationsPage);
+    return ReservationsPage;
 }());
 
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=reservations.js.map
 
 /***/ }),
 
@@ -6852,14 +6558,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReservationsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_appsetting__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__forgot_forgot__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_common__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_facebook__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_fcm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__terms_terms__ = __webpack_require__(74);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6875,182 +6586,278 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+
+
 /**
- * Generated class for the ReservationsPage page.
+ * Generated class for the LoginPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ReservationsPage = (function () {
-    function ReservationsPage(navCtrl, navParams, appsetting, http, common, loadingCtrl, alertCtrl) {
-        //alert('reservationsffff');
+var LoginPage = (function () {
+    function LoginPage(platform, navCtrl, navParams, alertCtrl, formBuilder, appsetting, http, events, common, toastCtrl, loadingCtrl, fb, fcm) {
+        //alert('login oage');
+        this.platform = platform;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.formBuilder = formBuilder;
         this.appsetting = appsetting;
         this.http = http;
+        this.events = events;
         this.common = common;
+        this.toastCtrl = toastCtrl;
         this.loadingCtrl = loadingCtrl;
-        this.alertCtrl = alertCtrl;
-        this.pageno = 1;
+        this.fb = fb;
+        this.fcm = fcm;
+        this.type = 'password';
+        this.showPass = false;
+        this.iconname = 'eye';
+        console.log('rahul');
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            console.log('You are online');
+        }
+        else {
+            this.common.tryagain();
+        }
     }
-    ReservationsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ReservationsPage');
-        this.GetList();
-    };
-    ReservationsPage.prototype.GetList = function () {
+    LoginPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        console.log('hereeee');
-        var user = JSON.parse(localStorage.getItem('CurrentUser'));
-        var options = this.appsetting.header();
-        var postdata = {
-            role: user.role,
-            user_id: user._id,
-            page: this.pageno
-        };
-        var serialized = this.appsetting.serializeObj(postdata);
-        var Loading = this.loadingCtrl.create({
-            spinner: 'bubbles',
-        });
-        Loading.present().then(function () {
-            _this.http.post(_this.appsetting.url + 'orders/getorders', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
-                console.log(response);
-                Loading.dismiss();
-                if (response.status == true) {
-                    _this.reservationsdata = '';
-                    response.data.forEach(function (value, key) {
-                        console.log(value);
-                        var datetime = value.orderstart;
-                        value.bookingtime = __WEBPACK_IMPORTED_MODULE_5_moment__(datetime).format('hh:mm A');
-                        value.bookingdate = __WEBPACK_IMPORTED_MODULE_5_moment__(datetime).format('MM-DD-YYYY');
-                        // value.bookingtime = parseInt( value.orderstart);
-                        console.log(value.bookingtime);
+        console.log('ionViewDidLoad SigninPage');
+        this.platform.ready().then(function () {
+            var lastTimeBackPress = 0;
+            var timePeriodToExit = 2000;
+            _this.platform.registerBackButtonAction(function () {
+                // get current active page
+                var view = _this.navCtrl.getActive();
+                if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+                    _this.platform.exitApp(); //Exit from app
+                }
+                else {
+                    // alert('Press back again to exit App?');
+                    var toast = _this.toastCtrl.create({
+                        message: 'Press back again to exit from app?',
+                        duration: 3000,
+                        position: 'bottom'
                     });
-                    _this.reservationsdata = response.data;
-                    _this.totalpageno = response.page;
-                    //                this.reservationsdata[0].bookingtime =  parseInt(this.reservationsdata[0].bookingtime);
-                    console.log(_this.reservationsdata);
-                }
-                else {
-                    _this.reservationsdata = '';
-                    //this.common.presentAlert('Book now', 'Something went wrong!');
+                    toast.present();
+                    lastTimeBackPress = new Date().getTime();
                 }
             });
         });
     };
-    /*********** function to accept the reservations *******************/
-    ReservationsPage.prototype.Accept = function (orderid) {
-        var _this = this;
-        console.log('Accept clicked');
-        console.log(orderid);
-        //return false;
-        var user = JSON.parse(localStorage.getItem('CurrentUser'));
-        var options = this.appsetting.header();
-        var postdata = {
-            order_id: orderid,
-            orderstatus: 1
-        };
-        var serialized = this.appsetting.serializeObj(postdata);
-        this.http.post(this.appsetting.url + 'orders/changeOrderStatus', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
-            console.log(response);
-            if (response.status == true) {
-                _this.common.presentAlert('Reservation', 'Reservation accepted successfully!');
-                _this.GetList();
-            }
-            else {
-                _this.common.presentAlert('Reservation', 'Something went wrong!');
-            }
+    LoginPage.prototype.ngOnInit = function () {
+        console.log('ngOnInit');
+        this.SigninForm = this.formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_5__angular_forms__["f" /* Validators */].required]],
         });
+        // this.tryagain();
     };
-    /*********** function to accept the reservations *******************/
-    ReservationsPage.prototype.Decline = function (orderid, dec) {
+    LoginPage.prototype.emailValidator = function (control) {
+        if (!(control.value.toLowerCase().match('^[a-z0-9]+(\.[_a-z0-9]+)+([@{1}])+(\.[a-z0-9-]+)+([.{1}])(\.[a-z]{1,15})$'))) {
+            return { invalidEmail: true };
+        }
+    };
+    LoginPage.prototype.isValid = function (field) {
+        var formField = this.SigninForm.get(field);
+        return formField.valid || formField.pristine;
+    };
+    LoginPage.prototype.showPassword = function () {
+        console.log('showpassword');
+        this.showPass = !this.showPass;
+        if (this.showPass) {
+            this.type = 'text';
+            this.iconname = 'eye-off';
+        }
+        else {
+            this.type = 'password';
+            this.iconname = 'eye';
+        }
+    };
+    LoginPage.prototype.Signin = function (signindata) {
         var _this = this;
-        console.log('Decline clicked');
-        if (dec != 2) {
-            var user = JSON.parse(localStorage.getItem('CurrentUser'));
-            var options = this.appsetting.header();
-            var postdata = {
-                order_id: orderid,
-                orderstatus: 0
-            };
-            var serialized = this.appsetting.serializeObj(postdata);
-            this.http.post(this.appsetting.url + 'orders/changeOrderStatus', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
-                console.log(response);
-                if (response.status == true) {
-                    _this.GetList();
-                    _this.common.presentAlert('Reservation', 'Reservation declined!');
+        console.log(signindata.value);
+        console.log('rahul');
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            this.fcm.getToken().then(function (token) {
+                var options = _this.appsetting.header();
+                var postdata = {
+                    email: signindata.value.email,
+                    password: signindata.value.password,
+                    divice_token: token,
+                    role: 'member'
+                };
+                console.log(postdata);
+                var serialized = _this.appsetting.serializeObj(postdata);
+                var Loading = _this.loadingCtrl.create({
+                    spinner: 'bubbles',
+                    content: 'Loading...'
+                });
+                Loading.present().then(function () {
+                    _this.http.post(_this.appsetting.url + 'users/loginuser', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+                        console.log(response);
+                        Loading.dismiss();
+                        if (response.status == true) {
+                            localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                            _this.events.publish('Loggedin', 'loginpage');
+                            _this.appsetting.userprofile = response.userinfo;
+                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+                        }
+                        else {
+                            _this.common.presentAlert('Login', response.message);
+                        }
+                    });
+                });
+            }, function (err) {
+                console.log(err);
+            });
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: 'Check your internet connection',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.onDidDismiss(function () {
+                console.log('Dismissed toast');
+            });
+            toast.present();
+        }
+    };
+    LoginPage.prototype.home = function () {
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            this.events.publish('skip', 'skip');
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: 'Check your internet connection',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.onDidDismiss(function () {
+                console.log('Dismissed toast');
+            });
+            toast.present();
+        }
+    };
+    LoginPage.prototype.Facebooklogin = function () {
+        var _this = this;
+        this.fb.login(['public_profile', 'user_friends', 'email'])
+            .then(function (res) {
+            console.log('Logged into Facebook!', JSON.stringify(res));
+            var userId = res.authResponse.userID;
+            var accesstoken = res.authResponse.accessToken;
+            console.log(accesstoken);
+            console.log(userId);
+            _this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', []).then(function (profile) {
+                _this.userData = {
+                    id: profile['id'],
+                    email: profile['email'],
+                    first_name: profile['first_name'],
+                    last_name: profile['last_name'],
+                    picture: profile['picture_large']['data']['url'],
+                    username: profile['name']
+                };
+                console.log('User profile');
+                console.log(_this.userData);
+                console.log('User profile stringify');
+                console.log(JSON.stringify(_this.userData));
+                console.log('rahul');
+                console.log(window.navigator.onLine);
+                if (window.navigator.onLine == true) {
+                    var options_1 = _this.appsetting.header();
+                    _this.fcm.getToken().then(function (token) {
+                        //                    alert(token);
+                        //                })
+                        var postdata = {
+                            fb_id: _this.userData.id,
+                            firstname: _this.userData.first_name,
+                            lastname: _this.userData.last_name,
+                            email: _this.userData.email,
+                            role: 'member',
+                            regitration_type: 'facebook',
+                            divice_token: token,
+                            profile_pic: _this.userData.picture,
+                            password: _this.userData.id,
+                        };
+                        console.log('postdata------->');
+                        console.log(postdata);
+                        var serialized = _this.appsetting.serializeObj(postdata);
+                        var Loading = _this.loadingCtrl.create({
+                            spinner: 'bubbles',
+                            content: 'Loading...'
+                        });
+                        Loading.present().then(function () {
+                            _this.http.post(_this.appsetting.url + 'users/fbregistration', serialized, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
+                                console.log(response);
+                                Loading.dismiss();
+                                if (response.status == true) {
+                                    // alert('succes facebook');
+                                    if (response.data) {
+                                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                                        _this.events.publish('Loggedin', 'loginpage');
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+                                    }
+                                    else {
+                                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                                        _this.events.publish('Loggedin', 'loginpage');
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+                                    }
+                                }
+                                else {
+                                    //alert('fail facebook');
+                                    _this.common.presentAlert('Signin', response.message);
+                                }
+                            });
+                        });
+                    }).catch(function (error) { return console.log(error); });
                 }
                 else {
-                    _this.common.presentAlert('Reservation', 'Something went wrong!');
+                    var toast = _this.toastCtrl.create({
+                        message: 'Check your internet connection',
+                        duration: 3000,
+                        position: 'bottom'
+                    });
+                    toast.onDidDismiss(function () {
+                        console.log('Dismissed toast');
+                    });
+                    toast.present();
                 }
             });
-        }
-        else {
-            var alert_1 = this.alertCtrl.create({
-                title: 'Reservation',
-                message: 'Are you sure you want to decline?',
-                buttons: [
-                    {
-                        text: 'Disagree',
-                        role: 'cancel',
-                        handler: function () {
-                            console.log('alertCtrl clicked');
-                        }
-                    },
-                    {
-                        text: 'Agree',
-                        handler: function () {
-                            console.log('Agree clicked');
-                            _this.Decline(orderid, 1);
-                        }
-                    }
-                ]
-            });
-            alert_1.present();
-        }
+        })
+            .catch(function (e) {
+            console.log('Error logging into Facebook', JSON.stringify(e));
+        });
     };
-    /****** functions used for pagination ************/
-    ReservationsPage.prototype.doInfinite = function (infiniteScroll) {
-        console.log('Begin async operation');
-        this.pageno = this.pageno + 1;
-        console.log(this.totalpageno);
-        console.log(this.pageno);
-        if (this.pageno < this.totalpageno) {
-            this.GetList();
-        }
-        else {
-            console.log('No more data to load');
-        }
-        setTimeout(function () {
-            console.log('Async operation has ended');
-            infiniteScroll.complete();
-        }, 500);
+    LoginPage.prototype.signup = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignupPage */]);
     };
-    /****** functions used for getlist on refresh ************/
-    ReservationsPage.prototype.doRefresh = function (refresher) {
-        console.log('Begin async operation', refresher);
-        this.ionViewDidLoad();
-        this.GetList();
-        setTimeout(function () {
-            console.log('Async operation has ended');
-            refresher.complete();
-        }, 2000);
+    LoginPage.prototype.forgot = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__forgot_forgot__["a" /* ForgotPage */]);
     };
-    ReservationsPage = __decorate([
+    LoginPage.prototype.term = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_11__terms_terms__["a" /* TermsPage */], { role: 'member' });
+    };
+    LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-reservations',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reservations/reservations.html"*/'<!--\n  Generated template for the ReservationsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar hideBackButton color="green">\n    <button ion-button menuToggle style="display:block !important;">\n      <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n    </button>\n  <ion-title>Home</ion-title>\n</ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n<ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content\n            pullingIcon="arrow-dropdown"\n            pullingText="Pull to refresh"\n            refreshingSpinner="circles"\n            refreshingText="Refreshing...">\n        </ion-refresher-content>\n    </ion-refresher>\n    \n<!--<ion-list *ngIf="reservationsdata">\n  <ion-item-sliding #item>\n    <ion-item *ngFor="let reservation of reservationsdata;let i = index;">\n      Itemhhhhhh{{i}}hhh\n       <img [src]="reservation?.order_data[0]?.profile_pic">\n      <h2>{{reservation?.order_data[0]?.firstname}} {{reservation?.order_data[0]?.lastname}} </h2>\n        <p>{{reservation?.spacial_accomodation}}</p>\n        <div class="left"><p>Booking Date</p> <h5>{{reservation?.orderstart}} </h5></div>\n        <div class="right"><p>Booking Time</p><h5>{{reservation?.orderstart}}</h5></div>\n    </ion-item>\n    <ion-item-options side="left">\n      <button ion-button (click)="favorite(item)">Favorite</button>\n      <button ion-button color="danger" (click)="share(item)">Share</button>\n    </ion-item-options>\n    <ion-item-options side="right">\n      <button ion-button (click)="unread(item)">Unread</button>\n    </ion-item-options>\n  </ion-item-sliding>\n</ion-list>-->\n  <ion-list *ngIf="reservationsdata">\n      <ion-item-sliding *ngFor="let reservation of reservationsdata">\n        <ion-item>\n            <ion-thumbnail item-start>\n              <img *ngIf="reservation?.order_data[0]?.profile_pic" [src]="reservation?.order_data[0]?.profile_pic">\n              <img *ngIf="!reservation?.order_data[0]?.profile_pic" src="assets/imgs/user.svg">\n            </ion-thumbnail>\n          <h2>{{reservation?.order_data[0]?.firstname}} {{reservation?.order_data[0]?.lastname}}</h2>\n          <p>{{reservation?.spacial_accomodation}}</p>\n          <div class="left">\n            <p>Booking Date</p>\n            <h5>{{reservation?.bookingdate}}</h5>\n          </div>\n          <div class="right">\n            <p>Booking Time</p>\n            <h5>{{reservation?.bookingtime}}</h5>\n          </div>\n        </ion-item>\n          \n       <ion-item-options side="right" class="btnsec">\n          <button ion-button color="green" (click)="Accept(reservation?._id,1)">\n<!--            <ion-icon><img src="assets/imgs/accept.png"></ion-icon>-->\n  <ion-icon style="font-size: 31px;font-weight: 700;" name="checkmark"></ion-icon>\n            Accept\n          </button>\n          <button ion-button color="reddrk" (click)="Decline(reservation?._id,2)">\n            <ion-icon><img src="assets/imgs/delete.png"></ion-icon>\n            Decline\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n<ion-list *ngIf="!reservationsdata">\n    <div style="text-align: center !important;padding: 50% 0 !important;color: grey;font-weight: 500; font-size: 15px;">\n          <img style="width:100px;margin: auto;display: block;" src="assets/imgs/sorry11.png">\n          <span> it\'s empty here!</span>\n    </div>\n    </ion-list>\n<ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/reservations/reservations.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-title text-center>login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <div class="loginform formmain">\n    <p style="font-weight: 600;">Thank you for becoming a part of <br> our community!</p>\n    <form [formGroup]="SigninForm" (submit)="Signin(SigninForm)">\n      <ion-list no-lines>\n       \n          <ion-item>\n            <ion-input type="email" placeholder="Email" formControlName="email" autocapitalize="off"></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n            <span item-content *ngIf="!isValid(\'email\')" class="validationpop animated bounce">Invalid email</span>\n          </ion-item>\n          \n        \n       \n          <ion-item>\n            <ion-input type="{{type}}" placeholder="Password" formControlName="password" ></ion-input>\n            <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n            <button item-end type="button" color="dark" class="" (click)="showPassword()" ion-button icon-only clear>\n                <ion-icon  name="{{iconname}}" ></ion-icon>\n            </button>\n            <span item-content *ngIf="!isValid(\'password\')" class="validationpop animated bounce">Invalid Password</span>\n          </ion-item>\n            \n          \n        \n        <button type="submit" class="btn1" ion-button color="green" block [disabled]="!SigninForm.valid">Login</button>\n        <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>\n        <h2 class="orstrip"><span style="font-weight: 600;">OR</span></h2>\n        <button (click)="Facebooklogin()" type="button" class="btn3" ion-button block >Login with facebook</button>\n      </ion-list>\n    </form>\n  </div>\n\n  <div class="haveacc">Don’t have an account? <span color="dark" (click)="signup()" style="font-weight: 600;">Sign Up</span></div>\n<!--  <div class="haveacc" (click)="term()">Terms and conditions </div>-->\n  <div class="haveacc"><button ion-button clear (click)="home()">Skip</button></div>\n  \n  \n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/login/login.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
-    ], ReservationsPage);
-    return ReservationsPage;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__angular_http__["b" /* Http */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_9__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__ionic_native_facebook__["a" /* Facebook */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_10__ionic_native_fcm__["a" /* FCM */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__ionic_native_fcm__["a" /* FCM */]) === "function" && _o || Object])
+    ], LoginPage);
+    return LoginPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 }());
 
-//# sourceMappingURL=reservations.js.map
+//# sourceMappingURL=login.js.map
 
 /***/ }),
 
@@ -7068,11 +6875,11 @@ var ReservationsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_list_list__ = __webpack_require__(571);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_getstart_getstart__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_logintwo_logintwo__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_signuptwo_signuptwo__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_filter_filter__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_logintwo_logintwo__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_signuptwo_signuptwo__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_filter_filter__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_realtalk_realtalk__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_careernetwork_careernetwork__ = __webpack_require__(513);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_newartist_newartist__ = __webpack_require__(515);
@@ -7081,29 +6888,29 @@ var ReservationsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_history_history__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_historytwo_historytwo__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_viewfavorites_viewfavorites__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_terms_terms__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_terms_terms__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_privacy_privacy__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_viewproduct_viewproduct__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_booknow_booknow__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_viewproduct_viewproduct__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_booknow_booknow__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_editprofiletwo_editprofiletwo__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_changepassword_changepassword__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_forgot_forgot__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_review_review__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__ionic_native_status_bar__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_splash_screen__ = __webpack_require__(418);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_reservations_reservations__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_reservations_reservations__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_reviews2_reviews2__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_editbusiness_editbusiness__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_addbusiness_addbusiness__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_addbusiness_addbusiness__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_forgottwo_forgottwo__ = __webpack_require__(514);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__ionic_native_fcm__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__ionic_native_camera__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__ionic_native_camera__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__ionic_native_facebook__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__ionic_native_geolocation__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42_ionic2_rating__ = __webpack_require__(572);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__ionic_native_social_sharing__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__ionic_native_launch_navigator__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__ionic_native_launch_navigator__ = __webpack_require__(375);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__ionic_native_in_app_browser__ = __webpack_require__(248);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_location_location__ = __webpack_require__(574);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__pages_talkreply_talkreply__ = __webpack_require__(185);
@@ -7111,10 +6918,10 @@ var ReservationsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49_angular_svg_icon__ = __webpack_require__(575);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__angular_common_http__ = __webpack_require__(420);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__yellowspot_ng_truncate__ = __webpack_require__(848);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__ionic_native_call_number__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__ionic_native_call_number__ = __webpack_require__(376);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__ionic_native_open_native_settings__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54_ng2_search_filter__ = __webpack_require__(852);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__pages_search_search__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__pages_search_search__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__pages_termsbusiness_termsbusiness__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__pages_privacytwo_privacytwo__ = __webpack_require__(183);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7235,33 +7042,33 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_54_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/booknow/booknow.module#BooknowPageModule', name: 'BooknowPage', segment: 'booknow', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/addbusiness/addbusiness.module#AddbusinessPageModule', name: 'AddbusinessPage', segment: 'addbusiness', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/careernetwork/careernetwork.module#CareernetworkPageModule', name: 'CareernetworkPage', segment: 'careernetwork', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/changepassword/changepassword.module#ChangepasswordPageModule', name: 'ChangepasswordPage', segment: 'changepassword', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/editbusiness/editbusiness.module#EditbusinessPageModule', name: 'EditbusinessPage', segment: 'editbusiness', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/editprofile/editprofile.module#EditprofilePageModule', name: 'EditprofilePage', segment: 'editprofile', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/booknow/booknow.module#BooknowPageModule', name: 'BooknowPage', segment: 'booknow', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/editprofiletwo/editprofiletwo.module#EditprofiletwoPageModule', name: 'EditprofiletwoPage', segment: 'editprofiletwo', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/filter/filter.module#FilterPageModule', name: 'FilterPage', segment: 'filter', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/editprofile/editprofile.module#EditprofilePageModule', name: 'EditprofilePage', segment: 'editprofile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/forgot/forgot.module#ForgotPageModule', name: 'ForgotPage', segment: 'forgot', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/addbusiness/addbusiness.module#AddbusinessPageModule', name: 'AddbusinessPage', segment: 'addbusiness', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/forgottwo/forgottwo.module#ForgottwoPageModule', name: 'ForgottwoPage', segment: 'forgottwo', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/getstart/getstart.module#GetstartPageModule', name: 'GetstartPage', segment: 'getstart', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/filter/filter.module#FilterPageModule', name: 'FilterPage', segment: 'filter', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/history/history.module#HistoryPageModule', name: 'HistoryPage', segment: 'history', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/getstart/getstart.module#GetstartPageModule', name: 'GetstartPage', segment: 'getstart', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/historytwo/historytwo.module#HistoryPageModule', name: 'HistorytwoPage', segment: 'historytwo', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/logintwo/logintwo.module#LogintwoPageModule', name: 'LogintwoPage', segment: 'logintwo', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/newartist/newartist.module#NewartistPageModule', name: 'NewartistPage', segment: 'newartist', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/ourtalkreply/ourtalkreply.module#OurtalkreplyPageModule', name: 'OurtalkreplyPage', segment: 'ourtalkreply', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/privacy/privacy.module#PrivacyPageModule', name: 'PrivacyPage', segment: 'privacy', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/privacytwo/privacytwo.module#PrivacytwoPageModule', name: 'PrivacytwoPage', segment: 'privacytwo', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reservations/reservations.module#ReservationsPageModule', name: 'ReservationsPage', segment: 'reservations', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/realtalk/realtalk.module#RealtalkPageModule', name: 'RealtalkPage', segment: 'realtalk', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reservations/reservations.module#ReservationsPageModule', name: 'ReservationsPage', segment: 'reservations', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/review/review.module#ReviewPageModule', name: 'ReviewPage', segment: 'review', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reviews2/reviews2.module#Reviews2PageModule', name: 'Reviews2Page', segment: 'reviews2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/search/search.module#SearchPageModule', name: 'SearchPage', segment: 'search', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/signuptwo/signuptwo.module#SignuptwoPageModule', name: 'SignuptwoPage', segment: 'signuptwo', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reviews2/reviews2.module#Reviews2PageModule', name: 'Reviews2Page', segment: 'reviews2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/talkreply/talkreply.module#TalkreplyPageModule', name: 'TalkreplyPage', segment: 'talkreply', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/signuptwo/signuptwo.module#SignuptwoPageModule', name: 'SignuptwoPage', segment: 'signuptwo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/terms/terms.module#TermsPageModule', name: 'TermsPage', segment: 'terms', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/termsbusiness/termsbusiness.module#TermsbusinessPageModule', name: 'TermsbusinessPage', segment: 'termsbusiness', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/viewfavorites/viewfavorites.module#ViewfavoritesPageModule', name: 'ViewfavoritesPage', segment: 'viewfavorites', priority: 'low', defaultHistory: [] },
@@ -7339,252 +7146,252 @@ var AppModule = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 254,
-	"./af.js": 254,
-	"./ar": 255,
-	"./ar-dz": 256,
-	"./ar-dz.js": 256,
-	"./ar-kw": 257,
-	"./ar-kw.js": 257,
-	"./ar-ly": 258,
-	"./ar-ly.js": 258,
-	"./ar-ma": 259,
-	"./ar-ma.js": 259,
-	"./ar-sa": 260,
-	"./ar-sa.js": 260,
-	"./ar-tn": 261,
-	"./ar-tn.js": 261,
-	"./ar.js": 255,
-	"./az": 262,
-	"./az.js": 262,
-	"./be": 263,
-	"./be.js": 263,
-	"./bg": 264,
-	"./bg.js": 264,
-	"./bm": 265,
-	"./bm.js": 265,
-	"./bn": 266,
-	"./bn.js": 266,
-	"./bo": 267,
-	"./bo.js": 267,
-	"./br": 268,
-	"./br.js": 268,
-	"./bs": 269,
-	"./bs.js": 269,
-	"./ca": 270,
-	"./ca.js": 270,
-	"./cs": 271,
-	"./cs.js": 271,
-	"./cv": 272,
-	"./cv.js": 272,
-	"./cy": 273,
-	"./cy.js": 273,
-	"./da": 274,
-	"./da.js": 274,
-	"./de": 275,
-	"./de-at": 276,
-	"./de-at.js": 276,
-	"./de-ch": 277,
-	"./de-ch.js": 277,
-	"./de.js": 275,
-	"./dv": 278,
-	"./dv.js": 278,
-	"./el": 279,
-	"./el.js": 279,
-	"./en-au": 280,
-	"./en-au.js": 280,
-	"./en-ca": 281,
-	"./en-ca.js": 281,
-	"./en-gb": 282,
-	"./en-gb.js": 282,
-	"./en-ie": 283,
-	"./en-ie.js": 283,
-	"./en-il": 284,
-	"./en-il.js": 284,
-	"./en-nz": 285,
-	"./en-nz.js": 285,
-	"./eo": 286,
-	"./eo.js": 286,
-	"./es": 287,
-	"./es-do": 288,
-	"./es-do.js": 288,
-	"./es-us": 289,
-	"./es-us.js": 289,
-	"./es.js": 287,
-	"./et": 290,
-	"./et.js": 290,
-	"./eu": 291,
-	"./eu.js": 291,
-	"./fa": 292,
-	"./fa.js": 292,
-	"./fi": 293,
-	"./fi.js": 293,
-	"./fo": 294,
-	"./fo.js": 294,
-	"./fr": 295,
-	"./fr-ca": 296,
-	"./fr-ca.js": 296,
-	"./fr-ch": 297,
-	"./fr-ch.js": 297,
-	"./fr.js": 295,
-	"./fy": 298,
-	"./fy.js": 298,
-	"./gd": 299,
-	"./gd.js": 299,
-	"./gl": 300,
-	"./gl.js": 300,
-	"./gom-latn": 301,
-	"./gom-latn.js": 301,
-	"./gu": 302,
-	"./gu.js": 302,
-	"./he": 303,
-	"./he.js": 303,
-	"./hi": 304,
-	"./hi.js": 304,
-	"./hr": 305,
-	"./hr.js": 305,
-	"./hu": 306,
-	"./hu.js": 306,
-	"./hy-am": 307,
-	"./hy-am.js": 307,
-	"./id": 308,
-	"./id.js": 308,
-	"./is": 309,
-	"./is.js": 309,
-	"./it": 310,
-	"./it.js": 310,
-	"./ja": 311,
-	"./ja.js": 311,
-	"./jv": 312,
-	"./jv.js": 312,
-	"./ka": 313,
-	"./ka.js": 313,
-	"./kk": 314,
-	"./kk.js": 314,
-	"./km": 315,
-	"./km.js": 315,
-	"./kn": 316,
-	"./kn.js": 316,
-	"./ko": 317,
-	"./ko.js": 317,
-	"./ky": 318,
-	"./ky.js": 318,
-	"./lb": 319,
-	"./lb.js": 319,
-	"./lo": 320,
-	"./lo.js": 320,
-	"./lt": 321,
-	"./lt.js": 321,
-	"./lv": 322,
-	"./lv.js": 322,
-	"./me": 323,
-	"./me.js": 323,
-	"./mi": 324,
-	"./mi.js": 324,
-	"./mk": 325,
-	"./mk.js": 325,
-	"./ml": 326,
-	"./ml.js": 326,
-	"./mn": 327,
-	"./mn.js": 327,
-	"./mr": 328,
-	"./mr.js": 328,
-	"./ms": 329,
-	"./ms-my": 330,
-	"./ms-my.js": 330,
-	"./ms.js": 329,
-	"./mt": 331,
-	"./mt.js": 331,
-	"./my": 332,
-	"./my.js": 332,
-	"./nb": 333,
-	"./nb.js": 333,
-	"./ne": 334,
-	"./ne.js": 334,
-	"./nl": 335,
-	"./nl-be": 336,
-	"./nl-be.js": 336,
-	"./nl.js": 335,
-	"./nn": 337,
-	"./nn.js": 337,
-	"./pa-in": 338,
-	"./pa-in.js": 338,
-	"./pl": 339,
-	"./pl.js": 339,
-	"./pt": 340,
-	"./pt-br": 341,
-	"./pt-br.js": 341,
-	"./pt.js": 340,
-	"./ro": 342,
-	"./ro.js": 342,
-	"./ru": 343,
-	"./ru.js": 343,
-	"./sd": 344,
-	"./sd.js": 344,
-	"./se": 345,
-	"./se.js": 345,
-	"./si": 346,
-	"./si.js": 346,
-	"./sk": 347,
-	"./sk.js": 347,
-	"./sl": 348,
-	"./sl.js": 348,
-	"./sq": 349,
-	"./sq.js": 349,
-	"./sr": 350,
-	"./sr-cyrl": 351,
-	"./sr-cyrl.js": 351,
-	"./sr.js": 350,
-	"./ss": 352,
-	"./ss.js": 352,
-	"./sv": 353,
-	"./sv.js": 353,
-	"./sw": 354,
-	"./sw.js": 354,
-	"./ta": 355,
-	"./ta.js": 355,
-	"./te": 356,
-	"./te.js": 356,
-	"./tet": 357,
-	"./tet.js": 357,
-	"./tg": 358,
-	"./tg.js": 358,
-	"./th": 359,
-	"./th.js": 359,
-	"./tl-ph": 360,
-	"./tl-ph.js": 360,
-	"./tlh": 361,
-	"./tlh.js": 361,
-	"./tr": 362,
-	"./tr.js": 362,
-	"./tzl": 363,
-	"./tzl.js": 363,
-	"./tzm": 364,
-	"./tzm-latn": 365,
-	"./tzm-latn.js": 365,
-	"./tzm.js": 364,
-	"./ug-cn": 366,
-	"./ug-cn.js": 366,
-	"./uk": 367,
-	"./uk.js": 367,
-	"./ur": 368,
-	"./ur.js": 368,
-	"./uz": 369,
-	"./uz-latn": 370,
-	"./uz-latn.js": 370,
-	"./uz.js": 369,
-	"./vi": 371,
-	"./vi.js": 371,
-	"./x-pseudo": 372,
-	"./x-pseudo.js": 372,
-	"./yo": 373,
-	"./yo.js": 373,
-	"./zh-cn": 374,
-	"./zh-cn.js": 374,
-	"./zh-hk": 375,
-	"./zh-hk.js": 375,
-	"./zh-tw": 376,
-	"./zh-tw.js": 376
+	"./af": 252,
+	"./af.js": 252,
+	"./ar": 253,
+	"./ar-dz": 254,
+	"./ar-dz.js": 254,
+	"./ar-kw": 255,
+	"./ar-kw.js": 255,
+	"./ar-ly": 256,
+	"./ar-ly.js": 256,
+	"./ar-ma": 257,
+	"./ar-ma.js": 257,
+	"./ar-sa": 258,
+	"./ar-sa.js": 258,
+	"./ar-tn": 259,
+	"./ar-tn.js": 259,
+	"./ar.js": 253,
+	"./az": 260,
+	"./az.js": 260,
+	"./be": 261,
+	"./be.js": 261,
+	"./bg": 262,
+	"./bg.js": 262,
+	"./bm": 263,
+	"./bm.js": 263,
+	"./bn": 264,
+	"./bn.js": 264,
+	"./bo": 265,
+	"./bo.js": 265,
+	"./br": 266,
+	"./br.js": 266,
+	"./bs": 267,
+	"./bs.js": 267,
+	"./ca": 268,
+	"./ca.js": 268,
+	"./cs": 269,
+	"./cs.js": 269,
+	"./cv": 270,
+	"./cv.js": 270,
+	"./cy": 271,
+	"./cy.js": 271,
+	"./da": 272,
+	"./da.js": 272,
+	"./de": 273,
+	"./de-at": 274,
+	"./de-at.js": 274,
+	"./de-ch": 275,
+	"./de-ch.js": 275,
+	"./de.js": 273,
+	"./dv": 276,
+	"./dv.js": 276,
+	"./el": 277,
+	"./el.js": 277,
+	"./en-au": 278,
+	"./en-au.js": 278,
+	"./en-ca": 279,
+	"./en-ca.js": 279,
+	"./en-gb": 280,
+	"./en-gb.js": 280,
+	"./en-ie": 281,
+	"./en-ie.js": 281,
+	"./en-il": 282,
+	"./en-il.js": 282,
+	"./en-nz": 283,
+	"./en-nz.js": 283,
+	"./eo": 284,
+	"./eo.js": 284,
+	"./es": 285,
+	"./es-do": 286,
+	"./es-do.js": 286,
+	"./es-us": 287,
+	"./es-us.js": 287,
+	"./es.js": 285,
+	"./et": 288,
+	"./et.js": 288,
+	"./eu": 289,
+	"./eu.js": 289,
+	"./fa": 290,
+	"./fa.js": 290,
+	"./fi": 291,
+	"./fi.js": 291,
+	"./fo": 292,
+	"./fo.js": 292,
+	"./fr": 293,
+	"./fr-ca": 294,
+	"./fr-ca.js": 294,
+	"./fr-ch": 295,
+	"./fr-ch.js": 295,
+	"./fr.js": 293,
+	"./fy": 296,
+	"./fy.js": 296,
+	"./gd": 297,
+	"./gd.js": 297,
+	"./gl": 298,
+	"./gl.js": 298,
+	"./gom-latn": 299,
+	"./gom-latn.js": 299,
+	"./gu": 300,
+	"./gu.js": 300,
+	"./he": 301,
+	"./he.js": 301,
+	"./hi": 302,
+	"./hi.js": 302,
+	"./hr": 303,
+	"./hr.js": 303,
+	"./hu": 304,
+	"./hu.js": 304,
+	"./hy-am": 305,
+	"./hy-am.js": 305,
+	"./id": 306,
+	"./id.js": 306,
+	"./is": 307,
+	"./is.js": 307,
+	"./it": 308,
+	"./it.js": 308,
+	"./ja": 309,
+	"./ja.js": 309,
+	"./jv": 310,
+	"./jv.js": 310,
+	"./ka": 311,
+	"./ka.js": 311,
+	"./kk": 312,
+	"./kk.js": 312,
+	"./km": 313,
+	"./km.js": 313,
+	"./kn": 314,
+	"./kn.js": 314,
+	"./ko": 315,
+	"./ko.js": 315,
+	"./ky": 316,
+	"./ky.js": 316,
+	"./lb": 317,
+	"./lb.js": 317,
+	"./lo": 318,
+	"./lo.js": 318,
+	"./lt": 319,
+	"./lt.js": 319,
+	"./lv": 320,
+	"./lv.js": 320,
+	"./me": 321,
+	"./me.js": 321,
+	"./mi": 322,
+	"./mi.js": 322,
+	"./mk": 323,
+	"./mk.js": 323,
+	"./ml": 324,
+	"./ml.js": 324,
+	"./mn": 325,
+	"./mn.js": 325,
+	"./mr": 326,
+	"./mr.js": 326,
+	"./ms": 327,
+	"./ms-my": 328,
+	"./ms-my.js": 328,
+	"./ms.js": 327,
+	"./mt": 329,
+	"./mt.js": 329,
+	"./my": 330,
+	"./my.js": 330,
+	"./nb": 331,
+	"./nb.js": 331,
+	"./ne": 332,
+	"./ne.js": 332,
+	"./nl": 333,
+	"./nl-be": 334,
+	"./nl-be.js": 334,
+	"./nl.js": 333,
+	"./nn": 335,
+	"./nn.js": 335,
+	"./pa-in": 336,
+	"./pa-in.js": 336,
+	"./pl": 337,
+	"./pl.js": 337,
+	"./pt": 338,
+	"./pt-br": 339,
+	"./pt-br.js": 339,
+	"./pt.js": 338,
+	"./ro": 340,
+	"./ro.js": 340,
+	"./ru": 341,
+	"./ru.js": 341,
+	"./sd": 342,
+	"./sd.js": 342,
+	"./se": 343,
+	"./se.js": 343,
+	"./si": 344,
+	"./si.js": 344,
+	"./sk": 345,
+	"./sk.js": 345,
+	"./sl": 346,
+	"./sl.js": 346,
+	"./sq": 347,
+	"./sq.js": 347,
+	"./sr": 348,
+	"./sr-cyrl": 349,
+	"./sr-cyrl.js": 349,
+	"./sr.js": 348,
+	"./ss": 350,
+	"./ss.js": 350,
+	"./sv": 351,
+	"./sv.js": 351,
+	"./sw": 352,
+	"./sw.js": 352,
+	"./ta": 353,
+	"./ta.js": 353,
+	"./te": 354,
+	"./te.js": 354,
+	"./tet": 355,
+	"./tet.js": 355,
+	"./tg": 356,
+	"./tg.js": 356,
+	"./th": 357,
+	"./th.js": 357,
+	"./tl-ph": 358,
+	"./tl-ph.js": 358,
+	"./tlh": 359,
+	"./tlh.js": 359,
+	"./tr": 360,
+	"./tr.js": 360,
+	"./tzl": 361,
+	"./tzl.js": 361,
+	"./tzm": 362,
+	"./tzm-latn": 363,
+	"./tzm-latn.js": 363,
+	"./tzm.js": 362,
+	"./ug-cn": 364,
+	"./ug-cn.js": 364,
+	"./uk": 365,
+	"./uk.js": 365,
+	"./ur": 366,
+	"./ur.js": 366,
+	"./uz": 367,
+	"./uz-latn": 368,
+	"./uz-latn.js": 368,
+	"./uz.js": 367,
+	"./vi": 369,
+	"./vi.js": 369,
+	"./x-pseudo": 370,
+	"./x-pseudo.js": 370,
+	"./yo": 371,
+	"./yo.js": 371,
+	"./zh-cn": 372,
+	"./zh-cn.js": 372,
+	"./zh-hk": 373,
+	"./zh-hk.js": 373,
+	"./zh-tw": 374,
+	"./zh-tw.js": 374
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -7763,8 +7570,8 @@ var ForgotPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GetstartPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logintwo_logintwo__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logintwo_logintwo__ = __webpack_require__(73);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7803,9 +7610,10 @@ var GetstartPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-getstart',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/getstart/getstart.html"*/'<!--\n  Generated template for the GetstartPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header hidden>\n\n  <ion-navbar>\n    <ion-title>Getstart</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="getbg" scroll="false">\n\n<div class="vcenter">\n    <div class="logo"><img src="assets/imgs/logo.png"></div>\n<p>Melanin Enterprise<br>is designed to enhance the african american social networking experience by providing all-in-one features to meet our entrepreneurial,social,career,& entertainment needs.</p>\n\n<ion-grid style="margin-top:10px;">\n  <ion-row>\n    <ion-col col-6><button class="box" color="green" ion-button block (click)="loginbs()">I AM A BUSINESS</button></ion-col>\n    <ion-col col-6><button class="box ylo" color="yellow" ion-button block (click)="login()">I AM A MEMBER</button></ion-col>\n  </ion-row>\n</ion-grid>\n\n</div>\n\n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/getstart/getstart.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object])
     ], GetstartPage);
     return GetstartPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=getstart.js.map
@@ -7828,16 +7636,16 @@ var GetstartPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_viewreservationtwo_viewreservationtwo__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_history_history__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_viewfavorites_viewfavorites__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_terms_terms__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_terms_terms__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_privacy_privacy__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_editprofiletwo_editprofiletwo__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_reservations_reservations__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_reservations_reservations__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_reviews2_reviews2__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_editbusiness_editbusiness__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_appsetting__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_addbusiness_addbusiness__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_addbusiness_addbusiness__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_ionic_angular_index__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_historytwo_historytwo__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_fcm__ = __webpack_require__(54);
@@ -7885,7 +7693,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen, alertCtrl, http, appsetting, common, toastCtrl, events, app, menu, fcm, geolocation, openNativeSettings) {
-        // alert('updaated latest 1');
         var _this = this;
         this.platform = platform;
         this.statusBar = statusBar;
@@ -7901,6 +7708,10 @@ var MyApp = (function () {
         this.fcm = fcm;
         this.geolocation = geolocation;
         this.openNativeSettings = openNativeSettings;
+        if (this.common.interval) {
+            clearInterval(this.common.interval);
+        }
+        //alert('updaated latest 1');
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -7919,25 +7730,6 @@ var MyApp = (function () {
             this.getUser();
             this.role = JSON.parse(localStorage.getItem('CurrentUser')).role;
         }
-        this.geolocation.getCurrentPosition().then(function (resp) {
-        }).catch(function (error) {
-            console.log('Error getting location', error);
-            //            let alert = this.alertCtrl.create({
-            //                title: 'Location',
-            //                message: 'Please enable your location to use Melanin Enterprises.',
-            //                buttons: [
-            //                  {
-            //                    text: 'Ok',
-            //                    role: 'submit',
-            //                    handler: () => {
-            //                      console.log('submit clicked');
-            //                      this.openNativeSettings.open('location');
-            //                    }
-            //                  }
-            //                ]
-            //              });
-            //              alert.present();
-        });
     }
     MyApp.prototype.initializeApp = function () {
         var _this = this;
@@ -7996,7 +7788,7 @@ var MyApp = (function () {
         }
         else {
             console.log('you are offline');
-            var alert_1 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 message: '<img src="assets/imgs/network.png">',
                 buttons: [{
                         text: 'Try again',
@@ -8007,7 +7799,7 @@ var MyApp = (function () {
                         }
                     }]
             });
-            alert_1.present();
+            alert.present();
         }
     };
     MyApp.prototype.openPage = function (page) {
@@ -8136,27 +7928,15 @@ var MyApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/app/app.html"*/'<ion-menu [content]="content" [swipeEnabled]="false">\n  <ion-header>\n    <ion-toolbar class="toolbarhead" color="green">\n      <div class="menuprofile" *ngIf="currentuser">\n        <div class="profile_strip">\n          <div class="profile_pic">\n            <div class="profile_picinn">\n            <img src="{{currentuser?.profile_pic}}"> \n            </div>\n          </div>\n          <h2>{{currentuser?.firstname}}</h2>\n          <p>{{currentuser?.email}}</p>\n        </div>\n      </div>\n        \n        <div class="menuprofile" *ngIf="!currentuser">\n        <div class="profile_strip">\n          <div class="profile_pic">\n            <div class="profile_picinn">\n            <img src="assets/imgs/user.png"> \n            </div>\n          </div>\n<!--          <h2>{{currentuser?.firstname}}</h2>\n          <p>{{currentuser?.email}}</p>-->\n        </div>\n      </div>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list no-lines class="sidemenu" *ngIf="currentuser">\n      <button menuClose color="black" ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.active]="checkActivePage(p)">\n        <ion-icon><img width="20px" src="{{p.icon}}"></ion-icon>\n        {{p.title}}\n      </button>\n        <button class="logoutclass" menuClose color="black" ion-item (click)="logout()">\n        <ion-icon><img width="20px" src="assets/imgs/logout.png"></ion-icon>\n        Logout\n      </button>\n    </ion-list>\n      \n      <ion-list no-lines class="sidemenu" *ngIf="currentuser == null">\n      <button menuClose color="black" ion-item *ngFor="let p of pages" (click)="openPage(p)" [class.active]="checkActivePage(p)">\n        <ion-icon><img width="20px" src="{{p.icon}}"></ion-icon>\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n</ion-menu>\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_17__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_18__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_19__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */],
-            __WEBPACK_IMPORTED_MODULE_21_ionic_angular_index__["k" /* MenuController */],
-            __WEBPACK_IMPORTED_MODULE_23__ionic_native_fcm__["a" /* FCM */],
-            __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_25__ionic_native_open_native_settings__["a" /* OpenNativeSettings */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_17__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_17__angular_http__["b" /* Http */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_18__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_18__providers_appsetting__["a" /* Appsetting */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_19__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_19__providers_common__["a" /* Common */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_21_ionic_angular_index__["k" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_21_ionic_angular_index__["k" /* MenuController */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_23__ionic_native_fcm__["a" /* FCM */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_23__ionic_native_fcm__["a" /* FCM */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_25__ionic_native_open_native_settings__["a" /* OpenNativeSettings */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_25__ionic_native_open_native_settings__["a" /* OpenNativeSettings */]) === "function" && _q || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -8284,348 +8064,16 @@ var LocationComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogintwoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signuptwo_signuptwo__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_appsetting__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__forgot_forgot__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__reservations_reservations__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_facebook__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__getstart_getstart__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__terms_terms__ = __webpack_require__(75);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Generated class for the LogintwoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var LogintwoPage = (function () {
-    function LogintwoPage(platform, navCtrl, navParams, alertCtrl, formBuilder, appsetting, http, events, common, toastCtrl, loadingCtrl, fb, fcm) {
-        this.platform = platform;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
-        this.formBuilder = formBuilder;
-        this.appsetting = appsetting;
-        this.http = http;
-        this.events = events;
-        this.common = common;
-        this.toastCtrl = toastCtrl;
-        this.loadingCtrl = loadingCtrl;
-        this.fb = fb;
-        this.fcm = fcm;
-        this.type = 'password';
-        this.showPass = false;
-        this.iconname = 'eye';
-        //alert('rahul');
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            console.log('You are online');
-        }
-        else {
-            this.common.tryagain();
-        }
-    }
-    LogintwoPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        console.log('ionViewDidLoad LogintwoPage');
-        this.platform.ready().then(function () {
-            var lastTimeBackPress = 0;
-            var timePeriodToExit = 2000;
-            _this.platform.registerBackButtonAction(function () {
-                // get current active page
-                var view = _this.navCtrl.getActive();
-                if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-                    _this.platform.exitApp(); //Exit from app
-                }
-                else {
-                    // alert('Press back again to exit App?');
-                    var toast = _this.toastCtrl.create({
-                        message: 'Press back again to exit from app?',
-                        duration: 3000,
-                        position: 'bottom'
-                    });
-                    toast.present();
-                    lastTimeBackPress = new Date().getTime();
-                }
-            });
-        });
-    };
-    LogintwoPage.prototype.ngOnInit = function () {
-        console.log('ngOnInit');
-        this.SigninForm = this.formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-        });
-        // this.tryagain();
-    };
-    LogintwoPage.prototype.emailValidator = function (control) {
-        if (!(control.value.toLowerCase().match('^[a-z0-9]+(\.[_a-z0-9]+)+([@{1}])+(\.[a-z0-9-]+)+([.{1}])(\.[a-z]{1,15})$'))) {
-            return { invalidEmail: true };
-        }
-    };
-    LogintwoPage.prototype.isValid = function (field) {
-        var formField = this.SigninForm.get(field);
-        return formField.valid || formField.pristine;
-    };
-    LogintwoPage.prototype.showPassword = function () {
-        console.log('showpassword');
-        this.showPass = !this.showPass;
-        if (this.showPass) {
-            this.type = 'text';
-            this.iconname = 'eye-off';
-        }
-        else {
-            this.type = 'password';
-            this.iconname = 'eye';
-        }
-    };
-    LogintwoPage.prototype.Signin = function (signindata) {
-        var _this = this;
-        console.log(signindata.value);
-        console.log('rahul');
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            var options_1 = this.appsetting.header();
-            this.fcm.getToken().then(function (token) {
-                //                console.log('Tokenid-->' + token);
-                var postdata = {
-                    email: signindata.value.email,
-                    password: signindata.value.password,
-                    divice_token: token,
-                    role: 'business'
-                };
-                console.log(postdata);
-                var serialized = _this.appsetting.serializeObj(postdata);
-                var Loading = _this.loadingCtrl.create({
-                    spinner: 'bubbles',
-                    content: 'Loading...'
-                });
-                Loading.present().then(function () {
-                    _this.http.post(_this.appsetting.url + 'users/loginuser', serialized, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
-                        console.log(response);
-                        Loading.dismiss();
-                        if (response.status == true) {
-                            localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                            _this.events.publish('Loggedin', 'loginpage');
-                            _this.appsetting.userprofile = response.userinfo;
-                            if (response.userinfo.business_data.length > 0) {
-                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__reservations_reservations__["a" /* ReservationsPage */]);
-                            }
-                            else {
-                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
-                            }
-                        }
-                        else {
-                            _this.common.presentAlert('Login', response.message);
-                        }
-                    });
-                });
-            }, function (err) {
-                console.log(err);
-            });
-        }
-        else {
-            var toast = this.toastCtrl.create({
-                message: 'Check your internet connection',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.onDidDismiss(function () {
-                console.log('Dismissed toast');
-            });
-            toast.present();
-        }
-    };
-    LogintwoPage.prototype.Facebooklogin = function () {
-        var _this = this;
-        this.fb.login(['public_profile', 'user_friends', 'email'])
-            .then(function (res) {
-            console.log('Logged into Facebook!', JSON.stringify(res));
-            var userId = res.authResponse.userID;
-            var accesstoken = res.authResponse.accessToken;
-            _this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', []).then(function (profile) {
-                _this.userData = {
-                    id: profile['id'],
-                    email: profile['email'],
-                    first_name: profile['first_name'],
-                    last_name: profile['last_name'],
-                    picture: profile['picture_large']['data']['url'],
-                    username: profile['name']
-                };
-                console.log('User profile');
-                console.log(_this.userData);
-                console.log('User profile stringify');
-                console.log(JSON.stringify(_this.userData));
-                console.log('rahul');
-                console.log(window.navigator.onLine);
-                if (window.navigator.onLine == true) {
-                    var options_2 = _this.appsetting.header();
-                    _this.fcm.getToken().then(function (token) {
-                        var postdata = {
-                            fb_id: _this.userData.id,
-                            firstname: _this.userData.first_name,
-                            lastname: _this.userData.last_name,
-                            email: _this.userData.email,
-                            role: 'business',
-                            regitration_type: 'facebook',
-                            divice_token: token,
-                            profile_pic: _this.userData.picture,
-                            password: _this.userData.id,
-                        };
-                        var serialized = _this.appsetting.serializeObj(postdata);
-                        var Loading = _this.loadingCtrl.create({
-                            spinner: 'bubbles',
-                            content: 'Loading...'
-                        });
-                        Loading.present().then(function () {
-                            _this.http.post(_this.appsetting.url + 'users/fbregistration', serialized, options_2).map(function (res) { return res.json(); }).subscribe(function (response) {
-                                console.log(response);
-                                Loading.dismiss();
-                                if (response.status == true) {
-                                    //alert('succes facebook');
-                                    if (response.data) {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
-                                        _this.events.publish('Loggedin', 'loginpage');
-                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__home_home__["a" /* HomePage */]);
-                                    }
-                                    else {
-                                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
-                                        _this.events.publish('Loggedin', 'loginpage');
-                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__home_home__["a" /* HomePage */]);
-                                    }
-                                }
-                                else {
-                                    //alert('fail facebook!');
-                                    _this.common.presentAlert('Signin', response.message);
-                                }
-                            });
-                        }, function (err) {
-                            console.log(err);
-                        });
-                    });
-                    //}).catch((error: any) => console.log(error));
-                }
-                else {
-                    var toast = _this.toastCtrl.create({
-                        message: 'Check your internet connection',
-                        duration: 3000,
-                        position: 'bottom'
-                    });
-                    toast.onDidDismiss(function () {
-                        console.log('Dismissed toast');
-                    });
-                    toast.present();
-                }
-            });
-        })
-            .catch(function (e) {
-            console.log('Error logging into Facebook', JSON.stringify(e));
-        });
-    };
-    LogintwoPage.prototype.home = function () {
-        console.log(window.navigator.onLine);
-        if (window.navigator.onLine == true) {
-            this.events.publish('skip', 'skip');
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__home_home__["a" /* HomePage */]);
-        }
-        else {
-            var toast = this.toastCtrl.create({
-                message: 'Check your internet connection',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.onDidDismiss(function () {
-                console.log('Dismissed toast');
-            });
-            toast.present();
-        }
-    };
-    LogintwoPage.prototype.signup = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signuptwo_signuptwo__["a" /* SignuptwoPage */]);
-    };
-    LogintwoPage.prototype.forgot = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__forgot_forgot__["a" /* ForgotPage */]);
-    };
-    LogintwoPage.prototype.add = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
-    };
-    LogintwoPage.prototype.getstart = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__getstart_getstart__["a" /* GetstartPage */]);
-    };
-    LogintwoPage.prototype.term = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__terms_terms__["a" /* TermsPage */], { role: 'business' });
-    };
-    LogintwoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-logintwo',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/logintwo/logintwo.html"*/'<!--\n  Generated template for the LogintwoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--<ion-header>\n    <ion-navbar color="green">\n        <ion-title text-center>login</ion-title>\n    </ion-navbar>\n\n</ion-header>-->\n<ion-header>\n\n    <ion-toolbar color="green">\n        <ion-buttons start>\n            \n            <button ion-button icon-only (click)="getstart()">\n                    <ion-icon class="bckbtn" name="arrow-back"></ion-icon>\n            </button>\n        </ion-buttons>\n        <ion-title>Login</ion-title>\n    </ion-toolbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div class="loginform formmain">\n        <p style="font-weight: 500;">Welcome to Melanin Enterprise. <br>We are glad that you are here!<br>Make yourself at home.</p>\n        <form [formGroup]="SigninForm" (submit)="Signin(SigninForm)">\n            <ion-list no-lines>\n\n                <ion-item>\n                    <ion-input type="email" placeholder="Email" formControlName="email" autocapitalize="off"></ion-input>\n                    <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n                    <span item-content *ngIf="!isValid(\'email\')" class="validationpop animated bounce">Invalid email</span>\n                </ion-item>\n\n\n\n                <ion-item>\n                    <ion-input type="{{type}}" placeholder="Password" formControlName="password"></ion-input>\n                    <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n                    <button item-end type="button" color="dark" (click)="showPassword()" ion-button icon-only clear>\n                        <ion-icon name="{{iconname}}" ></ion-icon>\n                    </button>\n                    <span item-content *ngIf="!isValid(\'password\')" class="validationpop animated bounce">Invalid Password</span>\n                </ion-item>\n\n                <button type="submit" class="btn1" ion-button color="green" block [disabled]="!SigninForm.valid">Login</button>\n                <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>\n                <h2 class="orstrip"><span style="font-weight: 600;">OR</span></h2>\n                <button (click)="Facebooklogin()" type="button" class="btn3" ion-button block >Login with facebook</button>\n            </ion-list>\n        </form>\n    </div>\n\n    <div class="haveacc">Don’t have an account? <span color="dark" (click)="signup()" style="font-weight: 600;">Sign Up</span></div>\n<!--    <div class="haveacc" (click)="term()">Terms and Conditions</div>-->\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/logintwo/logintwo.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_facebook__["a" /* Facebook */],
-            __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__["a" /* FCM */]])
-    ], LogintwoPage);
-    return LogintwoPage;
-}());
-
-//# sourceMappingURL=logintwo.js.map
-
-/***/ }),
-
-/***/ 73:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddbusinessPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reservations_reservations__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logintwo_logintwo__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reservations_reservations__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logintwo_logintwo__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_moment__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_moment__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8736,7 +8184,7 @@ var AddbusinessPage = (function () {
             accept: [false],
             reservation: [false],
             zipcode: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            websiteurl: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            websiteurl: [''],
             /******* controls for days,opening and closing hours *************/
             monday: [false],
             mondayopeninghours: [''],
@@ -9129,7 +8577,7 @@ var AddbusinessPage = (function () {
                         if (response.status == true) {
                             _this.events.publish('Loggedin', 'loginpage');
                             //                            this.navCtrl.push(ReservationsPage);
-                            var alert_1 = _this.alertCtrl.create({
+                            var alert = _this.alertCtrl.create({
                                 title: 'Add business',
                                 message: 'Your business has been successfully added',
                                 buttons: [
@@ -9143,7 +8591,7 @@ var AddbusinessPage = (function () {
                                     }
                                 ]
                             });
-                            alert_1.present();
+                            alert.present();
                         }
                         else {
                             _this.common.presentAlert('Add business', response.message);
@@ -9164,33 +8612,344 @@ var AddbusinessPage = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])('map'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
     ], AddbusinessPage.prototype, "mapElement", void 0);
     AddbusinessPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-addbusiness',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/addbusiness/addbusiness.html"*/'<!--\n  Generated template for the AddbusinessPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-toolbar color="green">\n        <ion-buttons start>\n            <button ion-button icon-only (click)="login()">\n                    <ion-icon class="bckbtn" name="arrow-back"></ion-icon>\n            </button>\n        </ion-buttons>\n        <ion-title>add business</ion-title>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <form [formGroup]="AddbusinessForm" (submit)="AddBusiness(AddbusinessForm)">\n        <ion-list no-lines>\n            <!--            <ion-item>\n                            <ion-label>Business type</ion-label>\n                            <ion-select formControlName="businesstype" (ionChange)="selectedBusiness($event)">\n                                <ion-option value="1">Premium</ion-option>\n                                <ion-option value="">Valued</ion-option>\n                            </ion-select>\n                        </ion-item>-->\n            <ion-item>\n                <ion-input type="text" placeholder="Business Name" formControlName="businessname"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-input type="tel" placeholder="Phone Number" formControlName="phone" maxLength="12"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-input type="text" placeholder="Address" formControlName="address" [(ngModel)]="autocomplete.query" (input)="updateSearch()"></ion-input>\n            </ion-item>\n            <div *ngIf="autocompleteItems != \'\'" class="suggestion">\n                <ion-label *ngFor="let item of autocompleteItems" tappable   (click)="chooseItem(item)">{{ item }}</ion-label>\n            </div>\n            <ion-item>\n                <ion-input type="text" placeholder="Zip code" formControlName="zipcode" maxLength="8"></ion-input>\n            </ion-item>\n            <ion-item class="area">\n                <ion-textarea  placeholder="Description" formControlName="description"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>Category</ion-label>\n                <ion-select class="catoption" formControlName="services" (ionChange)="selectedCat($event)">\n                    <ion-option *ngFor="let cat of services" value ="{{cat._id}}">{{cat.sub_category_title}}\n<!--                        <ion-input type="hidden" [(ngModel)]="data.category_title" formControlName="services_title"></ion-input>-->\n                    </ion-option>\n                </ion-select>\n            </ion-item>\n\n            <h2 style="margin-bottom: 7px !important;">Add opening and closing hours.</h2>\n\n            <div class="day-frmt">\n                <ion-item class="check_box">\n                    <ion-label>Monday</ion-label>\n                    <ion-checkbox color="green" formControlName="monday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="mondayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="mondayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n\n            <ion-item class="check_box">\n                    <ion-label>Tuesday</ion-label>\n                    <ion-checkbox color="green" formControlName="tuesday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="tuesdayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="tuesdayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n\n            <ion-item class="check_box">\n                    <ion-label>Wednesday</ion-label>\n                    <ion-checkbox color="green" formControlName="wednesday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="wednesdayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="wednesdayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n\n            <ion-item class="check_box">\n                    <ion-label>Thursday</ion-label>\n                    <ion-checkbox color="green" formControlName="thursday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="thursdayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="thursdayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n\n            <ion-item class="check_box">\n                    <ion-label>Friday</ion-label>\n                    <ion-checkbox color="green" formControlName="friday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="fridayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="fridayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n\n            <ion-item class="check_box">\n                    <ion-label>Saturday</ion-label>\n                    <ion-checkbox color="green" formControlName="saturday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="saturdayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="saturdayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n\n            <ion-item class="check_box">\n                    <ion-label>Sunday</ion-label>\n                    <ion-checkbox color="green" formControlName="sunday"></ion-checkbox>\n                </ion-item>\n                <ion-grid class="paddingnone">\n                <ion-row>\n                    <ion-col col-6 class="padding-left">\n                        <ion-item>\n                            <ion-label>From</ion-label>\n                            <ion-datetime  displayFormat="hh:mm A" formControlName="sundayopeninghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col>\n                    <ion-col col-6 class="padding-right">\n                        <ion-item>\n                            <ion-label>To</ion-label>\n                            <ion-datetime displayFormat="hh:mm A" formControlName="sundayclosinghours"></ion-datetime>\n                        </ion-item>\n                    </ion-col> \n                </ion-row>\n            </ion-grid>\n        </div>\n\n            <!-- <div class="tagsec" *ngIf="daytime.length>0">\n                <div class="inner-sec" *ngFor="let d of daytime;let i = index">\n                     <p style="margin-bottom:1px;">{{d.day}}</p>\n                    <p><span>{{d.openingtime}}</span> to <span>{{d.closingtime}}</span></p>\n                    <ion-icon name="close" (click)="DeleteTimes(d,i)"></ion-icon>\n                </div>\n            </div> -->\n\n<!--            <ion-item *ngIf="services">\n                <ion-label>Services</ion-label>\n                <ion-select class="catoption" formControlName="services" (ionChange)="selectedService($event)">\n                    <ion-option *ngFor="let service of services" value="{{service._id}}">{{service.sub_category_title}}\n                        <ion-input type="hidden" [(ngModel)]="data.service_title" formControlName="services_title"></ion-input>\n                    </ion-option>\n                </ion-select>\n            </ion-item>-->\n\n            <!--            <h2>Social Links</h2>\n            \n                        <ion-item>\n                            <img src="assets/imgs/instgrm.png" item-start class="social">\n                            <ion-input type="text" placeholder="https://www.instagram.com/" formControlName="instagramlink" autocapitalize="off"></ion-input>\n                        </ion-item>\n            \n                        <ion-item>\n                            <img src="assets/imgs/fb.png" item-start class="social">\n                            <ion-input type="text" placeholder="https://www.facebook.com/" formControlName="facebooklink" autocapitalize="off"></ion-input>\n                        </ion-item>\n            \n                        <ion-item>\n                            <img src="assets/imgs/twtr.png" item-start class="social">\n                            <ion-input type="text" placeholder="https://www.twitter.com/" formControlName="twitterlink" autocapitalize="off"></ion-input>\n                        </ion-item>-->\n            <ion-item>\n                \n                <ion-input type="text" placeholder="https://www.websitename.com/" formControlName="websiteurl" autocapitalize="off"></ion-input>\n            </ion-item>\n\n            <h2>Is this a veteran owned business?</h2>\n\n            <ion-list radio-group style="margin:0 !important;" formControlName="veteranowned">\n                <ion-item class="rdo" style="padding-left: 25px !important;">\n\n                    <ion-radio checked="yes" value="yes"></ion-radio>\n                    <ion-label>Yes</ion-label>\n                </ion-item>\n                <ion-item class="rdo" style="padding-left: 25px !important;">\n\n                    <ion-radio value="no"></ion-radio>\n                    <ion-label>No</ion-label>\n                </ion-item>\n            </ion-list>\n\n            <h2>Do you own an online marketplace?</h2>\n\n            <ion-list radio-group style="margin:0 !important;" formControlName="onlinemarketplace">\n                <ion-item class="rdo" style="padding-left: 25px !important;">\n\n                    <ion-radio checked="yes" value="yes"></ion-radio>\n                    <ion-label>Yes</ion-label>\n                </ion-item>\n\n                <ion-item class="rdo" style="padding-left: 25px !important;">\n\n                    <ion-radio value="no"></ion-radio>\n                    <ion-label>No</ion-label>\n                </ion-item>\n            </ion-list>\n\n            <h2>Do you accept?</h2>\n            <ion-list style="margin:0 !important;">\n                <ion-item class="chck">\n                    <ion-checkbox formControlName="accept" style="margin-right: 9px !important;"></ion-checkbox>\n                    <ion-label>Appointments</ion-label>\n                </ion-item>\n                <ion-item class="chck">\n                    <ion-checkbox formControlName="reservation" style="margin-right: 9px !important;"></ion-checkbox>\n                    <ion-label>Reservations</ion-label>\n                </ion-item>\n            </ion-list>\n        </ion-list>\n        <div class="photosec">\n            <h2 style="position:relative;">Add Photo <span>( Multiple photos )</span>\n                <button type="button" ion-button color="green" (click)="presentActionSheet()"><ion-icon name="add"></ion-icon></button>\n            </h2>\n            <ion-grid class="paddingnone" *ngIf="base64Image.length>0">\n                <ion-row>\n                    <ion-col col-4 *ngFor="let img of base64Image">\n                             <div class="image-wrapper">\n                            <img src="{{img}}">\n                        </div>\n                    </ion-col>\n                    <!--            <ion-col col-4>\n                                    <div class="image-wrapper">\n                                      <img src="assets/imgs/sqar.png">\n                                    </div>\n                                  </ion-col>\n                                  <ion-col col-4>\n                                      <div class="image-wrapper">\n                                        <img src="assets/imgs/sqar.png">\n                                      </div>\n                                    </ion-col>-->\n                </ion-row>\n            </ion-grid>\n            <div class="btnsec">\n                <button type="submit" ion-button color="green" [disabled]="!AddbusinessForm.valid" full class="btn1">SAVE</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/addbusiness/addbusiness.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */],
-            __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_appsetting__["a" /* Appsetting */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_common__["a" /* Common */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* NgZone */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__["a" /* Camera */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _o || Object])
     ], AddbusinessPage);
     return AddbusinessPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 }());
 
 //# sourceMappingURL=addbusiness.js.map
 
 /***/ }),
 
-/***/ 75:
+/***/ 73:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogintwoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signuptwo_signuptwo__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_appsetting__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_common__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__forgot_forgot__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__reservations_reservations__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_facebook__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__getstart_getstart__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__terms_terms__ = __webpack_require__(74);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Generated class for the LogintwoPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var LogintwoPage = (function () {
+    function LogintwoPage(platform, navCtrl, navParams, alertCtrl, formBuilder, appsetting, http, events, common, toastCtrl, loadingCtrl, fb, fcm) {
+        this.platform = platform;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.formBuilder = formBuilder;
+        this.appsetting = appsetting;
+        this.http = http;
+        this.events = events;
+        this.common = common;
+        this.toastCtrl = toastCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.fb = fb;
+        this.fcm = fcm;
+        this.type = 'password';
+        this.showPass = false;
+        this.iconname = 'eye';
+        //alert('rahul');
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            console.log('You are online');
+        }
+        else {
+            this.common.tryagain();
+        }
+    }
+    LogintwoPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log('ionViewDidLoad LogintwoPage');
+        this.platform.ready().then(function () {
+            var lastTimeBackPress = 0;
+            var timePeriodToExit = 2000;
+            _this.platform.registerBackButtonAction(function () {
+                // get current active page
+                var view = _this.navCtrl.getActive();
+                if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+                    _this.platform.exitApp(); //Exit from app
+                }
+                else {
+                    // alert('Press back again to exit App?');
+                    var toast = _this.toastCtrl.create({
+                        message: 'Press back again to exit from app?',
+                        duration: 3000,
+                        position: 'bottom'
+                    });
+                    toast.present();
+                    lastTimeBackPress = new Date().getTime();
+                }
+            });
+        });
+    };
+    LogintwoPage.prototype.ngOnInit = function () {
+        console.log('ngOnInit');
+        this.SigninForm = this.formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, this.emailValidator.bind(this)]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+        });
+        // this.tryagain();
+    };
+    LogintwoPage.prototype.emailValidator = function (control) {
+        if (!(control.value.toLowerCase().match('^[a-z0-9]+(\.[_a-z0-9]+)+([@{1}])+(\.[a-z0-9-]+)+([.{1}])(\.[a-z]{1,15})$'))) {
+            return { invalidEmail: true };
+        }
+    };
+    LogintwoPage.prototype.isValid = function (field) {
+        var formField = this.SigninForm.get(field);
+        return formField.valid || formField.pristine;
+    };
+    LogintwoPage.prototype.showPassword = function () {
+        console.log('showpassword');
+        this.showPass = !this.showPass;
+        if (this.showPass) {
+            this.type = 'text';
+            this.iconname = 'eye-off';
+        }
+        else {
+            this.type = 'password';
+            this.iconname = 'eye';
+        }
+    };
+    LogintwoPage.prototype.Signin = function (signindata) {
+        var _this = this;
+        console.log(signindata.value);
+        console.log('rahul');
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            var options_1 = this.appsetting.header();
+            this.fcm.getToken().then(function (token) {
+                //                console.log('Tokenid-->' + token);
+                var postdata = {
+                    email: signindata.value.email,
+                    password: signindata.value.password,
+                    divice_token: token,
+                    role: 'business'
+                };
+                console.log(postdata);
+                var serialized = _this.appsetting.serializeObj(postdata);
+                var Loading = _this.loadingCtrl.create({
+                    spinner: 'bubbles',
+                    content: 'Loading...'
+                });
+                Loading.present().then(function () {
+                    _this.http.post(_this.appsetting.url + 'users/loginuser', serialized, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
+                        console.log(response);
+                        Loading.dismiss();
+                        if (response.status == true) {
+                            localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                            _this.events.publish('Loggedin', 'loginpage');
+                            _this.appsetting.userprofile = response.userinfo;
+                            if (response.userinfo.business_data.length > 0) {
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__reservations_reservations__["a" /* ReservationsPage */]);
+                            }
+                            else {
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
+                            }
+                        }
+                        else {
+                            _this.common.presentAlert('Login', response.message);
+                        }
+                    });
+                });
+            }, function (err) {
+                console.log(err);
+            });
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: 'Check your internet connection',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.onDidDismiss(function () {
+                console.log('Dismissed toast');
+            });
+            toast.present();
+        }
+    };
+    LogintwoPage.prototype.Facebooklogin = function () {
+        var _this = this;
+        this.fb.login(['public_profile', 'user_friends', 'email'])
+            .then(function (res) {
+            console.log('Logged into Facebook!', JSON.stringify(res));
+            var userId = res.authResponse.userID;
+            var accesstoken = res.authResponse.accessToken;
+            _this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', []).then(function (profile) {
+                _this.userData = {
+                    id: profile['id'],
+                    email: profile['email'],
+                    first_name: profile['first_name'],
+                    last_name: profile['last_name'],
+                    picture: profile['picture_large']['data']['url'],
+                    username: profile['name']
+                };
+                console.log('User profile');
+                console.log(_this.userData);
+                console.log('User profile stringify');
+                console.log(JSON.stringify(_this.userData));
+                console.log('rahul');
+                console.log(window.navigator.onLine);
+                if (window.navigator.onLine == true) {
+                    var options_2 = _this.appsetting.header();
+                    _this.fcm.getToken().then(function (token) {
+                        var postdata = {
+                            fb_id: _this.userData.id,
+                            firstname: _this.userData.first_name,
+                            lastname: _this.userData.last_name,
+                            email: _this.userData.email,
+                            role: 'business',
+                            regitration_type: 'facebook',
+                            divice_token: token,
+                            profile_pic: _this.userData.picture,
+                            password: _this.userData.id,
+                        };
+                        var serialized = _this.appsetting.serializeObj(postdata);
+                        var Loading = _this.loadingCtrl.create({
+                            spinner: 'bubbles',
+                            content: 'Loading...'
+                        });
+                        Loading.present().then(function () {
+                            _this.http.post(_this.appsetting.url + 'users/fbregistration', serialized, options_2).map(function (res) { return res.json(); }).subscribe(function (response) {
+                                console.log(response);
+                                Loading.dismiss();
+                                if (response.status == true) {
+                                    //alert('succes facebook');
+                                    if (response.data) {
+                                        localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                                        _this.events.publish('Loggedin', 'loginpage');
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__home_home__["a" /* HomePage */]);
+                                    }
+                                    else {
+                                        localStorage.setItem('CurrentUser', JSON.stringify(response.userinfo));
+                                        _this.events.publish('Loggedin', 'loginpage');
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__home_home__["a" /* HomePage */]);
+                                    }
+                                }
+                                else {
+                                    //alert('fail facebook!');
+                                    _this.common.presentAlert('Signin', response.message);
+                                }
+                            });
+                        }, function (err) {
+                            console.log(err);
+                        });
+                    });
+                    //}).catch((error: any) => console.log(error));
+                }
+                else {
+                    var toast = _this.toastCtrl.create({
+                        message: 'Check your internet connection',
+                        duration: 3000,
+                        position: 'bottom'
+                    });
+                    toast.onDidDismiss(function () {
+                        console.log('Dismissed toast');
+                    });
+                    toast.present();
+                }
+            });
+        })
+            .catch(function (e) {
+            console.log('Error logging into Facebook', JSON.stringify(e));
+        });
+    };
+    LogintwoPage.prototype.home = function () {
+        console.log(window.navigator.onLine);
+        if (window.navigator.onLine == true) {
+            this.events.publish('skip', 'skip');
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__home_home__["a" /* HomePage */]);
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: 'Check your internet connection',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.onDidDismiss(function () {
+                console.log('Dismissed toast');
+            });
+            toast.present();
+        }
+    };
+    LogintwoPage.prototype.signup = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signuptwo_signuptwo__["a" /* SignuptwoPage */]);
+    };
+    LogintwoPage.prototype.forgot = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__forgot_forgot__["a" /* ForgotPage */]);
+    };
+    LogintwoPage.prototype.add = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__addbusiness_addbusiness__["a" /* AddbusinessPage */]);
+    };
+    LogintwoPage.prototype.getstart = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__getstart_getstart__["a" /* GetstartPage */]);
+    };
+    LogintwoPage.prototype.term = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__terms_terms__["a" /* TermsPage */], { role: 'business' });
+    };
+    LogintwoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-logintwo',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/logintwo/logintwo.html"*/'<!--\n  Generated template for the LogintwoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--<ion-header>\n    <ion-navbar color="green">\n        <ion-title text-center>login</ion-title>\n    </ion-navbar>\n\n</ion-header>-->\n<ion-header>\n\n    <ion-toolbar color="green">\n        <ion-buttons start>\n            \n            <button ion-button icon-only (click)="getstart()">\n                    <ion-icon class="bckbtn" name="arrow-back"></ion-icon>\n            </button>\n        </ion-buttons>\n        <ion-title>Login</ion-title>\n    </ion-toolbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div class="loginform formmain">\n        <p style="font-weight: 500;">Welcome to Melanin Enterprise. <br>We are glad that you are here!<br>Make yourself at home.</p>\n        <form [formGroup]="SigninForm" (submit)="Signin(SigninForm)">\n            <ion-list no-lines>\n\n                <ion-item>\n                    <ion-input type="email" placeholder="Email" formControlName="email" autocapitalize="off"></ion-input>\n                    <ion-icon class="iconinput" item-start><img src="assets/imgs/Generic.gif"></ion-icon>\n                    <span item-content *ngIf="!isValid(\'email\')" class="validationpop animated bounce">Invalid email</span>\n                </ion-item>\n\n\n\n                <ion-item>\n                    <ion-input type="{{type}}" placeholder="Password" formControlName="password"></ion-input>\n                    <ion-icon class="iconinput" item-start><img src="assets/imgs/pass.png"></ion-icon>\n                    <button item-end type="button" color="dark" (click)="showPassword()" ion-button icon-only clear>\n                        <ion-icon name="{{iconname}}" ></ion-icon>\n                    </button>\n                    <span item-content *ngIf="!isValid(\'password\')" class="validationpop animated bounce">Invalid Password</span>\n                </ion-item>\n\n                <button type="submit" class="btn1" ion-button color="green" block [disabled]="!SigninForm.valid">Login</button>\n                <button type="button" class="forgot" ion-button clear block color="dark" (click)="forgot()">Forgot Password?</button>\n                <h2 class="orstrip"><span style="font-weight: 600;">OR</span></h2>\n                <button (click)="Facebooklogin()" type="button" class="btn3" ion-button block >Login with facebook</button>\n            </ion-list>\n        </form>\n    </div>\n\n    <div class="haveacc">Don’t have an account? <span color="dark" (click)="signup()" style="font-weight: 600;">Sign Up</span></div>\n<!--    <div class="haveacc" (click)="term()">Terms and Conditions</div>-->\n</ion-content>\n'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/logintwo/logintwo.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_appsetting__["a" /* Appsetting */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_6__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_common__["a" /* Common */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_facebook__["a" /* Facebook */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__["a" /* FCM */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__["a" /* FCM */]) === "function" && _o || Object])
+    ], LogintwoPage);
+    return LogintwoPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+}());
+
+//# sourceMappingURL=logintwo.js.map
+
+/***/ }),
+
+/***/ 74:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9301,16 +9060,21 @@ var TermsPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BooknowPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewproductPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_appsetting__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_common__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_social_sharing__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_common__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__booknow_booknow__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_launch_navigator__ = __webpack_require__(375);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_geolocation__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_login__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_call_number__ = __webpack_require__(376);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_moment__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9328,147 +9092,362 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+
 /**
- * Generated class for the BooknowPage page.
+ * Generated class for the ViewproductPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var BooknowPage = (function () {
-    function BooknowPage(navCtrl, navParams, viewCtrl, formBuilder, appsetting, http, loadingCtrl, common, toastCtrl, alertCtrl) {
+var ViewproductPage = (function () {
+    function ViewproductPage(navCtrl, navParams, socialSharing, toastCtrl, modalCtrl, ViewCtrl, appsetting, http, loadingCtrl, common, launchNavigator, geolocation, callNumber) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.formBuilder = formBuilder;
+        this.socialSharing = socialSharing;
+        this.toastCtrl = toastCtrl;
+        this.modalCtrl = modalCtrl;
+        this.ViewCtrl = ViewCtrl;
         this.appsetting = appsetting;
         this.http = http;
         this.loadingCtrl = loadingCtrl;
         this.common = common;
-        this.toastCtrl = toastCtrl;
-        this.alertCtrl = alertCtrl;
-        this.data = {};
-        //alert('rahul');
-        console.log(new Date());
-        this.currentdate = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date().toISOString()).locale('es').format();
-        console.log(this.currentdate);
-        var time = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date().toISOString()).locale('es').format('hh:mm');
-        console.log(time);
-        var a = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date().toISOString()).locale('es').format('DD-MM-YYYY');
-        console.log(a);
-        var b = a.split('-');
-        console.log(b);
-        this.day = b[0];
-        this.month = b[1];
-        this.year = b[2];
+        this.launchNavigator = launchNavigator;
+        this.geolocation = geolocation;
+        this.callNumber = callNumber;
+        if (localStorage.getItem('CurrentUser')) {
+            this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+            this.currentUser = JSON.parse(localStorage.getItem('CurrentUser'));
+        }
+        else {
+            this.currentUser = '';
+        }
+        console.log(this.currentUser);
+    }
+    ViewproductPage.prototype.ionViewDidLoad = function () {
+        // alert('updated df');
+        var date = new Date();
+        var today_date = new Date(__WEBPACK_IMPORTED_MODULE_12_moment__(date).format("YYYY-MM-DD") + "T" + "00:00:00.000Z");
+        console.log('ionViewDidLoad ViewproductPage');
+        console.log(this.navParams.get('restdata'));
+        var resdata = this.navParams.get('restdata').business_data[0].opening_days_and_timings;
+        if (this.navParams.get('restdata').business_data[0].business_phone_number) {
+            var a = this.navParams.get('restdata').business_data[0].business_phone_number;
+            console.log(typeof (a));
+            console.log(a.toString());
+            var mystring = a.toString();
+            console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3"));
+            a = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3");
+            console.log(a);
+            this.navParams.get('restdata').business_data[0].business_phone_number = a;
+        }
+        this.restaurantdata = this.navParams.get('restdata');
+        if (this.favourite) {
+            if (this.favourite.length > 0) {
+                for (var j = 0; j < this.favourite.length; j++) {
+                    console.log(this.favourite[j].favorite_business_id);
+                    if (this.restaurantdata.business_data[0]._id == this.favourite[j].favorite_business_id) {
+                        console.log('matched');
+                        this.restaurantdata.fav = 1;
+                        break;
+                    }
+                    else {
+                        console.log('not matched');
+                        this.restaurantdata.fav = 0;
+                        // break;
+                    }
+                }
+            }
+            else {
+                this.restaurantdata.fav = 0;
+            }
+        }
+        else {
+            this.restaurantdata.fav = 0;
+        }
+        this.navParams.get('restdata').business_data[0].opening_days_and_timings.forEach(function (value, key) {
+            console.log(value);
+            value.opening_time = __WEBPACK_IMPORTED_MODULE_12_moment__(value.opening_time, ["h:mm A"]).format("hh:mm A");
+            value.closing_time = __WEBPACK_IMPORTED_MODULE_12_moment__(value.closing_time, ["h:mm A"]).format("hh:mm A");
+            //            var dt = moment(value.closing_time, ["h:mm A"]).format("hh:mm A");
+            //           console.log(dt);
+        });
+        console.log(this.restaurantdata);
+    };
+    /******** function used for social sharing *****************/
+    ViewproductPage.prototype.socialsharing = function (name, address, image) {
+        console.log(name);
+        console.log(address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play');
+        console.log(image);
         console.log(window.navigator.onLine);
         if (window.navigator.onLine == true) {
-            console.log('You are online');
+            // Check if sharing via email is supported
+            var message = address + ',"Powered by Melanin Enterprise App" Download today from the App Store and Google Play'; //'Amazing restaurant';
+            var subject = name; //'Restaurant name';
+            var file = '';
+            var url = image.business_image; //'https://www.google.co.in';
+            this.socialSharing.share(message, subject, file, url).then(function (res) {
+                // Sharing via email is possible
+                console.log(JSON.stringify(res));
+            }).catch(function (err) {
+                // Sharing via email is not possible
+                console.log(JSON.stringify(err));
+            });
         }
         else {
-            this.common.tryagain();
+            var toast = this.toastCtrl.create({
+                message: 'Check your internet connection',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.onDidDismiss(function () {
+                console.log('Dismissed toast');
+            });
+            toast.present();
         }
-    }
-    BooknowPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BooknowPage');
     };
-    BooknowPage.prototype.ngOnInit = function () {
-        console.log('ngOnInit');
-        this.BookingForm = this.formBuilder.group({
-            date: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            startTime: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            //endTime: ['', [Validators.required]],
-            specialAccomo: [''],
-        });
-    };
-    BooknowPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-    };
-    BooknowPage.prototype.MakeBooking = function (BookingForm) {
+    /******** function used for open booking modal *****************/
+    ViewproductPage.prototype.bookModal = function () {
         var _this = this;
-        console.log(BookingForm.value);
-        var startTime = BookingForm.value.startTime.split(':');
-        console.log(startTime);
-        console.log(startTime[0]);
-        //var endTime = "";
-        var a = BookingForm.value.date + ' ' + BookingForm.value.startTime;
-        var endTime = new Date(a);
-        var compareTo = new Date();
-        //var mins = moment.utc(moment(endTime, "HH:mm:ss").diff(moment(BookingForm.value.startTime, "HH:mm:ss"))).format("mm")
-        console.log('enddate:' + endTime);
-        console.log(compareTo);
-        console.log(a);
-        var isAfter = __WEBPACK_IMPORTED_MODULE_7_moment__(endTime).isAfter(compareTo);
-        console.log(isAfter);
-        return false;
-        console.log(window.navigator.onLine);
-        if (localStorage.getItem('CurrentUser')) {
-            // if(isAfter == true){
-            console.log('true');
-            this.viewCtrl.dismiss({ bookingdata: BookingForm.value });
-            //            }else{
-            //                this.common.presentAlert('Book Now','Time must be greater than current time!');
-            //            }
-        }
-        else {
-            var alert = this.alertCtrl.create({
-                title: 'Book now',
-                message: 'Please login first to confirm booking!',
-                buttons: [
-                    {
-                        text: 'Cancel',
-                        role: 'cancel',
-                        handler: function () {
-                            console.log('Cancel clicked');
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__booknow_booknow__["a" /* BooknowPage */]);
+        modal.onDidDismiss(function (data) {
+            console.log(data);
+            console.log(_this.modaldata);
+            if (localStorage.getItem('CurrentUser')) {
+                var user = JSON.parse(localStorage.getItem('CurrentUser'));
+                if (data.bookingdata) {
+                    console.log(new Date(data.bookingdata.date).toISOString());
+                    var da = new Date(data.bookingdata.date).toISOString();
+                    var t = da.charAt(10);
+                    var z = da.match(/.{1,16}/g);
+                    console.log(da.charAt(10));
+                    console.log(da.match(/.{1,16}/g));
+                    console.log(da);
+                    var startdate = data.bookingdata.date + t + data.bookingdata.startTime + z[1];
+                    console.log(startdate);
+                    var enddate = data.bookingdata.date + t + data.bookingdata.endTime + z[1];
+                    console.log(enddate);
+                    //return false;
+                    var options = _this.appsetting.header();
+                    var postdata = {
+                        business_id: _this.restaurantdata.business_data[0]._id,
+                        order_to: _this.restaurantdata._id,
+                        order_from: user._id,
+                        orderdate: da,
+                        orderstart: startdate,
+                        orderend: enddate
+                    };
+                    var serialized = _this.appsetting.serializeObj(postdata);
+                    _this.http.post(_this.appsetting.url + 'orders/addOrders', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+                        console.log(response);
+                        if (response.status == true) {
+                            _this.common.presentConfirm('Book now', response.message, __WEBPACK_IMPORTED_MODULE_7__home_home__["a" /* HomePage */]);
                         }
-                    },
-                    {
-                        text: 'Login',
-                        handler: function () {
-                            console.log('login clicked');
-                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__login_login__["a" /* LoginPage */]);
+                        else {
+                            _this.common.presentAlert('Book now', 'Something went wrong!');
+                        }
+                    });
+                }
+            }
+            else {
+                _this.common.ConfirmFunction('Book Now', 'Please login first to confirm booking!', __WEBPACK_IMPORTED_MODULE_10__login_login__["a" /* LoginPage */]);
+            }
+        });
+        modal.present();
+    };
+    ViewproductPage.prototype.CheckIn = function () {
+        var _this = this;
+        console.log('Check in');
+        if (localStorage.getItem('CurrentUser')) {
+            var user = JSON.parse(localStorage.getItem('CurrentUser'));
+            console.log(user._id);
+            var options = this.appsetting.header();
+            var postdata = {
+                user_id: user._id,
+                business_id: this.restaurantdata.business_data[0]._id,
+                date: new Date().toISOString()
+            };
+            var serialized = this.appsetting.serializeObj(postdata);
+            this.http.post(this.appsetting.url + 'checkin', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+                console.log(response);
+                if (response.status == true) {
+                    _this.restaurantdata = response.data;
+                    if (_this.favourite) {
+                        if (_this.favourite.length > 0) {
+                            for (var j = 0; j < _this.favourite.length; j++) {
+                                console.log(_this.favourite[j].favorite_business_id);
+                                if (_this.restaurantdata.business_data[0]._id == _this.favourite[j].favorite_business_id) {
+                                    console.log('matched');
+                                    _this.restaurantdata.fav = 1;
+                                    break;
+                                }
+                                else {
+                                    console.log('not matched');
+                                    _this.restaurantdata.fav = 0;
+                                    // break;
+                                }
+                            }
+                        }
+                        else {
+                            _this.restaurantdata.fav = 0;
                         }
                     }
-                ]
+                    else {
+                        _this.restaurantdata.fav = 0;
+                    }
+                    _this.common.presentAlert('Check in', response.msg);
+                }
+                else {
+                    _this.common.presentAlert('Check in', response.msg);
+                }
             });
-            alert.present();
-        }
-    };
-    BooknowPage.prototype.changedate = function (event) {
-        console.log(event);
-        console.log(typeof (event.day));
-        console.log(event.month);
-        console.log(event.year);
-        console.log(typeof (parseInt(this.day)));
-        console.log(typeof (parseInt(this.month)));
-        console.log(typeof (parseInt(this.year)));
-        if (event.day == parseInt(this.day) && event.month == parseInt(this.month) && event.year == parseInt(this.year)) {
-            var b = __WEBPACK_IMPORTED_MODULE_7_moment__(new Date()).format('HH:mm');
-            // this.currentdate1 = '2037'
-            this.BookingForm.patchValue({
-                startTime: b
-            });
-            console.log(this.currentdate1);
-            console.log('matched');
         }
         else {
-            this.currentdate1 = '2037';
-            this.BookingForm.patchValue({
-                startTime: ''
-            });
-            console.log('not matched');
+            this.common.presentAlert(' View detail', 'Login first to check in!');
         }
     };
-    BooknowPage = __decorate([
+    ViewproductPage.prototype.ClaimYourBusiness = function (businessid) {
+        var _this = this;
+        console.log('Claim this business');
+        var user = JSON.parse(localStorage.getItem('CurrentUser'));
+        console.log(user._id);
+        var options = this.appsetting.header();
+        var postdata = {
+            user_id: user._id,
+            business_id: businessid
+        };
+        var serialized = this.appsetting.serializeObj(postdata);
+        this.http.post(this.appsetting.url + 'users/getClaimRequest', serialized, options).map(function (res) { return res.json(); }).subscribe(function (response) {
+            console.log(response);
+            if (response.status == true) {
+                _this.common.presentAlert('Claim this business', response.message);
+            }
+            else {
+                _this.common.presentAlert('Claim this business', response.message);
+            }
+        });
+    };
+    /*********** function to favourite a restaurant *******************/
+    ViewproductPage.prototype.MarkAsFavourite = function (businessID) {
+        var _this = this;
+        console.log('MarkAsFavourite function');
+        console.log(businessID);
+        if (localStorage.getItem('CurrentUser')) {
+            var user = JSON.parse(localStorage.getItem('CurrentUser'));
+            var options_1 = this.appsetting.header();
+            var postdata = {
+                user_id: user._id,
+                favorite_business_id: businessID
+            };
+            var serialized_1 = this.appsetting.serializeObj(postdata);
+            this.http.post(this.appsetting.url + 'user/add_to_favarite', serialized_1, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
+                console.log(response);
+                if (response.status == true) {
+                    localStorage.setItem('CurrentUser', JSON.stringify(response.data[0]));
+                    console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
+                    _this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                    //console.log(this.favourite);
+                    console.log(_this.restaurantdata._id);
+                    if (_this.favourite.length > 0) {
+                        for (var j = 0; j < _this.favourite.length; j++) {
+                            console.log(_this.favourite[j].favorite_business_id);
+                            if (businessID == _this.favourite[j].favorite_business_id) {
+                                console.log('matched');
+                                _this.restaurantdata.fav = 1;
+                                break;
+                            }
+                            else {
+                                console.log('not matched');
+                                _this.restaurantdata.fav = 0;
+                                // break;
+                            }
+                        }
+                    }
+                    else {
+                        _this.restaurantdata.fav = 0;
+                    }
+                    console.log(_this.restaurantdata);
+                }
+                else {
+                    _this.http.post(_this.appsetting.url + 'user/delete_favarite_business ', serialized_1, options_1).map(function (res) { return res.json(); }).subscribe(function (response) {
+                        console.log(response);
+                        if (response.status == true) {
+                            localStorage.setItem('CurrentUser', JSON.stringify(response.data));
+                            console.log(JSON.parse(localStorage.getItem('CurrentUser')).favorite);
+                            _this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+                            if (_this.favourite.length > 0) {
+                                for (var j = 0; j < _this.favourite.length; j++) {
+                                    console.log(_this.favourite[j].favorite_business_id);
+                                    if (businessID == _this.favourite[j].favorite_business_id) {
+                                        console.log('matched');
+                                        _this.restaurantdata.fav = 1;
+                                        break;
+                                    }
+                                    else {
+                                        console.log('not matched');
+                                        _this.restaurantdata.fav = 0;
+                                        // break;
+                                    }
+                                }
+                            }
+                            else {
+                                _this.restaurantdata.fav = 0;
+                            }
+                        }
+                        else {
+                            _this.common.presentAlert('View detail', 'Something went wrong!');
+                        }
+                    });
+                }
+            });
+        }
+        else {
+            this.common.ConfirmFunction('Favourite', 'Please login first to make favourite!', __WEBPACK_IMPORTED_MODULE_10__login_login__["a" /* LoginPage */]);
+        }
+    };
+    /*********** Function for launch navigator after click on address ***************/
+    ViewproductPage.prototype.LaunchNavigator = function () {
+        var _this = this;
+        console.log(this.restaurantdata.business_data[0].location.coordinates);
+        //return false;
+        this.geolocation.getCurrentPosition().then(function (resp) {
+            console.log('getCurrentPosition');
+            console.log(resp.coords.latitude);
+            console.log(resp.coords.longitude);
+            var start = [resp.coords.latitude, resp.coords.longitude];
+            var options = {
+                start: start,
+            };
+            var lat = _this.restaurantdata.business_data[0].location.coordinates[1];
+            var long = _this.restaurantdata.business_data[0].location.coordinates[0];
+            var destination = [lat, long];
+            _this.launchNavigator.navigate(destination, options)
+                .then(function (success) { return console.log('Launched navigator'); }, function (error) { return console.log('Error launching navigator', error); });
+        });
+    };
+    /******** Function for open website url in browser ************/
+    ViewproductPage.prototype.OpenWebsiteInfo = function (link) {
+        console.log(link);
+        this.common.InappBrowser(link);
+    };
+    ViewproductPage.prototype.DialNumber = function (phone) {
+        this.callNumber.callNumber(phone, true).then(function (res) { return console.log('Launched dialer!', res); })
+            .catch(function (err) { return console.log('Error launching dialer', err); });
+    };
+    ViewproductPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-booknow',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/booknow/booknow.html"*/'<!--\n  Generated template for the BooknowPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header hidden>\n\n  <ion-navbar>\n      <button ion-button menuToggle style="display:block !important;">\n          <ion-icon><img src="assets/imgs/menuicon.png" class="menuicon"></ion-icon>\n      </button>\n    <ion-title>booknow</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <div class="overouter" (click)="dismiss()"></div>\n    <div class="centerbox">\n    <form class="formsec" [formGroup]="BookingForm" (submit)="MakeBooking(BookingForm)">\n      <div class="topsec">\n        <div class="image-wrapper">\n          <img src="assets/imgs/bookpopup.png">\n        </div>\n        <p>Please let us know if you\'re celebrating or \n          have a special accommodation!</p>\n          <h2>Add Booking Day / Time</h2>\n         \n            <ion-grid>\n              <ion-row>\n                <ion-col col-12 class="left right">\n                  <ion-item class="clandr">\n                    <ion-datetime class="inputtxt" placeholder="Date" displayFormat="DDDD  MM-DD-YYYY" pickerFormat="MM-DD-YYYY" min="{{currentdate}}" formControlName="date" (ionChange)="changedate($event)"></ion-datetime>\n                    <img src="assets/imgs/calander.png" item-end>\n                  </ion-item>\n                </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col col-12 class="left">\n                  <ion-item>\n                    <ion-datetime class="inputtxt" placeholder="Time" displayFormat="hh:mm A" pickerFormat="hh:mm A" formControlName="startTime"></ion-datetime>\n                  </ion-item>\n                </ion-col>\n<!--                <ion-col col-6 class="right">\n                  <ion-item>\n                    <ion-datetime class="inputtxt" placeholder="End Time" displayFormat="HH:mm" pickerFormat="HH:mm" formControlName="endTime"></ion-datetime>\n                  </ion-item>\n                </ion-col>-->\n              </ion-row>\n            </ion-grid>\n            <h2>Special accommodations</h2>\n            <ion-item class="discripation">\n              <ion-textarea class="inputtxt" placeholder="Write special accommodations..." formControlName="specialAccomo"></ion-textarea>\n            </ion-item>\n        </div>\n        <div class="btnsec">\n            <button type="button" clear color="green" (click)="dismiss()">Cancel</button>\n          <button type="submit" clear color="green" style="border-right:1px solid #bdbdbd;" [disabled]="!BookingForm.valid">Confirm</button>\n          \n        </div>\n      </form>\n\n    </div>\n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/booknow/booknow.html"*/,
+            selector: 'page-viewproduct',template:/*ion-inline-start:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/viewproduct/viewproduct.html"*/'<!--\n  Generated template for the ViewproductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="green">\n    <ion-title text-center>View</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content style="background: #dee1e4;">\n  <div class="productslide">\n    <ion-slides pager>\n      <ion-slide *ngFor="let img of restaurantdata?.business_image">\n        <div class="imagebox">\n          <img [src]="img.business_image">\n        </div>\n      </ion-slide>\n<!--      <ion-slide *ngIf="restaurantdata?.business_image1">\n        <div class="imagebox">\n          <img [src]="restaurantdata?.business_image1">\n        </div>\n      </ion-slide>-->\n    </ion-slides>\n  </div>\n\n  <div class="product_content">\n    <ion-list>\n      <ion-item>\n        <h1>{{restaurantdata?.business_data[0].business_name}}</h1>\n        <p>{{restaurantdata?.business_data[0].sub_cat}}</p>\n        <h4 *ngIf="restaurantdata?.checkin"><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> {{restaurantdata?.checkin.length}} Check-Ins</h4>\n        <h4 *ngIf="!restaurantdata?.checkin"><span class="proicon"><img width="13px" src="assets/imgs/check.png"></span> 0 Check-Ins</h4>\n        <div item-end class="buttonright">\n          <button [disabled]="restaurantdata?.role == \'dummy\'" class="btneq" full ion-button icon-left color="green" (click)="bookModal()">\n<!--              <ion-icon><img width="16px" src="assets/imgs/book.png"></ion-icon>-->\n              Book Now</button>\n          <button class="btneq checkin" full ion-button icon-left light color="grey" (click)="CheckIn()">\n<!--              <ion-icon ><img width="16px" src="assets/imgs/checkin.png"></ion-icon>-->\n              Check In</button>\n        </div>\n      </ion-item>\n      <ion-item-divider color="light">Info</ion-item-divider>\n      <ion-item text-wrap>\n        <div class="contactbox">\n          <h4><img width="20px" src="assets/imgs/contactinfo.png"> Contact Info</h4>\n<!--          <p><img width="12px" src="assets/imgs/city.png"> 508 Virginia </p>-->\n          <p (click)="LaunchNavigator()"><img width="12px" src="assets/imgs/location.png"> {{restaurantdata?.business_data[0].address}} </p>\n          <p *ngIf="restaurantdata?.business_data[0].business_phone_number" (click)="DialNumber(restaurantdata?.business_data[0].business_phone_number)"><img width="12px" src="assets/imgs/phone.png"> {{ restaurantdata?.business_data[0].business_phone_number}}</p>\n        </div>\n        <div class="contactbox">\n          <h4><img width="20px" src="assets/imgs/website.png"> Website Info</h4>\n          <p *ngIf="restaurantdata?.business_data[0].website_url" style="font-size: 14px !important;" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].website_url)"> {{restaurantdata?.business_data[0].website_url}}</p>\n          </div>\n<!--          <div class="contactbox" style="padding-top: 7px;">\n          <h4><img width="20px" src="assets/imgs/website.png"> Social Info</h4>\n           <p *ngIf="restaurantdata?.business_data[0].facebook_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].facebook_link)"> {{restaurantdata?.business_data[0].facebook_link}}</p>\n          <p *ngIf="restaurantdata?.business_data[0].instagram_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].instagram_link)"> {{restaurantdata?.business_data[0].instagram_link}}</p>\n          <p *ngIf="restaurantdata?.business_data[0].twitter_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].twitter_link)"> {{restaurantdata?.business_data[0].twitter_link}}</p>\n        </div>-->\n      </ion-item>\n      <ion-item>\n          <button class="share" clear ion-button icon-left color="dark" (click)="LaunchNavigator()"><ion-icon ><img width="16px" src="assets/imgs/download.png"></ion-icon>Map view</button>\n        <button class="fav" clear ion-button icon-left color="dark" (click)="MarkAsFavourite(restaurantdata?.business_data[0]._id)">\n            <ion-icon *ngIf="restaurantdata?.fav == 0"><img width="16px" src="assets/imgs/fav.png"></ion-icon>\n            <ion-icon *ngIf="restaurantdata?.fav == 1"><img width="16px" src="assets/imgs/favactive.png"></ion-icon>\n            \n            Favorite</button>\n        <button class="share" clear ion-button icon-left color="dark" (click)="socialsharing(restaurantdata?.business_data[0].business_name,restaurantdata?.business_data[0].address,restaurantdata?.business_image[0])"><ion-icon ><img width="16px" src="assets/imgs/share.png"></ion-icon>Share</button>\n      </ion-item>\n      \n      <ion-item-divider color="light" *ngIf="(restaurantdata?.business_data[0].facebook_link != \'\') || (restaurantdata?.business_data[0].twitter_link != \'\') || (restaurantdata?.business_data[0].instagram_link != \'\')">Social Info</ion-item-divider>\n      <ion-list class="social">\n        <ion-item *ngIf="restaurantdata?.business_data[0].facebook_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].facebook_link)">\n          <ion-icon name="logo-facebook" item-start style=\'color: #315C96;\'></ion-icon>\n            {{restaurantdata?.business_data[0].facebook_link}}\n        </ion-item>\n          <ion-item *ngIf="restaurantdata?.business_data[0].twitter_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].twitter_link)">\n          <ion-icon name="logo-twitter" item-start style=\'color: #00A6EF;\'></ion-icon>\n             {{restaurantdata?.business_data[0].twitter_link}}\n        </ion-item>\n          <ion-item *ngIf="restaurantdata?.business_data[0].instagram_link" (click)="OpenWebsiteInfo(restaurantdata?.business_data[0].instagram_link)">\n              <ion-icon name="" item-start>\n                  <img width="25px" src="assets/imgs/insta.png" />\n              </ion-icon>\n             {{restaurantdata?.business_data[0].instagram_link}}\n        </ion-item>\n      </ion-list>\n      \n      <ion-item-divider color="light">HOURS OF OPERATION</ion-item-divider>\n      <ion-item text-wrap>\n          <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length>0">\n          <h4 *ngFor="let days of restaurantdata?.business_data[0].opening_days_and_timings"><span>{{days.day}}</span> {{days.opening_time}} to {{days.closing_time}} </h4>\n        </div>\n          <div class="timesec" *ngIf="restaurantdata?.business_data[0].opening_days_and_timings.length == 0">\n          <h4>Not added yet!</h4>\n        </div>\n      </ion-item>\n      <ion-item-divider *ngIf="(restaurantdata?.role == \'dummy\') && (restaurantdata?.Claimed_requests?.length == 0) && currentUser != \'\'" color="light">IS THIS YOUR BUSINESS?</ion-item-divider>\n      <ion-item text-wrap *ngIf="(restaurantdata?.role == \'dummy\') && (restaurantdata?.Claimed_requests?.length == 0) && currentUser != \'\'">\n        <p>Claim your business to respond to reviews and messages.\n        </p>\n        <button class="btneq" full ion-button color="green" (click)="ClaimYourBusiness(restaurantdata?.business_data[0]._id)">Claim this Business</button>\n      </ion-item>\n      <ion-item-divider color="light">Description</ion-item-divider>\n      <ion-item text-wrap>\n        <p [innerHTML]="restaurantdata?.business_data[0].business_description">\n        </p>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>'/*ion-inline-end:"/Volumes/D/RahulProjects/ionic2project/businesslisting/businesslisting ios/business/src/pages/viewproduct/viewproduct.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_appsetting__["a" /* Appsetting */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_common__["a" /* Common */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _k || Object])
-    ], BooknowPage);
-    return BooknowPage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_social_sharing__["a" /* SocialSharing */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_social_sharing__["a" /* SocialSharing */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ModalController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* ViewController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__["a" /* Appsetting */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_appsetting__["a" /* Appsetting */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_http__["b" /* Http */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* LoadingController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_common__["a" /* Common */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_common__["a" /* Common */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_launch_navigator__["a" /* LaunchNavigator */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_launch_navigator__["a" /* LaunchNavigator */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_9__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_call_number__["a" /* CallNumber */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_call_number__["a" /* CallNumber */]) === "function" && _o || Object])
+    ], ViewproductPage);
+    return ViewproductPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 }());
 
-//# sourceMappingURL=booknow.js.map
+//# sourceMappingURL=viewproduct.js.map
 
 /***/ })
 

@@ -59,8 +59,10 @@ export class MyApp {
         private geolocation: Geolocation,
         private openNativeSettings: OpenNativeSettings
     ) {
-    
-       // alert('updaated latest 1');
+    if(this.common.interval){
+    clearInterval(this.common.interval);
+    }
+        //alert('updaated latest 1');
 
          platform.ready().then(() => {
             
@@ -85,27 +87,7 @@ export class MyApp {
             this.role = JSON.parse(localStorage.getItem('CurrentUser')).role;
             
         }
-   this.geolocation.getCurrentPosition().then((resp) => {
-            
-        }).catch((error) => {
-            console.log('Error getting location', error);
-//            let alert = this.alertCtrl.create({
-//                title: 'Location',
-//                message: 'Please enable your location to use Melanin Enterprises.',
-//                buttons: [
-//                  {
-//                    text: 'Ok',
-//                    role: 'submit',
-//                    handler: () => {
-//                      console.log('submit clicked');
-//                      this.openNativeSettings.open('location');
-//                    }
-//                  }
-//                ]
-//              });
-//              alert.present();
-            
-        });
+
                 }
 
     initializeApp() {
@@ -133,7 +115,7 @@ export class MyApp {
         if (localStorage.getItem('CurrentUser')) {
             console.log(JSON.parse(localStorage.getItem('CurrentUser')));
             var user = JSON.parse(localStorage.getItem('CurrentUser'));
-            this.events.publish('Loggedin', 'loginpage');
+              this.events.publish('Loggedin', 'loginpage');
             console.log(user);
             if(user.role == "business"){
             if (user.business_data.length>0) {
@@ -145,8 +127,7 @@ export class MyApp {
                 this.rootPage = HomePage;
             }
         } else {
-            this.rootPage = GetstartPage;
-            
+            this.rootPage = GetstartPage; 
         }
        /******** function for handle notifications **************/
 //                this.fcm.onNotification().subscribe(data => {

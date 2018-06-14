@@ -2,10 +2,6 @@ page-review {
 	.bottom_sec{
 		width: 100%;
 		float: left;
-		position: absolute;
-		bottom: 0px;
-		left: 0;
-		right: 0;
 		margin: auto;
 		padding: 15px;
                 background-color: #fff;
@@ -280,5 +276,6 @@ page-review {
 }*/
 .button-clear {
     color: #3cc602 !important;
+    padding: 0px !important;
 }
 }

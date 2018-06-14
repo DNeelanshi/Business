@@ -262,23 +262,6 @@ export class RealtalkPage {
                             value.days = moment(aba, ["HH:mm"]).format("HH:mm");
                          value.time = 'hour';
                         }
-                       // if(endDate.diff(startDate, 'hours')>9)
-                        
-//                        if(duration.minutes()>9){
-//                            if(duration.hours()>9){
-//                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-//                            }else{
-//                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-//                            }
-//                        }else{
-//                         if(duration.hours()>9){
-//                            value.days = duration.hours()+':'+duration.minutes();
-//                            }else{
-//                                value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-//                            }
-//                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
-//                        }
-                           // value.time = 'hour';
                         }
                         
                         if (JSON.parse(localStorage.getItem('CurrentUser')).profile_pic) {

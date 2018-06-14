@@ -60,7 +60,7 @@ export class EditprofiletwoPage {
             fname: ['', [Validators.required]],
             lname: ['', [Validators.required]],
             email: ['', [Validators.required, this.emailValidator.bind(this)]],
-            phone: ['', [Validators.required]],
+            phone: [''],
         });
 
     }
@@ -175,6 +175,15 @@ export class EditprofiletwoPage {
                 console.log(this.base64Image);
                 this.events.publish('Loggedin', 'loginpage');
                 var name = response.data.firstname + ' ' + response.data.lastname;
+                if(response.data.phone_number){
+                var a =response.data.phone_number;
+                console.log(typeof (a));
+                console.log(a.toString());
+                var mystring = a.toString();
+                console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3"));
+                response.data.phone_number = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3");
+                //console.log(a);
+                }
                 this.Editprofile.patchValue({
                     fname: response.data.firstname,
                     lname:response.data.lastname,
@@ -183,6 +192,20 @@ export class EditprofiletwoPage {
                 });
             }
         })
+    }
+    phonePattern(formdata){
+        console.log(formdata.value.phone);
+         if(formdata.value.phone){
+                var a =formdata.value.phone;
+                console.log(typeof (a));
+                console.log(a.toString());
+                var mystring = a.toString();
+                console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3"));
+                formdata.value.phone = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3");
+                }
+                this.Editprofile.patchValue({
+                    phone: formdata.value.phone,
+                });
     }
     doRefresh(refresher) {
         console.log('Begin async operation', refresher);

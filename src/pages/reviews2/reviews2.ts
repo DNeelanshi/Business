@@ -79,23 +79,50 @@ export class Reviews2Page {
                    
                     
                         /****** code to get date and time difference ************/
-                        var a = new Date();
-                        console.log(new Date(value.created_at))
-                        var startDate = moment(new Date(value.created_at), "DD.MM.YYYY");
-                        var endDate = moment(a, "DD.MM.YYYY");
-                        var milliseconds = endDate.diff(startDate);
-                        var duration = moment.duration(milliseconds, 'milliseconds');
-                        var aba = duration.hours()+':'+duration.minutes();
-                        console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
-                        console.log('Hours' + duration.hours())
-                        console.log('minutes' + duration.minutes());
-                        if(duration.hours()>24){
-                            value.days = duration.asDays();
+                          var startDate = moment(new Date(value.created_at));
+                        var endDate = moment(new Date());
+                       // var milliseconds = endDate.diff(startDate);
+                        
+                        console.log(endDate.diff(startDate, 'minutes'));
+                        console.log(endDate.diff(startDate, 'hours'));
+                        console.log(endDate.diff(startDate, 'days'));
+
+                         var aba = endDate.diff(startDate, 'hours')+':'+endDate.diff(startDate, 'minutes');
+                         console.log(endDate.diff(startDate, 'hours')+':'+endDate.diff(startDate, 'minutes'));
+                         console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
+                            
+//                        var duration = moment.duration(milliseconds, 'milliseconds');
+//                        console.log('Hours' + duration.hours())
+//                        console.log('minutes' + duration.minutes());
+                        if(endDate.diff(startDate, 'days')>0){
+                            value.days = endDate.diff(startDate, 'days');
                             value.time = 'day';
                         }else{
-                            value.days = duration.hours()+':'+duration.minutes();
+                        if(endDate.diff(startDate, 'hours')>1){
+                        value.days = moment(aba, ["HH:mm"]).format("HH:mm");
+                         value.time = 'time';
+                        }else{
+                            value.days = moment(aba, ["HH:mm"]).format("HH:mm");
                             value.time = 'time';
                         }
+                        }
+//                        var a = new Date();
+//                        console.log(new Date(value.created_at))
+//                        var startDate = moment(new Date(value.created_at), "DD.MM.YYYY");
+//                        var endDate = moment(a, "DD.MM.YYYY");
+//                        var milliseconds = endDate.diff(startDate);
+//                        var duration = moment.duration(milliseconds, 'milliseconds');
+//                        var aba = duration.hours()+':'+duration.minutes();
+//                        console.log(moment(aba, ["HH:mm"]).format("HH:mm"));
+//                        console.log('Hours' + duration.hours())
+//                        console.log('minutes' + duration.minutes());
+//                        if(duration.hours()>24){
+//                            value.days = duration.asDays();
+//                            value.time = 'day';
+//                        }else{
+//                            value.days = duration.hours()+':'+duration.minutes();
+//                            value.time = 'time';
+//                        }
                     })
                     response.data.review.avg = sum / length;
                     this.data.rating = response.data.review.avg;

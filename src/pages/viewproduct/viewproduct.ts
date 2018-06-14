@@ -28,6 +28,7 @@ import * as moment from 'moment';
 })
 
 export class ViewproductPage {
+    currentUser: any;
     favourite: any;
     modaldata: any;
     restaurantdata: any;
@@ -51,8 +52,12 @@ export class ViewproductPage {
     ) {
         if (localStorage.getItem('CurrentUser')) {
             this.favourite = JSON.parse(localStorage.getItem('CurrentUser')).favorite;
+            this.currentUser = JSON.parse(localStorage.getItem('CurrentUser'));
+            
+        }else{
+            this.currentUser = '';
         }
-
+        console.log(this.currentUser);
     }
 
     ionViewDidLoad() {
@@ -63,14 +68,17 @@ export class ViewproductPage {
         console.log('ionViewDidLoad ViewproductPage');
         console.log(this.navParams.get('restdata'));
         let resdata = this.navParams.get('restdata').business_data[0].opening_days_and_timings;
+        
+        if(this.navParams.get('restdata').business_data[0].business_phone_number){
         var a = this.navParams.get('restdata').business_data[0].business_phone_number;
         console.log(typeof (a));
         console.log(a.toString());
         var mystring = a.toString();
-        console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1) $2-$3"));
-        a = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1) $2-$3");
+        console.log(mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3"));
+        a = mystring.replace(/\D+/g, "").replace(/([0-9]{1,3})([0-9]{3})([0-9]{4}$)/gi, "($1)-$2-$3");
         console.log(a);
         this.navParams.get('restdata').business_data[0].business_phone_number = a;
+        }
         this.restaurantdata = this.navParams.get('restdata');
         if (this.favourite) {
             if (this.favourite.length > 0) {

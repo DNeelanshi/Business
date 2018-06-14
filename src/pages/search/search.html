@@ -24,8 +24,8 @@
        <form [formGroup]="SearchForm" (submit)="Search(SearchForm)">
     <div class="searchouter" color="green">
              <ion-searchbar id="inputaaa" class="bfr searchbar" placeholder="e.g. name, category" name="category" [(ngModel)]="data.term" (click)="currentLocation()" (input)="categories(data.term)" (ionClear)="ionClearCategory($event)" formControlName="category"></ion-searchbar>
-             <div class="buttonout" *ngIf="bit == false" >
-             <button type="button" class="btn1" ion-button icon-start color="green" block (click)="funClicked()"><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>
+             <div class="buttonout" *ngIf="bit == false" (click)="funClicked()">
+             <button type="button" class="btn1" ion-button icon-start color="green" block><ion-icon><img src="assets/imgs/currentloc.png" style="width:15px;float: left;"></ion-icon>Current Location</button>
              </div>
              <div *ngIf="bit == true">
              <ion-searchbar class="bfr searchbar changeimg" placeholder="Neighborhood,city,state..." name="query" [(ngModel)]="autocomplete.query" (input)="updateSearch()" (ionClear)="ionClear($event)" formControlName="location"></ion-searchbar>

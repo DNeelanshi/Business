@@ -65,7 +65,7 @@
 
         <ion-item>
           <ion-label stacked>Phone Number</ion-label>
-          <ion-input type="tel" placeholder="XXX-XXX-XXXX" formControlName="phone" maxLength="12"></ion-input>
+          <ion-input type="tel" placeholder="(XXX)-XXX-XXXX" formControlName="phone" (input)="phonePattern(Editprofile)"></ion-input>
         </ion-item>
         <h2>User Setting</h2>
         <ion-item *ngIf='profiledata?.regitration_type == "simple_registarion"' (click)="changepwd()">
